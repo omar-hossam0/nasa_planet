@@ -1,0 +1,18 @@
+{
+  "tests_run": 110,
+  "passed": true,
+  "errors": 0,
+  "failures": 0,
+  "skipped": 0,
+  "research_sha256": "8a5a8eefd18a9b6c6979ee726233903c1a9fe4459173d347b0e0f543885895fb",
+  "protocol_before_evaluation_verified": true,
+  "prior_hashes_unchanged": true,
+  "protected_file_count": 3683,
+  "saved_evidence_files_verified": 96,
+  "record_level_summaries_verified": 792,
+  "scipy_sen_references": 264,
+  "scipy_max_absolute_slope_error": 0.0,
+  "accounting_verified": true,
+  "application_release": false,
+  "phase5_started": false
+}

@@ -2,6 +2,14 @@
 
 Status: target architecture, not a claim of implemented application behavior. Read PLAN.md first. Match this layout to existing repository conventions before moving application files.
 
+Data-aligned update, 15 November 2026: all twelve regional inputs are delivered.
+Use `packages/science/PLAN.md` for current numerical sequencing. The explicit
+input contract in `scope.v2.json` distinguishes `source_variable` (provider)
+from `cube_variable` (processed NetCDF field) and `cube_units`.
+The numerical library can validate inputs independently of HTTP; final API
+schema reconciliation and owner review remain required before integration.
+Do not infer method approval from delivery claims on another branch.
+
 ## Module boundaries
 
 ```text
@@ -42,7 +50,7 @@ flowchart LR
 6. Member 2 validates the scientific pipeline independently. This enables method_ready.
 7. Member 6 verifies the end-to-end user path. Only then enable app_available.
 
-The existing runtime_catalog.json uses an older analysis_ready flag that means measurement-ingestion readiness. It must not bypass steps 6 and 7. scope.v2.json describes planned assets and does not supersede verified source provenance.
+The existing runtime_catalog.json uses an older analysis_ready flag that means measurement-ingestion readiness. It must not bypass steps 6 and 7. scope.v2.json now maps the twelve delivered inputs and their source/processed fields; its flags do not supersede verified provenance or the method/application gates.
 
 ## Canonical request and result
 

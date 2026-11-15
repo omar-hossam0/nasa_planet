@@ -1,0 +1,3998 @@
+{
+  "config": {
+    "revision": "phase4-followup-1",
+    "status": "prespecified_candidates_not_released",
+    "alpha": 0.05,
+    "confidence": 0.95,
+    "pilot_replications": 200,
+    "final_replications": 1000,
+    "pilot_seed": 731155,
+    "final_seed": 9906115,
+    "lengths": [
+      20,
+      24
+    ],
+    "phis": [
+      0,
+      0.4,
+      0.7
+    ],
+    "slopes": [
+      -0.08,
+      0,
+      0.08
+    ],
+    "seasonal_profiles": [
+      "none",
+      "monthly_cycle_annualized"
+    ],
+    "acceptance": {
+      "null_upper_wilson_max": 0.08,
+      "coverage_lower_wilson_min": 0.9,
+      "power_lower_wilson_min": 0.2,
+      "required_all_scenarios": true,
+      "numerical_failures_max": 0,
+      "note": "Minimum research screen only; no automatic release even if passed"
+    },
+    "mk": {
+      "variant": "Sen-detrended rank Hamed-Rao-style variance correction",
+      "lags": "1..floor(n/4), retain |acf|>1.96/sqrt(n)",
+      "variance_factor_floor": 1,
+      "interval": "experimental variance-adjusted Sen order-statistic inversion"
+    },
+    "ar1": {
+      "variant": "iterative feasible stationary Prais-Winsten GLS",
+      "rho_clip": [
+        -0.95,
+        0.95
+      ],
+      "max_iterations": 50,
+      "t_degrees_of_freedom": "n-3",
+      "interval_caveat": "plug-in covariance does not fully account for estimated rho"
+    },
+    "release": false
+  },
+  "identity": {
+    "config_sha256": "5fc58e7b806d29dc5893e413600c2b49caa9ab150c9e972ef80bf8e2dddef4d3",
+    "candidate_code_sha256": "0093c8f64757fdffce0fa21fa7680025bf8406b2a7711642dc619eda369f524d",
+    "runner_sha256": "57f4d034d27de8773f0ccbc4014152acc1e8fb5c88cac1126e4c9a680c2bb6bd"
+  },
+  "pilot": [
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 100,
+      "covered": 192,
+      "rejection_rate": 0.5,
+      "coverage": 0.96,
+      "rejection_mc95": [
+        0.43136085960389187,
+        0.5686391403961082
+      ],
+      "coverage_mc95": [
+        0.923067931799067,
+        0.9795943679338476
+      ],
+      "slope_bias": -0.00501844562248913,
+      "mean_estimated_rho": null,
+      "passes_screen": true
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 115,
+      "covered": 189,
+      "rejection_rate": 0.575,
+      "coverage": 0.945,
+      "rejection_mc95": [
+        0.5057093264785485,
+        0.6414638745648614
+      ],
+      "coverage_mc95": [
+        0.9042130012276914,
+        0.9690146582965411
+      ],
+      "slope_bias": -0.004957852322993306,
+      "mean_estimated_rho": -0.08121762626077307,
+      "passes_screen": true
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0,
+      "season": "none",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 10,
+      "covered": 192,
+      "rejection_rate": 0.05,
+      "coverage": 0.96,
+      "rejection_mc95": [
+        0.02738264560076393,
+        0.08957814813877599
+      ],
+      "coverage_mc95": [
+        0.923067931799067,
+        0.9795943679338476
+      ],
+      "slope_bias": -0.0050184456224891295,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0,
+      "season": "none",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 11,
+      "covered": 189,
+      "rejection_rate": 0.055,
+      "coverage": 0.945,
+      "rejection_mc95": [
+        0.03098534170345884,
+        0.0957869987723084
+      ],
+      "coverage_mc95": [
+        0.9042130012276914,
+        0.9690146582965411
+      ],
+      "slope_bias": -0.004957852322993307,
+      "mean_estimated_rho": -0.08121762626077307,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 79,
+      "covered": 192,
+      "rejection_rate": 0.395,
+      "coverage": 0.96,
+      "rejection_mc95": [
+        0.32984101013207967,
+        0.46411650840714636
+      ],
+      "coverage_mc95": [
+        0.923067931799067,
+        0.9795943679338476
+      ],
+      "slope_bias": -0.005018445622489131,
+      "mean_estimated_rho": null,
+      "passes_screen": true
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 98,
+      "covered": 189,
+      "rejection_rate": 0.49,
+      "coverage": 0.945,
+      "rejection_mc95": [
+        0.42156278331213176,
+        0.5588141232154135
+      ],
+      "coverage_mc95": [
+        0.9042130012276914,
+        0.9690146582965411
+      ],
+      "slope_bias": -0.004957852322993309,
+      "mean_estimated_rho": -0.08121762626077306,
+      "passes_screen": true
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 84,
+      "covered": 186,
+      "rejection_rate": 0.42,
+      "coverage": 0.93,
+      "rejection_mc95": [
+        0.35373599161616726,
+        0.4892792606041954
+      ],
+      "coverage_mc95": [
+        0.8859451911438936,
+        0.9578478281716571
+      ],
+      "slope_bias": 0.0010850266624302018,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 97,
+      "covered": 180,
+      "rejection_rate": 0.485,
+      "coverage": 0.9,
+      "rejection_mc95": [
+        0.41667385171877513,
+        0.5538915080725428
+      ],
+      "coverage_mc95": [
+        0.8505941875672826,
+        0.9343295513309041
+      ],
+      "slope_bias": 0.0013989384082013301,
+      "mean_estimated_rho": -0.07510824177790414,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 14,
+      "covered": 186,
+      "rejection_rate": 0.07,
+      "coverage": 0.93,
+      "rejection_mc95": [
+        0.042152171828342806,
+        0.11405480885610647
+      ],
+      "coverage_mc95": [
+        0.8859451911438936,
+        0.9578478281716571
+      ],
+      "slope_bias": 0.0010850266624302012,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 20,
+      "covered": 180,
+      "rejection_rate": 0.1,
+      "coverage": 0.9,
+      "rejection_mc95": [
+        0.06567044866909588,
+        0.1494058124327174
+      ],
+      "coverage_mc95": [
+        0.8505941875672826,
+        0.9343295513309041
+      ],
+      "slope_bias": 0.0013989384082013336,
+      "mean_estimated_rho": -0.07510824177790414,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 88,
+      "covered": 186,
+      "rejection_rate": 0.44,
+      "coverage": 0.93,
+      "rejection_mc95": [
+        0.37297819251185865,
+        0.5092832466534134
+      ],
+      "coverage_mc95": [
+        0.8859451911438936,
+        0.9578478281716571
+      ],
+      "slope_bias": 0.0010850266624302,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 102,
+      "covered": 180,
+      "rejection_rate": 0.51,
+      "coverage": 0.9,
+      "rejection_mc95": [
+        0.44118587678458643,
+        0.5784372166878682
+      ],
+      "coverage_mc95": [
+        0.8505941875672826,
+        0.9343295513309041
+      ],
+      "slope_bias": 0.0013989384082013323,
+      "mean_estimated_rho": -0.07510824177790415,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.4,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 100,
+      "covered": 168,
+      "rejection_rate": 0.5,
+      "coverage": 0.84,
+      "rejection_mc95": [
+        0.43136085960389187,
+        0.5686391403961082
+      ],
+      "coverage_mc95": [
+        0.7828592983793289,
+        0.8843258796841297
+      ],
+      "slope_bias": -0.002386062436196741,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.4,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 90,
+      "covered": 173,
+      "rejection_rate": 0.45,
+      "coverage": 0.865,
+      "rejection_mc95": [
+        0.3826406840224836,
+        0.5192438486152432
+      ],
+      "coverage_mc95": [
+        0.8107086162924745,
+        0.9055342954521209
+      ],
+      "slope_bias": -0.0012932025345592454,
+      "mean_estimated_rho": 0.20131954925555384,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 34,
+      "covered": 168,
+      "rejection_rate": 0.17,
+      "coverage": 0.84,
+      "rejection_mc95": [
+        0.12427907912586969,
+        0.22815883628312625
+      ],
+      "coverage_mc95": [
+        0.7828592983793289,
+        0.8843258796841297
+      ],
+      "slope_bias": -0.0023860624361967423,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 27,
+      "covered": 173,
+      "rejection_rate": 0.135,
+      "coverage": 0.865,
+      "rejection_mc95": [
+        0.09446570454787906,
+        0.18929138370752552
+      ],
+      "coverage_mc95": [
+        0.8107086162924745,
+        0.9055342954521209
+      ],
+      "slope_bias": -0.0012932025345592474,
+      "mean_estimated_rho": 0.20131954925555384,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 95,
+      "covered": 168,
+      "rejection_rate": 0.475,
+      "coverage": 0.84,
+      "rejection_mc95": [
+        0.4069162264657108,
+        0.5440260398531525
+      ],
+      "coverage_mc95": [
+        0.7828592983793289,
+        0.8843258796841297
+      ],
+      "slope_bias": -0.0023860624361967454,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 84,
+      "covered": 173,
+      "rejection_rate": 0.42,
+      "coverage": 0.865,
+      "rejection_mc95": [
+        0.35373599161616726,
+        0.4892792606041954
+      ],
+      "coverage_mc95": [
+        0.8107086162924745,
+        0.9055342954521209
+      ],
+      "slope_bias": -0.0012932025345592495,
+      "mean_estimated_rho": 0.20131954925555384,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 103,
+      "covered": 181,
+      "rejection_rate": 0.515,
+      "coverage": 0.905,
+      "rejection_mc95": [
+        0.44610849192745716,
+        0.5833261482812249
+      ],
+      "coverage_mc95": [
+        0.8563983883518006,
+        0.9383368972826135
+      ],
+      "slope_bias": -0.0010596082924111542,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 84,
+      "covered": 185,
+      "rejection_rate": 0.42,
+      "coverage": 0.925,
+      "rejection_mc95": [
+        0.35373599161616726,
+        0.4892792606041954
+      ],
+      "coverage_mc95": [
+        0.8799563897637055,
+        0.954025082815618
+      ],
+      "slope_bias": -0.0025219868184600393,
+      "mean_estimated_rho": 0.2103332463853759,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 20,
+      "covered": 181,
+      "rejection_rate": 0.1,
+      "coverage": 0.905,
+      "rejection_mc95": [
+        0.06567044866909588,
+        0.1494058124327174
+      ],
+      "coverage_mc95": [
+        0.8563983883518006,
+        0.9383368972826135
+      ],
+      "slope_bias": -0.001059608292411155,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 15,
+      "covered": 185,
+      "rejection_rate": 0.075,
+      "coverage": 0.925,
+      "rejection_mc95": [
+        0.04597491718438201,
+        0.12004361023629456
+      ],
+      "coverage_mc95": [
+        0.8799563897637055,
+        0.954025082815618
+      ],
+      "slope_bias": -0.0025219868184600393,
+      "mean_estimated_rho": 0.2103332463853759,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 90,
+      "covered": 181,
+      "rejection_rate": 0.45,
+      "coverage": 0.905,
+      "rejection_mc95": [
+        0.3826406840224836,
+        0.5192438486152432
+      ],
+      "coverage_mc95": [
+        0.8563983883518006,
+        0.9383368972826135
+      ],
+      "slope_bias": -0.0010596082924111563,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 75,
+      "covered": 185,
+      "rejection_rate": 0.375,
+      "coverage": 0.925,
+      "rejection_mc95": [
+        0.31085436858409826,
+        0.44385696301021843
+      ],
+      "coverage_mc95": [
+        0.8799563897637055,
+        0.954025082815618
+      ],
+      "slope_bias": -0.002521986818460043,
+      "mean_estimated_rho": 0.21033324638537593,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.7,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 107,
+      "covered": 133,
+      "rejection_rate": 0.535,
+      "coverage": 0.665,
+      "rejection_mc95": [
+        0.4658664687236316,
+        0.6028143584299599
+      ],
+      "coverage_mc95": [
+        0.5970219120796653,
+        0.7267591302158368
+      ],
+      "slope_bias": -0.0033539951307024174,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.7,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 97,
+      "covered": 157,
+      "rejection_rate": 0.485,
+      "coverage": 0.785,
+      "rejection_mc95": [
+        0.41667385171877513,
+        0.5538915080725428
+      ],
+      "coverage_mc95": [
+        0.7229769265100339,
+        0.8362812374549242
+      ],
+      "slope_bias": -0.001285645312453123,
+      "mean_estimated_rho": 0.42905925591999877,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 71,
+      "covered": 133,
+      "rejection_rate": 0.355,
+      "coverage": 0.665,
+      "rejection_mc95": [
+        0.2919862754043116,
+        0.42347886924509565
+      ],
+      "coverage_mc95": [
+        0.5970219120796653,
+        0.7267591302158368
+      ],
+      "slope_bias": -0.0033539951307024183,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 43,
+      "covered": 157,
+      "rejection_rate": 0.215,
+      "coverage": 0.785,
+      "rejection_mc95": [
+        0.1637187625450758,
+        0.27702307348996613
+      ],
+      "coverage_mc95": [
+        0.7229769265100339,
+        0.8362812374549242
+      ],
+      "slope_bias": -0.0012856453124531252,
+      "mean_estimated_rho": 0.42905925591999877,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 92,
+      "covered": 133,
+      "rejection_rate": 0.46,
+      "coverage": 0.665,
+      "rejection_mc95": [
+        0.39233051799971463,
+        0.5291771081104667
+      ],
+      "coverage_mc95": [
+        0.5970219120796653,
+        0.7267591302158368
+      ],
+      "slope_bias": -0.003353995130702421,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 78,
+      "covered": 157,
+      "rejection_rate": 0.39,
+      "coverage": 0.785,
+      "rejection_mc95": [
+        0.3250834313746962,
+        0.4590625404283025
+      ],
+      "coverage_mc95": [
+        0.7229769265100339,
+        0.8362812374549242
+      ],
+      "slope_bias": -0.0012856453124531265,
+      "mean_estimated_rho": 0.42905925591999877,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 89,
+      "covered": 151,
+      "rejection_rate": 0.445,
+      "coverage": 0.755,
+      "rejection_mc95": [
+        0.3778060100295335,
+        0.5142669758719658
+      ],
+      "coverage_mc95": [
+        0.6909575644379659,
+        0.8094313191096282
+      ],
+      "slope_bias": 0.0064570790460453595,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 79,
+      "covered": 162,
+      "rejection_rate": 0.395,
+      "coverage": 0.81,
+      "rejection_mc95": [
+        0.32984101013207967,
+        0.46411650840714636
+      ],
+      "coverage_mc95": [
+        0.7499876129240015,
+        0.8583282847220932
+      ],
+      "slope_bias": 0.006790324532117826,
+      "mean_estimated_rho": 0.41666899673475166,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 50,
+      "covered": 151,
+      "rejection_rate": 0.25,
+      "coverage": 0.755,
+      "rejection_mc95": [
+        0.19508168006817497,
+        0.31434098312045833
+      ],
+      "coverage_mc95": [
+        0.6909575644379659,
+        0.8094313191096282
+      ],
+      "slope_bias": 0.0064570790460453595,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 38,
+      "covered": 162,
+      "rejection_rate": 0.19,
+      "coverage": 0.81,
+      "rejection_mc95": [
+        0.14167171527790676,
+        0.25001238707599854
+      ],
+      "coverage_mc95": [
+        0.7499876129240015,
+        0.8583282847220932
+      ],
+      "slope_bias": 0.0067903245321178285,
+      "mean_estimated_rho": 0.41666899673475155,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 107,
+      "covered": 151,
+      "rejection_rate": 0.535,
+      "coverage": 0.755,
+      "rejection_mc95": [
+        0.4658664687236316,
+        0.6028143584299599
+      ],
+      "coverage_mc95": [
+        0.6909575644379659,
+        0.8094313191096282
+      ],
+      "slope_bias": 0.006457079046045359,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 88,
+      "covered": 162,
+      "rejection_rate": 0.44,
+      "coverage": 0.81,
+      "rejection_mc95": [
+        0.37297819251185865,
+        0.5092832466534134
+      ],
+      "coverage_mc95": [
+        0.7499876129240015,
+        0.8583282847220932
+      ],
+      "slope_bias": 0.006790324532117823,
+      "mean_estimated_rho": 0.41666899673475155,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 135,
+      "covered": 186,
+      "rejection_rate": 0.675,
+      "coverage": 0.93,
+      "rejection_mc95": [
+        0.6073198511602996,
+        0.7360842846076571
+      ],
+      "coverage_mc95": [
+        0.8859451911438936,
+        0.9578478281716571
+      ],
+      "slope_bias": 0.0027185003547328507,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 150,
+      "covered": 185,
+      "rejection_rate": 0.75,
+      "coverage": 0.925,
+      "rejection_mc95": [
+        0.6856590168795417,
+        0.8049183199318249
+      ],
+      "coverage_mc95": [
+        0.8799563897637055,
+        0.954025082815618
+      ],
+      "slope_bias": 0.0026323338860008484,
+      "mean_estimated_rho": -0.08284681183552972,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0,
+      "season": "none",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 13,
+      "covered": 186,
+      "rejection_rate": 0.065,
+      "coverage": 0.93,
+      "rejection_mc95": [
+        0.03837635464915299,
+        0.10801907929906895
+      ],
+      "coverage_mc95": [
+        0.8859451911438936,
+        0.9578478281716571
+      ],
+      "slope_bias": 0.0027185003547328516,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0,
+      "season": "none",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 15,
+      "covered": 185,
+      "rejection_rate": 0.075,
+      "coverage": 0.925,
+      "rejection_mc95": [
+        0.04597491718438201,
+        0.12004361023629456
+      ],
+      "coverage_mc95": [
+        0.8799563897637055,
+        0.954025082815618
+      ],
+      "slope_bias": 0.0026323338860008492,
+      "mean_estimated_rho": -0.08284681183552972,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 137,
+      "covered": 186,
+      "rejection_rate": 0.685,
+      "coverage": 0.93,
+      "rejection_mc95": [
+        0.6176504391426966,
+        0.745376790097715
+      ],
+      "coverage_mc95": [
+        0.8859451911438936,
+        0.9578478281716571
+      ],
+      "slope_bias": 0.0027185003547328525,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 148,
+      "covered": 185,
+      "rejection_rate": 0.74,
+      "coverage": 0.925,
+      "rejection_mc95": [
+        0.6750925439746589,
+        0.7958616993642531
+      ],
+      "coverage_mc95": [
+        0.8799563897637055,
+        0.954025082815618
+      ],
+      "slope_bias": 0.002632333886000849,
+      "mean_estimated_rho": -0.08284681183552971,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 136,
+      "covered": 187,
+      "rejection_rate": 0.68,
+      "coverage": 0.935,
+      "rejection_mc95": [
+        0.6124810156588646,
+        0.7407346668453195
+      ],
+      "coverage_mc95": [
+        0.8919809207009312,
+        0.961623645350847
+      ],
+      "slope_bias": -0.0024097157798484126,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 144,
+      "covered": 181,
+      "rejection_rate": 0.72,
+      "coverage": 0.905,
+      "rejection_mc95": [
+        0.6540769541334929,
+        0.7776311022605097
+      ],
+      "coverage_mc95": [
+        0.8563983883518006,
+        0.9383368972826135
+      ],
+      "slope_bias": -0.0023192569145665024,
+      "mean_estimated_rho": -0.064213605001666,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 13,
+      "covered": 187,
+      "rejection_rate": 0.065,
+      "coverage": 0.935,
+      "rejection_mc95": [
+        0.03837635464915299,
+        0.10801907929906895
+      ],
+      "coverage_mc95": [
+        0.8919809207009312,
+        0.961623645350847
+      ],
+      "slope_bias": -0.0024097157798484126,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 19,
+      "covered": 181,
+      "rejection_rate": 0.095,
+      "coverage": 0.905,
+      "rejection_mc95": [
+        0.06166310271738653,
+        0.1436016116481994
+      ],
+      "coverage_mc95": [
+        0.8563983883518006,
+        0.9383368972826135
+      ],
+      "slope_bias": -0.0023192569145665002,
+      "mean_estimated_rho": -0.06421360500166601,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 136,
+      "covered": 187,
+      "rejection_rate": 0.68,
+      "coverage": 0.935,
+      "rejection_mc95": [
+        0.6124810156588646,
+        0.7407346668453195
+      ],
+      "coverage_mc95": [
+        0.8919809207009312,
+        0.961623645350847
+      ],
+      "slope_bias": -0.0024097157798484165,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 145,
+      "covered": 181,
+      "rejection_rate": 0.725,
+      "coverage": 0.905,
+      "rejection_mc95": [
+        0.6593166064233035,
+        0.7822029967069265
+      ],
+      "coverage_mc95": [
+        0.8563983883518006,
+        0.9383368972826135
+      ],
+      "slope_bias": -0.002319256914566501,
+      "mean_estimated_rho": -0.06421360500166601,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.4,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 117,
+      "covered": 175,
+      "rejection_rate": 0.585,
+      "coverage": 0.875,
+      "rejection_mc95": [
+        0.5157391490134403,
+        0.6510571455024242
+      ],
+      "coverage_mc95": [
+        0.8219857499741765,
+        0.9138802552428735
+      ],
+      "slope_bias": 0.0038279793657290517,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.4,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 108,
+      "covered": 181,
+      "rejection_rate": 0.54,
+      "coverage": 0.905,
+      "rejection_mc95": [
+        0.4708228918895333,
+        0.6076694820002854
+      ],
+      "coverage_mc95": [
+        0.8563983883518006,
+        0.9383368972826135
+      ],
+      "slope_bias": 0.00394803580615086,
+      "mean_estimated_rho": 0.25385261545454885,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 24,
+      "covered": 175,
+      "rejection_rate": 0.12,
+      "coverage": 0.875,
+      "rejection_mc95": [
+        0.08197992706375512,
+        0.17234252098296743
+      ],
+      "coverage_mc95": [
+        0.8219857499741765,
+        0.9138802552428735
+      ],
+      "slope_bias": 0.0038279793657290512,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 19,
+      "covered": 181,
+      "rejection_rate": 0.095,
+      "coverage": 0.905,
+      "rejection_mc95": [
+        0.06166310271738653,
+        0.1436016116481994
+      ],
+      "coverage_mc95": [
+        0.8563983883518006,
+        0.9383368972826135
+      ],
+      "slope_bias": 0.0039480358061508595,
+      "mean_estimated_rho": 0.2538526154545488,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 129,
+      "covered": 175,
+      "rejection_rate": 0.645,
+      "coverage": 0.875,
+      "rejection_mc95": [
+        0.5765211307549043,
+        0.7080137245956883
+      ],
+      "coverage_mc95": [
+        0.8219857499741765,
+        0.9138802552428735
+      ],
+      "slope_bias": 0.003827979365729051,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 112,
+      "covered": 181,
+      "rejection_rate": 0.56,
+      "coverage": 0.905,
+      "rejection_mc95": [
+        0.4907167533465867,
+        0.6270218074881414
+      ],
+      "coverage_mc95": [
+        0.8563983883518006,
+        0.9383368972826135
+      ],
+      "slope_bias": 0.0039480358061508534,
+      "mean_estimated_rho": 0.2538526154545488,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 124,
+      "covered": 178,
+      "rejection_rate": 0.62,
+      "coverage": 0.89,
+      "rejection_mc95": [
+        0.5510671801561923,
+        0.6844099415132637
+      ],
+      "coverage_mc95": [
+        0.839073090026985,
+        0.926227555398747
+      ],
+      "slope_bias": 0.00101195869369968,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 110,
+      "covered": 185,
+      "rejection_rate": 0.55,
+      "coverage": 0.925,
+      "rejection_mc95": [
+        0.48075615138475697,
+        0.6173593159775166
+      ],
+      "coverage_mc95": [
+        0.8799563897637055,
+        0.954025082815618
+      ],
+      "slope_bias": 0.0019462685614970885,
+      "mean_estimated_rho": 0.2572431913495902,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 22,
+      "covered": 178,
+      "rejection_rate": 0.11,
+      "coverage": 0.89,
+      "rejection_mc95": [
+        0.07377244460125303,
+        0.1609269099730149
+      ],
+      "coverage_mc95": [
+        0.839073090026985,
+        0.926227555398747
+      ],
+      "slope_bias": 0.0010119586936996807,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 15,
+      "covered": 185,
+      "rejection_rate": 0.075,
+      "coverage": 0.925,
+      "rejection_mc95": [
+        0.04597491718438201,
+        0.12004361023629456
+      ],
+      "coverage_mc95": [
+        0.8799563897637055,
+        0.954025082815618
+      ],
+      "slope_bias": 0.001946268561497092,
+      "mean_estimated_rho": 0.2572431913495901,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 130,
+      "covered": 178,
+      "rejection_rate": 0.65,
+      "coverage": 0.89,
+      "rejection_mc95": [
+        0.5816346433604008,
+        0.7127117587264192
+      ],
+      "coverage_mc95": [
+        0.839073090026985,
+        0.926227555398747
+      ],
+      "slope_bias": 0.0010119586936996774,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 121,
+      "covered": 185,
+      "rejection_rate": 0.605,
+      "coverage": 0.925,
+      "rejection_mc95": [
+        0.5358834915928536,
+        0.6701589898679203
+      ],
+      "coverage_mc95": [
+        0.8799563897637055,
+        0.954025082815618
+      ],
+      "slope_bias": 0.0019462685614970892,
+      "mean_estimated_rho": 0.2572431913495902,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.7,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 116,
+      "covered": 150,
+      "rejection_rate": 0.58,
+      "coverage": 0.75,
+      "rejection_mc95": [
+        0.5107207393958046,
+        0.6462640083838327
+      ],
+      "coverage_mc95": [
+        0.6856590168795417,
+        0.8049183199318249
+      ],
+      "slope_bias": 0.0009376037316777619,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.7,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 98,
+      "covered": 158,
+      "rejection_rate": 0.49,
+      "coverage": 0.79,
+      "rejection_mc95": [
+        0.42156278331213176,
+        0.5588141232154135
+      ],
+      "coverage_mc95": [
+        0.7283538314009754,
+        0.8407158793002101
+      ],
+      "slope_bias": -0.00015516313918667007,
+      "mean_estimated_rho": 0.46840610098128593,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 50,
+      "covered": 150,
+      "rejection_rate": 0.25,
+      "coverage": 0.75,
+      "rejection_mc95": [
+        0.19508168006817497,
+        0.31434098312045833
+      ],
+      "coverage_mc95": [
+        0.6856590168795417,
+        0.8049183199318249
+      ],
+      "slope_bias": 0.0009376037316777598,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 42,
+      "covered": 158,
+      "rejection_rate": 0.21,
+      "coverage": 0.79,
+      "rejection_mc95": [
+        0.15928412069979,
+        0.2716461685990246
+      ],
+      "coverage_mc95": [
+        0.7283538314009754,
+        0.8407158793002101
+      ],
+      "slope_bias": -0.00015516313918666923,
+      "mean_estimated_rho": 0.46840610098128593,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 115,
+      "covered": 150,
+      "rejection_rate": 0.575,
+      "coverage": 0.75,
+      "rejection_mc95": [
+        0.5057093264785485,
+        0.6414638745648614
+      ],
+      "coverage_mc95": [
+        0.6856590168795417,
+        0.8049183199318249
+      ],
+      "slope_bias": 0.0009376037316777583,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 106,
+      "covered": 158,
+      "rejection_rate": 0.53,
+      "coverage": 0.79,
+      "rejection_mc95": [
+        0.4609168291500183,
+        0.5979524512673458
+      ],
+      "coverage_mc95": [
+        0.7283538314009754,
+        0.8407158793002101
+      ],
+      "slope_bias": -0.00015516313918667119,
+      "mean_estimated_rho": 0.46840610098128593,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 114,
+      "covered": 146,
+      "rejection_rate": 0.57,
+      "coverage": 0.73,
+      "rejection_mc95": [
+        0.5007048776415268,
+        0.6366567766656557
+      ],
+      "coverage_mc95": [
+        0.6645656480133157,
+        0.7867655018531416
+      ],
+      "slope_bias": -0.0027543382475862122,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 110,
+      "covered": 164,
+      "rejection_rate": 0.55,
+      "coverage": 0.82,
+      "rejection_mc95": [
+        0.48075615138475697,
+        0.6173593159775166
+      ],
+      "coverage_mc95": [
+        0.7608852497127511,
+        0.8670537414057983
+      ],
+      "slope_bias": -0.0013314503276300243,
+      "mean_estimated_rho": 0.4745636011448859,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 52,
+      "covered": 146,
+      "rejection_rate": 0.26,
+      "coverage": 0.73,
+      "rejection_mc95": [
+        0.20413830063574687,
+        0.32490745602534116
+      ],
+      "coverage_mc95": [
+        0.6645656480133157,
+        0.7867655018531416
+      ],
+      "slope_bias": -0.0027543382475862088,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 36,
+      "covered": 164,
+      "rejection_rate": 0.18,
+      "coverage": 0.82,
+      "rejection_mc95": [
+        0.13294625859420173,
+        0.23911475028724882
+      ],
+      "coverage_mc95": [
+        0.7608852497127511,
+        0.8670537414057983
+      ],
+      "slope_bias": -0.001331450327630021,
+      "mean_estimated_rho": 0.4745636011448859,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 103,
+      "covered": 146,
+      "rejection_rate": 0.515,
+      "coverage": 0.73,
+      "rejection_mc95": [
+        0.44610849192745716,
+        0.5833261482812249
+      ],
+      "coverage_mc95": [
+        0.6645656480133157,
+        0.7867655018531416
+      ],
+      "slope_bias": -0.0027543382475862122,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 200,
+      "valid": 200,
+      "failures": 0,
+      "rejections": 99,
+      "covered": 164,
+      "rejection_rate": 0.495,
+      "coverage": 0.82,
+      "rejection_mc95": [
+        0.4264584535990475,
+        0.5637299996647251
+      ],
+      "coverage_mc95": [
+        0.7608852497127511,
+        0.8670537414057983
+      ],
+      "slope_bias": -0.001331450327630028,
+      "mean_estimated_rho": 0.4745636011448859,
+      "passes_screen": false
+    }
+  ],
+  "final": [
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 436,
+      "covered": 963,
+      "rejection_rate": 0.436,
+      "coverage": 0.963,
+      "rejection_mc95": [
+        0.4055679635294317,
+        0.46692186155671933
+      ],
+      "coverage_mc95": [
+        0.9494176025179306,
+        0.9730388191244452
+      ],
+      "slope_bias": 0.00046380768259510446,
+      "mean_estimated_rho": null,
+      "passes_screen": true
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 518,
+      "covered": 937,
+      "rejection_rate": 0.518,
+      "coverage": 0.937,
+      "rejection_mc95": [
+        0.48702069136344844,
+        0.5488415453310715
+      ],
+      "coverage_mc95": [
+        0.920205076295354,
+        0.9504503367882711
+      ],
+      "slope_bias": -0.0002395898357353049,
+      "mean_estimated_rho": -0.10601323614960034,
+      "passes_screen": true
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0,
+      "season": "none",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 41,
+      "covered": 963,
+      "rejection_rate": 0.041,
+      "coverage": 0.963,
+      "rejection_mc95": [
+        0.030364971082098315,
+        0.0551479932076413
+      ],
+      "coverage_mc95": [
+        0.9494176025179306,
+        0.9730388191244452
+      ],
+      "slope_bias": 0.00046380768259510376,
+      "mean_estimated_rho": null,
+      "passes_screen": true
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0,
+      "season": "none",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 63,
+      "covered": 937,
+      "rejection_rate": 0.063,
+      "coverage": 0.937,
+      "rejection_mc95": [
+        0.049549663211729086,
+        0.0797949237046461
+      ],
+      "coverage_mc95": [
+        0.920205076295354,
+        0.9504503367882711
+      ],
+      "slope_bias": -0.00023958983573530416,
+      "mean_estimated_rho": -0.10601323614960034,
+      "passes_screen": true
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 435,
+      "covered": 963,
+      "rejection_rate": 0.435,
+      "coverage": 0.963,
+      "rejection_mc95": [
+        0.4045798065188989,
+        0.4659176720842233
+      ],
+      "coverage_mc95": [
+        0.9494176025179306,
+        0.9730388191244452
+      ],
+      "slope_bias": 0.0004638076825951028,
+      "mean_estimated_rho": null,
+      "passes_screen": true
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 519,
+      "covered": 937,
+      "rejection_rate": 0.519,
+      "coverage": 0.937,
+      "rejection_mc95": [
+        0.48801914625314236,
+        0.5498354369244066
+      ],
+      "coverage_mc95": [
+        0.920205076295354,
+        0.9504503367882711
+      ],
+      "slope_bias": -0.00023958983573530346,
+      "mean_estimated_rho": -0.10601323614960034,
+      "passes_screen": true
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 422,
+      "covered": 964,
+      "rejection_rate": 0.422,
+      "coverage": 0.964,
+      "rejection_mc95": [
+        0.3917453086472168,
+        0.4528516656765298
+      ],
+      "coverage_mc95": [
+        0.9505643395327921,
+        0.9738844285926127
+      ],
+      "slope_bias": 0.0012929789109406827,
+      "mean_estimated_rho": null,
+      "passes_screen": true
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 525,
+      "covered": 932,
+      "rejection_rate": 0.525,
+      "coverage": 0.932,
+      "rejection_mc95": [
+        0.49401247046123636,
+        0.555796191614486
+      ],
+      "coverage_mc95": [
+        0.9146861384770105,
+        0.9460075421914699
+      ],
+      "slope_bias": 0.0010998296020021249,
+      "mean_estimated_rho": -0.1015142157645607,
+      "passes_screen": true
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 40,
+      "covered": 964,
+      "rejection_rate": 0.04,
+      "coverage": 0.964,
+      "rejection_mc95": [
+        0.02951097368545276,
+        0.05400964412125796
+      ],
+      "coverage_mc95": [
+        0.9505643395327921,
+        0.9738844285926127
+      ],
+      "slope_bias": 0.0012929789109406835,
+      "mean_estimated_rho": null,
+      "passes_screen": true
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 68,
+      "covered": 932,
+      "rejection_rate": 0.068,
+      "coverage": 0.932,
+      "rejection_mc95": [
+        0.05399245780853015,
+        0.08531386152298948
+      ],
+      "coverage_mc95": [
+        0.9146861384770105,
+        0.9460075421914699
+      ],
+      "slope_bias": 0.0010998296020021255,
+      "mean_estimated_rho": -0.1015142157645607,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 455,
+      "covered": 964,
+      "rejection_rate": 0.455,
+      "coverage": 0.964,
+      "rejection_mc95": [
+        0.42436684599858754,
+        0.48597756226511246
+      ],
+      "coverage_mc95": [
+        0.9505643395327921,
+        0.9738844285926127
+      ],
+      "slope_bias": 0.0012929789109406814,
+      "mean_estimated_rho": null,
+      "passes_screen": true
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 553,
+      "covered": 932,
+      "rejection_rate": 0.553,
+      "coverage": 0.932,
+      "rejection_mc95": [
+        0.5220403713020199,
+        0.5835539922985113
+      ],
+      "coverage_mc95": [
+        0.9146861384770105,
+        0.9460075421914699
+      ],
+      "slope_bias": 0.0010998296020021238,
+      "mean_estimated_rho": -0.1015142157645607,
+      "passes_screen": true
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.4,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 477,
+      "covered": 856,
+      "rejection_rate": 0.477,
+      "coverage": 0.856,
+      "rejection_mc95": [
+        0.44619023214492903,
+        0.5079857987454065
+      ],
+      "coverage_mc95": [
+        0.8328762978702983,
+        0.8763990500879865
+      ],
+      "slope_bias": -0.001791001307705143,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.4,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 424,
+      "covered": 887,
+      "rejection_rate": 0.424,
+      "coverage": 0.887,
+      "rejection_mc95": [
+        0.3937184466169774,
+        0.4548632206728269
+      ],
+      "coverage_mc95": [
+        0.8658784472486151,
+        0.9051596416835653
+      ],
+      "slope_bias": -0.0013777685471760735,
+      "mean_estimated_rho": 0.21013828133784454,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 153,
+      "covered": 856,
+      "rejection_rate": 0.153,
+      "coverage": 0.856,
+      "rejection_mc95": [
+        0.13201921562431126,
+        0.17663655476466403
+      ],
+      "coverage_mc95": [
+        0.8328762978702983,
+        0.8763990500879865
+      ],
+      "slope_bias": -0.0017910013077051454,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 113,
+      "covered": 887,
+      "rejection_rate": 0.113,
+      "coverage": 0.887,
+      "rejection_mc95": [
+        0.09484035831643467,
+        0.13412155275138501
+      ],
+      "coverage_mc95": [
+        0.8658784472486151,
+        0.9051596416835653
+      ],
+      "slope_bias": -0.0013777685471760735,
+      "mean_estimated_rho": 0.2101382813378446,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 455,
+      "covered": 856,
+      "rejection_rate": 0.455,
+      "coverage": 0.856,
+      "rejection_mc95": [
+        0.42436684599858754,
+        0.48597756226511246
+      ],
+      "coverage_mc95": [
+        0.8328762978702983,
+        0.8763990500879865
+      ],
+      "slope_bias": -0.0017910013077051454,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 416,
+      "covered": 887,
+      "rejection_rate": 0.416,
+      "coverage": 0.887,
+      "rejection_mc95": [
+        0.38582896762102037,
+        0.44681392780455287
+      ],
+      "coverage_mc95": [
+        0.8658784472486151,
+        0.9051596416835653
+      ],
+      "slope_bias": -0.0013777685471760737,
+      "mean_estimated_rho": 0.21013828133784457,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 490,
+      "covered": 834,
+      "rejection_rate": 0.49,
+      "coverage": 0.834,
+      "rejection_mc95": [
+        0.45911403097425707,
+        0.520962504195454
+      ],
+      "coverage_mc95": [
+        0.8096691971622607,
+        0.8557745281693885
+      ],
+      "slope_bias": -0.0024964483929256808,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 415,
+      "covered": 870,
+      "rejection_rate": 0.415,
+      "coverage": 0.87,
+      "rejection_mc95": [
+        0.3848433602464026,
+        0.4458071886961417
+      ],
+      "coverage_mc95": [
+        0.8477319733455312,
+        0.8894362253751581
+      ],
+      "slope_bias": -0.0015412330545699468,
+      "mean_estimated_rho": 0.2083506677054947,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 173,
+      "covered": 834,
+      "rejection_rate": 0.173,
+      "coverage": 0.834,
+      "rejection_mc95": [
+        0.1508192344529515,
+        0.19768346559660158
+      ],
+      "coverage_mc95": [
+        0.8096691971622607,
+        0.8557745281693885
+      ],
+      "slope_bias": -0.002496448392925681,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 130,
+      "covered": 870,
+      "rejection_rate": 0.13,
+      "coverage": 0.87,
+      "rejection_mc95": [
+        0.11056377462484193,
+        0.1522680266544689
+      ],
+      "coverage_mc95": [
+        0.8477319733455312,
+        0.8894362253751581
+      ],
+      "slope_bias": -0.0015412330545699466,
+      "mean_estimated_rho": 0.20835066770549468,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 473,
+      "covered": 834,
+      "rejection_rate": 0.473,
+      "coverage": 0.834,
+      "rejection_mc95": [
+        0.4422178794680813,
+        0.5039887654901387
+      ],
+      "coverage_mc95": [
+        0.8096691971622607,
+        0.8557745281693885
+      ],
+      "slope_bias": -0.0024964483929256847,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 389,
+      "covered": 870,
+      "rejection_rate": 0.389,
+      "coverage": 0.87,
+      "rejection_mc95": [
+        0.35926319596566997,
+        0.4195863444181233
+      ],
+      "coverage_mc95": [
+        0.8477319733455312,
+        0.8894362253751581
+      ],
+      "slope_bias": -0.0015412330545699464,
+      "mean_estimated_rho": 0.20835066770549468,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.7,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 476,
+      "covered": 751,
+      "rejection_rate": 0.476,
+      "coverage": 0.751,
+      "rejection_mc95": [
+        0.4451969584283181,
+        0.5069867259789885
+      ],
+      "coverage_mc95": [
+        0.7232715438085464,
+        0.7768074234317048
+      ],
+      "slope_bias": 0.0022562412163951435,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.7,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 408,
+      "covered": 818,
+      "rejection_rate": 0.408,
+      "coverage": 0.818,
+      "rejection_mc95": [
+        0.3779477218755777,
+        0.43875640168576435
+      ],
+      "coverage_mc95": [
+        0.7928834388314774,
+        0.8406827427717094
+      ],
+      "slope_bias": 0.002019618398852753,
+      "mean_estimated_rho": 0.4300853846050549,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 259,
+      "covered": 751,
+      "rejection_rate": 0.259,
+      "coverage": 0.751,
+      "rejection_mc95": [
+        0.23280623499082614,
+        0.28703826259921145
+      ],
+      "coverage_mc95": [
+        0.7232715438085464,
+        0.7768074234317048
+      ],
+      "slope_bias": 0.0022562412163951414,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 182,
+      "covered": 818,
+      "rejection_rate": 0.182,
+      "coverage": 0.818,
+      "rejection_mc95": [
+        0.15931725722829052,
+        0.2071165611685226
+      ],
+      "coverage_mc95": [
+        0.7928834388314774,
+        0.8406827427717094
+      ],
+      "slope_bias": 0.0020196183988527546,
+      "mean_estimated_rho": 0.43008538460505497,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 499,
+      "covered": 751,
+      "rejection_rate": 0.499,
+      "coverage": 0.751,
+      "rejection_mc95": [
+        0.468073488750724,
+        0.529934164766247
+      ],
+      "coverage_mc95": [
+        0.7232715438085464,
+        0.7768074234317048
+      ],
+      "slope_bias": 0.00225624121639514,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 418,
+      "covered": 818,
+      "rejection_rate": 0.418,
+      "coverage": 0.818,
+      "rejection_mc95": [
+        0.3878005681433438,
+        0.4488270202482872
+      ],
+      "coverage_mc95": [
+        0.7928834388314774,
+        0.8406827427717094
+      ],
+      "slope_bias": 0.0020196183988527524,
+      "mean_estimated_rho": 0.4300853846050549,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 502,
+      "covered": 721,
+      "rejection_rate": 0.502,
+      "coverage": 0.721,
+      "rejection_mc95": [
+        0.47106219334840704,
+        0.5329224996176508
+      ],
+      "coverage_mc95": [
+        0.6923963660323501,
+        0.7479122067170344
+      ],
+      "slope_bias": -0.0007732303084204215,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 434,
+      "covered": 784,
+      "rejection_rate": 0.434,
+      "coverage": 0.784,
+      "rejection_mc95": [
+        0.40359177593584417,
+        0.4649133561842491
+      ],
+      "coverage_mc95": [
+        0.7574334101291272,
+        0.8083929910510775
+      ],
+      "slope_bias": -0.00036784505826207604,
+      "mean_estimated_rho": 0.43329260057214514,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 284,
+      "covered": 721,
+      "rejection_rate": 0.284,
+      "coverage": 0.721,
+      "rejection_mc95": [
+        0.2569190250903582,
+        0.3127341345754016
+      ],
+      "coverage_mc95": [
+        0.6923963660323501,
+        0.7479122067170344
+      ],
+      "slope_bias": -0.0007732303084204204,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 216,
+      "covered": 784,
+      "rejection_rate": 0.216,
+      "coverage": 0.784,
+      "rejection_mc95": [
+        0.19160700894892252,
+        0.24256658987087282
+      ],
+      "coverage_mc95": [
+        0.7574334101291272,
+        0.8083929910510775
+      ],
+      "slope_bias": -0.00036784505826207827,
+      "mean_estimated_rho": 0.4332926005721452,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 20,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 481,
+      "covered": 721,
+      "rejection_rate": 0.481,
+      "coverage": 0.721,
+      "rejection_mc95": [
+        0.4501645630755934,
+        0.5119808537468576
+      ],
+      "coverage_mc95": [
+        0.6923963660323501,
+        0.7479122067170344
+      ],
+      "slope_bias": -0.0007732303084204252,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 20,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 437,
+      "covered": 784,
+      "rejection_rate": 0.437,
+      "coverage": 0.784,
+      "rejection_mc95": [
+        0.40655624686835734,
+        0.4679259247008226
+      ],
+      "coverage_mc95": [
+        0.7574334101291272,
+        0.8083929910510775
+      ],
+      "slope_bias": -0.0003678450582620822,
+      "mean_estimated_rho": 0.43329260057214514,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 667,
+      "covered": 942,
+      "rejection_rate": 0.667,
+      "coverage": 0.942,
+      "rejection_mc95": [
+        0.6371997660141808,
+        0.6955220966516438
+      ],
+      "coverage_mc95": [
+        0.9257504237337675,
+        0.9548667217650018
+      ],
+      "slope_bias": -0.0006994612380581326,
+      "mean_estimated_rho": null,
+      "passes_screen": true
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 750,
+      "covered": 910,
+      "rejection_rate": 0.75,
+      "coverage": 0.91,
+      "rejection_mc95": [
+        0.7222397197409139,
+        0.7758469010163086
+      ],
+      "coverage_mc95": [
+        0.8906582073569279,
+        0.926203850684917
+      ],
+      "slope_bias": -0.0008230438334803873,
+      "mean_estimated_rho": -0.08856232194996473,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0,
+      "season": "none",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 58,
+      "covered": 942,
+      "rejection_rate": 0.058,
+      "coverage": 0.942,
+      "rejection_mc95": [
+        0.04513327823499824,
+        0.0742495762662325
+      ],
+      "coverage_mc95": [
+        0.9257504237337675,
+        0.9548667217650018
+      ],
+      "slope_bias": -0.0006994612380581332,
+      "mean_estimated_rho": null,
+      "passes_screen": true
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0,
+      "season": "none",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 90,
+      "covered": 910,
+      "rejection_rate": 0.09,
+      "coverage": 0.91,
+      "rejection_mc95": [
+        0.07379614931508309,
+        0.1093417926430721
+      ],
+      "coverage_mc95": [
+        0.8906582073569279,
+        0.926203850684917
+      ],
+      "slope_bias": -0.0008230438334803887,
+      "mean_estimated_rho": -0.08856232194996472,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 648,
+      "covered": 942,
+      "rejection_rate": 0.648,
+      "coverage": 0.942,
+      "rejection_mc95": [
+        0.6178838670299425,
+        0.6769834124583332
+      ],
+      "coverage_mc95": [
+        0.9257504237337675,
+        0.9548667217650018
+      ],
+      "slope_bias": -0.0006994612380581338,
+      "mean_estimated_rho": null,
+      "passes_screen": true
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 738,
+      "covered": 910,
+      "rejection_rate": 0.738,
+      "coverage": 0.91,
+      "rejection_mc95": [
+        0.7098723945402419,
+        0.764306068420634
+      ],
+      "coverage_mc95": [
+        0.8906582073569279,
+        0.926203850684917
+      ],
+      "slope_bias": -0.0008230438334803903,
+      "mean_estimated_rho": -0.08856232194996475,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 652,
+      "covered": 957,
+      "rejection_rate": 0.652,
+      "coverage": 0.957,
+      "rejection_mc95": [
+        0.6219460655735375,
+        0.6808905998468539
+      ],
+      "coverage_mc95": [
+        0.942580996155916,
+        0.9679213465882865
+      ],
+      "slope_bias": 0.0007058753913614448,
+      "mean_estimated_rho": null,
+      "passes_screen": true
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 741,
+      "covered": 925,
+      "rejection_rate": 0.741,
+      "coverage": 0.925,
+      "rejection_mc95": [
+        0.7129617374007885,
+        0.7671937650091739
+      ],
+      "coverage_mc95": [
+        0.9069990602607456,
+        0.9397481950265327
+      ],
+      "slope_bias": 0.0006208625634312431,
+      "mean_estimated_rho": -0.09216546275677291,
+      "passes_screen": true
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 40,
+      "covered": 957,
+      "rejection_rate": 0.04,
+      "coverage": 0.957,
+      "rejection_mc95": [
+        0.02951097368545276,
+        0.05400964412125796
+      ],
+      "coverage_mc95": [
+        0.942580996155916,
+        0.9679213465882865
+      ],
+      "slope_bias": 0.0007058753913614473,
+      "mean_estimated_rho": null,
+      "passes_screen": true
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 75,
+      "covered": 925,
+      "rejection_rate": 0.075,
+      "coverage": 0.925,
+      "rejection_mc95": [
+        0.06025180497346736,
+        0.0930009397392545
+      ],
+      "coverage_mc95": [
+        0.9069990602607456,
+        0.9397481950265327
+      ],
+      "slope_bias": 0.0006208625634312453,
+      "mean_estimated_rho": -0.09216546275677291,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 666,
+      "covered": 957,
+      "rejection_rate": 0.666,
+      "coverage": 0.957,
+      "rejection_mc95": [
+        0.6361818350568,
+        0.6945476811259959
+      ],
+      "coverage_mc95": [
+        0.942580996155916,
+        0.9679213465882865
+      ],
+      "slope_bias": 0.0007058753913614444,
+      "mean_estimated_rho": null,
+      "passes_screen": true
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 754,
+      "covered": 925,
+      "rejection_rate": 0.754,
+      "coverage": 0.925,
+      "rejection_mc95": [
+        0.7263681599761741,
+        0.7796878467131639
+      ],
+      "coverage_mc95": [
+        0.9069990602607456,
+        0.9397481950265327
+      ],
+      "slope_bias": 0.0006208625634312425,
+      "mean_estimated_rho": -0.0921654627567729,
+      "passes_screen": true
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.4,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 624,
+      "covered": 833,
+      "rejection_rate": 0.624,
+      "coverage": 0.833,
+      "rejection_mc95": [
+        0.5935575899582508,
+        0.6534933739373314
+      ],
+      "coverage_mc95": [
+        0.8086179403533302,
+        0.85483343849529
+      ],
+      "slope_bias": -0.000458094022229647,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.4,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 565,
+      "covered": 891,
+      "rejection_rate": 0.565,
+      "coverage": 0.891,
+      "rejection_mc95": [
+        0.5340823279157767,
+        0.595420193481101
+      ],
+      "coverage_mc95": [
+        0.8701675082488096,
+        0.9088399666154863
+      ],
+      "slope_bias": -0.001051247559917128,
+      "mean_estimated_rho": 0.25043072930150767,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 161,
+      "covered": 833,
+      "rejection_rate": 0.161,
+      "coverage": 0.833,
+      "rejection_mc95": [
+        0.13952453255948705,
+        0.18507000969371934
+      ],
+      "coverage_mc95": [
+        0.8086179403533302,
+        0.85483343849529
+      ],
+      "slope_bias": -0.00045809402222964817,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 109,
+      "covered": 891,
+      "rejection_rate": 0.109,
+      "coverage": 0.891,
+      "rejection_mc95": [
+        0.09116003338451377,
+        0.12983249175119035
+      ],
+      "coverage_mc95": [
+        0.8701675082488096,
+        0.9088399666154863
+      ],
+      "slope_bias": -0.0010512475599171278,
+      "mean_estimated_rho": 0.25043072930150767,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 605,
+      "covered": 833,
+      "rejection_rate": 0.605,
+      "coverage": 0.833,
+      "rejection_mc95": [
+        0.5743548264576065,
+        0.634841554260427
+      ],
+      "coverage_mc95": [
+        0.8086179403533302,
+        0.85483343849529
+      ],
+      "slope_bias": -0.00045809402222964996,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 544,
+      "covered": 891,
+      "rejection_rate": 0.544,
+      "coverage": 0.891,
+      "rejection_mc95": [
+        0.5130207581807846,
+        0.5746424870724867
+      ],
+      "coverage_mc95": [
+        0.8701675082488096,
+        0.9088399666154863
+      ],
+      "slope_bias": -0.0010512475599171287,
+      "mean_estimated_rho": 0.25043072930150767,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 594,
+      "covered": 860,
+      "rejection_rate": 0.594,
+      "coverage": 0.86,
+      "rejection_mc95": [
+        0.5632592745396628,
+        0.6240212948650526
+      ],
+      "coverage_mc95": [
+        0.8371133085163773,
+        0.8801314253740229
+      ],
+      "slope_bias": 0.0008212557889189056,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 543,
+      "covered": 887,
+      "rejection_rate": 0.543,
+      "coverage": 0.887,
+      "rejection_mc95": [
+        0.5120192033150067,
+        0.5736516954552356
+      ],
+      "coverage_mc95": [
+        0.8658784472486151,
+        0.9051596416835653
+      ],
+      "slope_bias": 0.0007364548772059119,
+      "mean_estimated_rho": 0.25005548201538974,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 136,
+      "covered": 860,
+      "rejection_rate": 0.136,
+      "coverage": 0.86,
+      "rejection_mc95": [
+        0.1161420645496615,
+        0.15864381562782268
+      ],
+      "coverage_mc95": [
+        0.8371133085163773,
+        0.8801314253740229
+      ],
+      "slope_bias": 0.0008212557889189083,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 113,
+      "covered": 887,
+      "rejection_rate": 0.113,
+      "coverage": 0.887,
+      "rejection_mc95": [
+        0.09484035831643467,
+        0.13412155275138501
+      ],
+      "coverage_mc95": [
+        0.8658784472486151,
+        0.9051596416835653
+      ],
+      "slope_bias": 0.000736454877205914,
+      "mean_estimated_rho": 0.2500554820153897,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 634,
+      "covered": 860,
+      "rejection_rate": 0.634,
+      "coverage": 0.86,
+      "rejection_mc95": [
+        0.6036838706724748,
+        0.6632905580533965
+      ],
+      "coverage_mc95": [
+        0.8371133085163773,
+        0.8801314253740229
+      ],
+      "slope_bias": 0.0008212557889189044,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 569,
+      "covered": 887,
+      "rejection_rate": 0.569,
+      "coverage": 0.887,
+      "rejection_mc95": [
+        0.5381003510964657,
+        0.5993715562325277
+      ],
+      "coverage_mc95": [
+        0.8658784472486151,
+        0.9051596416835653
+      ],
+      "slope_bias": 0.0007364548772059123,
+      "mean_estimated_rho": 0.25005548201538974,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.7,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 578,
+      "covered": 725,
+      "rejection_rate": 0.578,
+      "coverage": 0.725,
+      "rejection_mc95": [
+        0.5471483343234702,
+        0.6082546913527831
+      ],
+      "coverage_mc95": [
+        0.6965038327040266,
+        0.7517741259774736
+      ],
+      "slope_bias": -0.0013007597560072471,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.7,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 515,
+      "covered": 810,
+      "rejection_rate": 0.515,
+      "coverage": 0.81,
+      "rejection_mc95": [
+        0.4840260675164033,
+        0.5458591297290302
+      ],
+      "coverage_mc95": [
+        0.7845166798033586,
+        0.8331107299355974
+      ],
+      "slope_bias": -0.0010755949983519758,
+      "mean_estimated_rho": 0.4698498276959517,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 274,
+      "covered": 725,
+      "rejection_rate": 0.274,
+      "coverage": 0.725,
+      "rejection_mc95": [
+        0.24726082477543693,
+        0.30246887006003403
+      ],
+      "coverage_mc95": [
+        0.6965038327040266,
+        0.7517741259774736
+      ],
+      "slope_bias": -0.0013007597560072473,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 190,
+      "covered": 810,
+      "rejection_rate": 0.19,
+      "coverage": 0.81,
+      "rejection_mc95": [
+        0.1668892700644027,
+        0.2154833201966415
+      ],
+      "coverage_mc95": [
+        0.7845166798033586,
+        0.8331107299355974
+      ],
+      "slope_bias": -0.0010755949983519764,
+      "mean_estimated_rho": 0.4698498276959516,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 561,
+      "covered": 725,
+      "rejection_rate": 0.561,
+      "coverage": 0.725,
+      "rejection_mc95": [
+        0.5300663276081151,
+        0.5914668078566473
+      ],
+      "coverage_mc95": [
+        0.6965038327040266,
+        0.7517741259774736
+      ],
+      "slope_bias": -0.0013007597560072482,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 500,
+      "covered": 810,
+      "rejection_rate": 0.5,
+      "coverage": 0.81,
+      "rejection_mc95": [
+        0.4690696003681042,
+        0.5309303996318958
+      ],
+      "coverage_mc95": [
+        0.7845166798033586,
+        0.8331107299355974
+      ],
+      "slope_bias": -0.0010755949983519747,
+      "mean_estimated_rho": 0.4698498276959516,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 548,
+      "covered": 733,
+      "rejection_rate": 0.548,
+      "coverage": 0.733,
+      "rejection_mc95": [
+        0.5170282252037207,
+        0.5786044059816661
+      ],
+      "coverage_mc95": [
+        0.7047270990046101,
+        0.7594896315411211
+      ],
+      "slope_bias": -0.0005344154696256714,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 504,
+      "covered": 806,
+      "rejection_rate": 0.504,
+      "coverage": 0.806,
+      "rejection_mc95": [
+        0.4730552793350446,
+        0.5349141065970708
+      ],
+      "coverage_mc95": [
+        0.7803394533741679,
+        0.8293185704326724
+      ],
+      "slope_bias": -0.0014085405355024297,
+      "mean_estimated_rho": 0.4778925190747294,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 262,
+      "covered": 733,
+      "rejection_rate": 0.262,
+      "coverage": 0.733,
+      "rejection_mc95": [
+        0.23569393157936605,
+        0.2901276054597582
+      ],
+      "coverage_mc95": [
+        0.7047270990046101,
+        0.7594896315411211
+      ],
+      "slope_bias": -0.0005344154696256705,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 194,
+      "covered": 806,
+      "rejection_rate": 0.194,
+      "coverage": 0.806,
+      "rejection_mc95": [
+        0.17068142956732762,
+        0.21966054662583218
+      ],
+      "coverage_mc95": [
+        0.7803394533741679,
+        0.8293185704326724
+      ],
+      "slope_bias": -0.0014085405355024295,
+      "mean_estimated_rho": 0.4778925190747294,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "adjusted_mk",
+      "n": 24,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 559,
+      "covered": 733,
+      "rejection_rate": 0.559,
+      "coverage": 0.733,
+      "rejection_mc95": [
+        0.5280590840830492,
+        0.5894893584156553
+      ],
+      "coverage_mc95": [
+        0.7047270990046101,
+        0.7594896315411211
+      ],
+      "slope_bias": -0.0005344154696256722,
+      "mean_estimated_rho": null,
+      "passes_screen": false
+    },
+    {
+      "stage": "final",
+      "candidate": "ar1_regression",
+      "n": 24,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 1000,
+      "valid": 1000,
+      "failures": 0,
+      "rejections": 507,
+      "covered": 806,
+      "rejection_rate": 0.507,
+      "coverage": 0.806,
+      "rejection_mc95": [
+        0.47604583278568624,
+        0.537900592595516
+      ],
+      "coverage_mc95": [
+        0.7803394533741679,
+        0.8293185704326724
+      ],
+      "slope_bias": -0.0014085405355024304,
+      "mean_estimated_rho": 0.4778925190747294,
+      "passes_screen": false
+    }
+  ],
+  "decisions": {
+    "adjusted_mk": {
+      "passes_all_holdout_screens": false,
+      "failed_holdout_scenarios": 24,
+      "release": false
+    },
+    "ar1_regression": {
+      "passes_all_holdout_screens": false,
+      "failed_holdout_scenarios": 29,
+      "release": false
+    }
+  },
+  "bootstrap_diagnosis": {
+    "seed": 440158,
+    "oracle_population_seed": 550198,
+    "records": 200,
+    "bootstrap_replicates": 499,
+    "n": 24,
+    "independent_population_records": 5000,
+    "true_sampling_slope_sd_mc": 0.030867598998589613,
+    "mean_detrended_to_raw_variance_ratio": 0.956338845460195,
+    "mean_unique_positions_in_iid_resample": 15.354348697394789,
+    "comparisons": {
+      "fitted_iid": {
+        "mean_bootstrap_slope_sd": 0.024884330420549255,
+        "ratio_to_true_sampling_sd": 0.8061634603224649,
+        "coverage": 0.895,
+        "coverage_mc95": [
+          0.8448196800887696,
+          0.9302925120731899
+        ]
+      },
+      "fitted_block4": {
+        "mean_bootstrap_slope_sd": 0.021628492279731137,
+        "ratio_to_true_sampling_sd": 0.700685928980721,
+        "coverage": 0.815,
+        "coverage_mc95": [
+          0.7554293723884824,
+          0.8626980719938395
+        ]
+      },
+      "oracle_noise_iid": {
+        "mean_bootstrap_slope_sd": 0.025888666711700016,
+        "ratio_to_true_sampling_sd": 0.8387003703424717,
+        "coverage": 0.91,
+        "coverage_mc95": [
+          0.8622342812328346,
+          0.9423125511378069
+        ]
+      },
+      "oracle_noise_block4": {
+        "mean_bootstrap_slope_sd": 0.023955220743106773,
+        "ratio_to_true_sampling_sd": 0.7760636240026743,
+        "coverage": 0.9,
+        "coverage_mc95": [
+          0.8505941875672826,
+          0.9343295513309041
+        ]
+      },
+      "known_gaussian_iid": {
+        "mean_bootstrap_slope_sd": 0.030806321709640483,
+        "ratio_to_true_sampling_sd": 0.9980148346182698,
+        "coverage": 0.945,
+        "coverage_mc95": [
+          0.9042130012276914,
+          0.9690146582965411
+        ]
+      }
+    },
+    "interpretation": "oracle noise/known Gaussian draws diagnose mechanisms, not deployable methods or unique causal attribution"
+  },
+  "checks": {
+    "dense_covariance_gls_reference_max_error": 9.124645483638005e-16,
+    "input_and_missing_preservation": true,
+    "constant_and_short_admission_checked": true
+  },
+  "prior_hashes": {
+    "data/derived/science/phase_2/air_temperature__morocco_comparison.nc": "5a81dc2ef4538c51db309ce58baaf3f0775ffe964ad3c96c4749afe69f2ac4eb",
+    "data/derived/science/phase_2/air_temperature__nile_corridor.nc": "77ed7a528ec10cdc95ae79034f58009ee492e03a8da6810a75df2db23a998d37",
+    "data/derived/science/phase_2/air_temperature__sahel_comparison.nc": "536ff9d48651e7798fa56cd48b1cd5e1abd0fbd3de8adfb8dc468a5b4450e529",
+    "data/derived/science/phase_2/coverage_summary.png": "1c2eaa947cd80c46bcc1de188cf8c70a2edb4212cc803eb8d12770e77504ad03",
+    "data/derived/science/phase_2/manifest.json": "b2eaee3033ac8bf10e7e52950019e552555583b767032de310d7efb35c38c3c1",
+    "data/derived/science/phase_2/nile_ndvi_support.png": "eb90a9918e9668bd4910e2263460a88cee4356d0ba0ac24f282e7b7c78447316",
+    "data/derived/science/phase_2/nile_prepared_series.png": "cd4127d6af2ba38af6aeaf0aca3bc78bbd434584a52f6454a9f3827bf2325ca5",
+    "data/derived/science/phase_2/precipitation__morocco_comparison.nc": "a44700160db0f2dbc15c9150b984d7735fce482cd97ecce7a9516a2bc8fab91d",
+    "data/derived/science/phase_2/precipitation__nile_corridor.nc": "ab3ef38d54bd0302534b0726fc6c6bc1ffa366f9d35e597db008d7a840c67066",
+    "data/derived/science/phase_2/precipitation__sahel_comparison.nc": "0972ca3149a7eec8eb2a827634d90795a6b59f03c8bb407e181eb45aa046f3fe",
+    "data/derived/science/phase_2/qa_sensitivity.png": "21725934a4d791b3978d992cc74a2bb2847fc13456798d5485c4287d976f6396",
+    "data/derived/science/phase_2/soil_moisture__morocco_comparison.nc": "30e9f7958b4d65442f6459836618269046fd35aed28ab301612e2d9286b62999",
+    "data/derived/science/phase_2/soil_moisture__nile_corridor.nc": "655374d5e782d9938d37e1b93d06229fea9ad40042955e30b0d934ee63e15b5e",
+    "data/derived/science/phase_2/soil_moisture__sahel_comparison.nc": "14e8d4e44c8807dda5f2ae4fe3885fd229ef6734b24b5b354e750963c54a7ae5",
+    "data/derived/science/phase_2/source_review/IMERG_V07_ATBD_page_32.png": "9e077099018e5127a7cf676e15e601ec1605469b02db0a56360255e4233aa80a",
+    "data/derived/science/phase_2/source_review/MOD13_User_Guide_V61_page_18.png": "4f727f1cca487073605ab5e258f4329bf9bd32f6349c2cde9936dc9857e90d44",
+    "data/derived/science/phase_2/source_review/MOD13_User_Guide_V61_page_28.png": "6969d72f07fbaa49df9ee081b32c15d04b8f0ece648436fe9101ad1f370aa7da",
+    "data/derived/science/phase_2/vegetation_greenness__morocco_comparison.nc": "26fd56f343ea3a2d6deabfc49be555915eb9746f917b9c9b67428ebab242a349",
+    "data/derived/science/phase_2/vegetation_greenness__nile_corridor.nc": "8929660caddee1dae5a60e968af9dfe08dcabe20c8e382e040016c343fa075fe",
+    "data/derived/science/phase_2/vegetation_greenness__sahel_comparison.nc": "7ee3f6dc68875eb980944b9e7e8ad89d10e7d66d339d8661efd12a9210abf9b2",
+    "data/derived/science/phase_2_standard/manifest.json": "87866ac8f04e6d14d1b5c49fda52e1aa0526f87e931962eb915fbe7e0304bc98",
+    "data/derived/science/phase_2_standard/vegetation_greenness__morocco_comparison.nc": "114d43ef8111a13be600218109d884731a3e57bf6e8313dbbc56d5be96871c24",
+    "data/derived/science/phase_2_standard/vegetation_greenness__nile_corridor.nc": "446841f33debe6395de2166950d5a33aa7633a2834d64893143fbfa05ab80fea",
+    "data/derived/science/phase_2_standard/vegetation_greenness__sahel_comparison.nc": "ff40e267a9b1f0b1f2a08e3181d4ff3e05c3a02f5580ebd75508784d30adbb32",
+    "data/nasa/measurements/GLDAS_NOAH025_M_Egypt_2001_2024.nc": "47563a751a328e3d7cc2ff73dfc13e14dc5f2830f8e38e77ba3af4c38774773a",
+    "data/nasa/measurements/GLDAS_NOAH025_M_Morocco_2001_2024.nc": "a58c21ca540b3d008c45f8342548aab18689e4417169edd3ebcb43246c3fcb74",
+    "data/nasa/measurements/GLDAS_NOAH025_M_Nile_2001_2024.nc": "55a5194144348ff668cbdcc1485493422797d2206aa0535846d8a8f2feb121cc",
+    "data/nasa/measurements/GLDAS_NOAH025_M_Sahel_2001_2024.nc": "fd9dc0ccb3667a5987dfd7853db26cb4e8e7cdf7dddc686fb72bcf816750b273",
+    "data/nasa/measurements/GPM_3IMERGM_Morocco_2001_2024.nc": "95f3e53659dd4593e585031c3eb8d1b1ee8dfd1c30060cfa7d28a3a26969465b",
+    "data/nasa/measurements/GPM_3IMERGM_Nile_2001_2024.nc": "967131aec4bdb0fa98ffc6ec9c9340cde164f5704be8f861c7ee02c130d6e219",
+    "data/nasa/measurements/GPM_3IMERGM_Sahel_2001_2024.nc": "e515e68076c1639263ba3fe81a390d946c866595d7faee622f26128a579a974f",
+    "data/nasa/measurements/M2TMNXSLV_Egypt_2001_2024.nc": "f0bdb8612aae3e2394f19b48b84a07c90c6e654dd5698b0b521946652850e293",
+    "data/nasa/measurements/M2TMNXSLV_Morocco_2001_2024.nc": "c8801417edb435606a6c9621fa127f817dbe86c160a266a5d864c085a8199e40",
+    "data/nasa/measurements/M2TMNXSLV_Nile_2001_2024.nc": "5db8a5afe85560aad3e3f847c5ddfb2c75309dad7f89fbd3002a4c0c07c1e8cb",
+    "data/nasa/measurements/M2TMNXSLV_Sahel_2001_2024.nc": "14cdb693d945c73f570b296b85cfae3177258e848e078170fa46e608a16cb987",
+    "data/nasa/measurements/MOD13C2_Morocco_2001_2024.nc": "aad8265db99b64eaeafa12d5d09f9ca2ba8e813b9ccc070613987fa97cb5c7e8",
+    "data/nasa/measurements/MOD13C2_Nile_2001_2024.nc": "78427f6651ddc8ac129d89d6bb9903f59a020a47a10827f6f184ccafb290188c",
+    "data/nasa/measurements/MOD13C2_Sahel_2001_2024.nc": "063eeb3002c6f769b2389236626569d60f053a2a08f92500597d837222b1b02a",
+    "packages/science/config/preparation_policy.json": "35492fe4c43250d20a1a6996248cd9829e76d327042c270e13fb76996899efb2",
+    "packages/science/notebooks/02_preprocessing.ipynb": "c56404dcff06257ce4ea93a049431f224db77ca605da02c8056721e718ee07de",
+    "packages/science/phase_reports/PHASE_2_APPROVAL.md": "5f725e849d85da66948a7af1a166584d46f8ab5a23a277a58f405ebf61b2e4b3",
+    "packages/science/phase_reports/PHASE_2_COVERAGE.json": "b2eaee3033ac8bf10e7e52950019e552555583b767032de310d7efb35c38c3c1",
+    "packages/science/phase_reports/PHASE_2_QA_SENSITIVITY.json": "87866ac8f04e6d14d1b5c49fda52e1aa0526f87e931962eb915fbe7e0304bc98",
+    "packages/science/phase_reports/PHASE_2_REPORT.md": "3134537482eff4753dbd6b4752c3e44398537534892eb8220899d1d6cfa63cd6",
+    "packages/science/phase_reports/PHASE_2_VALIDATION.json": "d10963fc2f14a58d4107a76d22f656bacd5094465bd6cd94fd51c87083a0bbcc",
+    "data/derived/science/phase_1/precipitation_exploration.png": "6eb4978662904e1d51624aa64b987bacfe4285db9137c2a82317669f7ca14366",
+    "data/derived/science/sahel_ndvi_annual_review/annual_series_and_completeness.png": "b0509086fb4736522017cd186fb0e90fe30c95eed91901590ac5d91958ae27e2",
+    "data/derived/science/sahel_ndvi_annual_review/monthly_missingness_and_difference.png": "35b6a47dac1ce86dad481c97e479091f4b4da94468b4e7e041487e000276d802",
+    "data/derived/science/sahel_ndvi_annual_review/standard_100_annual_review.nc": "36a62b9ffb9e37c34378f45daeb7f2c1d450704d1d43a0cea9aaaa5de2a5a8d2",
+    "data/derived/science/sahel_ndvi_annual_review/standard_95_annual_review.nc": "cf7b499de93ec9bbce44c70de654e6c9fc25c3c86e792cbc3bb68f628005b7a6",
+    "data/derived/science/sahel_ndvi_annual_review/strict_100_annual_review.nc": "8b87314f17467c355facacec9b349d5ebe91e449e0dab4a8487a77617efe5a76",
+    "data/derived/science/sahel_ndvi_policy_review/calendar_month_quality.png": "3e91351862b124c4b0ceaf4aea014e55d8672214402db457a6786a02c185981a",
+    "data/derived/science/sahel_ndvi_policy_review/eligible_footprints.png": "0d590348a2992fa3eeb3c52940b76ff061066d57b61e03c2d065e454433c34ec",
+    "data/derived/science/sahel_ndvi_policy_review/monthly_series_and_support.png": "f0746aacb0afc6576a53f41c16c3f8c3a5efd607a00f9d6412c4448c18ee3705",
+    "data/derived/science/sahel_ndvi_policy_review/preserved_originals.json": "2c07f045c735aee406afa1c58b30887dbb553bd23e8bd94cff39b6588271b3af",
+    "data/derived/science/sahel_ndvi_policy_review/standard_100.nc": "9a729a6d6fd154e44ff97ae276da2d8ff87e5a14d15cd8f8592567250c146841",
+    "data/derived/science/sahel_ndvi_policy_review/standard_90.nc": "2f1a948f7fca74f9f790ef45030567f5e4acde17d7b81c7d1b963409513de413",
+    "data/derived/science/sahel_ndvi_policy_review/standard_95.nc": "80ec75ff4fe2359f753a109586c10cc938d266ff18183cb570d91d4b5cd40738",
+    "data/derived/science/sahel_ndvi_policy_review/strict_100.nc": "61613ffd1f69ba03bda9368a95a814bf9ad7a29d9435c878d51cc309b981d386",
+    "data/derived/science/sahel_ndvi_policy_review/strict_90.nc": "6db442c28df6fcfe3aa1a7b89ab7971b56708d2415293f5bbd3023a5ddf61981",
+    "data/derived/science/sahel_ndvi_policy_review/strict_95.nc": "6e2e15b6f4ca87eaf52d0bc45d35012402b67df5c009584a348833bd7f5535e5",
+    "data/derived/science/sahel_ndvi_policy_review/source_review/MOD13_C61_page27.png": "c1ce1254e74c380bde7207989f8e12e0ad9757bac624a74f8e16b16234873d2a",
+    "data/derived/science/sahel_ndvi_policy_review/source_review/MOD13_C61_page28.png": "6969d72f07fbaa49df9ee081b32c15d04b8f0ece648436fe9101ad1f370aa7da",
+    "data/derived/science/sahel_ndvi_preprocessing_comparison/source_and_prepared_month.png": "b80dd4ed32386981381bf5249fa046604c646612ecdcf077847d33eaeda544a3",
+    "data/derived/science/sahel_ndvi_preprocessing_comparison/three_output_comparison.png": "33bc569ddcd683473391ecfddf2330ff1ccf1eab3049c0468fae8b9a6609e369",
+    "data/derived/science/sahel_ndvi_preprocessing_comparison/three_output_footprints.png": "75bbfa13266a1ebfcaa4323c777311e42cc158f4d811081f55209e3bbec64659",
+    "packages/science/phase_reports/SAHEL_NDVI_POLICY_CHECKPOINT.md": "bfc6fa1ec12c57c7afa95fccfe3db33c0549439a62926dcdc75c46f4ca0c01cf",
+    "packages/science/phase_reports/SAHEL_NDVI_POLICY_METRICS.json": "ffcfbac5a2115a687afe50913f93610011892d7e4b8d1d10dcedb97158a588d7",
+    "packages/science/phase_reports/SAHEL_NDVI_QA_DISTRIBUTIONS.json": "971e4f8066fe5c55e7315d151dac8a099e8ebb39ba2719c7bf1006975dcdf76a",
+    "packages/science/phase_reports/SAHEL_NDVI_STANDARD95_MONTHLY_COVERAGE.md": "c5d9cc059da7cffb10d6519f5996337c819c3258ff10a74ba231cbda3574245c",
+    "packages/science/phase_reports/SAHEL_NDVI_STANDARD95_REVIEW.json": "8019de97fab81a268882243545895ff9a269b886333fd3ba74eaa79b2a56c393",
+    "packages/science/phase_reports/SAHEL_NDVI_STANDARD95_REVIEW.md": "510cfb116932afb7f809303a984a3b5c01586c394798b4fedb3ff78e130301a4",
+    "packages/science/phase_reports/PHASE_3_APPROVAL.md": "6941377ec076f0f8324987ac9110335c9ce0f20adeebdff95bdbffb537ce9e58",
+    "packages/science/phase_reports/PHASE_3_REPORT.md": "aee176cb07baaed562486c12b7e88c20073cd1e37c1a62931fb3565ca95be9f7",
+    "packages/science/phase_reports/PHASE_3_RESULTS.json": "3ea7e5b5e9f8fe5a793faf44b2948dc3ddf52f2dac3ab15707bc39ca27734497",
+    "packages/science/phase_reports/PHASE_3_TESTS.json": "c97f29b25058bc24407775dfedad47696223f7cf6940df68b4289a90180a5ea7",
+    "packages/science/phase_reports/PHASE_3_VALIDATION.json": "39193aedaf6dad1be5f9b1729040ac40c9c2a4d60ba3fec10abe38aa421f7f6d",
+    "packages/science/notebooks/03_trend_validation.ipynb": "9d0437262e2f43ab374da405284db245290edf62416bb246840685664618cc4c",
+    "packages/science/config/trend_policy.json": "926ab66d7074ee84fbceeab111fcc7b43d71e2a5675eb7e31eb30104ebd761ba",
+    "packages/science/src/trend_estimation.py": "41b26456db2506d7b494339d2c2579baf76020902d3352e123ebf558e1a7dcb8",
+    "data/derived/science/phase_3/air_temperature__morocco_comparison__strict_100.nc": "a72993734ead9e9d87daf9bf59032adc5de82cc3c76a352b174e835769ef96ae",
+    "data/derived/science/phase_3/air_temperature__nile_corridor__strict_100.nc": "7f71ba41d47c8254a83212275a636adf1b7ffa972fa216a28f96262d82be4e8d",
+    "data/derived/science/phase_3/air_temperature__sahel_comparison__strict_100.nc": "1a8bde25201c874fca9bbd74c4675d4ce7ac1f81eda87a95615b224a98762ed9",
+    "data/derived/science/phase_3/manifest.json": "93872d1f494446c2eff052b5b999f17a35283143e8aa62b6ca44ec1eb04868cb",
+    "data/derived/science/phase_3/precipitation__morocco_comparison__strict_100.nc": "e0e6d7c33b04395621bdba78f2d12fe0aad75256a93c1c3c52a190608148ca68",
+    "data/derived/science/phase_3/precipitation__nile_corridor__strict_100.nc": "1ad0ffe3091d91e5626207c2396695ea775c1a7d692e28016c98e4d1099c3b1b",
+    "data/derived/science/phase_3/precipitation__sahel_comparison__strict_100.nc": "638b5d228a7b3b3b7694b07e8024561b23e1c93e0d37205b8d975d9dab699195",
+    "data/derived/science/phase_3/sahel_cell_slopes.png": "82e8fc16dc57fc3e88cf894cacb70595dc7bd6a26bd122d7350b8857e9adc49c",
+    "data/derived/science/phase_3/sahel_policy_slopes.png": "336ec2803ffd9642759ee4fe497d4b4553006d80c55789f7678e1536ac07400a",
+    "data/derived/science/phase_3/soil_moisture__morocco_comparison__strict_100.nc": "e0f114e48a3b49cb78de7eb0bcb3bb82796a3ab0f82f37e8941e51cea3de8b35",
+    "data/derived/science/phase_3/soil_moisture__nile_corridor__strict_100.nc": "1751f00b2c0cb0a2f2f977fad15f3e78ad8f8dd9b53378f65208be56f1d3db79",
+    "data/derived/science/phase_3/soil_moisture__sahel_comparison__strict_100.nc": "e9582b5b8c4bca3a504337830a92455227c0c5a94814bc4a8dc52cabf2ff7791",
+    "data/derived/science/phase_3/stage2_preserved.json": "4ce31a6211bfa3fe53663161de70a0691fb3b27a0a9569909f442d26fd27956e",
+    "data/derived/science/phase_3/vegetation_greenness__morocco_comparison__strict_100.nc": "773b60efc829c608e540fd997e423280cf9fb7a646e58523e22a7d551b0ceca4",
+    "data/derived/science/phase_3/vegetation_greenness__nile_corridor__strict_100.nc": "30cca33a35bf463ecf2372b93de035ac74149614cadce6a9815b34f446ff04e5",
+    "data/derived/science/phase_3/vegetation_greenness__sahel_comparison__standard_100.nc": "35c1f27e5a0783397599452378cc6c95f76102a5bd3a4b6b92665ed2485d48ff",
+    "data/derived/science/phase_3/vegetation_greenness__sahel_comparison__standard_95.nc": "2a129d348319369d1b5c20f37baba24165ea25710922b2ec6016e5f5622ad439",
+    "data/derived/science/phase_3/vegetation_greenness__sahel_comparison__strict_100.nc": "313aaeeae0b7030a68a28de3cfde11a92d1eefdd689f90a36cb88bc57f524dc0",
+    "packages/science/phase_reports/PHASE_4_REPORT.md": "9fe398281e24eb827316864f8d426d4651128cbd8f2d3985a1243b6bf4394d62",
+    "packages/science/phase_reports/PHASE_4_STUDY.json": "47818f4e687164c24f876a75870ccf7e9f23fc2be9549368480565e13a2b3219",
+    "packages/science/phase_reports/PHASE_4_VALIDATION.json": "a0af3dc18d104a9ac7441654efdbba077925275e1275bfe097dc9fb605b39add",
+    "packages/science/phase_reports/PHASE_4_DECISION.json": "ed3ff10a0000c2d6b4ec64698b0a455ac195e9ae995f59d0584d0bd4cf71c134",
+    "packages/science/src/inference.py": "dfc727bd58761e1f2289a4de96a16a4fb46a8bd5124db4731d3cf25f8a57d0fc",
+    "packages/science/config/inference_policy.json": "f6152d1b24a134403fc6cb041dbdf0fdb9eb2a8a2c8600f6be7dd707108b0c6c",
+    "packages/science/notebooks/04_inference_validation.ipynb": "314b5cf1f33ac568bfa96a7f61e55b1a593d525426ca83cc2e01b113ad67098e"
+  },
+  "preserved_file_count": 105,
+  "application_release": false,
+  "phase5_started": false,
+  "elapsed_seconds": 31.642520199995488,
+  "no_nasa_pvalues_used_for_selection": true,
+  "seeds_independent_between_pilot_final_and_diagnosis": true,
+  "paired_design": "candidates and trend signs reuse noise within stage; rates use independent trials within each scenario"
+}

@@ -1,0 +1,47 @@
+{
+  "revision": "inference-study-1.0",
+  "status": "experimental_pending_calibration_and_review",
+  "basis": "complete_consecutive_annual_prepared_series",
+  "minimum_annual_observations": 20,
+  "minimum_rationale": "inherited annual candidate guard; investigated at n=24 and n=48, not a guarantee of adequacy",
+  "point_estimator": "Phase 3 exact Theil-Sen",
+  "resampling": "circular_fixed_length_blocks_of_median_centered_detrended_residuals",
+  "block_length_candidate_years": 4,
+  "block_length_sensitivity_years": [1, 3, 4, 6],
+  "bootstrap_replicates": 999,
+  "diagnostic_replicates": 1999,
+  "confidence_level": 0.95,
+  "interval": "basic_bootstrap_from_resampled_residual_slope_errors",
+  "two_sided_p": "plus_one_absolute_residual_bootstrap_slope_tail",
+  "alpha": 0.05,
+  "missing": "unsupported_for_inference; return insufficient_data, never impute",
+  "constant": "no_variation; interval and p-value withheld",
+  "experimental_standard95": "inference_withheld_due_to_changing_spatial_support",
+  "multiplicity": {
+    "implemented": ["BH", "BY"],
+    "candidate": "BY",
+    "q": 0.05,
+    "primary_regional_family": "12 strict-policy variable-region annual series",
+    "cell_family": "one variable-region-policy-period native grid; tested only in simulations until marginal calibration passes",
+    "limitations": "BY accommodates arbitrary dependence only when individual p-values are valid; adjustment cannot repair miscalibrated tests"
+  },
+  "monte_carlo": {
+    "seed": 20261115,
+    "replications_per_scenario": 500,
+    "null_lengths": [24, 48],
+    "ar1_phi": [0.0, 0.4, 0.7],
+    "stationary_marginal_error_sd": 1.0,
+    "power_slopes_per_year": [-0.08, 0.08],
+    "power_length": 24,
+    "rate_uncertainty": "95% Wilson interval, independent simulated records",
+    "research_screen": {
+      "max_false_positive_rate_upper_wilson": 0.08,
+      "min_coverage_lower_wilson": 0.90,
+      "note": "exploratory minimum screen, not proof of nominal 95% coverage or a release authorization"
+    },
+    "fdr_families_per_scenario": 2000,
+    "fdr_family_size": 200
+  },
+  "application_release": false,
+  "scientific_default_changed": false
+}

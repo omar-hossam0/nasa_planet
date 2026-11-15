@@ -1,0 +1,2888 @@
+{
+  "revision": "inference-study-1.0",
+  "identity": {
+    "policy_sha256": "be95a684387d56b43c4458e80bedbdc279a79ff079850137d70373196b1c638a",
+    "implementation_sha256": "dfc727bd58761e1f2289a4de96a16a4fb46a8bd5124db4731d3cf25f8a57d0fc",
+    "study_script_sha256": "e6d8a7cd026a92787cc8e4f899d3ac565b9c39e0a4d3cfa980f50d5f95872698"
+  },
+  "config": {
+    "revision": "inference-study-1.0",
+    "status": "experimental_pending_calibration_and_review",
+    "basis": "complete_consecutive_annual_prepared_series",
+    "minimum_annual_observations": 20,
+    "minimum_rationale": "inherited annual candidate guard; investigated at n=24 and n=48, not a guarantee of adequacy",
+    "point_estimator": "Phase 3 exact Theil-Sen",
+    "resampling": "circular_fixed_length_blocks_of_median_centered_detrended_residuals",
+    "block_length_candidate_years": 4,
+    "block_length_sensitivity_years": [
+      1,
+      3,
+      4,
+      6
+    ],
+    "bootstrap_replicates": 999,
+    "diagnostic_replicates": 1999,
+    "confidence_level": 0.95,
+    "interval": "basic_bootstrap_from_resampled_residual_slope_errors",
+    "two_sided_p": "plus_one_absolute_residual_bootstrap_slope_tail",
+    "alpha": 0.05,
+    "missing": "unsupported_for_inference; return insufficient_data, never impute",
+    "constant": "no_variation; interval and p-value withheld",
+    "experimental_standard95": "inference_withheld_due_to_changing_spatial_support",
+    "multiplicity": {
+      "implemented": [
+        "BH",
+        "BY"
+      ],
+      "candidate": "BY",
+      "q": 0.05,
+      "primary_regional_family": "12 strict-policy variable-region annual series",
+      "cell_family": "one variable-region-policy-period native grid; tested only in simulations until marginal calibration passes",
+      "limitations": "BY accommodates arbitrary dependence only when individual p-values are valid; adjustment cannot repair miscalibrated tests"
+    },
+    "monte_carlo": {
+      "seed": 20261115,
+      "replications_per_scenario": 500,
+      "null_lengths": [
+        24,
+        48
+      ],
+      "ar1_phi": [
+        0.0,
+        0.4,
+        0.7
+      ],
+      "stationary_marginal_error_sd": 1.0,
+      "power_slopes_per_year": [
+        -0.08,
+        0.08
+      ],
+      "power_length": 24,
+      "rate_uncertainty": "95% Wilson interval, independent simulated records",
+      "research_screen": {
+        "max_false_positive_rate_upper_wilson": 0.08,
+        "min_coverage_lower_wilson": 0.9,
+        "note": "exploratory minimum screen, not proof of nominal 95% coverage or a release authorization"
+      },
+      "fdr_families_per_scenario": 2000,
+      "fdr_family_size": 200
+    },
+    "application_release": false,
+    "scientific_default_changed": false
+  },
+  "candidate_calibration": {
+    "checks": [
+      {
+        "scenario": "annual_ar1_null_phi0.0_n24",
+        "false_positive_upper_mc95": 0.22245409405978459,
+        "coverage_lower_mc95": 0.78818582871064,
+        "passes_research_screen": false
+      },
+      {
+        "scenario": "annual_ar1_null_phi0.4_n24",
+        "false_positive_upper_mc95": 0.2897636734829552,
+        "coverage_lower_mc95": 0.6998260397638378,
+        "passes_research_screen": false
+      },
+      {
+        "scenario": "annual_ar1_null_phi0.7_n24",
+        "false_positive_upper_mc95": 0.3826009304939827,
+        "coverage_lower_mc95": 0.6153562150800094,
+        "passes_research_screen": false
+      }
+    ],
+    "passes_research_screen": false,
+    "application_release": false,
+    "note": "Even a passed minimum research screen is not proof of nominal coverage or owner approval"
+  },
+  "simulation_records": [
+    {
+      "scenario": "annual_ar1_null_phi0.0_n24",
+      "n_years": 24,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 1,
+      "replications": 500,
+      "covered": 442,
+      "coverage": 0.884,
+      "coverage_mc95": [
+        0.8529581630365658,
+        0.9091863434889621
+      ],
+      "rejected": 59,
+      "rejection_rate": 0.118,
+      "rejection_mc95": [
+        0.09259300825150649,
+        0.14923198786111944
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.10395756472889939,
+      "mean_slope_bias": 0.0025465669745569066,
+      "slope_rmse": 0.03219372348301129,
+      "model": "annual_ar1",
+      "phi": 0.0,
+      "record_seed_components": [
+        20261115,
+        24,
+        0,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.0_n24",
+      "n_years": 24,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 3,
+      "replications": 500,
+      "covered": 418,
+      "coverage": 0.836,
+      "coverage_mc95": [
+        0.8010053635257086,
+        0.8658710796841282
+      ],
+      "rejected": 79,
+      "rejection_rate": 0.158,
+      "rejection_mc95": [
+        0.1286526978644355,
+        0.19256235101126623
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.094653571294123,
+      "mean_slope_bias": 0.0025465669745569066,
+      "slope_rmse": 0.03219372348301129,
+      "model": "annual_ar1",
+      "phi": 0.0,
+      "record_seed_components": [
+        20261115,
+        24,
+        0,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.0_n24",
+      "n_years": 24,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 4,
+      "replications": 500,
+      "covered": 412,
+      "coverage": 0.824,
+      "coverage_mc95": [
+        0.78818582871064,
+        0.854873598670274
+      ],
+      "rejected": 93,
+      "rejection_rate": 0.186,
+      "rejection_mc95": [
+        0.1543339917500702,
+        0.22245409405978459
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.09066498962190839,
+      "mean_slope_bias": 0.0025465669745569066,
+      "slope_rmse": 0.03219372348301129,
+      "model": "annual_ar1",
+      "phi": 0.0,
+      "record_seed_components": [
+        20261115,
+        24,
+        0,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.0_n24",
+      "n_years": 24,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 6,
+      "replications": 500,
+      "covered": 388,
+      "coverage": 0.776,
+      "coverage_mc95": [
+        0.7374303353251315,
+        0.8103610287400917
+      ],
+      "rejected": 110,
+      "rejection_rate": 0.22,
+      "rejection_mc95": [
+        0.18590093257162363,
+        0.25836869808684565
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.08382827047940655,
+      "mean_slope_bias": 0.0025465669745569066,
+      "slope_rmse": 0.03219372348301129,
+      "model": "annual_ar1",
+      "phi": 0.0,
+      "record_seed_components": [
+        20261115,
+        24,
+        0,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.4_n24",
+      "n_years": 24,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 1,
+      "replications": 500,
+      "covered": 358,
+      "coverage": 0.716,
+      "coverage_mc95": [
+        0.674944056876268,
+        0.7537622280443413
+      ],
+      "rejected": 142,
+      "rejection_rate": 0.284,
+      "rejection_mc95": [
+        0.2462377719556586,
+        0.32505594312373204
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.09808318063094384,
+      "mean_slope_bias": 0.0017050186032316027,
+      "slope_rmse": 0.046558061966248544,
+      "model": "annual_ar1",
+      "phi": 0.4,
+      "record_seed_components": [
+        20261115,
+        24,
+        40,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.4_n24",
+      "n_years": 24,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 3,
+      "replications": 500,
+      "covered": 377,
+      "coverage": 0.754,
+      "coverage_mc95": [
+        0.7144078267312022,
+        0.7897190083143293
+      ],
+      "rejected": 123,
+      "rejection_rate": 0.246,
+      "rejection_mc95": [
+        0.2102809916856707,
+        0.2855921732687978
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.11358260214890609,
+      "mean_slope_bias": 0.0017050186032316027,
+      "slope_rmse": 0.046558061966248544,
+      "model": "annual_ar1",
+      "phi": 0.4,
+      "record_seed_components": [
+        20261115,
+        24,
+        40,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.4_n24",
+      "n_years": 24,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 4,
+      "replications": 500,
+      "covered": 370,
+      "coverage": 0.74,
+      "coverage_mc95": [
+        0.6998260397638378,
+        0.7765142768146172
+      ],
+      "rejected": 125,
+      "rejection_rate": 0.25,
+      "rejection_mc95": [
+        0.21404849674782103,
+        0.2897636734829552
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.11237822058828692,
+      "mean_slope_bias": 0.0017050186032316027,
+      "slope_rmse": 0.046558061966248544,
+      "model": "annual_ar1",
+      "phi": 0.4,
+      "record_seed_components": [
+        20261115,
+        24,
+        40,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.4_n24",
+      "n_years": 24,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 6,
+      "replications": 500,
+      "covered": 361,
+      "coverage": 0.722,
+      "coverage_mc95": [
+        0.6811514003636959,
+        0.7594633924713748
+      ],
+      "rejected": 139,
+      "rejection_rate": 0.278,
+      "rejection_mc95": [
+        0.2405366075286252,
+        0.31884859963630413
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.10694911618783365,
+      "mean_slope_bias": 0.0017050186032316027,
+      "slope_rmse": 0.046558061966248544,
+      "model": "annual_ar1",
+      "phi": 0.4,
+      "record_seed_components": [
+        20261115,
+        24,
+        40,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.7_n24",
+      "n_years": 24,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 1,
+      "replications": 500,
+      "covered": 265,
+      "coverage": 0.53,
+      "coverage_mc95": [
+        0.4861905914242533,
+        0.5733519481480536
+      ],
+      "rejected": 234,
+      "rejection_rate": 0.468,
+      "rejection_mc95": [
+        0.4246740659219794,
+        0.5118138918675601
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.08656741453925841,
+      "mean_slope_bias": -0.001260758145315143,
+      "slope_rmse": 0.06037933979490078,
+      "model": "annual_ar1",
+      "phi": 0.7,
+      "record_seed_components": [
+        20261115,
+        24,
+        70,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.7_n24",
+      "n_years": 24,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 3,
+      "replications": 500,
+      "covered": 323,
+      "coverage": 0.646,
+      "coverage_mc95": [
+        0.6031159977821284,
+        0.6866576948030984
+      ],
+      "rejected": 173,
+      "rejection_rate": 0.346,
+      "rejection_mc95": [
+        0.30562123178807926,
+        0.3887270650740789
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.11623983784516281,
+      "mean_slope_bias": -0.001260758145315143,
+      "slope_rmse": 0.06037933979490078,
+      "model": "annual_ar1",
+      "phi": 0.7,
+      "record_seed_components": [
+        20261115,
+        24,
+        70,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.7_n24",
+      "n_years": 24,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 4,
+      "replications": 500,
+      "covered": 329,
+      "coverage": 0.658,
+      "coverage_mc95": [
+        0.6153562150800094,
+        0.6982344933341402
+      ],
+      "rejected": 170,
+      "rejection_rate": 0.34,
+      "rejection_mc95": [
+        0.29983885845371416,
+        0.3826009304939827
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.11986102101176523,
+      "mean_slope_bias": -0.001260758145315143,
+      "slope_rmse": 0.06037933979490078,
+      "model": "annual_ar1",
+      "phi": 0.7,
+      "record_seed_components": [
+        20261115,
+        24,
+        70,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.7_n24",
+      "n_years": 24,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 6,
+      "replications": 500,
+      "covered": 325,
+      "coverage": 0.65,
+      "coverage_mc95": [
+        0.6071928710061952,
+        0.6905198268553391
+      ],
+      "rejected": 172,
+      "rejection_rate": 0.344,
+      "rejection_mc95": [
+        0.3036929655617379,
+        0.38668582866226636
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.1187170509251247,
+      "mean_slope_bias": -0.001260758145315143,
+      "slope_rmse": 0.06037933979490078,
+      "model": "annual_ar1",
+      "phi": 0.7,
+      "record_seed_components": [
+        20261115,
+        24,
+        70,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.0_n48",
+      "n_years": 48,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 1,
+      "replications": 500,
+      "covered": 462,
+      "coverage": 0.924,
+      "coverage_mc95": [
+        0.8974035863260316,
+        0.9441309729625723
+      ],
+      "rejected": 36,
+      "rejection_rate": 0.072,
+      "rejection_mc95": [
+        0.0524580314181262,
+        0.09806840401696253
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.03818025482526673,
+      "mean_slope_bias": 0.00023139292401893992,
+      "slope_rmse": 0.010414725725026285,
+      "model": "annual_ar1",
+      "phi": 0.0,
+      "record_seed_components": [
+        20261115,
+        48,
+        0,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.0_n48",
+      "n_years": 48,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 3,
+      "replications": 500,
+      "covered": 453,
+      "coverage": 0.906,
+      "coverage_mc95": [
+        0.8772354441374409,
+        0.9285735914077787
+      ],
+      "rejected": 49,
+      "rejection_rate": 0.098,
+      "rejection_mc95": [
+        0.07492391886460623,
+        0.12720605086648182
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.03638268306614,
+      "mean_slope_bias": 0.00023139292401893992,
+      "slope_rmse": 0.010414725725026285,
+      "model": "annual_ar1",
+      "phi": 0.0,
+      "record_seed_components": [
+        20261115,
+        48,
+        0,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.0_n48",
+      "n_years": 48,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 4,
+      "replications": 500,
+      "covered": 447,
+      "coverage": 0.894,
+      "coverage_mc95": [
+        0.8639490699892671,
+        0.9180429497270297
+      ],
+      "rejected": 51,
+      "rejection_rate": 0.102,
+      "rejection_mc95": [
+        0.07843435210316954,
+        0.13163462290422606
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.03544165071035995,
+      "mean_slope_bias": 0.00023139292401893992,
+      "slope_rmse": 0.010414725725026285,
+      "model": "annual_ar1",
+      "phi": 0.0,
+      "record_seed_components": [
+        20261115,
+        48,
+        0,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.0_n48",
+      "n_years": 48,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 6,
+      "replications": 500,
+      "covered": 436,
+      "coverage": 0.872,
+      "coverage_mc95": [
+        0.8398543146918417,
+        0.8984731760047634
+      ],
+      "rejected": 62,
+      "rejection_rate": 0.124,
+      "rejection_mc95": [
+        0.09794609113930344,
+        0.15578741288778383
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.033800780601841,
+      "mean_slope_bias": 0.00023139292401893992,
+      "slope_rmse": 0.010414725725026285,
+      "model": "annual_ar1",
+      "phi": 0.0,
+      "record_seed_components": [
+        20261115,
+        48,
+        0,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.4_n48",
+      "n_years": 48,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 1,
+      "replications": 500,
+      "covered": 389,
+      "coverage": 0.778,
+      "coverage_mc95": [
+        0.739530218085007,
+        0.8122306486183701
+      ],
+      "rejected": 111,
+      "rejection_rate": 0.222,
+      "rejection_mc95": [
+        0.18776935138162992,
+        0.26046978191499315
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.036994674077925976,
+      "mean_slope_bias": -0.00043365819132499574,
+      "slope_rmse": 0.015753233627045768,
+      "model": "annual_ar1",
+      "phi": 0.4,
+      "record_seed_components": [
+        20261115,
+        48,
+        40,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.4_n48",
+      "n_years": 48,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 3,
+      "replications": 500,
+      "covered": 424,
+      "coverage": 0.848,
+      "coverage_mc95": [
+        0.8138858517125613,
+        0.8768076073261983
+      ],
+      "rejected": 78,
+      "rejection_rate": 0.156,
+      "rejection_mc95": [
+        0.126830791403845,
+        0.19041475483370296
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.04526213469398644,
+      "mean_slope_bias": -0.00043365819132499574,
+      "slope_rmse": 0.015753233627045768,
+      "model": "annual_ar1",
+      "phi": 0.4,
+      "record_seed_components": [
+        20261115,
+        48,
+        40,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.4_n48",
+      "n_years": 48,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 4,
+      "replications": 500,
+      "covered": 421,
+      "coverage": 0.842,
+      "coverage_mc95": [
+        0.8074376489887337,
+        0.8713473021355645
+      ],
+      "rejected": 78,
+      "rejection_rate": 0.156,
+      "rejection_mc95": [
+        0.126830791403845,
+        0.19041475483370296
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.04608895946506631,
+      "mean_slope_bias": -0.00043365819132499574,
+      "slope_rmse": 0.015753233627045768,
+      "model": "annual_ar1",
+      "phi": 0.4,
+      "record_seed_components": [
+        20261115,
+        48,
+        40,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.4_n48",
+      "n_years": 48,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 6,
+      "replications": 500,
+      "covered": 418,
+      "coverage": 0.836,
+      "coverage_mc95": [
+        0.8010053635257086,
+        0.8658710796841282
+      ],
+      "rejected": 86,
+      "rejection_rate": 0.172,
+      "rejection_mc95": [
+        0.1414541198436514,
+        0.20754744749912687
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.04564754270877394,
+      "mean_slope_bias": -0.00043365819132499574,
+      "slope_rmse": 0.015753233627045768,
+      "model": "annual_ar1",
+      "phi": 0.4,
+      "record_seed_components": [
+        20261115,
+        48,
+        40,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.7_n48",
+      "n_years": 48,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 1,
+      "replications": 500,
+      "covered": 274,
+      "coverage": 0.548,
+      "coverage_mc95": [
+        0.50417540112498,
+        0.591092662190711
+      ],
+      "rejected": 223,
+      "rejection_rate": 0.446,
+      "rejection_mc95": [
+        0.4030063915853302,
+        0.4898170371845176
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.03396255036254703,
+      "mean_slope_bias": 0.0015746636092694578,
+      "slope_rmse": 0.022542564238373784,
+      "model": "annual_ar1",
+      "phi": 0.7,
+      "record_seed_components": [
+        20261115,
+        48,
+        70,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.7_n48",
+      "n_years": 48,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 3,
+      "replications": 500,
+      "covered": 338,
+      "coverage": 0.676,
+      "coverage_mc95": [
+        0.6337715143893493,
+        0.7155447177681845
+      ],
+      "rejected": 162,
+      "rejection_rate": 0.324,
+      "rejection_mc95": [
+        0.2844552822318157,
+        0.3662284856106508
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.04879707422670398,
+      "mean_slope_bias": 0.0015746636092694578,
+      "slope_rmse": 0.022542564238373784,
+      "model": "annual_ar1",
+      "phi": 0.7,
+      "record_seed_components": [
+        20261115,
+        48,
+        70,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.7_n48",
+      "n_years": 48,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 4,
+      "replications": 500,
+      "covered": 348,
+      "coverage": 0.696,
+      "coverage_mc95": [
+        0.6543133215963362,
+        0.7346979369427353
+      ],
+      "rejected": 152,
+      "rejection_rate": 0.304,
+      "rejection_mc95": [
+        0.26530206305726467,
+        0.34568667840366385
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.05202360967780001,
+      "mean_slope_bias": 0.0015746636092694578,
+      "slope_rmse": 0.022542564238373784,
+      "model": "annual_ar1",
+      "phi": 0.7,
+      "record_seed_components": [
+        20261115,
+        48,
+        70,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.7_n48",
+      "n_years": 48,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 6,
+      "replications": 500,
+      "covered": 369,
+      "coverage": 0.738,
+      "coverage_mc95": [
+        0.6977470833575388,
+        0.7746237305827623
+      ],
+      "rejected": 132,
+      "rejection_rate": 0.264,
+      "rejection_mc95": [
+        0.22726783141305193,
+        0.3043308572848008
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.05506725592227411,
+      "mean_slope_bias": 0.0015746636092694578,
+      "slope_rmse": 0.022542564238373784,
+      "model": "annual_ar1",
+      "phi": 0.7,
+      "record_seed_components": [
+        20261115,
+        48,
+        70,
+        0
+      ]
+    },
+    {
+      "scenario": "annual_ar1_power_phi0.0_slope-0.08",
+      "n_years": 24,
+      "true_slope_per_year": -0.08,
+      "block_length_years": 3,
+      "replications": 500,
+      "covered": 425,
+      "coverage": 0.85,
+      "coverage_mc95": [
+        0.8160389193683016,
+        0.8786240423086119
+      ],
+      "rejected": 419,
+      "rejection_rate": 0.838,
+      "rejection_mc95": [
+        0.8031477342378299,
+        0.8676982116101608
+      ],
+      "rejection_interpretation": "power",
+      "mean_interval_width": 0.09470484503365875,
+      "mean_slope_bias": 0.0015003977853433057,
+      "slope_rmse": 0.03138419310440045,
+      "model": "annual_ar1",
+      "phi": 0.0,
+      "record_seed_components": [
+        20261115,
+        24,
+        0,
+        1
+      ]
+    },
+    {
+      "scenario": "annual_ar1_power_phi0.0_slope-0.08",
+      "n_years": 24,
+      "true_slope_per_year": -0.08,
+      "block_length_years": 4,
+      "replications": 500,
+      "covered": 410,
+      "coverage": 0.82,
+      "coverage_mc95": [
+        0.7839253300173655,
+        0.851195092087241
+      ],
+      "rejected": 422,
+      "rejection_rate": 0.844,
+      "rejection_mc95": [
+        0.809585245166297,
+        0.8731692085961551
+      ],
+      "rejection_interpretation": "power",
+      "mean_interval_width": 0.09067343974886262,
+      "mean_slope_bias": 0.0015003977853433057,
+      "slope_rmse": 0.03138419310440045,
+      "model": "annual_ar1",
+      "phi": 0.0,
+      "record_seed_components": [
+        20261115,
+        24,
+        0,
+        1
+      ]
+    },
+    {
+      "scenario": "annual_ar1_power_phi0.0_slope-0.08",
+      "n_years": 24,
+      "true_slope_per_year": -0.08,
+      "block_length_years": 6,
+      "replications": 500,
+      "covered": 400,
+      "coverage": 0.8,
+      "coverage_mc95": [
+        0.7627108946948261,
+        0.8327145010282427
+      ],
+      "rejected": 433,
+      "rejection_rate": 0.866,
+      "rejection_mc95": [
+        0.8333339846536646,
+        0.8930849981284793
+      ],
+      "rejection_interpretation": "power",
+      "mean_interval_width": 0.08410771726276645,
+      "mean_slope_bias": 0.0015003977853433057,
+      "slope_rmse": 0.03138419310440045,
+      "model": "annual_ar1",
+      "phi": 0.0,
+      "record_seed_components": [
+        20261115,
+        24,
+        0,
+        1
+      ]
+    },
+    {
+      "scenario": "annual_ar1_power_phi0.0_slope0.08",
+      "n_years": 24,
+      "true_slope_per_year": 0.08,
+      "block_length_years": 3,
+      "replications": 500,
+      "covered": 425,
+      "coverage": 0.85,
+      "coverage_mc95": [
+        0.8160389193683016,
+        0.8786240423086119
+      ],
+      "rejected": 422,
+      "rejection_rate": 0.844,
+      "rejection_mc95": [
+        0.809585245166297,
+        0.8731692085961551
+      ],
+      "rejection_interpretation": "power",
+      "mean_interval_width": 0.09470484503365874,
+      "mean_slope_bias": 0.0015003977853433033,
+      "slope_rmse": 0.03138419310440045,
+      "model": "annual_ar1",
+      "phi": 0.0,
+      "record_seed_components": [
+        20261115,
+        24,
+        0,
+        1
+      ]
+    },
+    {
+      "scenario": "annual_ar1_power_phi0.0_slope0.08",
+      "n_years": 24,
+      "true_slope_per_year": 0.08,
+      "block_length_years": 4,
+      "replications": 500,
+      "covered": 410,
+      "coverage": 0.82,
+      "coverage_mc95": [
+        0.7839253300173655,
+        0.851195092087241
+      ],
+      "rejected": 430,
+      "rejection_rate": 0.86,
+      "rejection_mc95": [
+        0.826833135055546,
+        0.8876773398121365
+      ],
+      "rejection_interpretation": "power",
+      "mean_interval_width": 0.0906734397488626,
+      "mean_slope_bias": 0.0015003977853433033,
+      "slope_rmse": 0.03138419310440045,
+      "model": "annual_ar1",
+      "phi": 0.0,
+      "record_seed_components": [
+        20261115,
+        24,
+        0,
+        1
+      ]
+    },
+    {
+      "scenario": "annual_ar1_power_phi0.0_slope0.08",
+      "n_years": 24,
+      "true_slope_per_year": 0.08,
+      "block_length_years": 6,
+      "replications": 500,
+      "covered": 400,
+      "coverage": 0.8,
+      "coverage_mc95": [
+        0.7627108946948261,
+        0.8327145010282427
+      ],
+      "rejected": 438,
+      "rejection_rate": 0.876,
+      "rejection_mc95": [
+        0.8442125871122163,
+        0.9020539088606966
+      ],
+      "rejection_interpretation": "power",
+      "mean_interval_width": 0.08410771726276645,
+      "mean_slope_bias": 0.0015003977853433033,
+      "slope_rmse": 0.03138419310440045,
+      "model": "annual_ar1",
+      "phi": 0.0,
+      "record_seed_components": [
+        20261115,
+        24,
+        0,
+        1
+      ]
+    },
+    {
+      "scenario": "annual_ar1_power_phi0.4_slope-0.08",
+      "n_years": 24,
+      "true_slope_per_year": -0.08,
+      "block_length_years": 3,
+      "replications": 500,
+      "covered": 414,
+      "coverage": 0.828,
+      "coverage_mc95": [
+        0.7924525525008731,
+        0.8585458801563487
+      ],
+      "rejected": 348,
+      "rejection_rate": 0.696,
+      "rejection_mc95": [
+        0.6543133215963362,
+        0.7346979369427353
+      ],
+      "rejection_interpretation": "power",
+      "mean_interval_width": 0.11669004117321924,
+      "mean_slope_bias": 0.0002602177330074209,
+      "slope_rmse": 0.04043406837783267,
+      "model": "annual_ar1",
+      "phi": 0.4,
+      "record_seed_components": [
+        20261115,
+        24,
+        40,
+        1
+      ]
+    },
+    {
+      "scenario": "annual_ar1_power_phi0.4_slope-0.08",
+      "n_years": 24,
+      "true_slope_per_year": -0.08,
+      "block_length_years": 4,
+      "replications": 500,
+      "covered": 413,
+      "coverage": 0.826,
+      "coverage_mc95": [
+        0.7903184021001322,
+        0.8567105279189358
+      ],
+      "rejected": 346,
+      "rejection_rate": 0.692,
+      "rejection_mc95": [
+        0.6501980013173227,
+        0.7308742519454412
+      ],
+      "rejection_interpretation": "power",
+      "mean_interval_width": 0.11560127950379678,
+      "mean_slope_bias": 0.0002602177330074209,
+      "slope_rmse": 0.04043406837783267,
+      "model": "annual_ar1",
+      "phi": 0.4,
+      "record_seed_components": [
+        20261115,
+        24,
+        40,
+        1
+      ]
+    },
+    {
+      "scenario": "annual_ar1_power_phi0.4_slope-0.08",
+      "n_years": 24,
+      "true_slope_per_year": -0.08,
+      "block_length_years": 6,
+      "replications": 500,
+      "covered": 394,
+      "coverage": 0.788,
+      "coverage_mc95": [
+        0.7500478841824445,
+        0.8215604957117015
+      ],
+      "rejected": 361,
+      "rejection_rate": 0.722,
+      "rejection_mc95": [
+        0.6811514003636959,
+        0.7594633924713748
+      ],
+      "rejection_interpretation": "power",
+      "mean_interval_width": 0.10926155625498825,
+      "mean_slope_bias": 0.0002602177330074209,
+      "slope_rmse": 0.04043406837783267,
+      "model": "annual_ar1",
+      "phi": 0.4,
+      "record_seed_components": [
+        20261115,
+        24,
+        40,
+        1
+      ]
+    },
+    {
+      "scenario": "annual_ar1_power_phi0.4_slope0.08",
+      "n_years": 24,
+      "true_slope_per_year": 0.08,
+      "block_length_years": 3,
+      "replications": 500,
+      "covered": 414,
+      "coverage": 0.828,
+      "coverage_mc95": [
+        0.7924525525008731,
+        0.8585458801563487
+      ],
+      "rejected": 348,
+      "rejection_rate": 0.696,
+      "rejection_mc95": [
+        0.6543133215963362,
+        0.7346979369427353
+      ],
+      "rejection_interpretation": "power",
+      "mean_interval_width": 0.11669004117321924,
+      "mean_slope_bias": 0.0002602177330074209,
+      "slope_rmse": 0.04043406837783268,
+      "model": "annual_ar1",
+      "phi": 0.4,
+      "record_seed_components": [
+        20261115,
+        24,
+        40,
+        1
+      ]
+    },
+    {
+      "scenario": "annual_ar1_power_phi0.4_slope0.08",
+      "n_years": 24,
+      "true_slope_per_year": 0.08,
+      "block_length_years": 4,
+      "replications": 500,
+      "covered": 413,
+      "coverage": 0.826,
+      "coverage_mc95": [
+        0.7903184021001322,
+        0.8567105279189358
+      ],
+      "rejected": 344,
+      "rejection_rate": 0.688,
+      "rejection_mc95": [
+        0.6460861967117412,
+        0.727047051274715
+      ],
+      "rejection_interpretation": "power",
+      "mean_interval_width": 0.11560127950379678,
+      "mean_slope_bias": 0.0002602177330074209,
+      "slope_rmse": 0.04043406837783268,
+      "model": "annual_ar1",
+      "phi": 0.4,
+      "record_seed_components": [
+        20261115,
+        24,
+        40,
+        1
+      ]
+    },
+    {
+      "scenario": "annual_ar1_power_phi0.4_slope0.08",
+      "n_years": 24,
+      "true_slope_per_year": 0.08,
+      "block_length_years": 6,
+      "replications": 500,
+      "covered": 394,
+      "coverage": 0.788,
+      "coverage_mc95": [
+        0.7500478841824445,
+        0.8215604957117015
+      ],
+      "rejected": 362,
+      "rejection_rate": 0.724,
+      "rejection_mc95": [
+        0.6832224284166226,
+        0.761361867056602
+      ],
+      "rejection_interpretation": "power",
+      "mean_interval_width": 0.10926155625498825,
+      "mean_slope_bias": 0.0002602177330074209,
+      "slope_rmse": 0.04043406837783268,
+      "model": "annual_ar1",
+      "phi": 0.4,
+      "record_seed_components": [
+        20261115,
+        24,
+        40,
+        1
+      ]
+    },
+    {
+      "scenario": "annual_ar1_power_phi0.7_slope-0.08",
+      "n_years": 24,
+      "true_slope_per_year": -0.08,
+      "block_length_years": 3,
+      "replications": 500,
+      "covered": 303,
+      "coverage": 0.606,
+      "coverage_mc95": [
+        0.5625178093072173,
+        0.6478658305149335
+      ],
+      "rejected": 339,
+      "rejection_rate": 0.678,
+      "rejection_mc95": [
+        0.6358218272211889,
+        0.7174639075744986
+      ],
+      "rejection_interpretation": "power",
+      "mean_interval_width": 0.11533022656051206,
+      "mean_slope_bias": -0.006720047689886325,
+      "slope_rmse": 0.05725126009660038,
+      "model": "annual_ar1",
+      "phi": 0.7,
+      "record_seed_components": [
+        20261115,
+        24,
+        70,
+        1
+      ]
+    },
+    {
+      "scenario": "annual_ar1_power_phi0.7_slope-0.08",
+      "n_years": 24,
+      "true_slope_per_year": -0.08,
+      "block_length_years": 4,
+      "replications": 500,
+      "covered": 311,
+      "coverage": 0.622,
+      "coverage_mc95": [
+        0.5787204544668169,
+        0.6634192064605645
+      ],
+      "rejected": 326,
+      "rejection_rate": 0.652,
+      "rejection_mc95": [
+        0.6092325025566356,
+        0.6924496979430526
+      ],
+      "rejection_interpretation": "power",
+      "mean_interval_width": 0.11885091039823562,
+      "mean_slope_bias": -0.006720047689886325,
+      "slope_rmse": 0.05725126009660038,
+      "model": "annual_ar1",
+      "phi": 0.7,
+      "record_seed_components": [
+        20261115,
+        24,
+        70,
+        1
+      ]
+    },
+    {
+      "scenario": "annual_ar1_power_phi0.7_slope-0.08",
+      "n_years": 24,
+      "true_slope_per_year": -0.08,
+      "block_length_years": 6,
+      "replications": 500,
+      "covered": 321,
+      "coverage": 0.642,
+      "coverage_mc95": [
+        0.5990422907102082,
+        0.682792396598711
+      ],
+      "rejected": 328,
+      "rejection_rate": 0.656,
+      "rejection_mc95": [
+        0.6133141713377337,
+        0.696307034438262
+      ],
+      "rejection_interpretation": "power",
+      "mean_interval_width": 0.11804876283348972,
+      "mean_slope_bias": -0.006720047689886325,
+      "slope_rmse": 0.05725126009660038,
+      "model": "annual_ar1",
+      "phi": 0.7,
+      "record_seed_components": [
+        20261115,
+        24,
+        70,
+        1
+      ]
+    },
+    {
+      "scenario": "annual_ar1_power_phi0.7_slope0.08",
+      "n_years": 24,
+      "true_slope_per_year": 0.08,
+      "block_length_years": 3,
+      "replications": 500,
+      "covered": 303,
+      "coverage": 0.606,
+      "coverage_mc95": [
+        0.5625178093072173,
+        0.6478658305149335
+      ],
+      "rejected": 303,
+      "rejection_rate": 0.606,
+      "rejection_mc95": [
+        0.5625178093072173,
+        0.6478658305149335
+      ],
+      "rejection_interpretation": "power",
+      "mean_interval_width": 0.11533022656051206,
+      "mean_slope_bias": -0.006720047689886326,
+      "slope_rmse": 0.057251260096600386,
+      "model": "annual_ar1",
+      "phi": 0.7,
+      "record_seed_components": [
+        20261115,
+        24,
+        70,
+        1
+      ]
+    },
+    {
+      "scenario": "annual_ar1_power_phi0.7_slope0.08",
+      "n_years": 24,
+      "true_slope_per_year": 0.08,
+      "block_length_years": 4,
+      "replications": 500,
+      "covered": 311,
+      "coverage": 0.622,
+      "coverage_mc95": [
+        0.5787204544668169,
+        0.6634192064605645
+      ],
+      "rejected": 302,
+      "rejection_rate": 0.604,
+      "rejection_mc95": [
+        0.5604958406867544,
+        0.6459182964972427
+      ],
+      "rejection_interpretation": "power",
+      "mean_interval_width": 0.1188509103982356,
+      "mean_slope_bias": -0.006720047689886326,
+      "slope_rmse": 0.057251260096600386,
+      "model": "annual_ar1",
+      "phi": 0.7,
+      "record_seed_components": [
+        20261115,
+        24,
+        70,
+        1
+      ]
+    },
+    {
+      "scenario": "annual_ar1_power_phi0.7_slope0.08",
+      "n_years": 24,
+      "true_slope_per_year": 0.08,
+      "block_length_years": 6,
+      "replications": 500,
+      "covered": 321,
+      "coverage": 0.642,
+      "coverage_mc95": [
+        0.5990422907102082,
+        0.682792396598711
+      ],
+      "rejected": 298,
+      "rejection_rate": 0.596,
+      "rejection_mc95": [
+        0.5524153513244502,
+        0.6381207753069317
+      ],
+      "rejection_interpretation": "power",
+      "mean_interval_width": 0.11804876283348972,
+      "mean_slope_bias": -0.006720047689886326,
+      "slope_rmse": 0.057251260096600386,
+      "model": "annual_ar1",
+      "phi": 0.7,
+      "record_seed_components": [
+        20261115,
+        24,
+        70,
+        1
+      ]
+    },
+    {
+      "scenario": "monthly_seasonal_null_annualized_phi0.0",
+      "n_years": 24,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 3,
+      "replications": 500,
+      "covered": 427,
+      "coverage": 0.854,
+      "coverage_mc95": [
+        0.8203507337796904,
+        0.8822512331735307
+      ],
+      "rejected": 72,
+      "rejection_rate": 0.144,
+      "rejection_mc95": [
+        0.11593807411034973,
+        0.17749045629827542
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.027227460431764,
+      "mean_slope_bias": 2.9293603453427353e-05,
+      "slope_rmse": 0.009066399468651494,
+      "model": "annualized_monthly_seasonal",
+      "monthly_phi": 0.0,
+      "seasonal_amplitude": 3.0,
+      "record_seed_components": [
+        20261115,
+        288,
+        0,
+        2
+      ]
+    },
+    {
+      "scenario": "monthly_seasonal_null_annualized_phi0.0",
+      "n_years": 24,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 4,
+      "replications": 500,
+      "covered": 408,
+      "coverage": 0.816,
+      "coverage_mc95": [
+        0.7796708962064596,
+        0.8475105206218394
+      ],
+      "rejected": 89,
+      "rejection_rate": 0.178,
+      "rejection_mc95": [
+        0.14696488670733526,
+        0.21394518854990435
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.02599829457701358,
+      "mean_slope_bias": 2.9293603453427353e-05,
+      "slope_rmse": 0.009066399468651494,
+      "model": "annualized_monthly_seasonal",
+      "monthly_phi": 0.0,
+      "seasonal_amplitude": 3.0,
+      "record_seed_components": [
+        20261115,
+        288,
+        0,
+        2
+      ]
+    },
+    {
+      "scenario": "monthly_seasonal_null_annualized_phi0.0",
+      "n_years": 24,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 6,
+      "replications": 500,
+      "covered": 390,
+      "coverage": 0.78,
+      "coverage_mc95": [
+        0.7416313019131544,
+        0.8140990674283763
+      ],
+      "rejected": 105,
+      "rejection_rate": 0.21,
+      "rejection_mc95": [
+        0.1765772705084025,
+        0.24784484695929782
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.024295860207340456,
+      "mean_slope_bias": 2.9293603453427353e-05,
+      "slope_rmse": 0.009066399468651494,
+      "model": "annualized_monthly_seasonal",
+      "monthly_phi": 0.0,
+      "seasonal_amplitude": 3.0,
+      "record_seed_components": [
+        20261115,
+        288,
+        0,
+        2
+      ]
+    },
+    {
+      "scenario": "monthly_seasonal_null_annualized_phi0.7",
+      "n_years": 24,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 3,
+      "replications": 500,
+      "covered": 422,
+      "coverage": 0.844,
+      "coverage_mc95": [
+        0.809585245166297,
+        0.8731692085961551
+      ],
+      "rejected": 76,
+      "rejection_rate": 0.152,
+      "rejection_mc95": [
+        0.12319239267380164,
+        0.18611414828743875
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.06154652454648519,
+      "mean_slope_bias": 0.0007911076983080109,
+      "slope_rmse": 0.020551246794926033,
+      "model": "annualized_monthly_seasonal",
+      "monthly_phi": 0.7,
+      "seasonal_amplitude": 3.0,
+      "record_seed_components": [
+        20261115,
+        288,
+        70,
+        2
+      ]
+    },
+    {
+      "scenario": "monthly_seasonal_null_annualized_phi0.7",
+      "n_years": 24,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 4,
+      "replications": 500,
+      "covered": 412,
+      "coverage": 0.824,
+      "coverage_mc95": [
+        0.78818582871064,
+        0.854873598670274
+      ],
+      "rejected": 87,
+      "rejection_rate": 0.174,
+      "rejection_mc95": [
+        0.14328947208106416,
+        0.20968159789986787
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.059314889268843006,
+      "mean_slope_bias": 0.0007911076983080109,
+      "slope_rmse": 0.020551246794926033,
+      "model": "annualized_monthly_seasonal",
+      "monthly_phi": 0.7,
+      "seasonal_amplitude": 3.0,
+      "record_seed_components": [
+        20261115,
+        288,
+        70,
+        2
+      ]
+    },
+    {
+      "scenario": "monthly_seasonal_null_annualized_phi0.7",
+      "n_years": 24,
+      "true_slope_per_year": 0.0,
+      "block_length_years": 6,
+      "replications": 500,
+      "covered": 387,
+      "coverage": 0.774,
+      "coverage_mc95": [
+        0.7353316422926235,
+        0.8084902191344461
+      ],
+      "rejected": 108,
+      "rejection_rate": 0.216,
+      "rejection_mc95": [
+        0.18216774485419415,
+        0.25416288052796754
+      ],
+      "rejection_interpretation": "false_positive_rate",
+      "mean_interval_width": 0.0546085198300479,
+      "mean_slope_bias": 0.0007911076983080109,
+      "slope_rmse": 0.020551246794926033,
+      "model": "annualized_monthly_seasonal",
+      "monthly_phi": 0.7,
+      "seasonal_amplitude": 3.0,
+      "record_seed_components": [
+        20261115,
+        288,
+        70,
+        2
+      ]
+    }
+  ],
+  "monte_carlo_total_records": 24000,
+  "multiplicity_study": {
+    "rows": [
+      {
+        "dependence": "independent",
+        "nonnull_fraction": 0.0,
+        "method": "BH",
+        "families": 2000,
+        "family_size": 200,
+        "fdr": 0.049,
+        "fdr_mc95": [
+          0.04037353995030726,
+          0.05935563669738288
+        ],
+        "mean_rejections": 0.056,
+        "power": null,
+        "fdr_interval_method": "Wilson all-null Bernoulli event",
+        "reference_max_absolute_difference": 2.220446049250313e-16
+      },
+      {
+        "dependence": "independent",
+        "nonnull_fraction": 0.0,
+        "method": "BY",
+        "families": 2000,
+        "family_size": 200,
+        "fdr": 0.008,
+        "fdr_mc95": [
+          0.0049302968532159265,
+          0.012956077671536958
+        ],
+        "mean_rejections": 0.008,
+        "power": null,
+        "fdr_interval_method": "Wilson all-null Bernoulli event",
+        "reference_max_absolute_difference": 2.220446049250313e-16
+      },
+      {
+        "dependence": "independent",
+        "nonnull_fraction": 0.2,
+        "method": "BH",
+        "families": 2000,
+        "family_size": 200,
+        "fdr": 0.03967318315563173,
+        "fdr_mc95": [
+          0.03794890003323309,
+          0.04139746627803037
+        ],
+        "mean_rejections": 25.3965,
+        "power": 0.608325,
+        "fdr_interval_method": "normal Monte Carlo mean-FDP across independent families",
+        "reference_max_absolute_difference": 2.220446049250313e-16
+      },
+      {
+        "dependence": "independent",
+        "nonnull_fraction": 0.2,
+        "method": "BY",
+        "families": 2000,
+        "family_size": 200,
+        "fdr": 0.006752489009210977,
+        "fdr_mc95": [
+          0.005783464388492077,
+          0.007721513629929877
+        ],
+        "mean_rejections": 13.466,
+        "power": 0.33415,
+        "fdr_interval_method": "normal Monte Carlo mean-FDP across independent families",
+        "reference_max_absolute_difference": 3.3306690738754696e-16
+      },
+      {
+        "dependence": "positive_shared_factor",
+        "nonnull_fraction": 0.0,
+        "method": "BH",
+        "families": 2000,
+        "family_size": 200,
+        "fdr": 0.0325,
+        "fdr_mc95": [
+          0.025580698826170273,
+          0.04121174038180121
+        ],
+        "mean_rejections": 0.6905,
+        "power": null,
+        "fdr_interval_method": "Wilson all-null Bernoulli event",
+        "reference_max_absolute_difference": 2.220446049250313e-16
+      },
+      {
+        "dependence": "positive_shared_factor",
+        "nonnull_fraction": 0.0,
+        "method": "BY",
+        "families": 2000,
+        "family_size": 200,
+        "fdr": 0.0045,
+        "fdr_mc95": [
+          0.0023692806369618345,
+          0.008530513218759823
+        ],
+        "mean_rejections": 0.018,
+        "power": null,
+        "fdr_interval_method": "Wilson all-null Bernoulli event",
+        "reference_max_absolute_difference": 3.3306690738754696e-16
+      },
+      {
+        "dependence": "positive_shared_factor",
+        "nonnull_fraction": 0.2,
+        "method": "BH",
+        "families": 2000,
+        "family_size": 200,
+        "fdr": 0.0328730192917269,
+        "fdr_mc95": [
+          0.027559766181189,
+          0.038186272402264805
+        ],
+        "mean_rejections": 24.1505,
+        "power": 0.573575,
+        "fdr_interval_method": "normal Monte Carlo mean-FDP across independent families",
+        "reference_max_absolute_difference": 2.220446049250313e-16
+      },
+      {
+        "dependence": "positive_shared_factor",
+        "nonnull_fraction": 0.2,
+        "method": "BY",
+        "families": 2000,
+        "family_size": 200,
+        "fdr": 0.0056587934808292,
+        "fdr_mc95": [
+          0.0034233992969512905,
+          0.00789418766470711
+        ],
+        "mean_rejections": 13.67,
+        "power": 0.33801249999999994,
+        "fdr_interval_method": "normal Monte Carlo mean-FDP across independent families",
+        "reference_max_absolute_difference": 3.3306690738754696e-16
+      },
+      {
+        "dependence": "signed_shared_factor",
+        "nonnull_fraction": 0.0,
+        "method": "BH",
+        "families": 2000,
+        "family_size": 200,
+        "fdr": 0.029,
+        "fdr_mc95": [
+          0.022500401616129873,
+          0.03730545692281039
+        ],
+        "mean_rejections": 0.3625,
+        "power": null,
+        "fdr_interval_method": "Wilson all-null Bernoulli event",
+        "reference_max_absolute_difference": 2.220446049250313e-16
+      },
+      {
+        "dependence": "signed_shared_factor",
+        "nonnull_fraction": 0.0,
+        "method": "BY",
+        "families": 2000,
+        "family_size": 200,
+        "fdr": 0.0065,
+        "fdr_mc95": [
+          0.0038025964940741515,
+          0.011089529172522494
+        ],
+        "mean_rejections": 0.0075,
+        "power": null,
+        "fdr_interval_method": "Wilson all-null Bernoulli event",
+        "reference_max_absolute_difference": 2.220446049250313e-16
+      },
+      {
+        "dependence": "signed_shared_factor",
+        "nonnull_fraction": 0.2,
+        "method": "BH",
+        "families": 2000,
+        "family_size": 200,
+        "fdr": 0.03527488299383002,
+        "fdr_mc95": [
+          0.030871830424184423,
+          0.03967793556347562
+        ],
+        "mean_rejections": 25.7425,
+        "power": 0.6087750000000001,
+        "fdr_interval_method": "normal Monte Carlo mean-FDP across independent families",
+        "reference_max_absolute_difference": 2.220446049250313e-16
+      },
+      {
+        "dependence": "signed_shared_factor",
+        "nonnull_fraction": 0.2,
+        "method": "BY",
+        "families": 2000,
+        "family_size": 200,
+        "fdr": 0.006260353987138243,
+        "fdr_mc95": [
+          0.0045195765355526465,
+          0.00800113143872384
+        ],
+        "mean_rejections": 12.9285,
+        "power": 0.31823750000000006,
+        "fdr_interval_method": "normal Monte Carlo mean-FDP across independent families",
+        "reference_max_absolute_difference": 3.3306690738754696e-16
+      }
+    ],
+    "max_reference_absolute_difference": 3.3306690738754696e-16,
+    "valid_marginal_p_values": "two-sided Gaussian tails with exact N(0,1) null marginals",
+    "interpretation": "synthetic arithmetic/assumption checks; no guarantee for invalid NASA candidate p-values"
+  },
+  "nasa_candidate_diagnostics": [
+    {
+      "case": "air_temperature__nile_corridor__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "K per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.025330383313493597,
+      "p_value_candidate": 0.002,
+      "interval_candidate": [
+        0.008236858677489158,
+        0.04260240620992206
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 3,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261115,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": -0.35559273150346893,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "air_temperature__nile_corridor__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "K per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.025330383313493597,
+      "p_value_candidate": 0.001,
+      "interval_candidate": [
+        0.009387787061400518,
+        0.043116749373646276
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 4,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261115,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": -0.35559273150346893,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "air_temperature__nile_corridor__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "K per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.025330383313493597,
+      "p_value_candidate": 0.001,
+      "interval_candidate": [
+        0.012799902689275212,
+        0.04250009475058111
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 6,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261115,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": -0.35559273150346893,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "soil_moisture__nile_corridor__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "kg m-2 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.008890433836505951,
+      "p_value_candidate": 0.1875,
+      "interval_candidate": [
+        -0.004925721646398285,
+        0.023084519160251032
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 3,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261116,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": -0.028793734656899373,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "soil_moisture__nile_corridor__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "kg m-2 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.008890433836505951,
+      "p_value_candidate": 0.1555,
+      "interval_candidate": [
+        -0.003535337102968092,
+        0.022453610638956692
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 4,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261116,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": -0.028793734656899373,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "soil_moisture__nile_corridor__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "kg m-2 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.008890433836505951,
+      "p_value_candidate": 0.117,
+      "interval_candidate": [
+        -0.002000898281001081,
+        0.02089011851607555
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 6,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261116,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": -0.028793734656899373,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "precipitation__nile_corridor__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "mm per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.027554997033746184,
+      "p_value_candidate": 0.7185,
+      "interval_candidate": [
+        -0.4401868317595579,
+        0.5349848406414902
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 3,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261117,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.033196264681110914,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "precipitation__nile_corridor__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "mm per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.027554997033746184,
+      "p_value_candidate": 0.7155,
+      "interval_candidate": [
+        -0.42071496348508103,
+        0.5402380871744173
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 4,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261117,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.033196264681110914,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "precipitation__nile_corridor__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "mm per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.027554997033746184,
+      "p_value_candidate": 0.6355,
+      "interval_candidate": [
+        -0.28160003448424314,
+        0.43945897387685834
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 6,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261117,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.033196264681110914,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "vegetation_greenness__nile_corridor__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "1 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.000123810554870301,
+      "p_value_candidate": 0.0005,
+      "interval_candidate": [
+        5.192586991225493e-05,
+        0.00019606574144304952
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 3,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261118,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.5302720188261214,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "vegetation_greenness__nile_corridor__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "1 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.000123810554870301,
+      "p_value_candidate": 0.0025,
+      "interval_candidate": [
+        4.709910944236124e-05,
+        0.0002001980212559271
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 4,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261118,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.5302720188261214,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "vegetation_greenness__nile_corridor__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "1 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.000123810554870301,
+      "p_value_candidate": 0.001,
+      "interval_candidate": [
+        5.187993872993227e-05,
+        0.00020017257998467583
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 6,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261118,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.5302720188261214,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "air_temperature__morocco_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "K per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.033175364236687224,
+      "p_value_candidate": 0.0535,
+      "interval_candidate": [
+        -0.0003182564847147157,
+        0.0669048942499125
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 3,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261119,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.31326152451204253,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "air_temperature__morocco_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "K per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.033175364236687224,
+      "p_value_candidate": 0.0825,
+      "interval_candidate": [
+        -0.0016142149360059699,
+        0.07234775793997969
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 4,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261119,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.31326152451204253,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "air_temperature__morocco_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "K per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.033175364236687224,
+      "p_value_candidate": 0.1215,
+      "interval_candidate": [
+        -0.002586568050200466,
+        0.07656379550442341
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 6,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261119,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.31326152451204253,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "soil_moisture__morocco_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "kg m-2 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": -0.12612017353263624,
+      "p_value_candidate": 0.0085,
+      "interval_candidate": [
+        -0.21435572743879056,
+        -0.036262551936277185
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 3,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261120,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.3365071325799418,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "soil_moisture__morocco_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "kg m-2 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": -0.12612017353263624,
+      "p_value_candidate": 0.0095,
+      "interval_candidate": [
+        -0.21887198971719257,
+        -0.025921043076514064
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 4,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261120,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.3365071325799418,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "soil_moisture__morocco_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "kg m-2 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": -0.12612017353263624,
+      "p_value_candidate": 0.0085,
+      "interval_candidate": [
+        -0.22301058944494564,
+        -0.019830217125224453
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 6,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261120,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.3365071325799418,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "precipitation__morocco_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "mm per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": -8.47735157908451,
+      "p_value_candidate": 0.0055,
+      "interval_candidate": [
+        -14.620596272988763,
+        -2.293027897724854
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 3,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261121,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.07635415919980781,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "precipitation__morocco_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "mm per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": -8.47735157908451,
+      "p_value_candidate": 0.0025,
+      "interval_candidate": [
+        -14.59116325591925,
+        -2.4328365595346124
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 4,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261121,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.07635415919980781,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "precipitation__morocco_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "mm per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": -8.47735157908451,
+      "p_value_candidate": 0.002,
+      "interval_candidate": [
+        -14.830847987253387,
+        -2.058540283393296
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 6,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261121,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.07635415919980781,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "vegetation_greenness__morocco_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "1 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": -0.0003231025134762133,
+      "p_value_candidate": 0.4575,
+      "interval_candidate": [
+        -0.0013001410257761003,
+        0.0006842191386662511
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 3,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261122,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.2265766829568078,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "vegetation_greenness__morocco_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "1 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": -0.0003231025134762133,
+      "p_value_candidate": 0.493,
+      "interval_candidate": [
+        -0.001348355530047962,
+        0.0008409726819389838
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 4,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261122,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.2265766829568078,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "vegetation_greenness__morocco_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "1 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": -0.0003231025134762133,
+      "p_value_candidate": 0.534,
+      "interval_candidate": [
+        -0.0014291535105753128,
+        0.0009485814323537185
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 6,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261122,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.2265766829568078,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "air_temperature__sahel_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "K per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": -0.023441037765244185,
+      "p_value_candidate": 0.005,
+      "interval_candidate": [
+        -0.03831945810647991,
+        -0.007044858638032392
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 3,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261123,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": -0.16266859940825462,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "air_temperature__sahel_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "K per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": -0.023441037765244185,
+      "p_value_candidate": 0.0035,
+      "interval_candidate": [
+        -0.037146288283187945,
+        -0.008433394936028224
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 4,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261123,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": -0.16266859940825462,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "air_temperature__sahel_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "K per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": -0.023441037765244185,
+      "p_value_candidate": 0.003,
+      "interval_candidate": [
+        -0.03823833261557906,
+        -0.00634954350832569
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 6,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261123,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": -0.16266859940825462,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "soil_moisture__sahel_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "kg m-2 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": -0.026383741725966903,
+      "p_value_candidate": 0.0035,
+      "interval_candidate": [
+        -0.04089460530574781,
+        -0.010453084929305374
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 3,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261124,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": -0.4904897772282716,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "soil_moisture__sahel_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "kg m-2 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": -0.026383741725966903,
+      "p_value_candidate": 0.002,
+      "interval_candidate": [
+        -0.04190489940976978,
+        -0.011369691744372988
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 4,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261124,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": -0.4904897772282716,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "soil_moisture__sahel_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "kg m-2 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": -0.026383741725966903,
+      "p_value_candidate": 0.002,
+      "interval_candidate": [
+        -0.044388705345107284,
+        -0.010804381876206266
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 6,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261124,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": -0.4904897772282716,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "precipitation__sahel_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "mm per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 2.6037411068641902,
+      "p_value_candidate": 0.0065,
+      "interval_candidate": [
+        1.1427624340470721,
+        4.129191363426531
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 3,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261125,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": -0.5816674609416667,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "precipitation__sahel_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "mm per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 2.6037411068641902,
+      "p_value_candidate": 0.0025,
+      "interval_candidate": [
+        1.1494948444905366,
+        4.142543948925424
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 4,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261125,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": -0.5816674609416667,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "precipitation__sahel_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "mm per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 2.6037411068641902,
+      "p_value_candidate": 0.0025,
+      "interval_candidate": [
+        0.999448786422211,
+        4.028765306699516
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 6,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261125,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": -0.5816674609416667,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "vegetation_greenness__sahel_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "1 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.0009737242896536887,
+      "p_value_candidate": 0.0005,
+      "interval_candidate": [
+        0.0006495204379905843,
+        0.001324817650795581
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 3,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261126,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.20490966563159,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "vegetation_greenness__sahel_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "1 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.0009737242896536887,
+      "p_value_candidate": 0.0005,
+      "interval_candidate": [
+        0.0006293389350606191,
+        0.0013312722473373423
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 4,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261126,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.20490966563159,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "vegetation_greenness__sahel_comparison__strict_100",
+      "policy": "strict_100",
+      "role": "primary_strict_family",
+      "units": "1 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.0009737242896536887,
+      "p_value_candidate": 0.0005,
+      "interval_candidate": [
+        0.0006078182237733876,
+        0.0013349909890518958
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 6,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261126,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.20490966563159,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "vegetation_greenness__sahel_comparison__standard_100",
+      "policy": "standard_100",
+      "role": "separate_policy_sensitivity",
+      "units": "1 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.0009536488487937967,
+      "p_value_candidate": 0.0005,
+      "interval_candidate": [
+        0.0006076134858865542,
+        0.001295651877801069
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 3,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261127,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.11014061304913476,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "vegetation_greenness__sahel_comparison__standard_100",
+      "policy": "standard_100",
+      "role": "separate_policy_sensitivity",
+      "units": "1 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.0009536488487937967,
+      "p_value_candidate": 0.0005,
+      "interval_candidate": [
+        0.0005827143562508009,
+        0.0013406671905470363
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 4,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261127,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.11014061304913476,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "vegetation_greenness__sahel_comparison__standard_100",
+      "policy": "standard_100",
+      "role": "separate_policy_sensitivity",
+      "units": "1 per year",
+      "status": "candidate_diagnostic",
+      "slope_per_year": 0.0009536488487937967,
+      "p_value_candidate": 0.0005,
+      "interval_candidate": [
+        0.0005326351438110867,
+        0.001355121477324279
+      ],
+      "n_records": 24,
+      "n_valid": 24,
+      "block_length_years": 6,
+      "bootstrap_replicates": 1999,
+      "confidence_level": 0.95,
+      "seed": 20261127,
+      "application_release": false,
+      "reason": "experimental calibration-dependent estimates; not released",
+      "interval_definition": "basic bootstrap using residual slope errors",
+      "p_definition": "plus-one two-sided absolute residual slope tail",
+      "residual_lag1_correlation": 0.11014061304913476,
+      "scientific_status": "diagnostic_only; individual p-value calibration not released"
+    },
+    {
+      "case": "vegetation_greenness__sahel_comparison__standard_95",
+      "status": "inference_withheld",
+      "reason": "Standard 95% remains experimental with changing spatial support; incomplete cell-years stay missing"
+    }
+  ],
+  "application_release": false,
+  "real_cell_inference": "withheld pending marginal calibration",
+  "real_multiplicity": "withheld; adjustment cannot repair miscalibrated marginal p-values",
+  "default_changed": false,
+  "software_versions": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.0",
+    "xarray": "2026.9.0"
+  },
+  "preserved_file_count": 98,
+  "all_earlier_sha256_unchanged": true,
+  "preserved_sha256": {
+    "data/derived/science/phase_2/air_temperature__morocco_comparison.nc": "5a81dc2ef4538c51db309ce58baaf3f0775ffe964ad3c96c4749afe69f2ac4eb",
+    "data/derived/science/phase_2/air_temperature__nile_corridor.nc": "77ed7a528ec10cdc95ae79034f58009ee492e03a8da6810a75df2db23a998d37",
+    "data/derived/science/phase_2/air_temperature__sahel_comparison.nc": "536ff9d48651e7798fa56cd48b1cd5e1abd0fbd3de8adfb8dc468a5b4450e529",
+    "data/derived/science/phase_2/coverage_summary.png": "1c2eaa947cd80c46bcc1de188cf8c70a2edb4212cc803eb8d12770e77504ad03",
+    "data/derived/science/phase_2/manifest.json": "b2eaee3033ac8bf10e7e52950019e552555583b767032de310d7efb35c38c3c1",
+    "data/derived/science/phase_2/nile_ndvi_support.png": "eb90a9918e9668bd4910e2263460a88cee4356d0ba0ac24f282e7b7c78447316",
+    "data/derived/science/phase_2/nile_prepared_series.png": "cd4127d6af2ba38af6aeaf0aca3bc78bbd434584a52f6454a9f3827bf2325ca5",
+    "data/derived/science/phase_2/precipitation__morocco_comparison.nc": "a44700160db0f2dbc15c9150b984d7735fce482cd97ecce7a9516a2bc8fab91d",
+    "data/derived/science/phase_2/precipitation__nile_corridor.nc": "ab3ef38d54bd0302534b0726fc6c6bc1ffa366f9d35e597db008d7a840c67066",
+    "data/derived/science/phase_2/precipitation__sahel_comparison.nc": "0972ca3149a7eec8eb2a827634d90795a6b59f03c8bb407e181eb45aa046f3fe",
+    "data/derived/science/phase_2/qa_sensitivity.png": "21725934a4d791b3978d992cc74a2bb2847fc13456798d5485c4287d976f6396",
+    "data/derived/science/phase_2/soil_moisture__morocco_comparison.nc": "30e9f7958b4d65442f6459836618269046fd35aed28ab301612e2d9286b62999",
+    "data/derived/science/phase_2/soil_moisture__nile_corridor.nc": "655374d5e782d9938d37e1b93d06229fea9ad40042955e30b0d934ee63e15b5e",
+    "data/derived/science/phase_2/soil_moisture__sahel_comparison.nc": "14e8d4e44c8807dda5f2ae4fe3885fd229ef6734b24b5b354e750963c54a7ae5",
+    "data/derived/science/phase_2/source_review/IMERG_V07_ATBD_page_32.png": "9e077099018e5127a7cf676e15e601ec1605469b02db0a56360255e4233aa80a",
+    "data/derived/science/phase_2/source_review/MOD13_User_Guide_V61_page_18.png": "4f727f1cca487073605ab5e258f4329bf9bd32f6349c2cde9936dc9857e90d44",
+    "data/derived/science/phase_2/source_review/MOD13_User_Guide_V61_page_28.png": "6969d72f07fbaa49df9ee081b32c15d04b8f0ece648436fe9101ad1f370aa7da",
+    "data/derived/science/phase_2/vegetation_greenness__morocco_comparison.nc": "26fd56f343ea3a2d6deabfc49be555915eb9746f917b9c9b67428ebab242a349",
+    "data/derived/science/phase_2/vegetation_greenness__nile_corridor.nc": "8929660caddee1dae5a60e968af9dfe08dcabe20c8e382e040016c343fa075fe",
+    "data/derived/science/phase_2/vegetation_greenness__sahel_comparison.nc": "7ee3f6dc68875eb980944b9e7e8ad89d10e7d66d339d8661efd12a9210abf9b2",
+    "data/derived/science/phase_2_standard/manifest.json": "87866ac8f04e6d14d1b5c49fda52e1aa0526f87e931962eb915fbe7e0304bc98",
+    "data/derived/science/phase_2_standard/vegetation_greenness__morocco_comparison.nc": "114d43ef8111a13be600218109d884731a3e57bf6e8313dbbc56d5be96871c24",
+    "data/derived/science/phase_2_standard/vegetation_greenness__nile_corridor.nc": "446841f33debe6395de2166950d5a33aa7633a2834d64893143fbfa05ab80fea",
+    "data/derived/science/phase_2_standard/vegetation_greenness__sahel_comparison.nc": "ff40e267a9b1f0b1f2a08e3181d4ff3e05c3a02f5580ebd75508784d30adbb32",
+    "data/nasa/measurements/GLDAS_NOAH025_M_Egypt_2001_2024.nc": "47563a751a328e3d7cc2ff73dfc13e14dc5f2830f8e38e77ba3af4c38774773a",
+    "data/nasa/measurements/GLDAS_NOAH025_M_Morocco_2001_2024.nc": "a58c21ca540b3d008c45f8342548aab18689e4417169edd3ebcb43246c3fcb74",
+    "data/nasa/measurements/GLDAS_NOAH025_M_Nile_2001_2024.nc": "55a5194144348ff668cbdcc1485493422797d2206aa0535846d8a8f2feb121cc",
+    "data/nasa/measurements/GLDAS_NOAH025_M_Sahel_2001_2024.nc": "fd9dc0ccb3667a5987dfd7853db26cb4e8e7cdf7dddc686fb72bcf816750b273",
+    "data/nasa/measurements/GPM_3IMERGM_Morocco_2001_2024.nc": "95f3e53659dd4593e585031c3eb8d1b1ee8dfd1c30060cfa7d28a3a26969465b",
+    "data/nasa/measurements/GPM_3IMERGM_Nile_2001_2024.nc": "967131aec4bdb0fa98ffc6ec9c9340cde164f5704be8f861c7ee02c130d6e219",
+    "data/nasa/measurements/GPM_3IMERGM_Sahel_2001_2024.nc": "e515e68076c1639263ba3fe81a390d946c866595d7faee622f26128a579a974f",
+    "data/nasa/measurements/M2TMNXSLV_Egypt_2001_2024.nc": "f0bdb8612aae3e2394f19b48b84a07c90c6e654dd5698b0b521946652850e293",
+    "data/nasa/measurements/M2TMNXSLV_Morocco_2001_2024.nc": "c8801417edb435606a6c9621fa127f817dbe86c160a266a5d864c085a8199e40",
+    "data/nasa/measurements/M2TMNXSLV_Nile_2001_2024.nc": "5db8a5afe85560aad3e3f847c5ddfb2c75309dad7f89fbd3002a4c0c07c1e8cb",
+    "data/nasa/measurements/M2TMNXSLV_Sahel_2001_2024.nc": "14cdb693d945c73f570b296b85cfae3177258e848e078170fa46e608a16cb987",
+    "data/nasa/measurements/MOD13C2_Morocco_2001_2024.nc": "aad8265db99b64eaeafa12d5d09f9ca2ba8e813b9ccc070613987fa97cb5c7e8",
+    "data/nasa/measurements/MOD13C2_Nile_2001_2024.nc": "78427f6651ddc8ac129d89d6bb9903f59a020a47a10827f6f184ccafb290188c",
+    "data/nasa/measurements/MOD13C2_Sahel_2001_2024.nc": "063eeb3002c6f769b2389236626569d60f053a2a08f92500597d837222b1b02a",
+    "packages/science/config/preparation_policy.json": "35492fe4c43250d20a1a6996248cd9829e76d327042c270e13fb76996899efb2",
+    "packages/science/notebooks/02_preprocessing.ipynb": "c56404dcff06257ce4ea93a049431f224db77ca605da02c8056721e718ee07de",
+    "packages/science/phase_reports/PHASE_2_APPROVAL.md": "5f725e849d85da66948a7af1a166584d46f8ab5a23a277a58f405ebf61b2e4b3",
+    "packages/science/phase_reports/PHASE_2_COVERAGE.json": "b2eaee3033ac8bf10e7e52950019e552555583b767032de310d7efb35c38c3c1",
+    "packages/science/phase_reports/PHASE_2_QA_SENSITIVITY.json": "87866ac8f04e6d14d1b5c49fda52e1aa0526f87e931962eb915fbe7e0304bc98",
+    "packages/science/phase_reports/PHASE_2_REPORT.md": "3134537482eff4753dbd6b4752c3e44398537534892eb8220899d1d6cfa63cd6",
+    "packages/science/phase_reports/PHASE_2_VALIDATION.json": "d10963fc2f14a58d4107a76d22f656bacd5094465bd6cd94fd51c87083a0bbcc",
+    "data/derived/science/phase_1/precipitation_exploration.png": "6eb4978662904e1d51624aa64b987bacfe4285db9137c2a82317669f7ca14366",
+    "data/derived/science/sahel_ndvi_annual_review/annual_series_and_completeness.png": "b0509086fb4736522017cd186fb0e90fe30c95eed91901590ac5d91958ae27e2",
+    "data/derived/science/sahel_ndvi_annual_review/monthly_missingness_and_difference.png": "35b6a47dac1ce86dad481c97e479091f4b4da94468b4e7e041487e000276d802",
+    "data/derived/science/sahel_ndvi_annual_review/standard_100_annual_review.nc": "36a62b9ffb9e37c34378f45daeb7f2c1d450704d1d43a0cea9aaaa5de2a5a8d2",
+    "data/derived/science/sahel_ndvi_annual_review/standard_95_annual_review.nc": "cf7b499de93ec9bbce44c70de654e6c9fc25c3c86e792cbc3bb68f628005b7a6",
+    "data/derived/science/sahel_ndvi_annual_review/strict_100_annual_review.nc": "8b87314f17467c355facacec9b349d5ebe91e449e0dab4a8487a77617efe5a76",
+    "data/derived/science/sahel_ndvi_policy_review/calendar_month_quality.png": "3e91351862b124c4b0ceaf4aea014e55d8672214402db457a6786a02c185981a",
+    "data/derived/science/sahel_ndvi_policy_review/eligible_footprints.png": "0d590348a2992fa3eeb3c52940b76ff061066d57b61e03c2d065e454433c34ec",
+    "data/derived/science/sahel_ndvi_policy_review/monthly_series_and_support.png": "f0746aacb0afc6576a53f41c16c3f8c3a5efd607a00f9d6412c4448c18ee3705",
+    "data/derived/science/sahel_ndvi_policy_review/preserved_originals.json": "2c07f045c735aee406afa1c58b30887dbb553bd23e8bd94cff39b6588271b3af",
+    "data/derived/science/sahel_ndvi_policy_review/standard_100.nc": "9a729a6d6fd154e44ff97ae276da2d8ff87e5a14d15cd8f8592567250c146841",
+    "data/derived/science/sahel_ndvi_policy_review/standard_90.nc": "2f1a948f7fca74f9f790ef45030567f5e4acde17d7b81c7d1b963409513de413",
+    "data/derived/science/sahel_ndvi_policy_review/standard_95.nc": "80ec75ff4fe2359f753a109586c10cc938d266ff18183cb570d91d4b5cd40738",
+    "data/derived/science/sahel_ndvi_policy_review/strict_100.nc": "61613ffd1f69ba03bda9368a95a814bf9ad7a29d9435c878d51cc309b981d386",
+    "data/derived/science/sahel_ndvi_policy_review/strict_90.nc": "6db442c28df6fcfe3aa1a7b89ab7971b56708d2415293f5bbd3023a5ddf61981",
+    "data/derived/science/sahel_ndvi_policy_review/strict_95.nc": "6e2e15b6f4ca87eaf52d0bc45d35012402b67df5c009584a348833bd7f5535e5",
+    "data/derived/science/sahel_ndvi_policy_review/source_review/MOD13_C61_page27.png": "c1ce1254e74c380bde7207989f8e12e0ad9757bac624a74f8e16b16234873d2a",
+    "data/derived/science/sahel_ndvi_policy_review/source_review/MOD13_C61_page28.png": "6969d72f07fbaa49df9ee081b32c15d04b8f0ece648436fe9101ad1f370aa7da",
+    "data/derived/science/sahel_ndvi_preprocessing_comparison/source_and_prepared_month.png": "b80dd4ed32386981381bf5249fa046604c646612ecdcf077847d33eaeda544a3",
+    "data/derived/science/sahel_ndvi_preprocessing_comparison/three_output_comparison.png": "33bc569ddcd683473391ecfddf2330ff1ccf1eab3049c0468fae8b9a6609e369",
+    "data/derived/science/sahel_ndvi_preprocessing_comparison/three_output_footprints.png": "75bbfa13266a1ebfcaa4323c777311e42cc158f4d811081f55209e3bbec64659",
+    "packages/science/phase_reports/SAHEL_NDVI_POLICY_CHECKPOINT.md": "bfc6fa1ec12c57c7afa95fccfe3db33c0549439a62926dcdc75c46f4ca0c01cf",
+    "packages/science/phase_reports/SAHEL_NDVI_POLICY_METRICS.json": "ffcfbac5a2115a687afe50913f93610011892d7e4b8d1d10dcedb97158a588d7",
+    "packages/science/phase_reports/SAHEL_NDVI_QA_DISTRIBUTIONS.json": "971e4f8066fe5c55e7315d151dac8a099e8ebb39ba2719c7bf1006975dcdf76a",
+    "packages/science/phase_reports/SAHEL_NDVI_STANDARD95_MONTHLY_COVERAGE.md": "c5d9cc059da7cffb10d6519f5996337c819c3258ff10a74ba231cbda3574245c",
+    "packages/science/phase_reports/SAHEL_NDVI_STANDARD95_REVIEW.json": "8019de97fab81a268882243545895ff9a269b886333fd3ba74eaa79b2a56c393",
+    "packages/science/phase_reports/SAHEL_NDVI_STANDARD95_REVIEW.md": "510cfb116932afb7f809303a984a3b5c01586c394798b4fedb3ff78e130301a4",
+    "packages/science/phase_reports/PHASE_3_APPROVAL.md": "6941377ec076f0f8324987ac9110335c9ce0f20adeebdff95bdbffb537ce9e58",
+    "packages/science/phase_reports/PHASE_3_REPORT.md": "aee176cb07baaed562486c12b7e88c20073cd1e37c1a62931fb3565ca95be9f7",
+    "packages/science/phase_reports/PHASE_3_RESULTS.json": "3ea7e5b5e9f8fe5a793faf44b2948dc3ddf52f2dac3ab15707bc39ca27734497",
+    "packages/science/phase_reports/PHASE_3_TESTS.json": "c97f29b25058bc24407775dfedad47696223f7cf6940df68b4289a90180a5ea7",
+    "packages/science/phase_reports/PHASE_3_VALIDATION.json": "39193aedaf6dad1be5f9b1729040ac40c9c2a4d60ba3fec10abe38aa421f7f6d",
+    "packages/science/notebooks/03_trend_validation.ipynb": "9d0437262e2f43ab374da405284db245290edf62416bb246840685664618cc4c",
+    "packages/science/config/trend_policy.json": "926ab66d7074ee84fbceeab111fcc7b43d71e2a5675eb7e31eb30104ebd761ba",
+    "packages/science/src/trend_estimation.py": "41b26456db2506d7b494339d2c2579baf76020902d3352e123ebf558e1a7dcb8",
+    "data/derived/science/phase_3/air_temperature__morocco_comparison__strict_100.nc": "a72993734ead9e9d87daf9bf59032adc5de82cc3c76a352b174e835769ef96ae",
+    "data/derived/science/phase_3/air_temperature__nile_corridor__strict_100.nc": "7f71ba41d47c8254a83212275a636adf1b7ffa972fa216a28f96262d82be4e8d",
+    "data/derived/science/phase_3/air_temperature__sahel_comparison__strict_100.nc": "1a8bde25201c874fca9bbd74c4675d4ce7ac1f81eda87a95615b224a98762ed9",
+    "data/derived/science/phase_3/manifest.json": "93872d1f494446c2eff052b5b999f17a35283143e8aa62b6ca44ec1eb04868cb",
+    "data/derived/science/phase_3/precipitation__morocco_comparison__strict_100.nc": "e0e6d7c33b04395621bdba78f2d12fe0aad75256a93c1c3c52a190608148ca68",
+    "data/derived/science/phase_3/precipitation__nile_corridor__strict_100.nc": "1ad0ffe3091d91e5626207c2396695ea775c1a7d692e28016c98e4d1099c3b1b",
+    "data/derived/science/phase_3/precipitation__sahel_comparison__strict_100.nc": "638b5d228a7b3b3b7694b07e8024561b23e1c93e0d37205b8d975d9dab699195",
+    "data/derived/science/phase_3/sahel_cell_slopes.png": "82e8fc16dc57fc3e88cf894cacb70595dc7bd6a26bd122d7350b8857e9adc49c",
+    "data/derived/science/phase_3/sahel_policy_slopes.png": "336ec2803ffd9642759ee4fe497d4b4553006d80c55789f7678e1536ac07400a",
+    "data/derived/science/phase_3/soil_moisture__morocco_comparison__strict_100.nc": "e0f114e48a3b49cb78de7eb0bcb3bb82796a3ab0f82f37e8941e51cea3de8b35",
+    "data/derived/science/phase_3/soil_moisture__nile_corridor__strict_100.nc": "1751f00b2c0cb0a2f2f977fad15f3e78ad8f8dd9b53378f65208be56f1d3db79",
+    "data/derived/science/phase_3/soil_moisture__sahel_comparison__strict_100.nc": "e9582b5b8c4bca3a504337830a92455227c0c5a94814bc4a8dc52cabf2ff7791",
+    "data/derived/science/phase_3/stage2_preserved.json": "4ce31a6211bfa3fe53663161de70a0691fb3b27a0a9569909f442d26fd27956e",
+    "data/derived/science/phase_3/vegetation_greenness__morocco_comparison__strict_100.nc": "773b60efc829c608e540fd997e423280cf9fb7a646e58523e22a7d551b0ceca4",
+    "data/derived/science/phase_3/vegetation_greenness__nile_corridor__strict_100.nc": "30cca33a35bf463ecf2372b93de035ac74149614cadce6a9815b34f446ff04e5",
+    "data/derived/science/phase_3/vegetation_greenness__sahel_comparison__standard_100.nc": "35c1f27e5a0783397599452378cc6c95f76102a5bd3a4b6b92665ed2485d48ff",
+    "data/derived/science/phase_3/vegetation_greenness__sahel_comparison__standard_95.nc": "2a129d348319369d1b5c20f37baba24165ea25710922b2ec6016e5f5622ad439",
+    "data/derived/science/phase_3/vegetation_greenness__sahel_comparison__strict_100.nc": "313aaeeae0b7030a68a28de3cfde11a92d1eefdd689f90a36cb88bc57f524dc0"
+  },
+  "elapsed_seconds": 357.7529152000061
+}

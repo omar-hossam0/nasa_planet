@@ -1,0 +1,37 @@
+{
+  "tests_run": 72,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": true,
+  "annual_factor_of_twelve_regression": {
+    "truth_per_year": 1.0,
+    "actual_per_year": 1.0,
+    "passed": true
+  },
+  "explicit_60_point_guard_on_48_samples": {
+    "regional_status": "insufficient_data",
+    "computable_grid_cells": 0,
+    "passed": true
+  },
+  "all_case_grid_masks_counts_and_hashes_passed": [
+    "air_temperature__nile_corridor__strict_100",
+    "soil_moisture__nile_corridor__strict_100",
+    "precipitation__nile_corridor__strict_100",
+    "vegetation_greenness__nile_corridor__strict_100",
+    "air_temperature__morocco_comparison__strict_100",
+    "soil_moisture__morocco_comparison__strict_100",
+    "precipitation__morocco_comparison__strict_100",
+    "vegetation_greenness__morocco_comparison__strict_100",
+    "air_temperature__sahel_comparison__strict_100",
+    "soil_moisture__sahel_comparison__strict_100",
+    "precipitation__sahel_comparison__strict_100",
+    "vegetation_greenness__sahel_comparison__strict_100",
+    "vegetation_greenness__sahel_comparison__standard_100",
+    "vegetation_greenness__sahel_comparison__standard_95"
+  ],
+  "all_grid_valid_counts_match_original_prepared_values": true,
+  "stage2_preserved_file_count": 72,
+  "stage2_hashes_unchanged": true,
+  "inference_fields_absent": true
+}

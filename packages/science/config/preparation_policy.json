@@ -1,0 +1,69 @@
+{
+  "policy_revision": "prep-1.0.0",
+  "status": "candidate_pending_owner_review",
+  "scope": "preparation only; no trend or inference release",
+  "spatial": {
+    "selection": "native_cell_centres_inclusive_bbox",
+    "weighting": "full_native_spherical_cell_solid_angle",
+    "boundary_intersection": false,
+    "longitude_convention": "-180_to_180_no_wrap",
+    "native_spacing_degrees": {
+      "M2TMNXSLV": [0.5, 0.625],
+      "GLDAS_NOAH025_M": [0.25, 0.25],
+      "GPM_3IMERGM": [0.1, 0.1],
+      "MOD13C2": [0.05, 0.05]
+    }
+  },
+  "qa": {
+    "modis_mode": "strict",
+    "modis_modes": {
+      "strict": {"accepted_modland_bits": [0], "accepted_reliability": [0]},
+      "standard": {"accepted_modland_bits": [0, 1], "accepted_reliability": [0, 1]}
+    },
+    "modis_processed_ndvi_range": [-0.2, 1.0],
+    "modis_quality_fill": 65535,
+    "imerg_quality_threshold": null,
+    "imerg_quality_weighting": false,
+    "retain_ancillary_fields": true,
+    "temperature": "finite values",
+    "soil_moisture": "finite nonnegative values",
+    "precipitation": "finite nonnegative values"
+  },
+  "coverage": {
+    "fixed_support": "valid_after_qa_in_every_registered_reference_month",
+    "support_reference": "full_source_period_from_input_contract",
+    "minimum_support_cells": 1,
+    "minimum_area_fraction": null,
+    "annual_required_months": 12,
+    "imputation": "none"
+  },
+  "temporal": {
+    "precipitation_monthly_basis": "calendar_month_amount_mm",
+    "precipitation_annual": "sum_complete_monthly_amounts",
+    "other_annual": "calendar_day_weighted_mean_of_complete_monthly_values",
+    "anomaly_baseline": "arithmetic_mean_per_calendar_month_over_registered_reference",
+    "annual_coordinate": "actual_calendar_year"
+  },
+  "sources": [
+    {
+      "path": "data/nasa/expanded_v2/docs/MOD13_User_Guide_V61.pdf",
+      "sha256": "7440d485fef25e85c19752c553989d7af33698f2f606cc0b50cf298012f85a0a",
+      "url": "https://lpdaac.usgs.gov/documents/621/MOD13_User_Guide_V61.pdf",
+      "locator": "PDF pages 18, 27-29; Tables 5, 17-19; sections 8.3.2 and 9.3.2"
+    },
+    {
+      "path": "data/nasa/expanded_v2/docs/IMERG_V07_ATBD.pdf",
+      "sha256": "c2746d55c4637895e94b54a8a086958ab5fd96b5d5a7a087eb144f4cf645b168",
+      "url": "https://arthurhou.pps.eosdis.nasa.gov/Documents/IMERG_V07_ATBD_final.pdf",
+      "locator": "PDF page 32, Table 5: precipitation, randomError and PrecipitationQualityIndex"
+    }
+  ],
+  "limitations": [
+    "Coverage, weights and QA acceptance are team preparation choices, not NASA-mandated statistical thresholds.",
+    "Strict complete-case support may exclude large or unrepresentative parts of a rectangle; report the retained cell and area fractions.",
+    "One retained cell permits preparation, not a claim of representative regional coverage or sufficient trend evidence.",
+    "Centre-selected full cells can extend beyond a requested bbox; this is not exact polygon area integration.",
+    "MODIS standard mode admits marginal observations and is for an explicit sensitivity comparison.",
+    "IMERG ancillary fields are retained and summarized; no unsupported quality cutoff or quality weighting is imposed."
+  ]
+}

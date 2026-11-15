@@ -1,0 +1,33 @@
+{
+  "method_revision": "inference-study-1.0",
+  "policy_sha256": "be95a684387d56b43c4458e80bedbdc279a79ff079850137d70373196b1c638a",
+  "candidate_decision": "rejected_for_release_after_failed_calibration",
+  "application_release": false,
+  "phase_5_authorized": false,
+  "default_changed": false,
+  "phase_4_research_checkpoint": "complete; scientific release criteria not met",
+  "checks": [
+    {
+      "scenario": "annual_ar1_null_phi0.0_n24",
+      "false_positive_upper_mc95": 0.22245409405978459,
+      "coverage_lower_mc95": 0.78818582871064,
+      "passes_research_screen": false
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.4_n24",
+      "false_positive_upper_mc95": 0.2897636734829552,
+      "coverage_lower_mc95": 0.6998260397638378,
+      "passes_research_screen": false
+    },
+    {
+      "scenario": "annual_ar1_null_phi0.7_n24",
+      "false_positive_upper_mc95": 0.3826009304939827,
+      "coverage_lower_mc95": 0.6153562150800094,
+      "passes_research_screen": false
+    }
+  ],
+  "scenario_record_evaluations": 24000,
+  "distinct_synthetic_input_series": 7000,
+  "independent_noise_trajectories": 5500,
+  "paired_block_comparisons": "same records reused across block lengths; power signs also share noise"
+}

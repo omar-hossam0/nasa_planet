@@ -1,0 +1,20 @@
+{
+  "revision": "sen-uncertainty-1",
+  "alpha": 0.05,
+  "confidence": 0.95,
+  "lengths": [20, 24],
+  "truths": [-0.08, 0.0, 0.08],
+  "rho_grid": [-0.5, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+  "cache_realizations": 4,
+  "calibration_replicates": 4999,
+  "records_per_panel": 1000,
+  "cache_seed": 542801,
+  "validation_seed": 914073,
+  "subsample_fractions": [0.35, 0.5, 0.65],
+  "candidates": ["sen_subsampling", "sen_parametric_plugin", "sen_nuisance_grid_envelope"],
+  "acceptance": "unchanged double_bootstrap_research.json criteria; all core cases and no release on misspecification failures",
+  "selection": "no NASA p-values; no post-result cache, rho or block selection",
+  "target": "linear trend beta under additive symmetric errors; finite-sample point estimate always Sen",
+  "release": false,
+  "phase5": false
+}

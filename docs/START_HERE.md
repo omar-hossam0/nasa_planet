@@ -8,8 +8,14 @@ Read in order:
 4. [Verified existing data](../data/nasa/README.md).
 5. [Data validation report](../data/nasa/validation_report.json).
 
-The target is four variables across three study windows, 2001-2024. Delivered measurements currently cover **temperature and soil moisture for the Egypt rectangle only**. GPM precipitation, MODIS NDVI/QA and the Morocco/Sahel extensions are planned, not downloaded. Never present planned scope as available functionality.
+All four variables across the three study windows are present for 2001-2024: **12 regional cubes**, each with 288 months. The original two Egypt cubes are also retained. GPM quality/error fields and MODIS QA/reliability fields are bundled. This is source availability, not scientific-method or application approval.
 
-Existing data: 576 monthly regional files, two combined NetCDF cubes, frontend JSON, provenance, official source documents and a 315-chunk RAG starter. See data/nasa/runtime_catalog.json for source-ingestion readiness, not proof of a validated statistics service.
+Use `docs/architecture/scope.v2.json` for the expanded input mapping (`source_variable`, `cube_variable`, `cube_units` and paths), and `data/nasa/validation_regional_report.json` for the source-delivery checks. `runtime_catalog.json` is the legacy two-variable Egypt registry. Do not use it to infer full application readiness.
 
 No application files are implemented by this documentation/data delivery. The project plan governs future work; adapt proposed module paths to the repository's established structure.
+
+For current numerical work, read [the statistics plan](../packages/science/PLAN.md),
+[its progress tracker](../packages/science/PROGRESS.md), and the latest statistics
+phase report. The earlier Phase 0 report is historical; its NDVI mapping issue is
+resolved by an explicit processed-field contract. Backend schema review remains
+an integration requirement, rather than a blocker for local input preparation.

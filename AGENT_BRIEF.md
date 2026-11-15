@@ -33,7 +33,7 @@ The LLM selects only permitted IDs and explains cited evidence. Your determinist
 
 Target: four variables across Nile, Morocco and Sahel windows, monthly 2001-2024. Preserve user period selection, Spin It, spatial reveal and cross-region comparisons. These features were NOT removed by this brief.
 
-Actual delivered measurements: MERRA-2 T2M v5.12.4 and GLDAS SoilMoi0_10cm_inst v2.1 for the Egypt rectangle only. GPM precipitation, MODIS NDVI/QA and additional geographic coverage remain acquisition work. Product documentation does not make a dataset executable.
+Actual delivered measurements now cover all twelve variable-region pairs: MERRA-2 T2M v5.12.4, GLDAS SoilMoi0_10cm_inst v2.1, GPM precipitation v07 and MOD13C2 NDVI v061 across Nile/Morocco/Sahel, 2001-2024. Original Egypt parent cubes remain available. Product documentation and source ingestion do not establish scientific/application readiness. Current numerical planning is in `packages/science/PLAN.md`.
 
 Existing assets:
 
@@ -41,7 +41,7 @@ Existing assets:
 - `data/nasa/validation_report.json`: measurement checks, not statistical validation.
 - `data/nasa/rag/corpus.jsonl`: 315 nonempty starter chunks from 10 sources.
 - `data/nasa/rag/sources/`, `data/nasa/docs/`, `data/nasa/methods/`: original source material.
-- `docs/architecture/scope.v2.json`: target variable-region entries, currently unavailable for the expanded application.
+- `docs/architecture/scope.v2.json`: delivered variable-region input entries with separate provider/processed field names, units and readiness gates; application readiness remains independent.
 
 Legacy IDs such as T2M are not automatically identical to target semantic IDs such as air_temperature. Role 03 must own an explicit mapping using Role 01's source identity. Never guess aliases from chat examples.
 
