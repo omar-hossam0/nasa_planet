@@ -1,0 +1,210 @@
+{
+  "script": "verify_coordinate_order_and_grid_shapes.py",
+  "status": "pass",
+  "results": [
+    {
+      "file": "GLDAS_NOAH025_M_Morocco_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "details": {
+        "lat_step": 0.25,
+        "lon_step": 0.25,
+        "lat_extent": [
+          30.0,
+          34.75
+        ],
+        "lon_extent": [
+          -10.0,
+          -5.25
+        ]
+      }
+    },
+    {
+      "file": "GLDAS_NOAH025_M_Nile_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "details": {
+        "lat_step": 0.25,
+        "lon_step": 0.25,
+        "lat_extent": [
+          24.125,
+          31.875
+        ],
+        "lon_extent": [
+          29.125,
+          32.875
+        ]
+      }
+    },
+    {
+      "file": "GLDAS_NOAH025_M_Sahel_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "details": {
+        "lat_step": 0.25,
+        "lon_step": 0.25,
+        "lat_extent": [
+          12.0,
+          16.75
+        ],
+        "lon_extent": [
+          -5.0,
+          4.75
+        ]
+      }
+    },
+    {
+      "file": "GPM_3IMERGM_Morocco_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "details": {
+        "lat_step": 0.10000000000000142,
+        "lon_step": 0.09999999999999964,
+        "lat_extent": [
+          30.0,
+          34.9
+        ],
+        "lon_extent": [
+          -10.0,
+          -5.1
+        ]
+      }
+    },
+    {
+      "file": "GPM_3IMERGM_Nile_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "details": {
+        "lat_step": 0.10000000000000142,
+        "lon_step": 0.10000000000000142,
+        "lat_extent": [
+          24.0,
+          31.9
+        ],
+        "lon_extent": [
+          29.0,
+          32.9
+        ]
+      }
+    },
+    {
+      "file": "GPM_3IMERGM_Sahel_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "details": {
+        "lat_step": 0.09999999999999964,
+        "lon_step": 0.10000000000000009,
+        "lat_extent": [
+          12.0,
+          16.9
+        ],
+        "lon_extent": [
+          -5.0,
+          4.9
+        ]
+      }
+    },
+    {
+      "file": "M2TMNXSLV_Morocco_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "details": {
+        "lat_step": 0.5,
+        "lon_step": 0.625,
+        "lat_extent": [
+          30.0,
+          34.5
+        ],
+        "lon_extent": [
+          -10.0,
+          -5.625
+        ]
+      }
+    },
+    {
+      "file": "M2TMNXSLV_Nile_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "details": {
+        "lat_step": 0.5,
+        "lon_step": 0.625,
+        "lat_extent": [
+          24.0,
+          32.0
+        ],
+        "lon_extent": [
+          29.375,
+          32.5
+        ]
+      }
+    },
+    {
+      "file": "M2TMNXSLV_Sahel_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "details": {
+        "lat_step": 0.5,
+        "lon_step": 0.625,
+        "lat_extent": [
+          12.0,
+          16.5
+        ],
+        "lon_extent": [
+          -5.0,
+          4.375
+        ]
+      }
+    },
+    {
+      "file": "MOD13C2_Morocco_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "details": {
+        "lat_step": 0.05000000000000071,
+        "lon_step": 0.04999999999999982,
+        "lat_extent": [
+          30.05,
+          35.0
+        ],
+        "lon_extent": [
+          -10.0,
+          -5.05
+        ]
+      }
+    },
+    {
+      "file": "MOD13C2_Nile_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "details": {
+        "lat_step": 0.05000000000000071,
+        "lon_step": 0.05000000000000071,
+        "lat_extent": [
+          24.05,
+          32.0
+        ],
+        "lon_extent": [
+          29.0,
+          32.95
+        ]
+      }
+    },
+    {
+      "file": "MOD13C2_Sahel_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "details": {
+        "lat_step": 0.05000000000000071,
+        "lon_step": 0.04999999999999999,
+        "lat_extent": [
+          12.05,
+          17.0
+        ],
+        "lon_extent": [
+          -5.0,
+          4.95
+        ]
+      }
+    }
+  ]
+}

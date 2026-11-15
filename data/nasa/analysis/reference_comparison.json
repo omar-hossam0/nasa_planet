@@ -1,0 +1,87 @@
+{
+  "generated": "2026-11-14",
+  "method_revision": "m2-1.0.0",
+  "theilsen_vs_scipy": {
+    "checks": [
+      {
+        "case": "synthetic_linear",
+        "ours": 0.5051929103122637,
+        "scipy": 0.5051929103122657,
+        "abs_diff": 1.9984014443252818e-15,
+        "agree": true
+      },
+      {
+        "case": "merra2_nile_region_anomalies",
+        "ours": 0.030858817265498682,
+        "scipy": 0.03085881726549875,
+        "abs_diff": 6.938893903907228e-17,
+        "agree": true
+      }
+    ],
+    "note": "scipy also returns an intercept; that intercept is not a confidence interval and is not used anywhere in this project."
+  },
+  "mannkendall_vs_pymannkendall": {
+    "checks": [
+      {
+        "case": "synthetic_ar_trend",
+        "original": {
+          "ours_S": 25194.0,
+          "pmk_S": 25194.0,
+          "ours_p": 0.0,
+          "pmk_p": 0.0,
+          "p_abs_diff": 0.0,
+          "S_equal": true
+        },
+        "seasonal": {
+          "ours_p": 0.0,
+          "pmk_p": 0.0,
+          "p_abs_diff": 0.0
+        }
+      },
+      {
+        "case": "merra2_sahel_region",
+        "original": {
+          "ours_S": -1226.0,
+          "pmk_S": -1226.0,
+          "ours_p": 0.4532694537553019,
+          "pmk_p": 0.45326945375530214,
+          "p_abs_diff": 2.220446049250313e-16,
+          "S_equal": true
+        },
+        "seasonal": {
+          "ours_p": 0.0722937171418585,
+          "pmk_p": 0.0722937171418585,
+          "p_abs_diff": 0.0
+        }
+      }
+    ]
+  },
+  "power_vs_merra2": {
+    "merra2_cell": {
+      "lat": 30.0,
+      "lon": 31.25,
+      "slope_C_per_year": 0.026823043823242177,
+      "p_value": 0.023711584381880257,
+      "ci": [
+        0.003192950947328965,
+        0.05051462577688819
+      ]
+    },
+    "power_point": {
+      "slope_C_per_year": 0.02691062910629099,
+      "p_value": 0.029484743903516186,
+      "ci": [
+        0.003230701752940278,
+        0.05064166599839795
+      ]
+    },
+    "difference_C_per_year": -8.758528304881122e-05,
+    "months_compared": 288,
+    "reconciliation": [
+      "Same period, same months, same method and same QA policy.",
+      "POWER is a point request for the containing grid cell; it is not a station observation and not a city average.",
+      "MERRA-2 cube value is the 0.5 x 0.625 deg cell centre nearest 30.0N, 31.25E; POWER may use a different MERRA-2 vertical/level and bias-correction configuration.",
+      "Agreement is expected in sign and order of magnitude, not to the third decimal."
+    ]
+  }
+}

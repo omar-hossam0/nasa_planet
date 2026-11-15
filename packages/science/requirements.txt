@@ -1,0 +1,7 @@
+-r requirements-audit.txt
+matplotlib==3.10.8
+nbformat==5.10.4
+nbclient==0.10.2
+ipykernel==6.30.1
+# Slope-only independent reference in tests/validation, not the production kernel.
+scipy==1.18.0

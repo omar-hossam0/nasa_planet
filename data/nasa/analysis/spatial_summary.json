@@ -1,0 +1,173 @@
+{
+  "method_revision": "m2-1.0.0",
+  "cubes": {
+    "M2TMNXSLV_nile_corridor": {
+      "shape": [
+        288,
+        17,
+        6
+      ],
+      "cells_total": 102,
+      "cells_eligible": 102,
+      "cells_significant_fdr": 102,
+      "fdr_threshold": 0.029776669301500913,
+      "median_slope": 0.02859555184841156,
+      "slope_units": "K per year",
+      "file": "spatial_trends/M2TMNXSLV_nile_corridor.npz"
+    },
+    "M2TMNXSLV_morocco_comparison": {
+      "shape": [
+        288,
+        10,
+        8
+      ],
+      "cells_total": 80,
+      "cells_eligible": 80,
+      "cells_significant_fdr": 0,
+      "fdr_threshold": 0.00125,
+      "median_slope": 0.03295410796999931,
+      "slope_units": "K per year",
+      "file": "spatial_trends/M2TMNXSLV_morocco_comparison.npz"
+    },
+    "M2TMNXSLV_sahel_comparison": {
+      "shape": [
+        288,
+        10,
+        16
+      ],
+      "cells_total": 160,
+      "cells_eligible": 160,
+      "cells_significant_fdr": 0,
+      "fdr_threshold": 0.000625,
+      "median_slope": -0.013097199611365795,
+      "slope_units": "K per year",
+      "file": "spatial_trends/M2TMNXSLV_sahel_comparison.npz"
+    },
+    "GLDAS_NOAH025_M_nile_corridor": {
+      "shape": [
+        288,
+        32,
+        16
+      ],
+      "cells_total": 512,
+      "cells_eligible": 459,
+      "cells_significant_fdr": 133,
+      "fdr_threshold": 0.028208408156163323,
+      "median_slope": 0.0008772303117439151,
+      "slope_units": "kg m-2 per year",
+      "file": "spatial_trends/GLDAS_NOAH025_M_nile_corridor.npz"
+    },
+    "GLDAS_NOAH025_M_morocco_comparison": {
+      "shape": [
+        288,
+        20,
+        20
+      ],
+      "cells_total": 400,
+      "cells_eligible": 287,
+      "cells_significant_fdr": 0,
+      "fdr_threshold": 0.0003484320557491289,
+      "median_slope": -0.09336139261722565,
+      "slope_units": "kg m-2 per year",
+      "file": "spatial_trends/GLDAS_NOAH025_M_morocco_comparison.npz"
+    },
+    "GLDAS_NOAH025_M_sahel_comparison": {
+      "shape": [
+        288,
+        20,
+        40
+      ],
+      "cells_total": 800,
+      "cells_eligible": 800,
+      "cells_significant_fdr": 658,
+      "fdr_threshold": 0.0818624080827659,
+      "median_slope": -0.02632463164627552,
+      "slope_units": "kg m-2 per year",
+      "file": "spatial_trends/GLDAS_NOAH025_M_sahel_comparison.npz"
+    },
+    "GPM_3IMERGM_nile_corridor": {
+      "shape": [
+        288,
+        80,
+        40
+      ],
+      "cells_total": 3200,
+      "cells_eligible": 3200,
+      "cells_significant_fdr": 12,
+      "fdr_threshold": 0.0002766207670794607,
+      "median_slope": 0.0,
+      "slope_units": "mm/hr per year",
+      "file": "spatial_trends/GPM_3IMERGM_nile_corridor.npz"
+    },
+    "GPM_3IMERGM_morocco_comparison": {
+      "shape": [
+        288,
+        50,
+        50
+      ],
+      "cells_total": 2500,
+      "cells_eligible": 2500,
+      "cells_significant_fdr": 1120,
+      "fdr_threshold": 0.0447544468649288,
+      "median_slope": -0.0004571247845888138,
+      "slope_units": "mm/hr per year",
+      "file": "spatial_trends/GPM_3IMERGM_morocco_comparison.npz"
+    },
+    "GPM_3IMERGM_sahel_comparison": {
+      "shape": [
+        288,
+        50,
+        100
+      ],
+      "cells_total": 5000,
+      "cells_eligible": 5000,
+      "cells_significant_fdr": 5,
+      "fdr_threshold": 4.613575371226197e-05,
+      "median_slope": 4.132231879339088e-06,
+      "slope_units": "mm/hr per year",
+      "file": "spatial_trends/GPM_3IMERGM_sahel_comparison.npz"
+    },
+    "MOD13C2_nile_corridor": {
+      "shape": [
+        288,
+        160,
+        80
+      ],
+      "cells_total": 12800,
+      "cells_eligible": 11583,
+      "cells_significant_fdr": 3660,
+      "fdr_threshold": 0.03159540815174977,
+      "median_slope": -6.1031372752040625e-05,
+      "slope_units": "1 per year",
+      "file": "spatial_trends/MOD13C2_nile_corridor.npz"
+    },
+    "MOD13C2_morocco_comparison": {
+      "shape": [
+        288,
+        100,
+        100
+      ],
+      "cells_total": 10000,
+      "cells_eligible": 7255,
+      "cells_significant_fdr": 810,
+      "fdr_threshold": 0.011114181504380927,
+      "median_slope": -0.0001695027604000643,
+      "slope_units": "1 per year",
+      "file": "spatial_trends/MOD13C2_morocco_comparison.npz"
+    },
+    "MOD13C2_sahel_comparison": {
+      "shape": [
+        288,
+        100,
+        200
+      ],
+      "cells_total": 20000,
+      "cells_eligible": 19998,
+      "cells_significant_fdr": 11640,
+      "fdr_threshold": 0.05813997531873705,
+      "median_slope": 0.0006000004359520972,
+      "slope_units": "1 per year",
+      "file": "spatial_trends/MOD13C2_sahel_comparison.npz"
+    }
+  }
+}

@@ -8,12 +8,8 @@
     "coverage": {
       "start": "2001-01",
       "end": "2024-12",
-      "bbox": [
-        24,
-        22,
-        36,
-        32
-      ]
+      "bbox": [24, 22, 36, 32],
+      "bbox_label": "Egypt rectangle 24-36E, 22-32N"
     },
     "path": "measurements/M2TMNXSLV_Egypt_2001_2024.nc",
     "native_grid": {
@@ -25,7 +21,8 @@
       "Rectangle includes neighboring areas and sea.",
       "No causal inference from trend alone."
     ],
-    "version": "5.12.4"
+    "version": "5.12.4",
+    "region_id": "egypt_reference_domain"
   },
   {
     "id": "SoilMoi0_10cm_inst",
@@ -36,12 +33,8 @@
     "coverage": {
       "start": "2001-01",
       "end": "2024-12",
-      "bbox": [
-        24,
-        22,
-        36,
-        32
-      ]
+      "bbox": [24, 22, 36, 32],
+      "bbox_label": "Egypt rectangle 24-36E, 22-32N"
     },
     "path": "measurements/GLDAS_NOAH025_M_Egypt_2001_2024.nc",
     "native_grid": {
@@ -53,6 +46,361 @@
       "Rectangle includes neighboring areas and sea.",
       "No causal inference from trend alone."
     ],
-    "version": "2.1"
+    "version": "2.1",
+    "region_id": "egypt_reference_domain"
+  },
+  {
+    "id": "T2M",
+    "variable_id": "air_temperature",
+    "product_id": "M2TMNXSLV",
+    "version": "5.12.4",
+    "region_id": "nile_corridor",
+    "region_name": "Nile",
+    "label": "2-metre air temperature",
+    "units": "K",
+    "analysis_ready": true,
+    "coverage": {
+      "start": "2001-01",
+      "end": "2024-12",
+      "bbox": [29, 24, 33, 32]
+    },
+    "path": "measurements/M2TMNXSLV_Nile_2001_2024.nc",
+    "monthly_subsets": "regional/M2TMNXSLV/nile/",
+    "native_grid": {
+      "lat": "0.5 deg",
+      "lon": "0.625 deg"
+    },
+    "source_kind": "reanalysis",
+    "limitations": [
+      "Native grids differ between products; no implicit regridding.",
+      "Bounding rectangles include neighboring areas and sea.",
+      "No causal inference from trend alone.",
+      "Missing cells are masked, not zero."
+    ]
+  },
+  {
+    "id": "T2M",
+    "variable_id": "air_temperature",
+    "product_id": "M2TMNXSLV",
+    "version": "5.12.4",
+    "region_id": "morocco_comparison",
+    "region_name": "Morocco",
+    "label": "2-metre air temperature",
+    "units": "K",
+    "analysis_ready": true,
+    "coverage": {
+      "start": "2001-01",
+      "end": "2024-12",
+      "bbox": [-10, 30, -5, 35]
+    },
+    "path": "measurements/M2TMNXSLV_Morocco_2001_2024.nc",
+    "monthly_subsets": "regional/M2TMNXSLV/morocco/",
+    "native_grid": {
+      "lat": "0.5 deg",
+      "lon": "0.625 deg"
+    },
+    "source_kind": "reanalysis",
+    "limitations": [
+      "Native grids differ between products; no implicit regridding.",
+      "Bounding rectangles include neighboring areas and sea.",
+      "No causal inference from trend alone.",
+      "Missing cells are masked, not zero."
+    ]
+  },
+  {
+    "id": "T2M",
+    "variable_id": "air_temperature",
+    "product_id": "M2TMNXSLV",
+    "version": "5.12.4",
+    "region_id": "sahel_comparison",
+    "region_name": "Sahel",
+    "label": "2-metre air temperature",
+    "units": "K",
+    "analysis_ready": true,
+    "coverage": {
+      "start": "2001-01",
+      "end": "2024-12",
+      "bbox": [-5, 12, 5, 17]
+    },
+    "path": "measurements/M2TMNXSLV_Sahel_2001_2024.nc",
+    "monthly_subsets": "regional/M2TMNXSLV/sahel/",
+    "native_grid": {
+      "lat": "0.5 deg",
+      "lon": "0.625 deg"
+    },
+    "source_kind": "reanalysis",
+    "limitations": [
+      "Native grids differ between products; no implicit regridding.",
+      "Bounding rectangles include neighboring areas and sea.",
+      "No causal inference from trend alone.",
+      "Missing cells are masked, not zero."
+    ]
+  },
+  {
+    "id": "SoilMoi0_10cm_inst",
+    "variable_id": "soil_moisture",
+    "product_id": "GLDAS_NOAH025_M",
+    "version": "2.1",
+    "region_id": "nile_corridor",
+    "region_name": "Nile",
+    "label": "Top 0-10 cm soil moisture",
+    "units": "kg m-2",
+    "analysis_ready": true,
+    "coverage": {
+      "start": "2001-01",
+      "end": "2024-12",
+      "bbox": [29, 24, 33, 32]
+    },
+    "path": "measurements/GLDAS_NOAH025_M_Nile_2001_2024.nc",
+    "monthly_subsets": "regional/GLDAS_NOAH025_M/nile/",
+    "native_grid": {
+      "lat": "0.25 deg",
+      "lon": "0.25 deg"
+    },
+    "source_kind": "land_surface_model",
+    "limitations": [
+      "Native grids differ between products; no implicit regridding.",
+      "Bounding rectangles include neighboring areas and sea.",
+      "No causal inference from trend alone.",
+      "Missing cells are masked, not zero."
+    ]
+  },
+  {
+    "id": "SoilMoi0_10cm_inst",
+    "variable_id": "soil_moisture",
+    "product_id": "GLDAS_NOAH025_M",
+    "version": "2.1",
+    "region_id": "morocco_comparison",
+    "region_name": "Morocco",
+    "label": "Top 0-10 cm soil moisture",
+    "units": "kg m-2",
+    "analysis_ready": true,
+    "coverage": {
+      "start": "2001-01",
+      "end": "2024-12",
+      "bbox": [-10, 30, -5, 35]
+    },
+    "path": "measurements/GLDAS_NOAH025_M_Morocco_2001_2024.nc",
+    "monthly_subsets": "regional/GLDAS_NOAH025_M/morocco/",
+    "native_grid": {
+      "lat": "0.25 deg",
+      "lon": "0.25 deg"
+    },
+    "source_kind": "land_surface_model",
+    "limitations": [
+      "Native grids differ between products; no implicit regridding.",
+      "Bounding rectangles include neighboring areas and sea.",
+      "No causal inference from trend alone.",
+      "Missing cells are masked, not zero."
+    ]
+  },
+  {
+    "id": "SoilMoi0_10cm_inst",
+    "variable_id": "soil_moisture",
+    "product_id": "GLDAS_NOAH025_M",
+    "version": "2.1",
+    "region_id": "sahel_comparison",
+    "region_name": "Sahel",
+    "label": "Top 0-10 cm soil moisture",
+    "units": "kg m-2",
+    "analysis_ready": true,
+    "coverage": {
+      "start": "2001-01",
+      "end": "2024-12",
+      "bbox": [-5, 12, 5, 17]
+    },
+    "path": "measurements/GLDAS_NOAH025_M_Sahel_2001_2024.nc",
+    "monthly_subsets": "regional/GLDAS_NOAH025_M/sahel/",
+    "native_grid": {
+      "lat": "0.25 deg",
+      "lon": "0.25 deg"
+    },
+    "source_kind": "land_surface_model",
+    "limitations": [
+      "Native grids differ between products; no implicit regridding.",
+      "Bounding rectangles include neighboring areas and sea.",
+      "No causal inference from trend alone.",
+      "Missing cells are masked, not zero."
+    ]
+  },
+  {
+    "id": "precipitation",
+    "variable_id": "precipitation",
+    "product_id": "GPM_3IMERGM",
+    "version": "07",
+    "region_id": "nile_corridor",
+    "region_name": "Nile",
+    "label": "Monthly mean precipitation rate",
+    "units": "mm/hr",
+    "analysis_ready": true,
+    "coverage": {
+      "start": "2001-01",
+      "end": "2024-12",
+      "bbox": [29, 24, 33, 32]
+    },
+    "path": "measurements/GPM_3IMERGM_Nile_2001_2024.nc",
+    "monthly_subsets": "regional/GPM_3IMERGM/nile/",
+    "native_grid": {
+      "lat": "0.1 deg",
+      "lon": "0.1 deg"
+    },
+    "source_kind": "satellite_gauge_merged",
+    "limitations": [
+      "Native grids differ between products; no implicit regridding.",
+      "Bounding rectangles include neighboring areas and sea.",
+      "No causal inference from trend alone.",
+      "Missing cells are masked, not zero."
+    ],
+    "additional_fields": ["precipitationQualityIndex", "randomError"]
+  },
+  {
+    "id": "precipitation",
+    "variable_id": "precipitation",
+    "product_id": "GPM_3IMERGM",
+    "version": "07",
+    "region_id": "morocco_comparison",
+    "region_name": "Morocco",
+    "label": "Monthly mean precipitation rate",
+    "units": "mm/hr",
+    "analysis_ready": true,
+    "coverage": {
+      "start": "2001-01",
+      "end": "2024-12",
+      "bbox": [-10, 30, -5, 35]
+    },
+    "path": "measurements/GPM_3IMERGM_Morocco_2001_2024.nc",
+    "monthly_subsets": "regional/GPM_3IMERGM/morocco/",
+    "native_grid": {
+      "lat": "0.1 deg",
+      "lon": "0.1 deg"
+    },
+    "source_kind": "satellite_gauge_merged",
+    "limitations": [
+      "Native grids differ between products; no implicit regridding.",
+      "Bounding rectangles include neighboring areas and sea.",
+      "No causal inference from trend alone.",
+      "Missing cells are masked, not zero."
+    ],
+    "additional_fields": ["precipitationQualityIndex", "randomError"]
+  },
+  {
+    "id": "precipitation",
+    "variable_id": "precipitation",
+    "product_id": "GPM_3IMERGM",
+    "version": "07",
+    "region_id": "sahel_comparison",
+    "region_name": "Sahel",
+    "label": "Monthly mean precipitation rate",
+    "units": "mm/hr",
+    "analysis_ready": true,
+    "coverage": {
+      "start": "2001-01",
+      "end": "2024-12",
+      "bbox": [-5, 12, 5, 17]
+    },
+    "path": "measurements/GPM_3IMERGM_Sahel_2001_2024.nc",
+    "monthly_subsets": "regional/GPM_3IMERGM/sahel/",
+    "native_grid": {
+      "lat": "0.1 deg",
+      "lon": "0.1 deg"
+    },
+    "source_kind": "satellite_gauge_merged",
+    "limitations": [
+      "Native grids differ between products; no implicit regridding.",
+      "Bounding rectangles include neighboring areas and sea.",
+      "No causal inference from trend alone.",
+      "Missing cells are masked, not zero."
+    ],
+    "additional_fields": ["precipitationQualityIndex", "randomError"]
+  },
+  {
+    "id": "NDVI",
+    "variable_id": "vegetation_greenness",
+    "product_id": "MOD13C2",
+    "version": "061",
+    "region_id": "nile_corridor",
+    "region_name": "Nile",
+    "label": "CMG 0.05-deg monthly NDVI",
+    "units": "1",
+    "analysis_ready": true,
+    "coverage": {
+      "start": "2001-01",
+      "end": "2024-12",
+      "bbox": [29, 24, 33, 32]
+    },
+    "path": "measurements/MOD13C2_Nile_2001_2024.nc",
+    "monthly_subsets": "regional/MOD13C2/nile/",
+    "native_grid": {
+      "lat": "0.05 deg",
+      "lon": "0.05 deg"
+    },
+    "source_kind": "satellite",
+    "limitations": [
+      "Native grids differ between products; no implicit regridding.",
+      "Bounding rectangles include neighboring areas and sea.",
+      "No causal inference from trend alone.",
+      "Missing cells are masked, not zero."
+    ],
+    "additional_fields": ["VI_Quality", "pixel_reliability"]
+  },
+  {
+    "id": "NDVI",
+    "variable_id": "vegetation_greenness",
+    "product_id": "MOD13C2",
+    "version": "061",
+    "region_id": "morocco_comparison",
+    "region_name": "Morocco",
+    "label": "CMG 0.05-deg monthly NDVI",
+    "units": "1",
+    "analysis_ready": true,
+    "coverage": {
+      "start": "2001-01",
+      "end": "2024-12",
+      "bbox": [-10, 30, -5, 35]
+    },
+    "path": "measurements/MOD13C2_Morocco_2001_2024.nc",
+    "monthly_subsets": "regional/MOD13C2/morocco/",
+    "native_grid": {
+      "lat": "0.05 deg",
+      "lon": "0.05 deg"
+    },
+    "source_kind": "satellite",
+    "limitations": [
+      "Native grids differ between products; no implicit regridding.",
+      "Bounding rectangles include neighboring areas and sea.",
+      "No causal inference from trend alone.",
+      "Missing cells are masked, not zero."
+    ],
+    "additional_fields": ["VI_Quality", "pixel_reliability"]
+  },
+  {
+    "id": "NDVI",
+    "variable_id": "vegetation_greenness",
+    "product_id": "MOD13C2",
+    "version": "061",
+    "region_id": "sahel_comparison",
+    "region_name": "Sahel",
+    "label": "CMG 0.05-deg monthly NDVI",
+    "units": "1",
+    "analysis_ready": true,
+    "coverage": {
+      "start": "2001-01",
+      "end": "2024-12",
+      "bbox": [-5, 12, 5, 17]
+    },
+    "path": "measurements/MOD13C2_Sahel_2001_2024.nc",
+    "monthly_subsets": "regional/MOD13C2/sahel/",
+    "native_grid": {
+      "lat": "0.05 deg",
+      "lon": "0.05 deg"
+    },
+    "source_kind": "satellite",
+    "limitations": [
+      "Native grids differ between products; no implicit regridding.",
+      "Bounding rectangles include neighboring areas and sea.",
+      "No causal inference from trend alone.",
+      "Missing cells are masked, not zero."
+    ],
+    "additional_fields": ["VI_Quality", "pixel_reliability"]
   }
 ]

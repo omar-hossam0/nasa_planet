@@ -1,0 +1,1218 @@
+{
+  "generated_at_utc": "2026-11-15T00:49:40.891079+00:00",
+  "git_revision": "ecf39088744c7ea01ae7d30d92e5ce6b91d24f6d",
+  "scope_sha256": "547fb7166c88751190c6556bda0b132dba4226d9290d0c9c6d9a3ec3d2863798",
+  "scope_path": "docs/architecture/scope.v2.json",
+  "software_versions": {
+    "numpy": "2.5.4",
+    "xarray": "2026.9.0",
+    "netCDF4": "1.7.5.1.post1"
+  },
+  "scope_entries": 12,
+  "entries_without_contract_issues": 9,
+  "issue_count": 3,
+  "limitations": [
+    "Metadata inventory only: no trend or inferential method was validated.",
+    "Product versions are registry claims; file hashes identify the inspected bytes.",
+    "Decoded missingness is reported before any product-specific QA selection.",
+    "Monthly source subsets and their full lineage were not validated by this audit.",
+    "This audit does not promote measurement, method, or application readiness."
+  ],
+  "entries": [
+    {
+      "variable_id": "air_temperature",
+      "region_id": "nile_corridor",
+      "product_id": "M2TMNXSLV",
+      "version": "5.12.4",
+      "source_variable": "T2M",
+      "cube_file": "data/nasa/measurements/M2TMNXSLV_Nile_2001_2024.nc",
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "bbox": [
+        29,
+        24,
+        33,
+        32
+      ],
+      "issues": [],
+      "qa_applied_by_audit": false,
+      "sha256": "5db8a5afe85560aad3e3f847c5ddfb2c75309dad7f89fbd3002a4c0c07c1e8cb",
+      "bytes": 88409,
+      "dimensions": {
+        "time": 288,
+        "lat": 17,
+        "lon": 6
+      },
+      "attributes": {
+        "title": "M2TMNXSLV nile monthly cube 2001-2024",
+        "product": "M2TMNXSLV",
+        "region": "nile",
+        "bbox_west_south_east_north": "29,24,33,32",
+        "period": "2001-01..2024-12 monthly",
+        "source": "subset of M2TMNXSLV_Egypt_2001_2024.nc (NASA Earthdata)",
+        "generated_by": "verify+assemble pipeline, 2026-11-14",
+        "parent_cube": "M2TMNXSLV_Egypt_2001_2024.nc"
+      },
+      "variables": {
+        "T2M": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "K",
+          "attributes": {
+            "units": "K",
+            "long_name": "T2M"
+          },
+          "encoding": {
+            "_FillValue": "9.96921e+36"
+          },
+          "finite_count_before_product_qa": 29376,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        }
+      },
+      "time": {
+        "first_timestamp": "2001-01-01T00:30:00.000000000",
+        "last_timestamp": "2024-12-01T00:30:00.000000000",
+        "calendar": "proleptic_gregorian",
+        "count": 288,
+        "unique_months": 288,
+        "matches_catalog_period_in_order": true
+      },
+      "coordinates": {
+        "lat": {
+          "count": 17,
+          "first": 24.0,
+          "last": 32.0,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        },
+        "lon": {
+          "count": 6,
+          "first": 29.375,
+          "last": 32.5,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        }
+      }
+    },
+    {
+      "variable_id": "soil_moisture",
+      "region_id": "nile_corridor",
+      "product_id": "GLDAS_NOAH025_M",
+      "version": "2.1",
+      "source_variable": "SoilMoi0_10cm_inst",
+      "cube_file": "data/nasa/measurements/GLDAS_NOAH025_M_Nile_2001_2024.nc",
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "bbox": [
+        29,
+        24,
+        33,
+        32
+      ],
+      "issues": [],
+      "qa_applied_by_audit": false,
+      "sha256": "55a5194144348ff668cbdcc1485493422797d2206aa0535846d8a8f2feb121cc",
+      "bytes": 421647,
+      "dimensions": {
+        "time": 288,
+        "lat": 32,
+        "lon": 16
+      },
+      "attributes": {
+        "title": "GLDAS_NOAH025_M nile monthly cube 2001-2024",
+        "product": "GLDAS_NOAH025_M",
+        "region": "nile",
+        "bbox_west_south_east_north": "29,24,33,32",
+        "period": "2001-01..2024-12 monthly",
+        "source": "subset of GLDAS_NOAH025_M_Egypt_2001_2024.nc (NASA Earthdata)",
+        "generated_by": "verify+assemble pipeline, 2026-11-14",
+        "parent_cube": "GLDAS_NOAH025_M_Egypt_2001_2024.nc"
+      },
+      "variables": {
+        "SoilMoi0_10cm_inst": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "kg m-2",
+          "attributes": {
+            "units": "kg m-2",
+            "long_name": "SoilMoi0_10cm_inst"
+          },
+          "encoding": {
+            "_FillValue": "9.96921e+36"
+          },
+          "finite_count_before_product_qa": 132192,
+          "missing_count_before_product_qa": 15264,
+          "source_fill_minus_9999_count": 0
+        }
+      },
+      "time": {
+        "first_timestamp": "2001-01-01T00:00:00.000000000",
+        "last_timestamp": "2024-12-01T00:00:00.000000000",
+        "calendar": "proleptic_gregorian",
+        "count": 288,
+        "unique_months": 288,
+        "matches_catalog_period_in_order": true
+      },
+      "coordinates": {
+        "lat": {
+          "count": 32,
+          "first": 24.125,
+          "last": 31.875,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        },
+        "lon": {
+          "count": 16,
+          "first": 29.125,
+          "last": 32.875,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        }
+      }
+    },
+    {
+      "variable_id": "precipitation",
+      "region_id": "nile_corridor",
+      "product_id": "GPM_3IMERGM",
+      "version": "07",
+      "source_variable": "precipitation",
+      "cube_file": "data/nasa/measurements/GPM_3IMERGM_Nile_2001_2024.nc",
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "bbox": [
+        29,
+        24,
+        33,
+        32
+      ],
+      "issues": [],
+      "qa_applied_by_audit": false,
+      "sha256": "967131aec4bdb0fa98ffc6ec9c9340cde164f5704be8f861c7ee02c130d6e219",
+      "bytes": 1127955,
+      "dimensions": {
+        "time": 288,
+        "lat": 80,
+        "lon": 40
+      },
+      "attributes": {
+        "title": "GPM_3IMERGM nile monthly cube 2001-2024",
+        "product": "GPM_3IMERGM",
+        "region": "nile",
+        "bbox_west_south_east_north": "29,24,33,32",
+        "period": "2001-01..2024-12 monthly",
+        "source": "NASA Earthdata opendap.earthdata.nasa.gov (DAP4 subsets)",
+        "generated_by": "verify+assemble pipeline, 2026-11-14"
+      },
+      "variables": {
+        "precipitation": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "mm/hr",
+          "attributes": {
+            "units": "mm/hr",
+            "long_name": "monthly mean precipitation rate"
+          },
+          "encoding": {
+            "_FillValue": "9.96921e+36"
+          },
+          "finite_count_before_product_qa": 921600,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        },
+        "precipitationQualityIndex": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "1",
+          "attributes": {
+            "units": "1",
+            "long_name": "quality index (0-100, higher is better)"
+          },
+          "encoding": {},
+          "finite_count_before_product_qa": 921600,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        },
+        "randomError": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "mm/hr",
+          "attributes": {
+            "units": "mm/hr",
+            "long_name": "random error of monthly mean rate"
+          },
+          "encoding": {
+            "_FillValue": "9.96921e+36"
+          },
+          "finite_count_before_product_qa": 921600,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        }
+      },
+      "time": {
+        "first_timestamp": "2001-01-01T00:00:00.000000000",
+        "last_timestamp": "2024-12-01T00:00:00.000000000",
+        "calendar": "proleptic_gregorian",
+        "count": 288,
+        "unique_months": 288,
+        "matches_catalog_period_in_order": true
+      },
+      "coordinates": {
+        "lat": {
+          "count": 80,
+          "first": 24.0,
+          "last": 31.9,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        },
+        "lon": {
+          "count": 40,
+          "first": 29.0,
+          "last": 32.9,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        }
+      }
+    },
+    {
+      "variable_id": "vegetation_greenness",
+      "region_id": "nile_corridor",
+      "product_id": "MOD13C2",
+      "version": "061",
+      "source_variable": "CMG_0_05_Deg_Monthly_NDVI",
+      "cube_file": "data/nasa/measurements/MOD13C2_Nile_2001_2024.nc",
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "bbox": [
+        29,
+        24,
+        33,
+        32
+      ],
+      "issues": [
+        "catalog_source_variable_absent_from_cube"
+      ],
+      "qa_applied_by_audit": false,
+      "sha256": "78427f6651ddc8ac129d89d6bb9903f59a020a47a10827f6f184ccafb290188c",
+      "bytes": 10880211,
+      "dimensions": {
+        "time": 288,
+        "lat": 160,
+        "lon": 80
+      },
+      "attributes": {
+        "title": "MOD13C2 nile monthly cube 2001-2024",
+        "product": "MOD13C2",
+        "region": "nile",
+        "bbox_west_south_east_north": "29,24,33,32",
+        "period": "2001-01..2024-12 monthly",
+        "source": "NASA Earthdata opendap.earthdata.nasa.gov (DAP4 subsets)",
+        "generated_by": "verify+assemble pipeline, 2026-11-14"
+      },
+      "variables": {
+        "NDVI": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "1",
+          "attributes": {
+            "units": "1",
+            "scale_factor_note": "real NDVI = raw * 0.0001; fill -> NaN",
+            "long_name": "CMG 0.05-deg monthly NDVI"
+          },
+          "encoding": {
+            "_FillValue": "9.96921e+36"
+          },
+          "finite_count_before_product_qa": 3340002,
+          "missing_count_before_product_qa": 346398,
+          "source_fill_minus_9999_count": 0
+        },
+        "VI_Quality": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "1",
+          "attributes": {
+            "units": "1",
+            "long_name": "MODLAND QA bit flags"
+          },
+          "encoding": {},
+          "finite_count_before_product_qa": 3686400,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        },
+        "pixel_reliability": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "1",
+          "attributes": {
+            "units": "1",
+            "long_name": "pixel reliability rank (0 good..)"
+          },
+          "encoding": {},
+          "finite_count_before_product_qa": 3686400,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        }
+      },
+      "time": {
+        "first_timestamp": "2001-01-01T00:00:00.000000000",
+        "last_timestamp": "2024-12-01T00:00:00.000000000",
+        "calendar": "proleptic_gregorian",
+        "count": 288,
+        "unique_months": 288,
+        "matches_catalog_period_in_order": true
+      },
+      "coordinates": {
+        "lat": {
+          "count": 160,
+          "first": 24.05,
+          "last": 32.0,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        },
+        "lon": {
+          "count": 80,
+          "first": 29.0,
+          "last": 32.95,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        }
+      }
+    },
+    {
+      "variable_id": "air_temperature",
+      "region_id": "morocco_comparison",
+      "product_id": "M2TMNXSLV",
+      "version": "5.12.4",
+      "source_variable": "T2M",
+      "cube_file": "data/nasa/measurements/M2TMNXSLV_Morocco_2001_2024.nc",
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "bbox": [
+        -10,
+        30,
+        -5,
+        35
+      ],
+      "issues": [],
+      "qa_applied_by_audit": false,
+      "sha256": "c8801417edb435606a6c9621fa127f817dbe86c160a266a5d864c085a8199e40",
+      "bytes": 73724,
+      "dimensions": {
+        "time": 288,
+        "lat": 10,
+        "lon": 8
+      },
+      "attributes": {
+        "title": "M2TMNXSLV morocco monthly cube 2001-2024",
+        "product": "M2TMNXSLV",
+        "region": "morocco",
+        "bbox_west_south_east_north": "-10,30,-5,35",
+        "period": "2001-01..2024-12 monthly",
+        "source": "NASA Earthdata opendap.earthdata.nasa.gov (DAP4 subsets)",
+        "generated_by": "verify+assemble pipeline, 2026-11-14"
+      },
+      "variables": {
+        "T2M": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "K",
+          "attributes": {
+            "units": "K",
+            "long_name": "T2M"
+          },
+          "encoding": {
+            "_FillValue": "9.96921e+36"
+          },
+          "finite_count_before_product_qa": 23040,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        }
+      },
+      "time": {
+        "first_timestamp": "2001-01-01T00:00:00.000000000",
+        "last_timestamp": "2024-12-01T00:00:00.000000000",
+        "calendar": "proleptic_gregorian",
+        "count": 288,
+        "unique_months": 288,
+        "matches_catalog_period_in_order": true
+      },
+      "coordinates": {
+        "lat": {
+          "count": 10,
+          "first": 30.0,
+          "last": 34.5,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        },
+        "lon": {
+          "count": 8,
+          "first": -10.0,
+          "last": -5.625,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        }
+      }
+    },
+    {
+      "variable_id": "soil_moisture",
+      "region_id": "morocco_comparison",
+      "product_id": "GLDAS_NOAH025_M",
+      "version": "2.1",
+      "source_variable": "SoilMoi0_10cm_inst",
+      "cube_file": "data/nasa/measurements/GLDAS_NOAH025_M_Morocco_2001_2024.nc",
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "bbox": [
+        -10,
+        30,
+        -5,
+        35
+      ],
+      "issues": [],
+      "qa_applied_by_audit": false,
+      "sha256": "a58c21ca540b3d008c45f8342548aab18689e4417169edd3ebcb43246c3fcb74",
+      "bytes": 478210,
+      "dimensions": {
+        "time": 288,
+        "lat": 20,
+        "lon": 20
+      },
+      "attributes": {
+        "title": "GLDAS_NOAH025_M morocco monthly cube 2001-2024",
+        "product": "GLDAS_NOAH025_M",
+        "region": "morocco",
+        "bbox_west_south_east_north": "-10,30,-5,35",
+        "period": "2001-01..2024-12 monthly",
+        "source": "NASA Earthdata opendap.earthdata.nasa.gov (DAP4 subsets)",
+        "generated_by": "verify+assemble pipeline, 2026-11-14",
+        "quality_correction": "2026-11-14: masked source fill -9999 before analysis"
+      },
+      "variables": {
+        "SoilMoi0_10cm_inst": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "kg m-2",
+          "attributes": {
+            "units": "kg m-2",
+            "long_name": "SoilMoi0_10cm_inst",
+            "missing_value_policy": "-9999 source fill converted to NaN"
+          },
+          "encoding": {
+            "_FillValue": "nan"
+          },
+          "finite_count_before_product_qa": 82656,
+          "missing_count_before_product_qa": 32544,
+          "source_fill_minus_9999_count": 0
+        }
+      },
+      "time": {
+        "first_timestamp": "2001-01-01T00:00:00.000000000",
+        "last_timestamp": "2024-12-01T00:00:00.000000000",
+        "calendar": "proleptic_gregorian",
+        "count": 288,
+        "unique_months": 288,
+        "matches_catalog_period_in_order": true
+      },
+      "coordinates": {
+        "lat": {
+          "count": 20,
+          "first": 30.0,
+          "last": 34.75,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        },
+        "lon": {
+          "count": 20,
+          "first": -10.0,
+          "last": -5.25,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        }
+      }
+    },
+    {
+      "variable_id": "precipitation",
+      "region_id": "morocco_comparison",
+      "product_id": "GPM_3IMERGM",
+      "version": "07",
+      "source_variable": "precipitation",
+      "cube_file": "data/nasa/measurements/GPM_3IMERGM_Morocco_2001_2024.nc",
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "bbox": [
+        -10,
+        30,
+        -5,
+        35
+      ],
+      "issues": [],
+      "qa_applied_by_audit": false,
+      "sha256": "95f3e53659dd4593e585031c3eb8d1b1ee8dfd1c30060cfa7d28a3a26969465b",
+      "bytes": 2287927,
+      "dimensions": {
+        "time": 288,
+        "lat": 50,
+        "lon": 50
+      },
+      "attributes": {
+        "title": "GPM_3IMERGM morocco monthly cube 2001-2024",
+        "product": "GPM_3IMERGM",
+        "region": "morocco",
+        "bbox_west_south_east_north": "-10,30,-5,35",
+        "period": "2001-01..2024-12 monthly",
+        "source": "NASA Earthdata opendap.earthdata.nasa.gov (DAP4 subsets)",
+        "generated_by": "verify+assemble pipeline, 2026-11-14"
+      },
+      "variables": {
+        "precipitation": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "mm/hr",
+          "attributes": {
+            "units": "mm/hr",
+            "long_name": "monthly mean precipitation rate"
+          },
+          "encoding": {
+            "_FillValue": "9.96921e+36"
+          },
+          "finite_count_before_product_qa": 720000,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        },
+        "precipitationQualityIndex": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "1",
+          "attributes": {
+            "units": "1",
+            "long_name": "quality index (0-100, higher is better)"
+          },
+          "encoding": {},
+          "finite_count_before_product_qa": 720000,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        },
+        "randomError": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "mm/hr",
+          "attributes": {
+            "units": "mm/hr",
+            "long_name": "random error of monthly mean rate"
+          },
+          "encoding": {
+            "_FillValue": "9.96921e+36"
+          },
+          "finite_count_before_product_qa": 720000,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        }
+      },
+      "time": {
+        "first_timestamp": "2001-01-01T00:00:00.000000000",
+        "last_timestamp": "2024-12-01T00:00:00.000000000",
+        "calendar": "proleptic_gregorian",
+        "count": 288,
+        "unique_months": 288,
+        "matches_catalog_period_in_order": true
+      },
+      "coordinates": {
+        "lat": {
+          "count": 50,
+          "first": 30.0,
+          "last": 34.9,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        },
+        "lon": {
+          "count": 50,
+          "first": -10.0,
+          "last": -5.1,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        }
+      }
+    },
+    {
+      "variable_id": "vegetation_greenness",
+      "region_id": "morocco_comparison",
+      "product_id": "MOD13C2",
+      "version": "061",
+      "source_variable": "CMG_0_05_Deg_Monthly_NDVI",
+      "cube_file": "data/nasa/measurements/MOD13C2_Morocco_2001_2024.nc",
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "bbox": [
+        -10,
+        30,
+        -5,
+        35
+      ],
+      "issues": [
+        "catalog_source_variable_absent_from_cube"
+      ],
+      "qa_applied_by_audit": false,
+      "sha256": "aad8265db99b64eaeafa12d5d09f9ca2ba8e813b9ccc070613987fa97cb5c7e8",
+      "bytes": 7564882,
+      "dimensions": {
+        "time": 288,
+        "lat": 100,
+        "lon": 100
+      },
+      "attributes": {
+        "title": "MOD13C2 morocco monthly cube 2001-2024",
+        "product": "MOD13C2",
+        "region": "morocco",
+        "bbox_west_south_east_north": "-10,30,-5,35",
+        "period": "2001-01..2024-12 monthly",
+        "source": "NASA Earthdata opendap.earthdata.nasa.gov (DAP4 subsets)",
+        "generated_by": "verify+assemble pipeline, 2026-11-14"
+      },
+      "variables": {
+        "NDVI": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "1",
+          "attributes": {
+            "units": "1",
+            "scale_factor_note": "real NDVI = raw * 0.0001; fill -> NaN",
+            "long_name": "CMG 0.05-deg monthly NDVI"
+          },
+          "encoding": {
+            "_FillValue": "9.96921e+36"
+          },
+          "finite_count_before_product_qa": 2096846,
+          "missing_count_before_product_qa": 783154,
+          "source_fill_minus_9999_count": 0
+        },
+        "VI_Quality": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "1",
+          "attributes": {
+            "units": "1",
+            "long_name": "MODLAND QA bit flags"
+          },
+          "encoding": {},
+          "finite_count_before_product_qa": 2880000,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        },
+        "pixel_reliability": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "1",
+          "attributes": {
+            "units": "1",
+            "long_name": "pixel reliability rank (0 good..)"
+          },
+          "encoding": {},
+          "finite_count_before_product_qa": 2880000,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        }
+      },
+      "time": {
+        "first_timestamp": "2001-01-01T00:00:00.000000000",
+        "last_timestamp": "2024-12-01T00:00:00.000000000",
+        "calendar": "proleptic_gregorian",
+        "count": 288,
+        "unique_months": 288,
+        "matches_catalog_period_in_order": true
+      },
+      "coordinates": {
+        "lat": {
+          "count": 100,
+          "first": 30.05,
+          "last": 35.0,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        },
+        "lon": {
+          "count": 100,
+          "first": -10.0,
+          "last": -5.05,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        }
+      }
+    },
+    {
+      "variable_id": "air_temperature",
+      "region_id": "sahel_comparison",
+      "product_id": "M2TMNXSLV",
+      "version": "5.12.4",
+      "source_variable": "T2M",
+      "cube_file": "data/nasa/measurements/M2TMNXSLV_Sahel_2001_2024.nc",
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "bbox": [
+        -5,
+        12,
+        5,
+        17
+      ],
+      "issues": [],
+      "qa_applied_by_audit": false,
+      "sha256": "14cdb693d945c73f570b296b85cfae3177258e848e078170fa46e608a16cb987",
+      "bytes": 119882,
+      "dimensions": {
+        "time": 288,
+        "lat": 10,
+        "lon": 16
+      },
+      "attributes": {
+        "title": "M2TMNXSLV sahel monthly cube 2001-2024",
+        "product": "M2TMNXSLV",
+        "region": "sahel",
+        "bbox_west_south_east_north": "-5,12,5,17",
+        "period": "2001-01..2024-12 monthly",
+        "source": "NASA Earthdata opendap.earthdata.nasa.gov (DAP4 subsets)",
+        "generated_by": "verify+assemble pipeline, 2026-11-14"
+      },
+      "variables": {
+        "T2M": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "K",
+          "attributes": {
+            "units": "K",
+            "long_name": "T2M"
+          },
+          "encoding": {
+            "_FillValue": "9.96921e+36"
+          },
+          "finite_count_before_product_qa": 46080,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        }
+      },
+      "time": {
+        "first_timestamp": "2001-01-01T00:00:00.000000000",
+        "last_timestamp": "2024-12-01T00:00:00.000000000",
+        "calendar": "proleptic_gregorian",
+        "count": 288,
+        "unique_months": 288,
+        "matches_catalog_period_in_order": true
+      },
+      "coordinates": {
+        "lat": {
+          "count": 10,
+          "first": 12.0,
+          "last": 16.5,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        },
+        "lon": {
+          "count": 16,
+          "first": -5.0,
+          "last": 4.375,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        }
+      }
+    },
+    {
+      "variable_id": "soil_moisture",
+      "region_id": "sahel_comparison",
+      "product_id": "GLDAS_NOAH025_M",
+      "version": "2.1",
+      "source_variable": "SoilMoi0_10cm_inst",
+      "cube_file": "data/nasa/measurements/GLDAS_NOAH025_M_Sahel_2001_2024.nc",
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "bbox": [
+        -5,
+        12,
+        5,
+        17
+      ],
+      "issues": [],
+      "qa_applied_by_audit": false,
+      "sha256": "fd9dc0ccb3667a5987dfd7853db26cb4e8e7cdf7dddc686fb72bcf816750b273",
+      "bytes": 723375,
+      "dimensions": {
+        "time": 288,
+        "lat": 20,
+        "lon": 40
+      },
+      "attributes": {
+        "title": "GLDAS_NOAH025_M sahel monthly cube 2001-2024",
+        "product": "GLDAS_NOAH025_M",
+        "region": "sahel",
+        "bbox_west_south_east_north": "-5,12,5,17",
+        "period": "2001-01..2024-12 monthly",
+        "source": "NASA Earthdata opendap.earthdata.nasa.gov (DAP4 subsets)",
+        "generated_by": "verify+assemble pipeline, 2026-11-14"
+      },
+      "variables": {
+        "SoilMoi0_10cm_inst": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "kg m-2",
+          "attributes": {
+            "units": "kg m-2",
+            "long_name": "SoilMoi0_10cm_inst"
+          },
+          "encoding": {
+            "_FillValue": "9.96921e+36"
+          },
+          "finite_count_before_product_qa": 230400,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        }
+      },
+      "time": {
+        "first_timestamp": "2001-01-01T00:00:00.000000000",
+        "last_timestamp": "2024-12-01T00:00:00.000000000",
+        "calendar": "proleptic_gregorian",
+        "count": 288,
+        "unique_months": 288,
+        "matches_catalog_period_in_order": true
+      },
+      "coordinates": {
+        "lat": {
+          "count": 20,
+          "first": 12.0,
+          "last": 16.75,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        },
+        "lon": {
+          "count": 40,
+          "first": -5.0,
+          "last": 4.75,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        }
+      }
+    },
+    {
+      "variable_id": "precipitation",
+      "region_id": "sahel_comparison",
+      "product_id": "GPM_3IMERGM",
+      "version": "07",
+      "source_variable": "precipitation",
+      "cube_file": "data/nasa/measurements/GPM_3IMERGM_Sahel_2001_2024.nc",
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "bbox": [
+        -5,
+        12,
+        5,
+        17
+      ],
+      "issues": [],
+      "qa_applied_by_audit": false,
+      "sha256": "e515e68076c1639263ba3fe81a390d946c866595d7faee622f26128a579a974f",
+      "bytes": 3636402,
+      "dimensions": {
+        "time": 288,
+        "lat": 50,
+        "lon": 100
+      },
+      "attributes": {
+        "title": "GPM_3IMERGM sahel monthly cube 2001-2024",
+        "product": "GPM_3IMERGM",
+        "region": "sahel",
+        "bbox_west_south_east_north": "-5,12,5,17",
+        "period": "2001-01..2024-12 monthly",
+        "source": "NASA Earthdata opendap.earthdata.nasa.gov (DAP4 subsets)",
+        "generated_by": "verify+assemble pipeline, 2026-11-14"
+      },
+      "variables": {
+        "precipitation": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "mm/hr",
+          "attributes": {
+            "units": "mm/hr",
+            "long_name": "monthly mean precipitation rate"
+          },
+          "encoding": {
+            "_FillValue": "9.96921e+36"
+          },
+          "finite_count_before_product_qa": 1440000,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        },
+        "precipitationQualityIndex": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "1",
+          "attributes": {
+            "units": "1",
+            "long_name": "quality index (0-100, higher is better)"
+          },
+          "encoding": {},
+          "finite_count_before_product_qa": 1440000,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        },
+        "randomError": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "mm/hr",
+          "attributes": {
+            "units": "mm/hr",
+            "long_name": "random error of monthly mean rate"
+          },
+          "encoding": {
+            "_FillValue": "9.96921e+36"
+          },
+          "finite_count_before_product_qa": 1440000,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        }
+      },
+      "time": {
+        "first_timestamp": "2001-01-01T00:00:00.000000000",
+        "last_timestamp": "2024-12-01T00:00:00.000000000",
+        "calendar": "proleptic_gregorian",
+        "count": 288,
+        "unique_months": 288,
+        "matches_catalog_period_in_order": true
+      },
+      "coordinates": {
+        "lat": {
+          "count": 50,
+          "first": 12.0,
+          "last": 16.9,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        },
+        "lon": {
+          "count": 100,
+          "first": -5.0,
+          "last": 4.9,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        }
+      }
+    },
+    {
+      "variable_id": "vegetation_greenness",
+      "region_id": "sahel_comparison",
+      "product_id": "MOD13C2",
+      "version": "061",
+      "source_variable": "CMG_0_05_Deg_Monthly_NDVI",
+      "cube_file": "data/nasa/measurements/MOD13C2_Sahel_2001_2024.nc",
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "bbox": [
+        -5,
+        12,
+        5,
+        17
+      ],
+      "issues": [
+        "catalog_source_variable_absent_from_cube"
+      ],
+      "qa_applied_by_audit": false,
+      "sha256": "063eeb3002c6f769b2389236626569d60f053a2a08f92500597d837222b1b02a",
+      "bytes": 18841089,
+      "dimensions": {
+        "time": 288,
+        "lat": 100,
+        "lon": 200
+      },
+      "attributes": {
+        "title": "MOD13C2 sahel monthly cube 2001-2024",
+        "product": "MOD13C2",
+        "region": "sahel",
+        "bbox_west_south_east_north": "-5,12,5,17",
+        "period": "2001-01..2024-12 monthly",
+        "source": "NASA Earthdata opendap.earthdata.nasa.gov (DAP4 subsets)",
+        "generated_by": "verify+assemble pipeline, 2026-11-14"
+      },
+      "variables": {
+        "NDVI": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "1",
+          "attributes": {
+            "units": "1",
+            "scale_factor_note": "real NDVI = raw * 0.0001; fill -> NaN",
+            "long_name": "CMG 0.05-deg monthly NDVI"
+          },
+          "encoding": {
+            "_FillValue": "9.96921e+36"
+          },
+          "finite_count_before_product_qa": 5760000,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        },
+        "VI_Quality": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "1",
+          "attributes": {
+            "units": "1",
+            "long_name": "MODLAND QA bit flags"
+          },
+          "encoding": {},
+          "finite_count_before_product_qa": 5760000,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        },
+        "pixel_reliability": {
+          "dimensions": [
+            "time",
+            "lat",
+            "lon"
+          ],
+          "units": "1",
+          "attributes": {
+            "units": "1",
+            "long_name": "pixel reliability rank (0 good..)"
+          },
+          "encoding": {},
+          "finite_count_before_product_qa": 5760000,
+          "missing_count_before_product_qa": 0,
+          "source_fill_minus_9999_count": 0
+        }
+      },
+      "time": {
+        "first_timestamp": "2001-01-01T00:00:00.000000000",
+        "last_timestamp": "2024-12-01T00:00:00.000000000",
+        "calendar": "proleptic_gregorian",
+        "count": 288,
+        "unique_months": 288,
+        "matches_catalog_period_in_order": true
+      },
+      "coordinates": {
+        "lat": {
+          "count": 100,
+          "first": 12.05,
+          "last": 17.0,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        },
+        "lon": {
+          "count": 200,
+          "first": -5.0,
+          "last": 4.95,
+          "strictly_increasing": true,
+          "centres_within_catalog_bbox": true,
+          "units": null
+        }
+      }
+    }
+  ]
+}

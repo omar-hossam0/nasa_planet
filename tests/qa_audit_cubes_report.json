@@ -1,0 +1,506 @@
+{
+  "generated_at": "2026-11-15T01:01:42.845298+00:00",
+  "expected_month_span": [
+    "2001-01",
+    "2024-12"
+  ],
+  "expected_total_cubes": 12,
+  "files_found": 12,
+  "files_checked": 12,
+  "missing_files": [],
+  "status": "pass",
+  "results": [
+    {
+      "file": "data\\nasa\\measurements\\GLDAS_NOAH025_M_Morocco_2001_2024.nc",
+      "product": "GLDAS_NOAH025_M",
+      "region": "Morocco",
+      "variable": "SoilMoi0_10cm_inst",
+      "status": "pass",
+      "errors": [],
+      "warnings": [
+        "Native grid dimension order is lat/lon; this is acceptable when the downstream code explicitly handles it, but the regional analysis must not assume lon/lat without checking."
+      ],
+      "checks": {
+        "time_coord": "time",
+        "lat_coord": "lat",
+        "lon_coord": "lon",
+        "month_count": 288,
+        "unique_month_count": 288,
+        "first_month": "2001-01",
+        "last_month": "2024-12",
+        "lat_extent": [
+          30.0,
+          34.75
+        ],
+        "lon_extent": [
+          -10.0,
+          -5.25
+        ],
+        "native_spatial_axis_order": "lat/lon",
+        "variables": {
+          "SoilMoi0_10cm_inst": {
+            "valid_fraction": 0.7175,
+            "min_value": 5.8709716796875,
+            "max_value": 42.66454315185547
+          }
+        }
+      }
+    },
+    {
+      "file": "data\\nasa\\measurements\\GLDAS_NOAH025_M_Nile_2001_2024.nc",
+      "product": "GLDAS_NOAH025_M",
+      "region": "Nile",
+      "variable": "SoilMoi0_10cm_inst",
+      "status": "pass",
+      "errors": [],
+      "warnings": [
+        "Native grid dimension order is lat/lon; this is acceptable when the downstream code explicitly handles it, but the regional analysis must not assume lon/lat without checking."
+      ],
+      "checks": {
+        "time_coord": "time",
+        "lat_coord": "lat",
+        "lon_coord": "lon",
+        "month_count": 288,
+        "unique_month_count": 288,
+        "first_month": "2001-01",
+        "last_month": "2024-12",
+        "lat_extent": [
+          24.125,
+          31.875
+        ],
+        "lon_extent": [
+          29.125,
+          32.875
+        ],
+        "native_spatial_axis_order": "lat/lon",
+        "variables": {
+          "SoilMoi0_10cm_inst": {
+            "valid_fraction": 0.896484375,
+            "min_value": 1.9999998807907104,
+            "max_value": 32.41978073120117
+          }
+        }
+      }
+    },
+    {
+      "file": "data\\nasa\\measurements\\GLDAS_NOAH025_M_Sahel_2001_2024.nc",
+      "product": "GLDAS_NOAH025_M",
+      "region": "Sahel",
+      "variable": "SoilMoi0_10cm_inst",
+      "status": "pass",
+      "errors": [],
+      "warnings": [
+        "Native grid dimension order is lat/lon; this is acceptable when the downstream code explicitly handles it, but the regional analysis must not assume lon/lat without checking."
+      ],
+      "checks": {
+        "time_coord": "time",
+        "lat_coord": "lat",
+        "lon_coord": "lon",
+        "month_count": 288,
+        "unique_month_count": 288,
+        "first_month": "2001-01",
+        "last_month": "2024-12",
+        "lat_extent": [
+          12.0,
+          16.75
+        ],
+        "lon_extent": [
+          -5.0,
+          4.75
+        ],
+        "native_spatial_axis_order": "lat/lon",
+        "variables": {
+          "SoilMoi0_10cm_inst": {
+            "valid_fraction": 1.0,
+            "min_value": 1.9999998807907104,
+            "max_value": 41.38508224487305
+          }
+        }
+      }
+    },
+    {
+      "file": "data\\nasa\\measurements\\GPM_3IMERGM_Morocco_2001_2024.nc",
+      "product": "GPM_3IMERGM",
+      "region": "Morocco",
+      "variable": "precipitation",
+      "status": "pass",
+      "errors": [],
+      "warnings": [
+        "Native grid dimension order is lat/lon; this is acceptable when the downstream code explicitly handles it, but the regional analysis must not assume lon/lat without checking."
+      ],
+      "checks": {
+        "time_coord": "time",
+        "lat_coord": "lat",
+        "lon_coord": "lon",
+        "month_count": 288,
+        "unique_month_count": 288,
+        "first_month": "2001-01",
+        "last_month": "2024-12",
+        "lat_extent": [
+          30.0,
+          34.9
+        ],
+        "lon_extent": [
+          -10.0,
+          -5.1
+        ],
+        "native_spatial_axis_order": "lat/lon",
+        "variables": {
+          "precipitation": {
+            "valid_fraction": 1.0,
+            "min_value": 0.0,
+            "max_value": 0.5560000538825989
+          },
+          "precipitationQualityIndex": {
+            "valid_fraction": 1.0,
+            "min_value": 1.0,
+            "max_value": 36.0
+          },
+          "randomError": {
+            "valid_fraction": 1.0,
+            "min_value": 0.0020000000949949026,
+            "max_value": 0.09100000560283661
+          }
+        }
+      }
+    },
+    {
+      "file": "data\\nasa\\measurements\\GPM_3IMERGM_Nile_2001_2024.nc",
+      "product": "GPM_3IMERGM",
+      "region": "Nile",
+      "variable": "precipitation",
+      "status": "pass",
+      "errors": [],
+      "warnings": [
+        "Native grid dimension order is lat/lon; this is acceptable when the downstream code explicitly handles it, but the regional analysis must not assume lon/lat without checking."
+      ],
+      "checks": {
+        "time_coord": "time",
+        "lat_coord": "lat",
+        "lon_coord": "lon",
+        "month_count": 288,
+        "unique_month_count": 288,
+        "first_month": "2001-01",
+        "last_month": "2024-12",
+        "lat_extent": [
+          24.0,
+          31.9
+        ],
+        "lon_extent": [
+          29.0,
+          32.9
+        ],
+        "native_spatial_axis_order": "lat/lon",
+        "variables": {
+          "precipitation": {
+            "valid_fraction": 1.0,
+            "min_value": 0.0,
+            "max_value": 0.42000001668930054
+          },
+          "precipitationQualityIndex": {
+            "valid_fraction": 1.0,
+            "min_value": 1.0,
+            "max_value": 20.0
+          },
+          "randomError": {
+            "valid_fraction": 1.0,
+            "min_value": 0.0020000000949949026,
+            "max_value": 0.07700000703334808
+          }
+        }
+      }
+    },
+    {
+      "file": "data\\nasa\\measurements\\GPM_3IMERGM_Sahel_2001_2024.nc",
+      "product": "GPM_3IMERGM",
+      "region": "Sahel",
+      "variable": "precipitation",
+      "status": "pass",
+      "errors": [],
+      "warnings": [
+        "Native grid dimension order is lat/lon; this is acceptable when the downstream code explicitly handles it, but the regional analysis must not assume lon/lat without checking."
+      ],
+      "checks": {
+        "time_coord": "time",
+        "lat_coord": "lat",
+        "lon_coord": "lon",
+        "month_count": 288,
+        "unique_month_count": 288,
+        "first_month": "2001-01",
+        "last_month": "2024-12",
+        "lat_extent": [
+          12.0,
+          16.9
+        ],
+        "lon_extent": [
+          -5.0,
+          4.9
+        ],
+        "native_spatial_axis_order": "lat/lon",
+        "variables": {
+          "precipitation": {
+            "valid_fraction": 1.0,
+            "min_value": 0.0,
+            "max_value": 0.6570000052452087
+          },
+          "precipitationQualityIndex": {
+            "valid_fraction": 1.0,
+            "min_value": 0.0,
+            "max_value": 23.0
+          },
+          "randomError": {
+            "valid_fraction": 1.0,
+            "min_value": 0.0020000000949949026,
+            "max_value": 0.07700000703334808
+          }
+        }
+      }
+    },
+    {
+      "file": "data\\nasa\\measurements\\M2TMNXSLV_Morocco_2001_2024.nc",
+      "product": "M2TMNXSLV",
+      "region": "Morocco",
+      "variable": "T2M",
+      "status": "pass",
+      "errors": [],
+      "warnings": [
+        "Native grid dimension order is lat/lon; this is acceptable when the downstream code explicitly handles it, but the regional analysis must not assume lon/lat without checking."
+      ],
+      "checks": {
+        "time_coord": "time",
+        "lat_coord": "lat",
+        "lon_coord": "lon",
+        "month_count": 288,
+        "unique_month_count": 288,
+        "first_month": "2001-01",
+        "last_month": "2024-12",
+        "lat_extent": [
+          30.0,
+          34.5
+        ],
+        "lon_extent": [
+          -10.0,
+          -5.625
+        ],
+        "native_spatial_axis_order": "lat/lon",
+        "variables": {
+          "T2M": {
+            "valid_fraction": 1.0,
+            "min_value": 272.630126953125,
+            "max_value": 310.5342102050781
+          }
+        }
+      }
+    },
+    {
+      "file": "data\\nasa\\measurements\\M2TMNXSLV_Nile_2001_2024.nc",
+      "product": "M2TMNXSLV",
+      "region": "Nile",
+      "variable": "T2M",
+      "status": "pass",
+      "errors": [],
+      "warnings": [
+        "Native grid dimension order is lat/lon; this is acceptable when the downstream code explicitly handles it, but the regional analysis must not assume lon/lat without checking."
+      ],
+      "checks": {
+        "time_coord": "time",
+        "lat_coord": "lat",
+        "lon_coord": "lon",
+        "month_count": 288,
+        "unique_month_count": 288,
+        "first_month": "2001-01",
+        "last_month": "2024-12",
+        "lat_extent": [
+          24.0,
+          32.0
+        ],
+        "lon_extent": [
+          29.375,
+          32.5
+        ],
+        "native_spatial_axis_order": "lat/lon",
+        "variables": {
+          "T2M": {
+            "valid_fraction": 1.0,
+            "min_value": 280.88787841796875,
+            "max_value": 309.0633544921875
+          }
+        }
+      }
+    },
+    {
+      "file": "data\\nasa\\measurements\\M2TMNXSLV_Sahel_2001_2024.nc",
+      "product": "M2TMNXSLV",
+      "region": "Sahel",
+      "variable": "T2M",
+      "status": "pass",
+      "errors": [],
+      "warnings": [
+        "Native grid dimension order is lat/lon; this is acceptable when the downstream code explicitly handles it, but the regional analysis must not assume lon/lat without checking."
+      ],
+      "checks": {
+        "time_coord": "time",
+        "lat_coord": "lat",
+        "lon_coord": "lon",
+        "month_count": 288,
+        "unique_month_count": 288,
+        "first_month": "2001-01",
+        "last_month": "2024-12",
+        "lat_extent": [
+          12.0,
+          16.5
+        ],
+        "lon_extent": [
+          -5.0,
+          4.375
+        ],
+        "native_spatial_axis_order": "lat/lon",
+        "variables": {
+          "T2M": {
+            "valid_fraction": 1.0,
+            "min_value": 289.7999572753906,
+            "max_value": 311.13885498046875
+          }
+        }
+      }
+    },
+    {
+      "file": "data\\nasa\\measurements\\MOD13C2_Morocco_2001_2024.nc",
+      "product": "MOD13C2",
+      "region": "Morocco",
+      "variable": "NDVI",
+      "status": "pass",
+      "errors": [],
+      "warnings": [
+        "Native grid dimension order is lat/lon; this is acceptable when the downstream code explicitly handles it, but the regional analysis must not assume lon/lat without checking."
+      ],
+      "checks": {
+        "time_coord": "time",
+        "lat_coord": "lat",
+        "lon_coord": "lon",
+        "month_count": 288,
+        "unique_month_count": 288,
+        "first_month": "2001-01",
+        "last_month": "2024-12",
+        "lat_extent": [
+          30.05,
+          35.0
+        ],
+        "lon_extent": [
+          -10.0,
+          -5.05
+        ],
+        "native_spatial_axis_order": "lat/lon",
+        "variables": {
+          "NDVI": {
+            "valid_fraction": 0.7280715277777777,
+            "min_value": -0.1939999908208847,
+            "max_value": 0.882099986076355
+          },
+          "VI_Quality": {
+            "valid_fraction": 1.0,
+            "min_value": 2072.0,
+            "max_value": 65535.0
+          },
+          "pixel_reliability": {
+            "valid_fraction": 1.0,
+            "min_value": -1.0,
+            "max_value": 4.0
+          }
+        }
+      }
+    },
+    {
+      "file": "data\\nasa\\measurements\\MOD13C2_Nile_2001_2024.nc",
+      "product": "MOD13C2",
+      "region": "Nile",
+      "variable": "NDVI",
+      "status": "pass",
+      "errors": [],
+      "warnings": [
+        "Native grid dimension order is lat/lon; this is acceptable when the downstream code explicitly handles it, but the regional analysis must not assume lon/lat without checking."
+      ],
+      "checks": {
+        "time_coord": "time",
+        "lat_coord": "lat",
+        "lon_coord": "lon",
+        "month_count": 288,
+        "unique_month_count": 288,
+        "first_month": "2001-01",
+        "last_month": "2024-12",
+        "lat_extent": [
+          24.05,
+          32.0
+        ],
+        "lon_extent": [
+          29.0,
+          32.95
+        ],
+        "native_spatial_axis_order": "lat/lon",
+        "variables": {
+          "NDVI": {
+            "valid_fraction": 0.9060335286458333,
+            "min_value": -0.19999998807907104,
+            "max_value": 0.8496999740600586
+          },
+          "VI_Quality": {
+            "valid_fraction": 1.0,
+            "min_value": 2072.0,
+            "max_value": 65535.0
+          },
+          "pixel_reliability": {
+            "valid_fraction": 1.0,
+            "min_value": -1.0,
+            "max_value": 4.0
+          }
+        }
+      }
+    },
+    {
+      "file": "data\\nasa\\measurements\\MOD13C2_Sahel_2001_2024.nc",
+      "product": "MOD13C2",
+      "region": "Sahel",
+      "variable": "NDVI",
+      "status": "pass",
+      "errors": [],
+      "warnings": [
+        "Native grid dimension order is lat/lon; this is acceptable when the downstream code explicitly handles it, but the regional analysis must not assume lon/lat without checking."
+      ],
+      "checks": {
+        "time_coord": "time",
+        "lat_coord": "lat",
+        "lon_coord": "lon",
+        "month_count": 288,
+        "unique_month_count": 288,
+        "first_month": "2001-01",
+        "last_month": "2024-12",
+        "lat_extent": [
+          12.05,
+          17.0
+        ],
+        "lon_extent": [
+          -5.0,
+          4.95
+        ],
+        "native_spatial_axis_order": "lat/lon",
+        "variables": {
+          "NDVI": {
+            "valid_fraction": 1.0,
+            "min_value": -0.09879999607801437,
+            "max_value": 0.8431999683380127
+          },
+          "VI_Quality": {
+            "valid_fraction": 1.0,
+            "min_value": 2073.0,
+            "max_value": 65535.0
+          },
+          "pixel_reliability": {
+            "valid_fraction": 1.0,
+            "min_value": -1.0,
+            "max_value": 4.0
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "method_revision": "m2-1.0.0",
+  "frozen_at": "2026-11-14T19:45:00+02:00",
+  "owner": "Member 2 - statistics and scientific validity",
+  "status": "frozen",
+  "scope": "12 cubes: 4 variables x 3 windows x 288 months (2001-01..2024-12)",
+  "inference": {
+    "basis": "seasonal",
+    "season_period": 12,
+    "alpha": 0.05,
+    "two_sided": true,
+    "annual_basis_available": true,
+    "why_seasonal": "A monthly series with a strong annual cycle would make the original Mann-Kendall test read the seasonal swing as a trend. The seasonal test (Hirsch & Slack 1984) sums S and Var(S) within each calendar month, so the annual cycle cannot leak into the test statistic."
+  },
+  "aggregation": {
+    "policy_id": "coslat_area_weighted_mean_v1",
+    "weighting": "cos(latitude) area weights on each product's native grid",
+    "slope_source": "the area-weighted regional series, never the mean of per-cell slopes",
+    "why": "Cell slopes have different variances; averaging them would not estimate the regional slope and would break comparability across windows with different cell counts."
+  },
+  "seasonal_adjustment": {
+    "method": "subtract the per-season mean computed over the analysed series",
+    "baseline": "per-season mean of the analysed period (reported with every result)",
+    "why": "Sen slopes are estimated on anomalies so the annual cycle cannot bias the slope; the baseline is always disclosed so the anomaly definition is reproducible."
+  },
+  "minimum_series": {
+    "min_months": 60,
+    "min_valid_months": 48,
+    "min_valid_fraction": 0.8,
+    "min_years_for_annual": 20,
+    "insufficient_data_behavior": "state=insufficient_data with null slope, p-value and interval; never zero, never a guess"
+  },
+  "dependence": {
+    "apply_hamed_rao": true,
+    "max_lag": 24,
+    "significance_rule": "only autocorrelations with |rho| > 1.96/sqrt(n) are used",
+    "applies_to": ["region series", "per-cell map"],
+    "why": "Serial dependence inflates the variance of S; without correction the test is anti-conservative. The same correction is used for maps and cards so they cannot disagree."
+  },
+  "bootstrap": {
+    "method": "block residual bootstrap",
+    "block_length_months": 12,
+    "replicates": 2000,
+    "seed": 20261114,
+    "confidence": 0.95,
+    "interval": "percentile",
+    "estimand": "Theil-Sen slope in units per year",
+    "why_blocks": "Independent resampling would destroy the annual cycle and serial dependence; 12-month circular blocks preserve both.",
+    "not_used": "The intercept of the Sen fit is NOT a confidence interval and is never reported as one."
+  },
+  "multiplicity": {
+    "procedure": "benjamini_hochberg",
+    "q": 0.1,
+    "family": "all eligible cells within one variable x window analysis",
+    "why": "Testing thousands of cells at alpha=0.05 would label roughly 5% of no-trend cells as significant. FDR is controlled at q=0.10 within a stated family, and the family is reported."
+  },
+  "period_sensitivity": {
+    "min_months": 60,
+    "windows": [
+      {"start": "2005-01", "end": "2024-12"},
+      {"start": "2010-01", "end": "2024-12"},
+      {"start": "2015-01", "end": "2024-12"},
+      {"start": "2001-01", "end": "2010-12"},
+      {"start": "2001-01", "end": "2015-12"},
+      {"start": "2001-01", "end": "2020-12"},
+      {"start": "2001-01", "end": "2012-12"},
+      {"start": "2013-01", "end": "2024-12"},
+      {"start": "2006-01", "end": "2015-12"},
+      {"start": "2011-01", "end": "2020-12"},
+      {"start": "2016-01", "end": "2024-12"}
+    ],
+    "why_fixed": "The window set is frozen in advance so a reversal cannot be manufactured by choosing a window after seeing the answer.",
+    "sign_agreement_note": "The sign-agreement fraction is descriptive and depends on the fixed window set; it is not a calibrated probability."
+  },
+  "qa": {
+    "mode": "default",
+    "policy_file": "qa_policy.json",
+    "note": "MODIS uses MODLAND QA bits 0-1 with reliability 0-1 in default mode; IMERG quality index is reported, never used to exclude cells."
+  },
+  "units": {
+    "temperature": "K in the cube; display C = K - 273.15; slopes are numerically identical in K/yr and C/yr",
+    "soil_moisture": "kg m-2; not a percentage and not relative humidity",
+    "precipitation": "mm/hr monthly mean rate; mm/month = value x hours in month (state the conversion on the card)",
+    "ndvi": "unitless [-0.2, 1.0]; not yield, not biomass"
+  },
+  "interpretation_rules": {
+    "p_value_wording": "A p-value is the probability of data at least as extreme as observed if the no-trend null were true. It is never the probability that a trend exists, nor the probability that a trend is due to chance.",
+    "always_show_effect_size": true,
+    "no_causal_language": true,
+    "inconclusive_state": "Show the effect size and the interval, label the result inconclusive, never hide it.",
+    "no_significance_before_gate": "Significance labels may only be produced by this library with this method_revision after the test suite and the external comparison pass."
+  }
+}

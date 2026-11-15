@@ -3,6 +3,7 @@ __pycache__/
 .venv/
 venv/
 node_modules/
+*.tsbuildinfo
 .env
 .env.*
 !.env.example
@@ -13,3 +14,7 @@ _netrc
 *.partial.nc
 *.tmp
 data/derived/
+
+backend/var/
+__pycache__/
+.pytest_cache/

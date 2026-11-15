@@ -1,0 +1,17 @@
+{
+  "source_revision": "486fe73551b3239bab172d26fe94979402c81e4e",
+  "annual_time_basis": {
+    "synthetic_truth_per_year": 1.0,
+    "actual_slope": 12.0,
+    "actual_state": "succeeded",
+    "passed": false
+  },
+  "minimum_months_parity": {
+    "configured_min_months": 60,
+    "supplied_months": 48,
+    "regional_state": "insufficient_data",
+    "spatial_tests_admitted": 1,
+    "passed": false
+  },
+  "scope": "Synthetic read-only regression probes against the other branch; not real climate results and not a full method validation."
+}

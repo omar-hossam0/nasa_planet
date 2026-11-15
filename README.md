@@ -13,11 +13,17 @@ Team reference for **What the Average Hides**: investigate Earth-system trends, 
 
 ## Delivered versus planned
 
-**Delivered:** temperature (MERRA-2) and soil moisture (GLDAS) for the Egypt bounding rectangle, monthly January 2001 through December 2024. Includes 576 monthly regional subsets, two combined NetCDF cubes, browser JSON, source lineage, official documentation and a 315-chunk RAG starter.
+**Delivered in this working branch:** temperature (MERRA-2), precipitation
+(GPM IMERG), soil moisture (GLDAS) and vegetation greenness (MODIS) across
+Nile, Morocco and Sahel study windows, monthly 2001–2024. The
+[coverage report](data/nasa/coverage_report.json) and
+[regional validation](data/nasa/validation_regional_report.json) document the
+measurements and QA. The backend, statistics pipeline, citations, React
+product and [release checks](docs/acceptance_report.json) are present. The
+production experience still needs deployment and review on real devices.
 
-**Target:** four variables (temperature, precipitation, soil moisture, vegetation greenness) across Nile, Morocco and Sahel study windows. Precipitation, vegetation/QA and additional geographic coverage are not included yet. The full application and validated statistics pipeline remain implementation work.
-
-Data-ingestion readiness is not scientific-method or application readiness. Follow the separate readiness gates in the architecture.
+These application commits are local on `feature/react-product-ui`; the remote
+`main` branch remains the data-only history chosen earlier.
 
 ## Repository map
 
@@ -63,3 +69,38 @@ Reading the bundled measurements does not require Earthdata credentials. Re-down
 Source URLs, product versions and hashes are preserved in the data bundle and architecture. Temperature is reanalysis and soil moisture is model output; neither is a direct station observation. The rectangle includes adjacent areas and sea and is not a national boundary mask. Different products retain different native grids. Missing values are not zeros.
 
 Official source documents retain their original attribution and applicable terms; this repository does not assign a new blanket license to third-party content. No statistical or causal conclusions are implied by the downloaded data.
+
+## Run the service locally
+
+```bash
+cd backend
+python -m pip install -r requirements.txt -r ../data/nasa/requirements.txt
+python run.py            # product: http://127.0.0.1:8000/  · API docs: /docs
+python -m pytest tests/test_api.py -q
+```
+
+API contract for the frontend and AI roles: `backend/CONTRACTS.md`.
+Role-by-role deliverables and handoffs: `docs/roles/`.
+
+## Demo and offline fallback
+
+The public entry page is `/` (redirects to the React product at `/product/`).
+Its Launch explorer action opens the new React analysis workspace. The former
+static UI remains at `/app/` for compatibility. See [frontend/README.md](frontend/README.md)
+for build and offline instructions. Landing illustrations are conceptual;
+analysis numbers come from the verified backend or the precomputed snapshot.
+
+```bash
+cd backend && python run.py        # product: http://127.0.0.1:8000/
+python warm_cache.py               # pre-warm the demo presets
+python tools/acceptance_check.py   # 15 release checks -> docs/acceptance_report.json
+python tools/export_offline.py     # rebuild dist/offline (12 analyses, ~2.7 MB)
+```
+
+One URL reproduces the stage state:
+`/app/?lang=ar&region=nile_corridor&variable=air_temperature&autorun=1`
+
+If the network fails, run `dist/product/START_OFFLINE.cmd` (Node.js required)
+for the React product and precomputed results. The previous static offline
+snapshot remains at `dist/offline/index.html`. The 90-second script is in
+`docs/DEMO_SCRIPT.md`; per-role handoffs are in `docs/roles/`.

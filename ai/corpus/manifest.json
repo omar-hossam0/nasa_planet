@@ -1,0 +1,51 @@
+{
+  "corpus_version": "c82ccc8092307adcbdc95912e2da4f3c48fdf64961b4dd10a75d39063d836c26",
+  "built_at": "2026-11-14T18:01:56+00:00",
+  "chunks": 522,
+  "chunk_chars": 1400,
+  "by_product": {
+    "M2TMNXSLV": 228,
+    "GLDAS_NOAH025_M": 58,
+    "None": 32,
+    "GPM_3IMERGM": 141,
+    "MOD13C2": 63
+  },
+  "by_content_role": {
+    "official_metadata_not_measurements": 16,
+    "official_documentation_not_measurements": 474,
+    "official_software_method_documentation_not_NASA": 29,
+    "team_authored_policy": 3
+  },
+  "by_authority": {
+    "official_nasa": 519,
+    "project_authored": 3
+  },
+  "injection_flagged": 0,
+  "sources": {
+    "IMERG_V07_ATBD.pdf": {
+      "chunks": 135,
+      "sha256": "c2746d55c4637895e94b54a8a086958ab5fd96b5d5a7a087eb144f4cf645b168"
+    },
+    "MOD13_User_Guide_V61.pdf": {
+      "chunks": 60,
+      "sha256": "7440d485fef25e85c19752c553989d7af33698f2f606cc0b50cf298012f85a0a"
+    },
+    "GPM_3IMERGM_collection.json": {
+      "chunks": 6,
+      "sha256": "fab2b7471349a613b6e44b86162302877a380964286325b491a49f26f8220f69"
+    },
+    "MOD13C2_collection.json": {
+      "chunks": 3,
+      "sha256": "1499be9af6cf7276293576ec2669f3326cb8e7ade40cb9bc0d5e671d635ecf64"
+    },
+    "team_policy": {
+      "chunks": 3,
+      "sha256": null
+    }
+  },
+  "rules": {
+    "official_nasa": "may be cited for product definitions, units, limitations",
+    "project_authored": "may be cited only as project policy, never as NASA evidence",
+    "numeric_claims": "must come from the analysis result, never from retrieved text"
+  }
+}

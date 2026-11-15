@@ -1,0 +1,23 @@
+{
+  "revision": "descriptive-ts-1.0",
+  "status": "phase_3_candidate_pending_checkpoint_review",
+  "estimator": "exact_median_of_all_finite_observation_pair_slopes",
+  "monthly_time": "elapsed_calendar_month_ordinals_divided_by_12",
+  "annual_time": "actual_calendar_year_labels_minus_first_year",
+  "missing": "omit_pairs_touching_missing_values_without_compressing_time",
+  "minimum_valid_observations": 3,
+  "minimum_interpretation": "shared computational guard inherited from the reviewed core; not an inference or representative-record threshold",
+  "monthly_estimand": "prepared_raw_monthly_values",
+  "regional_anomaly_sensitivity": "existing_stage_2_full_reference_calendar_month_anomalies",
+  "annual_estimand": "existing_complete_12_month_cell_or_regional_summary",
+  "regional_slope": "estimate_from_prepared_regional_series_never_average_cell_slopes",
+  "imputation": "none",
+  "inference_status": "not_computed",
+  "inherited_review": {
+    "revision": "486fe73551b3239bab172d26fe94979402c81e4e",
+    "file": "data/nasa/analysis/trend.py",
+    "reused_method": "finite-pair upper-triangle median slope",
+    "repairs": ["mandatory explicit year axis", "same scalar and grid kernel and minimum guard"],
+    "excluded": "legacy inference, bootstrap, significance and implicit-time wrappers"
+  }
+}

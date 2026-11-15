@@ -1,0 +1,983 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Trend Detective API",
+    "version": "m3-1.0.0"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Root",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/catalog": {
+      "get": {
+        "summary": "Catalog",
+        "operationId": "catalog_v1_catalog_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/methods": {
+      "get": {
+        "summary": "Methods",
+        "operationId": "methods_v1_methods_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MethodResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/analyses": {
+      "post": {
+        "summary": "Submit Analysis",
+        "operationId": "submit_analysis_v1_analyses_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnalysisRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/analyses/{job_id}": {
+      "get": {
+        "summary": "Get Analysis",
+        "operationId": "get_analysis_v1_analyses__job_id__get",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/analyses/{job_id}/result": {
+      "get": {
+        "summary": "Get Result",
+        "operationId": "get_result_v1_analyses__job_id__result_get",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/receipts/{receipt_id}": {
+      "get": {
+        "summary": "Get Receipt",
+        "operationId": "get_receipt_v1_receipts__receipt_id__get",
+        "parameters": [
+          {
+            "name": "receipt_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Receipt Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReceiptResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/analyses/{job_id}/series": {
+      "get": {
+        "summary": "Get Series",
+        "description": "Monthly area-weighted series for a finished analysis (chart data).\n\nRecomputed from the verified cube with the same aggregation policy; no\nbootstrap, so this is fast and safe to call on every card render.",
+        "operationId": "get_series_v1_analyses__job_id__series_get",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/compare": {
+      "post": {
+        "summary": "Compare Regions",
+        "description": "Same variable, same period, same method across the three windows.\n\nSlopes and p-values only by default; intervals are optional because each\none costs a bootstrap run.",
+        "operationId": "compare_regions_v1_compare_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Body"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/spatial/{variable_id}/{region_id}": {
+      "get": {
+        "summary": "Get Spatial",
+        "description": "Per-cell slope map on the product's native grid (Member 5 layer).\n\nValues are the frozen method outputs; the client only colours them. Cells\nthat failed the coverage rule are null, never zero.",
+        "operationId": "get_spatial_v1_spatial__variable_id___region_id__get",
+        "parameters": [
+          {
+            "name": "variable_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Variable Id"
+            }
+          },
+          {
+            "name": "region_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Region Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/analyses/{job_id}/explanation": {
+      "get": {
+        "summary": "Get Explanation",
+        "description": "Grounded explanation for a finished analysis (Member 4 layer).\n\nDeterministic by default. If a provider is configured it is used, and its\noutput is admitted only when the validator passes; otherwise the\ndeterministic answer is returned.",
+        "operationId": "get_explanation_v1_analyses__job_id__explanation_get",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "ar",
+              "title": "Language"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AnalysisRequest": {
+        "properties": {
+          "region_id": {
+            "type": "string",
+            "title": "Region Id",
+            "description": "study window id from the catalog"
+          },
+          "variable_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 4,
+            "minItems": 1,
+            "title": "Variable Ids"
+          },
+          "start_month": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}$",
+            "title": "Start Month"
+          },
+          "end_month": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}$",
+            "title": "End Month"
+          },
+          "aoi": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aoi",
+            "description": "optional GeoJSON Polygon in WGS84 lon/lat; must lie inside the region bbox"
+          },
+          "aggregation_policy_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aggregation Policy Id"
+          },
+          "method_revision": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Method Revision"
+          },
+          "data_revision": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data Revision"
+          }
+        },
+        "type": "object",
+        "required": [
+          "region_id",
+          "variable_ids",
+          "start_month",
+          "end_month"
+        ],
+        "title": "AnalysisRequest"
+      },
+      "CatalogEntry": {
+        "properties": {
+          "variable_id": {
+            "type": "string",
+            "title": "Variable Id"
+          },
+          "region_id": {
+            "type": "string",
+            "title": "Region Id"
+          },
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "units": {
+            "type": "string",
+            "title": "Units"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Label"
+          },
+          "bbox": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Bbox"
+          },
+          "native_grid": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Native Grid"
+          },
+          "measurement_ready": {
+            "type": "boolean",
+            "title": "Measurement Ready"
+          },
+          "method_ready": {
+            "type": "boolean",
+            "title": "Method Ready"
+          },
+          "app_available": {
+            "type": "boolean",
+            "title": "App Available"
+          },
+          "method_revision": {
+            "type": "string",
+            "title": "Method Revision"
+          },
+          "source_kind": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Kind"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          }
+        },
+        "type": "object",
+        "required": [
+          "variable_id",
+          "region_id",
+          "product_id",
+          "version",
+          "units",
+          "label",
+          "bbox",
+          "native_grid",
+          "measurement_ready",
+          "method_ready",
+          "app_available",
+          "method_revision",
+          "source_kind",
+          "limitations"
+        ],
+        "title": "CatalogEntry"
+      },
+      "CatalogResponse": {
+        "properties": {
+          "data_revision": {
+            "type": "string",
+            "title": "Data Revision"
+          },
+          "method_revision": {
+            "type": "string",
+            "title": "Method Revision"
+          },
+          "entries": {
+            "items": {
+              "$ref": "#/components/schemas/CatalogEntry"
+            },
+            "type": "array",
+            "title": "Entries"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data_revision",
+          "method_revision",
+          "entries"
+        ],
+        "title": "CatalogResponse"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "ok",
+            "title": "Status"
+          },
+          "software_revision": {
+            "type": "string",
+            "title": "Software Revision"
+          },
+          "data_revision": {
+            "type": "string",
+            "title": "Data Revision"
+          },
+          "method_revision": {
+            "type": "string",
+            "title": "Method Revision"
+          },
+          "database": {
+            "type": "string",
+            "title": "Database"
+          },
+          "queue_depth": {
+            "type": "integer",
+            "title": "Queue Depth"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "software_revision",
+          "data_revision",
+          "method_revision",
+          "database",
+          "queue_depth"
+        ],
+        "title": "HealthResponse"
+      },
+      "JobError": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "detail"
+        ],
+        "title": "JobError"
+      },
+      "JobResponse": {
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "title": "Job Id"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "queued",
+              "running",
+              "succeeded",
+              "failed"
+            ],
+            "title": "State"
+          },
+          "progress": {
+            "type": "number",
+            "title": "Progress"
+          },
+          "request_hash": {
+            "type": "string",
+            "title": "Request Hash"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started At"
+          },
+          "finished_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Finished At"
+          },
+          "result_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Result Id"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/JobError"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "cached": {
+            "type": "boolean",
+            "title": "Cached",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "job_id",
+          "state",
+          "progress",
+          "request_hash",
+          "created_at"
+        ],
+        "title": "JobResponse"
+      },
+      "MethodResponse": {
+        "properties": {
+          "method_revision": {
+            "type": "string",
+            "title": "Method Revision"
+          },
+          "alpha": {
+            "type": "number",
+            "title": "Alpha"
+          },
+          "basis": {
+            "type": "string",
+            "title": "Basis"
+          },
+          "aggregation": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Aggregation"
+          },
+          "dependence": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Dependence"
+          },
+          "bootstrap": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Bootstrap"
+          },
+          "multiplicity": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Multiplicity"
+          },
+          "minimum_series": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Minimum Series"
+          },
+          "period_sensitivity": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Period Sensitivity"
+          }
+        },
+        "type": "object",
+        "required": [
+          "method_revision",
+          "alpha",
+          "basis",
+          "aggregation",
+          "dependence",
+          "bootstrap",
+          "multiplicity",
+          "minimum_series",
+          "period_sensitivity"
+        ],
+        "title": "MethodResponse"
+      },
+      "ReceiptResponse": {
+        "properties": {
+          "receipt_id": {
+            "type": "string",
+            "title": "Receipt Id"
+          },
+          "payload": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Payload"
+          },
+          "payload_sha256": {
+            "type": "string",
+            "title": "Payload Sha256"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "receipt_id",
+          "payload",
+          "payload_sha256",
+          "created_at"
+        ],
+        "title": "ReceiptResponse"
+      },
+      "ResultResponse": {
+        "properties": {
+          "result_id": {
+            "type": "string",
+            "title": "Result Id"
+          },
+          "job_id": {
+            "type": "string",
+            "title": "Job Id"
+          },
+          "request_hash": {
+            "type": "string",
+            "title": "Request Hash"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "succeeded",
+              "insufficient_data",
+              "unavailable",
+              "failed"
+            ],
+            "title": "State"
+          },
+          "data_revision": {
+            "type": "string",
+            "title": "Data Revision"
+          },
+          "method_revision": {
+            "type": "string",
+            "title": "Method Revision"
+          },
+          "receipt_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Receipt Id"
+          },
+          "payload": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Payload"
+          },
+          "payload_sha256": {
+            "type": "string",
+            "title": "Payload Sha256"
+          }
+        },
+        "type": "object",
+        "required": [
+          "result_id",
+          "job_id",
+          "request_hash",
+          "state",
+          "data_revision",
+          "method_revision",
+          "receipt_id",
+          "payload",
+          "payload_sha256"
+        ],
+        "title": "ResultResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

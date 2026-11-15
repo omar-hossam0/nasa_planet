@@ -1,0 +1,332 @@
+{
+  "generated": "2026-11-14",
+  "period": {
+    "start": "2001-01",
+    "end": "2024-12",
+    "months": 288
+  },
+  "policy": "qa_policy.json",
+  "cubes": {
+    "M2TMNXSLV/nile_corridor": {
+      "path": "measurements/M2TMNXSLV_Nile_2001_2024.nc",
+      "variable": "T2M",
+      "units": "K",
+      "months": 288,
+      "grid": {
+        "lat": 17,
+        "lon": 6
+      },
+      "valid_fraction": 1.0,
+      "per_month_valid_fraction": {
+        "min": 1.0,
+        "median": 1.0,
+        "max": 1.0
+      },
+      "cells_all_missing": 0,
+      "cells_partial": 0,
+      "cells_complete": 102,
+      "value_min": 280.88787841796875,
+      "value_max": 309.0633544921875,
+      "sha256": "5db8a5afe85560aad3e3f847c5ddfb2c75309dad7f89fbd3002a4c0c07c1e8cb",
+      "bytes": 88409
+    },
+    "M2TMNXSLV/morocco_comparison": {
+      "path": "measurements/M2TMNXSLV_Morocco_2001_2024.nc",
+      "variable": "T2M",
+      "units": "K",
+      "months": 288,
+      "grid": {
+        "lat": 10,
+        "lon": 8
+      },
+      "valid_fraction": 1.0,
+      "per_month_valid_fraction": {
+        "min": 1.0,
+        "median": 1.0,
+        "max": 1.0
+      },
+      "cells_all_missing": 0,
+      "cells_partial": 0,
+      "cells_complete": 80,
+      "value_min": 272.630126953125,
+      "value_max": 310.5342102050781,
+      "sha256": "c8801417edb435606a6c9621fa127f817dbe86c160a266a5d864c085a8199e40",
+      "bytes": 73724
+    },
+    "M2TMNXSLV/sahel_comparison": {
+      "path": "measurements/M2TMNXSLV_Sahel_2001_2024.nc",
+      "variable": "T2M",
+      "units": "K",
+      "months": 288,
+      "grid": {
+        "lat": 10,
+        "lon": 16
+      },
+      "valid_fraction": 1.0,
+      "per_month_valid_fraction": {
+        "min": 1.0,
+        "median": 1.0,
+        "max": 1.0
+      },
+      "cells_all_missing": 0,
+      "cells_partial": 0,
+      "cells_complete": 160,
+      "value_min": 289.7999572753906,
+      "value_max": 311.13885498046875,
+      "sha256": "14cdb693d945c73f570b296b85cfae3177258e848e078170fa46e608a16cb987",
+      "bytes": 119882
+    },
+    "GLDAS_NOAH025_M/nile_corridor": {
+      "path": "measurements/GLDAS_NOAH025_M_Nile_2001_2024.nc",
+      "variable": "SoilMoi0_10cm_inst",
+      "units": "kg m-2",
+      "months": 288,
+      "grid": {
+        "lat": 32,
+        "lon": 16
+      },
+      "valid_fraction": 0.896484,
+      "per_month_valid_fraction": {
+        "min": 0.896484,
+        "median": 0.896484,
+        "max": 0.896484
+      },
+      "cells_all_missing": 53,
+      "cells_partial": 0,
+      "cells_complete": 459,
+      "value_min": 1.9999998807907104,
+      "value_max": 32.41978073120117,
+      "sha256": "55a5194144348ff668cbdcc1485493422797d2206aa0535846d8a8f2feb121cc",
+      "bytes": 421647
+    },
+    "GLDAS_NOAH025_M/morocco_comparison": {
+      "path": "measurements/GLDAS_NOAH025_M_Morocco_2001_2024.nc",
+      "variable": "SoilMoi0_10cm_inst",
+      "units": "kg m-2",
+      "months": 288,
+      "grid": {
+        "lat": 20,
+        "lon": 20
+      },
+      "valid_fraction": 0.7175,
+      "per_month_valid_fraction": {
+        "min": 0.7175,
+        "median": 0.7175,
+        "max": 0.7175
+      },
+      "cells_all_missing": 113,
+      "cells_partial": 0,
+      "cells_complete": 287,
+      "value_min": 5.8709716796875,
+      "value_max": 42.66454315185547,
+      "sha256": "a58c21ca540b3d008c45f8342548aab18689e4417169edd3ebcb43246c3fcb74",
+      "bytes": 478210
+    },
+    "GLDAS_NOAH025_M/sahel_comparison": {
+      "path": "measurements/GLDAS_NOAH025_M_Sahel_2001_2024.nc",
+      "variable": "SoilMoi0_10cm_inst",
+      "units": "kg m-2",
+      "months": 288,
+      "grid": {
+        "lat": 20,
+        "lon": 40
+      },
+      "valid_fraction": 1.0,
+      "per_month_valid_fraction": {
+        "min": 1.0,
+        "median": 1.0,
+        "max": 1.0
+      },
+      "cells_all_missing": 0,
+      "cells_partial": 0,
+      "cells_complete": 800,
+      "value_min": 1.9999998807907104,
+      "value_max": 41.38508224487305,
+      "sha256": "fd9dc0ccb3667a5987dfd7853db26cb4e8e7cdf7dddc686fb72bcf816750b273",
+      "bytes": 723375
+    },
+    "GPM_3IMERGM/nile_corridor": {
+      "path": "measurements/GPM_3IMERGM_Nile_2001_2024.nc",
+      "variable": "precipitation",
+      "units": "mm/hr",
+      "months": 288,
+      "grid": {
+        "lat": 80,
+        "lon": 40
+      },
+      "valid_fraction": 1.0,
+      "per_month_valid_fraction": {
+        "min": 1.0,
+        "median": 1.0,
+        "max": 1.0
+      },
+      "cells_all_missing": 0,
+      "cells_partial": 0,
+      "cells_complete": 3200,
+      "value_min": 0.0,
+      "value_max": 0.42000001668930054,
+      "sha256": "967131aec4bdb0fa98ffc6ec9c9340cde164f5704be8f861c7ee02c130d6e219",
+      "bytes": 1127955,
+      "quality_index": {
+        "min": 1.0,
+        "median": 5.0,
+        "p95": 10.0,
+        "max": 20.0,
+        "documented_scale": "0-100, higher is better",
+        "masked_by_policy": false
+      }
+    },
+    "GPM_3IMERGM/morocco_comparison": {
+      "path": "measurements/GPM_3IMERGM_Morocco_2001_2024.nc",
+      "variable": "precipitation",
+      "units": "mm/hr",
+      "months": 288,
+      "grid": {
+        "lat": 50,
+        "lon": 50
+      },
+      "valid_fraction": 1.0,
+      "per_month_valid_fraction": {
+        "min": 1.0,
+        "median": 1.0,
+        "max": 1.0
+      },
+      "cells_all_missing": 0,
+      "cells_partial": 0,
+      "cells_complete": 2500,
+      "value_min": 0.0,
+      "value_max": 0.5560000538825989,
+      "sha256": "95f3e53659dd4593e585031c3eb8d1b1ee8dfd1c30060cfa7d28a3a26969465b",
+      "bytes": 2287927,
+      "quality_index": {
+        "min": 1.0,
+        "median": 7.0,
+        "p95": 16.0,
+        "max": 36.0,
+        "documented_scale": "0-100, higher is better",
+        "masked_by_policy": false
+      }
+    },
+    "GPM_3IMERGM/sahel_comparison": {
+      "path": "measurements/GPM_3IMERGM_Sahel_2001_2024.nc",
+      "variable": "precipitation",
+      "units": "mm/hr",
+      "months": 288,
+      "grid": {
+        "lat": 50,
+        "lon": 100
+      },
+      "valid_fraction": 1.0,
+      "per_month_valid_fraction": {
+        "min": 1.0,
+        "median": 1.0,
+        "max": 1.0
+      },
+      "cells_all_missing": 0,
+      "cells_partial": 0,
+      "cells_complete": 5000,
+      "value_min": 0.0,
+      "value_max": 0.6570000052452087,
+      "sha256": "e515e68076c1639263ba3fe81a390d946c866595d7faee622f26128a579a974f",
+      "bytes": 3636402,
+      "quality_index": {
+        "min": 0.0,
+        "median": 5.0,
+        "p95": 9.0,
+        "max": 23.0,
+        "documented_scale": "0-100, higher is better",
+        "masked_by_policy": false
+      }
+    },
+    "MOD13C2/nile_corridor": {
+      "path": "measurements/MOD13C2_Nile_2001_2024.nc",
+      "variable": "NDVI",
+      "units": "1",
+      "months": 288,
+      "grid": {
+        "lat": 160,
+        "lon": 80
+      },
+      "valid_fraction": 0.906034,
+      "per_month_valid_fraction": {
+        "min": 0.905156,
+        "median": 0.906016,
+        "max": 0.906719
+      },
+      "cells_all_missing": 1176,
+      "cells_partial": 49,
+      "cells_complete": 11575,
+      "value_min": -0.19999998807907104,
+      "value_max": 0.8496999740600586,
+      "sha256": "78427f6651ddc8ac129d89d6bb9903f59a020a47a10827f6f184ccafb290188c",
+      "bytes": 10880211,
+      "passes_qa_default": 0.905739,
+      "passes_qa_strict": 0.886056,
+      "modland_qa_bit_counts": {
+        "0": 3319427,
+        "1": 19551,
+        "3": 347422
+      }
+    },
+    "MOD13C2/morocco_comparison": {
+      "path": "measurements/MOD13C2_Morocco_2001_2024.nc",
+      "variable": "NDVI",
+      "units": "1",
+      "months": 288,
+      "grid": {
+        "lat": 100,
+        "lon": 100
+      },
+      "valid_fraction": 0.728072,
+      "per_month_valid_fraction": {
+        "min": 0.7273,
+        "median": 0.7281,
+        "max": 0.7284
+      },
+      "cells_all_missing": 2712,
+      "cells_partial": 22,
+      "cells_complete": 7266,
+      "value_min": -0.1939999908208847,
+      "value_max": 0.882099986076355,
+      "sha256": "aad8265db99b64eaeafa12d5d09f9ca2ba8e813b9ccc070613987fa97cb5c7e8",
+      "bytes": 7564882,
+      "passes_qa_default": 0.724806,
+      "passes_qa_strict": 0.704674,
+      "modland_qa_bit_counts": {
+        "0": 2077925,
+        "1": 18905,
+        "3": 783170
+      }
+    },
+    "MOD13C2/sahel_comparison": {
+      "path": "measurements/MOD13C2_Sahel_2001_2024.nc",
+      "variable": "NDVI",
+      "units": "1",
+      "months": 288,
+      "grid": {
+        "lat": 100,
+        "lon": 200
+      },
+      "valid_fraction": 1.0,
+      "per_month_valid_fraction": {
+        "min": 1.0,
+        "median": 1.0,
+        "max": 1.0
+      },
+      "cells_all_missing": 0,
+      "cells_partial": 0,
+      "cells_complete": 20000,
+      "value_min": -0.09879999607801437,
+      "value_max": 0.8431999683380127,
+      "sha256": "063eeb3002c6f769b2389236626569d60f053a2a08f92500597d837222b1b02a",
+      "bytes": 18841089,
+      "passes_qa_default": 0.999045,
+      "passes_qa_strict": 0.946205,
+      "modland_qa_bit_counts": {
+        "0": 5587836,
+        "1": 171930,
+        "3": 234
+      }
+    }
+  }
+}

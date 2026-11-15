@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-15T14:13:16.209487+00:00",
+  "generated_utc": "2026-11-15T14:35:32.607272+00:00",
   "builder": "packages/rag/semantic_corpus.py",
   "builder_revision": "role04_phase1_v1",
   "corpus_path": "data/nasa/rag/corpus_semantic.jsonl",

@@ -127,8 +127,8 @@ def test_real_data_e2e_all_variables_all_regions(service, variable, region):
         QUESTION_BY_VARIABLE[variable], region_id=region, period=PERIOD
     )
     assert answer["mode"] == "local_retrieval"
-    assert answer["status"] == "documented_only"
-    assert answer["reason_code"] == "measurement_ready_app_not_available"
+    assert answer["status"] == "recommended"
+    assert answer["reason_code"] is None
     assert answer["variable_ids"] == [variable]
 
     lookup = service.retriever.readiness.lookup(variable, region, PERIOD)

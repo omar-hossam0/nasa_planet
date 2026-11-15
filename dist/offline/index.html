@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Trend Detective — كاشف الاتجاهات</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo" aria-hidden="true">◎</span>
+    <div>
+      <h1 data-i18n="app.title">كاشف الاتجاهات</h1>
+      <p class="sub" data-i18n="app.subtitle">ماذا يخفي المتوسط؟ — NASA Space Apps</p>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span id="revBadge" class="badge" title="method revision">m2-1.0.0</span>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button id="langAr" class="lang active" aria-pressed="true">عربي</button>
+      <button id="langEn" class="lang" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main class="layout">
+  <!-- ---------------------------------------------------------------- controls -->
+  <aside class="panel controls" aria-label="Analysis controls">
+    <section class="block">
+      <h2 data-i18n="ctl.region">النطاق</h2>
+      <div id="regionList" class="chips" role="radiogroup" aria-label="Region"></div>
+    </section>
+
+    <section class="block">
+      <h2 data-i18n="ctl.variable">المتغير</h2>
+      <div id="variableList" class="vars" role="radiogroup" aria-label="Variable"></div>
+      <p id="varHint" class="hint" aria-live="polite"></p>
+    </section>
+
+    <section class="block">
+      <h2 data-i18n="ctl.period">الفترة</h2>
+      <div class="period">
+        <label><span data-i18n="ctl.from">من</span>
+          <select id="startMonth" aria-label="start month"></select></label>
+        <label><span data-i18n="ctl.to">إلى</span>
+          <select id="endMonth" aria-label="end month"></select></label>
+      </div>
+      <p class="hint" data-i18n="ctl.periodHint">القاعدة المجمّدة: 60 شهرًا على الأقل و80% قيم صالحة.</p>
+    </section>
+
+    <section class="block">
+      <h2 data-i18n="ctl.aoi">منطقة مخصصة (اختياري)</h2>
+      <div class="row">
+        <button id="drawBtn" class="btn ghost" aria-pressed="false" data-i18n="ctl.draw">ارسم مستطيلاً على الخريطة</button>
+        <button id="clearAoi" class="btn ghost" data-i18n="ctl.clear">مسح</button>
+      </div>
+      <div class="bbox" role="group" aria-label="AOI bounding box">
+        <label>W<input id="aoiW" type="number" step="0.25" aria-label="west"></label>
+        <label>S<input id="aoiS" type="number" step="0.25" aria-label="south"></label>
+        <label>E<input id="aoiE" type="number" step="0.25" aria-label="east"></label>
+        <label>N<input id="aoiN" type="number" step="0.25" aria-label="north"></label>
+      </div>
+      <p class="hint" data-i18n="ctl.aoiHint">أو اكتب الحدود بالأرقام — نفس الطلب ونفس المفتاح.</p>
+    </section>
+
+    <button id="runBtn" class="btn primary" data-i18n="ctl.run">حلّل</button>
+    <p id="statusLine" class="status" aria-live="polite"></p>
+  </aside>
+
+  <!-- ------------------------------------------------------------------- map -->
+  <section class="panel mapwrap" aria-label="Map">
+    <div class="maphead">
+      <h2 id="mapTitle">—</h2>
+      <div class="mapmeta">
+        <span id="gridInfo" class="badge subtle"></span>
+        <span id="fdrInfo" class="badge subtle"></span>
+      </div>
+    </div>
+    <div id="banner" class="banner hidden" role="status" aria-live="polite"></div>
+    <div class="canvas-wrap">
+      <canvas id="map" width="900" height="620" tabindex="0"
+              aria-label="Slope map of the selected variable"></canvas>
+      <div id="overlay" class="overlay hidden" role="status"></div>
+    </div>
+    <div class="legend" aria-label="Legend">
+      <div class="legend-bar">
+        <span id="legMin" class="leg-label">—</span>
+        <div id="legGradient" class="gradient"></div>
+        <span id="legMax" class="leg-label">—</span>
+      </div>
+      <div class="legend-items">
+        <span><i class="sw fdr"></i><span data-i18n="legend.fdr">خلية دالة (FDR)</span></span>
+        <span><i class="sw nodata"></i><span data-i18n="legend.nodata">لا بيانات / غير مؤهلة</span></span>
+        <span id="legUnits" class="muted"></span>
+      </div>
+      <p class="attrib" data-i18n="legend.attrib">المصادر: NASA MERRA-2 · GLDAS · GPM IMERG · MODIS — الشبكة الأصلية بدون استيفاء.</p>
+    </div>
+    <div class="chart-block">
+      <div class="chart-head">
+        <h3 data-i18n="chart.title">السلسلة الشهرية</h3>
+        <span id="chartMeta" class="badge subtle" dir="ltr"></span>
+      </div>
+      <canvas id="chart" width="820" height="170" aria-label="Monthly series with trend line"></canvas>
+      <p class="hint" data-i18n="chart.hint">الخط الرقيق هو السلسلة الشهرية، والخط السميك هو خط الاتجاه المحسوب على الخادم.</p>
+    </div>
+  </section>
+
+  <!-- ---------------------------------------------------------------- result -->
+  <aside class="panel result" aria-label="Evidence card">
+    <h2 data-i18n="res.title">بطاقة الدليل</h2>
+    <div id="cardEmpty" class="empty" data-i18n="res.empty">اختر نطاقًا ومتغيرًا ثم اضغط «حلّل».</div>
+    <div id="card" class="card hidden">
+      <p id="cardHeadline" class="headline"></p>
+      <dl class="stats">
+        <div><dt data-i18n="res.slope">الميل / سنة</dt><dd id="stSlope">—</dd></div>
+        <div><dt data-i18n="res.ci">مجال 95%</dt><dd id="stCi">—</dd></div>
+        <div><dt data-i18n="res.p">قيمة p</dt><dd id="stP">—</dd></div>
+        <div><dt data-i18n="res.cover">تغطية</dt><dd id="stCover">—</dd></div>
+      </dl>
+      <p id="stVerdict" class="verdict"></p>
+      <details class="limits"><summary data-i18n="res.limits">القيود</summary>
+        <ul id="limitList"></ul></details>
+      <details class="limits" open><summary data-i18n="res.spin">Spin It — حساسية الفترة</summary>
+        <div id="spinList" class="spin"></div>
+        <p class="hint" data-i18n="res.spinHint">نسبة توافق الإشارة وصفية، وليست احتمالًا معايرًا.</p>
+      </details>
+      <details class="limits"><summary data-i18n="res.cites">المصادر</summary>
+        <ul id="citeList"></ul></details>
+      <div class="rc">
+        <h3 data-i18n="rc.title">Reality Check</h3>
+        <p class="hint" data-i18n="rc.prompt">توقّعك للاتجاه في هذه النافذة؟</p>
+        <div class="rc-btns" role="group" aria-label="Expectation">
+          <button class="btn ghost" data-expect="up" data-i18n="rc.up">ارتفاع</button>
+          <button class="btn ghost" data-expect="down" data-i18n="rc.down">انخفاض</button>
+          <button class="btn ghost" data-expect="flat" data-i18n="rc.flat">لا تغيّر واضح</button>
+        </div>
+        <p id="rcVerdict" class="verdict hidden"></p>
+      </div>
+      <div class="cmp">
+        <h3 data-i18n="cmp.title">مقارنة النوافذ</h3>
+        <button id="cmpBtn" class="btn ghost" data-i18n="cmp.run">قارن نفس المتغير في الثلاث نوافذ</button>
+        <div id="cmpTable"></div>
+      </div>
+      <div class="export">
+        <h3 data-i18n="exp.title">تصدير</h3>
+        <div class="row">
+          <button id="expResult" class="btn ghost" data-i18n="exp.result">النتيجة JSON</button>
+          <button id="expReceipt" class="btn ghost" data-i18n="exp.receipt">الإيصال JSON</button>
+          <button id="expCsv" class="btn ghost" data-i18n="exp.csv">السلسلة CSV</button>
+        </div>
+      </div>
+      <p id="receiptLine" class="muted small"></p>
+    </div>
+  </aside>
+</main>
+
+<footer class="foot">
+  <span data-i18n="foot.note">أرقام هذه الواجهة تُنسخ من نتيجة التحليل المتحققة، ولا تُحسب في المتصفح.</span>
+</footer>
+
+<script src="offline_data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

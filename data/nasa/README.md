@@ -7,7 +7,7 @@ Original Egypt pack scope: two variables, monthly January 2001–December 2024, 
 - measurements/GLDAS_NOAH025_M_Egypt_2001_2024.nc — actual 288-month upper-soil-moisture cube, SoilMoi0_10cm_inst, kg m-2. Not a percentage.
 - measurements/<product>/<month>.nc — all 576 individual regional subsets with source-granule attribution.
 - frontend/T2M.json and frontend/SoilMoi0_10cm_inst.json — identical values in a browser-friendly format with explicit dimension order and nulls for missing data. Do not treat nulls as zeros.
-- runtime_catalog.json — actual validated availability for your application and AI.
+- runtime_catalog.json — legacy source-ingestion registry for the original two-variable Egypt pack. Expanded input mapping is in `../../docs/architecture/scope.v2.json`; neither registry certifies a statistical method or application.
 - validation_report.json — tests on every month, units, dimensions, missing data, native coordinates and file hashes. This verifies ingestion, not scientific trend conclusions.
 - source_lineage.json and manifests/ — source inventory and local hashes for every month.
 - rag/corpus.jsonl — official product and method-documentation chunks with citations. NASA source docs in rag/sources/ and docs/; software-method docs in methods/.
@@ -43,9 +43,35 @@ Units and grids:
 
 All cubes use dims (time, lat, lon) with ascending lat/lon. Missing fractions per cube are in validation_regional_report.json; ocean and land-only model masks are expected, not errors.
 
+## Role 01 artifacts (data ownership)
+
+- `preprocess.py` — the only supported entry point for analysis code: `load_cube(product, window)`, `apply_qa(ds, product, mode)`, `regional_series(ds, product)`. `python preprocess.py --all` regenerates every artifact below.
+- `qa_policy.json` — QA rules per product with the observed distributions that justify them. Key decisions: IMERG quality index is reported, never used as an exclusion filter (observed medians 5-7 on a 0-100 scale); MODIS uses MODLAND QA bits with default and strict modes.
+- `coverage_report.json` — per cube: months, valid fraction, per-month min/median/max, all-missing and partial cells, value range, SHA-256.
+- `regional_lineage.json` — 3,456 entries (4 products x 3 windows x 288 months) with SHA-256, byte size and source granule id per monthly file.
+- `study_windows.geojson` — the three windows with bbox, native grid per product, period and limitations.
+- `docs/roles/MEMBER_1.md` — the role's deliverable table, decisions and handoffs.
+
+## Role 02 artifacts (statistics)
+
+- `analysis/trend.py` — the single implementation for evidence cards **and** spatial maps: seasonal Mann-Kendall with Hamed-Rao correction, Theil-Sen slope on anomalies, block-residual bootstrap interval, BH-FDR for maps, period sensitivity.
+- `analysis/method_config.json` — frozen `method_revision m2-1.0.0`: alpha, coverage rules, block length, seed, replicate count, FDR family, Spin It window set.
+- `analysis/test_trend.py` — 9 synthetic checks (known slope, null, seasonality, AR(1), missingness, insufficient data, FDR, map, sensitivity). Run it before trusting any number.
+- `analysis/reference_comparison.py` / `.json` — agreement with scipy, pyMannKendall and NASA POWER.
+- `analysis/evidence_cards.json` — 12 cards: slope, interval, p, coverage, diagnostics, Spin It.
+- `analysis/spatial_trends/*.npz` + `spatial_summary.json` — per-cell slope, p, FDR decision, valid months, dependence factor on the native grid.
+- `analysis/INTERPRETATION.md` — the reviewed wording for Members 3, 4, 5 and 6.
+
+```bash
+cd data/nasa/analysis
+python test_trend.py            # 9/9 must pass
+python trend.py --all-cards     # regenerate cards
+python trend.py --spatial       # regenerate maps
+```
+
 ## Scope limits
-This is the complete numeric source dataset for the stated two-variable, one-domain, 24-year scope, not all NASA data. There are no rainfall, NO2, global, neighborhood-level or administrative-boundary datasets here. Land-only model output has masked cells; use the validation report. Spatial coverage is limited to grid-cell centers inside the rectangle. Source model/reanalysis errors remain; ingestion checks do not prove physical truth.
+The current numeric scope is four variables across three rectangles for 2001-2024, plus the two parent Egypt cubes. Rainfall and NDVI are included. NO2, global coverage, neighborhood-level and administrative-boundary datasets are outside this pack. Land-only model output has masked cells; use the regional validation report and the Morocco correction note. Spatial coverage is limited to native grid-cell centres inside the rectangles. Source model/reanalysis errors remain; ingestion checks do not prove physical truth.
 
 The RAG corpus is a bounded set of official product and software documents, not an exhaustive scientific literature review. Product versions and source URLs are recorded; verify passage applicability because some guides cover multiple versions. The starter retrieval tests are historical and do not certify the expanded corpus. Statistical outputs (anomalies, slopes, uncertainty, significance, FDR, period-sensitivity matrices, evidence receipts) are computed later from these actual cubes. They are not downloaded facts, and no statistical or causal conclusions have been fabricated here. RAG answer quality remains to be evaluated with your chosen model.
 
-Do not read the original rag/README.md as the final data-availability state; this README and runtime_catalog.json supersede it.
+Do not read the original rag/README.md or legacy runtime catalog as the final expanded availability state. Use this README, the actual cubes and `docs/architecture/scope.v2.json`. Its `source_variable` preserves the provider field, while `cube_variable` identifies the processed field (notably `NDVI`); `cube_units` records the units checked against the file. The source measurements are unchanged by this metadata clarification. The current statistics plan is `packages/science/PLAN.md` at the repository root.

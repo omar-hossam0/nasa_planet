@@ -1,0 +1,114 @@
+{
+  "script": "verify_product_qa_masks_and_fill_rules.py",
+  "status": "pass",
+  "results": [
+    {
+      "file": "GLDAS_NOAH025_M_Morocco_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "region": "Morocco"
+      }
+    },
+    {
+      "file": "GLDAS_NOAH025_M_Nile_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "region": "Nile"
+      }
+    },
+    {
+      "file": "GLDAS_NOAH025_M_Sahel_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "region": "Sahel"
+      }
+    },
+    {
+      "file": "GPM_3IMERGM_Morocco_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "zero_precip_count": 50183,
+        "region": "Morocco"
+      }
+    },
+    {
+      "file": "GPM_3IMERGM_Nile_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "zero_precip_count": 567039,
+        "region": "Nile"
+      }
+    },
+    {
+      "file": "GPM_3IMERGM_Sahel_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "zero_precip_count": 454474,
+        "region": "Sahel"
+      }
+    },
+    {
+      "file": "M2TMNXSLV_Morocco_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "region": "Morocco"
+      }
+    },
+    {
+      "file": "M2TMNXSLV_Nile_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "region": "Nile"
+      }
+    },
+    {
+      "file": "M2TMNXSLV_Sahel_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "region": "Sahel"
+      }
+    },
+    {
+      "file": "MOD13C2_Morocco_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "ndvi_valid_fraction": 0.7280715277777777,
+        "pixel_reliability_good_fraction": 0.7248090277777778,
+        "vi_quality_good_fraction": 0.7280659722222222,
+        "region": "Morocco"
+      }
+    },
+    {
+      "file": "MOD13C2_Nile_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "ndvi_valid_fraction": 0.9060335286458333,
+        "pixel_reliability_good_fraction": 0.9059025065104167,
+        "vi_quality_good_fraction": 0.9057557508680556,
+        "region": "Nile"
+      }
+    },
+    {
+      "file": "MOD13C2_Sahel_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "ndvi_valid_fraction": 1.0,
+        "pixel_reliability_good_fraction": 0.9990732638888888,
+        "vi_quality_good_fraction": 0.999959375,
+        "region": "Sahel"
+      }
+    }
+  ]
+}

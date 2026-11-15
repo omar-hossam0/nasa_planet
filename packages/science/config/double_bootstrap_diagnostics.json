@@ -1,0 +1,29 @@
+{
+  "revision": "double-bootstrap-diagnostics-1",
+  "alpha": 0.05,
+  "confidence": 0.95,
+  "lengths": [20, 24],
+  "truths": [-0.08, 0.0, 0.08],
+  "cache_realizations": 8,
+  "records_per_panel": 1000,
+  "cache_seed": 290017,
+  "fixed_panel_seed": 720113,
+  "fresh_panel_seed": 830209,
+  "inner_replicates": 1999,
+  "outer_replicates": 999,
+  "grids": {
+    "original": [-0.5, 0.95, 0.025],
+    "fine": [-0.5, 0.95, 0.0125],
+    "expanded": [-0.9, 0.99, 0.025]
+  },
+  "models": ["gaussian_ar1", "seasonal_annualized", "student5_ar1", "arma11", "heteroskedastic_ar1", "boundary_ar1"],
+  "phi": 0.7,
+  "boundary_phi": 0.95,
+  "arma_theta": 0.4,
+  "heteroskedastic_innovation_scale": [1.0, 2.0],
+  "acceptance_source": "unchanged config/double_bootstrap_research.json acceptance",
+  "inference_estimand": "linear conditional-mean regression coefficient, not the finite-sample Sen statistic",
+  "scope": "diagnosis; no grid/cache selection based on best result, no NASA fitting, no release",
+  "release": false,
+  "phase5": false
+}

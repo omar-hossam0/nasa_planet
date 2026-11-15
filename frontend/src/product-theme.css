@@ -1,0 +1,114 @@
+/* Shared product surfaces: observatory blue, vegetation green, paper evidence. */
+.reference-actor{position:absolute;width:135px;height:180px;pointer-events:none;z-index:5}
+.reference-actor.gardener{bottom:8px;left:39%}
+.landing section#story{padding-bottom:170px!important}
+.landing .story-visual.window-visual{overflow:visible;margin-top:100px}
+.reference-actor.seated{right:25px;top:-102px;width:75px;height:200px}
+.landing .window-visual .monitor-head{padding-right:145px}
+@media(max-width:760px){.reference-actor.gardener{left:calc(50% - 60px);width:120px;height:160px}.landing section#story{padding-bottom:175px!important}.reference-actor.seated{right:12px}.landing .window-visual .monitor-head{padding-right:130px;font-size:10px}}
+.landing section.story-section{padding-bottom:80px!important;min-height:640px!important}
+@media(max-width:760px){.landing section.story-section{padding-bottom:55px!important;min-height:0!important}}
+.landing .section-actor{position:absolute;left:36%;bottom:12px;width:210px;height:162px;pointer-events:none;z-index:3;contain:layout paint}
+.section-actor svg{display:block;width:100%;height:100%;overflow:visible}
+.section-actor [data-part]{transform-box:view-box}
+@media(max-width:760px){.landing .story-section{padding-bottom:185px!important}.landing .section-actor{left:calc(50% - 95px);bottom:10px;width:190px;height:146px}}
+.landing .receipt-visual .receipt-head,.landing .receipt-visual .receipt-row{width:100%;max-width:none;align-self:stretch;margin-left:0}
+.workspace .workspace-top h1{font:600 32px 'Space Grotesk',sans-serif;letter-spacing:-.035em}
+.workspace .workspace-top{margin-bottom:20px}
+.landing .observatory-map .place-pin{left:68%;top:34%}
+@media(max-width:760px){.workspace .mission-symbol{display:none}.workspace .mission-strip{height:0;margin:0}.workspace .workspace-top h1{font-size:28px}}
+.workspace .workspace-main{padding-top:110px}
+.workspace .evidence-rail{padding:0}
+.workspace .evidence-heading h2{color:#142e43}
+.workspace .map-panel{min-height:0;height:auto}
+.workspace .control-group{margin:0;padding:14px 0}
+.workspace .rail-heading{padding-bottom:8px}
+.workspace .big-number{margin:16px 0}
+.spatial-note{padding:13px;margin:16px 0;border:1px solid #dfad6c;border-radius:9px;background:#fff1df;color:#704617;font-size:12px;line-height:1.5}
+.landing .story-section{min-height:760px;padding:85px max(6vw,24px) 160px;gap:7%;grid-template-columns:35% 58%;background:linear-gradient(180deg,#051b2ae8,#061e35a8),url('/expedition-landscape.png') center bottom/cover;border:0;border-bottom:1px solid #6194aa55}
+.landing .story-text h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,3.4vw,52px);line-height:1.08;letter-spacing:-.045em;text-transform:none}
+.landing .story-text p{font-size:17px;line-height:1.65;color:#c4d5e0}
+.landing .story-text .eyebrow{border:0;background:none;padding:0;color:#b2ee7d;letter-spacing:.06em}
+.landing .story-visual{min-height:410px;border-radius:18px;background:#092637ee;box-shadow:0 22px 75px #0005;border:1px solid #71b6ca88;overflow:hidden}
+.landing .story-visual::before,.landing .story-visual::after{display:none}
+.landing .window .story-text{grid-column:1;grid-row:1}
+.landing .window .story-visual{grid-column:2;grid-row:1}
+.landing .window{background-image:linear-gradient(180deg,#062436c9,#072039c9),url('/expedition-landscape.png')}
+.landing .evidence{background:linear-gradient(110deg,#eff6f5 0%,#e5eeef 44%,#122c48aa 80%),url('/hero-scene.png') center/cover}
+.landing .evidence .story-text h2,.landing .evidence .story-text p{color:#102b40}
+.landing .evidence .eyebrow,.landing .evidence .text-link{color:#285f35}
+.landing .receipt-visual{background:#f7fafb;color:#162c40;padding:28px;min-height:370px;align-self:start}
+.landing .receipt-head{color:#18392b;font:600 23px 'Space Grotesk',sans-serif;background:none;padding:0 0 22px}
+.landing .receipt-row{background:none;border-color:#cbd8df;padding:22px 0;grid-template-columns:24px 120px 1fr;font:500 14px 'Space Grotesk',sans-serif}
+.receipt-detail{font-size:12px;color:#516577;line-height:1.4}
+.landing .receipt-row svg{color:#398445}
+.landing .closing{padding:130px 24px;min-height:480px;background:linear-gradient(#061b3990,#06182bdf),url('/hero-scene.png') center 65%/cover}
+.landing .closing h2{font:600 clamp(30px,4vw,58px)/1.15 'Space Grotesk',sans-serif;max-width:800px;margin:22px auto;letter-spacing:-.035em}
+.landing .closing .launch{border-radius:10px;background:#b5ed7c;color:#153b2b;box-shadow:none;font-family:inherit}
+.science-band{display:none}
+.observatory-title{display:flex;align-items:center;gap:10px;padding:18px 22px;font-weight:600;border-bottom:1px solid #6cb4c944}
+.observatory-title span{margin-left:auto;font-size:11px;color:#b5e990}
+.observatory-map{height:230px;position:relative;margin:12px;border-radius:10px;overflow:hidden}
+.geo-backdrop{position:absolute;inset:0;width:100%;height:100%;display:block}
+.observatory-map small{position:absolute;bottom:8px;left:10px;font-size:9px;background:#092637c9;padding:4px 7px}
+.place-pin{position:absolute;top:25%;left:57%;display:flex;align-items:center;gap:5px;font-size:12px;color:#d2ff9c;text-shadow:0 2px 8px #000}
+.observatory-controls{padding:10px 24px 25px;font-size:12px;color:#b5cdd9}
+.observatory-controls div{margin:8px 0 14px;color:#f2f7fa;font-size:14px}
+.observatory-controls button{display:flex;align-items:center;justify-content:space-between;width:100%;background:#a8df73;border:0;border-radius:8px;padding:13px 16px;color:#123323;font-weight:600}
+.region-visual .visual-foot,.region-visual .concept-note{display:none}
+.landing .monitor-head,.landing .monitor-footer{font-family:'Space Grotesk',sans-serif;font-size:12px}
+.landing .window-visual svg{margin:20px 0;opacity:1}
+.landing .chart-path{stroke:#a8e677}
+.scroll-journey{width:255px;height:350px}
+.workspace{background:linear-gradient(#051b2ae8,#071d32d9),url('/expedition-landscape.png') center bottom/cover fixed}
+.workspace-main{max-width:1800px;margin:auto;padding:25px 28px 60px 95px}
+.workspace-head{margin-bottom:20px}
+.workspace-head h1{font:600 32px 'Space Grotesk',sans-serif;letter-spacing:-.04em}
+.workspace-grid{display:grid;grid-template-columns:minmax(240px,.85fr) minmax(380px,1.8fr) minmax(300px,1.15fr);gap:18px;align-items:start}
+.mission-strip{padding:12px 18px;margin-bottom:18px;border-radius:12px;background:#123749ab}
+.mission-intro strong,.mission-intro span,.mission-steps a{font-family:'Space Grotesk',sans-serif}
+.control-rail,.evidence-rail,.series-panel,.panel-title,.map-panel{border-radius:16px;border:1px solid #4b8198;background:#082839e8;box-shadow:0 14px 40px #00111f33}
+.control-rail{padding:22px 18px}
+.rail-heading span{font:600 21px 'Space Grotesk',sans-serif;letter-spacing:-.03em;color:#f4f9fc}
+.rail-heading p{font-size:13px;color:#c5d6df}
+.control-group{padding:17px 0}
+.control-group label{font-size:13px}
+.variable-options button,.region-options button{border-radius:9px;padding:12px;background:#163d50;border:1px solid #7295a8;font:500 13px 'Space Grotesk',sans-serif}
+.variable-options button.active,.region-options button.active{background:#294d3c;border:1px solid #b6ee70;box-shadow:inset 0 0 0 1px #b6ee7033}
+.date-row select{border-radius:7px;background:#16394e}
+.run-button{border-radius:10px;box-shadow:none;font:600 15px 'Space Grotesk',sans-serif;padding:16px}
+.panel-title{padding:17px 20px;margin-bottom:10px}
+.panel-title h2,.series-heading h2{font:600 21px 'Space Grotesk',sans-serif;letter-spacing:-.03em}
+.panel-title .eyebrow,.series-heading .eyebrow{font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:.05em}
+.map-panel{overflow:hidden;padding:0}
+.geographic-map{height:350px!important;min-height:350px;position:relative;overflow:hidden;background:#0b3447}
+.geographic-map .spatial-plot{position:absolute;max-height:none;max-width:none;min-height:0;margin:0;transform:none}
+.geographic-map .spatial-canvas{width:100%;height:100%;opacity:.84;touch-action:none}
+.map-grid-note{background:#092738df;padding:10px;border-radius:8px;border:1px solid #5a8ca0;right:12px;top:12px}
+.map-attribution{display:block;font:9px 'Space Grotesk',sans-serif;margin-bottom:5px;color:#b9d1df}
+.map-coordinate{display:none}
+.map-corner{background:#092637e3;border-radius:7px;padding:8px;left:12px;bottom:12px}
+.map-legend{border:0;border-radius:8px;font-size:10px;padding:10px;background:#0c293c}
+.series-panel{padding:20px;margin-top:12px}
+.series-chart{max-height:250px}
+.evidence-rail{background:#f0f5f9;color:#13253a;border:0;overflow:hidden}
+.evidence-heading{padding:22px 22px 12px}
+.evidence-heading h2{font:600 25px 'Space Grotesk',sans-serif;letter-spacing:-.03em}
+.evidence-heading p,.evidence-rail .eyebrow,.evidence-rail .result-sub,.evidence-rail .control-hint,.empty-evidence p{color:#53697b}
+.evidence-tabs{padding:0 20px;gap:10px;border-color:#cedae2}
+.evidence-tabs button{color:#29465b;font:600 13px 'Space Grotesk',sans-serif;padding:12px 14px}
+.evidence-tabs button.active{color:#275c2c;background:#dbefce;border-radius:8px 8px 0 0;border-color:#6b9d47}
+.evidence-rail .result-body,.spin-body,.sources-body{padding:22px}
+.evidence-rail .big-number span{color:#27613e;font-size:42px;letter-spacing:-.04em}
+.evidence-rail .big-number small,.evidence-rail .metric-row span{color:#52687a}
+.evidence-rail .metric-row{border-color:#cdd9e2;font-size:12px;gap:14px;padding:14px 0}
+.evidence-rail .metric-row strong{color:#152e43;overflow-wrap:anywhere;font-family:'Space Grotesk',sans-serif}
+.evidence-rail .explanation{background:#e2eee4;border-radius:9px;color:#234832;padding:15px;font-size:12px;line-height:1.6}
+.evidence-rail .receipt-button{background:#d8eacb;color:#24502e;border:1px solid #9bb389;border-radius:8px;font-family:inherit}
+.evidence-rail .state-ok{color:#327440}
+.evidence-rail .window-list button,.evidence-rail .selected-window,.evidence-rail .comparison,.evidence-rail .source-meta,.evidence-rail .citation{background:#e2eaf0;color:#193447;border-color:#c0d0dc}
+.evidence-rail .window-list button.active{background:#d2e8c1;border-color:#6b9d47}
+.evidence-rail .compare-button{color:#23442e;border-color:#81aa6b;background:#deecd5}
+@media(min-width:1500px){.workspace-main{padding-right:35px}.geographic-map{height:390px!important}}
+@media(max-width:1150px){.workspace-grid{grid-template-columns:250px 1fr}.evidence-rail{grid-column:2}.control-rail{grid-row:span 2}.landing .story-section{gap:5%;grid-template-columns:38% 57%}}
+@media(max-width:760px){.landing .story-section{display:flex;flex-direction:column;gap:28px;padding:55px 20px 270px;min-height:0}.landing .window .story-text{order:-1}.landing .story-text,.landing .story-visual{width:100%;max-width:none}.landing .story-text h2{font-size:34px}.landing .story-text p{font-size:15px}.landing .story-visual{min-height:350px}.landing .receipt-visual{padding:20px}.landing .receipt-row{grid-template-columns:22px 90px 1fr;padding:18px 0}.receipt-detail{font-size:11px}.scroll-journey{width:170px;height:235px}.landing .evidence{background:linear-gradient(#eff6f5ee,#d8e5ecc9),url('/hero-scene.png') center/cover}.workspace-main{padding:22px 15px 100px}.workspace-grid{display:flex;flex-direction:column;gap:16px}.workspace-grid>*{width:100%}.control-rail{padding:20px}.region-options{display:grid;grid-template-columns:repeat(3,1fr)}.region-options button{padding:10px 6px;font-size:11px}.region-options button svg{display:none}.variable-options{display:grid;grid-template-columns:1fr 1fr}.mission-intro{display:none}.mission-strip{min-height:0;padding:0;border:0}.geographic-map{height:310px!important;min-height:310px}.workspace-head h1{font-size:27px}.evidence-rail{min-height:350px}.observatory-title{padding:16px;font-size:13px}.observatory-title span{font-size:9px}.landing .closing{padding:90px 22px}.landing .closing h2{font-size:35px}}

@@ -1,0 +1,25 @@
+{
+  "generated": "2026-11-14",
+  "cases": {
+    "single_variable_full_period": {
+      "state": "succeeded",
+      "seconds": 4.52,
+      "result_bytes": 4330
+    },
+    "four_variables_full_period": {
+      "state": "succeeded",
+      "seconds": 15.85,
+      "result_bytes": 14029
+    },
+    "single_variable_aoi": {
+      "state": "succeeded",
+      "seconds": 4.31,
+      "result_bytes": 4414
+    },
+    "cached_repeat": {
+      "status": 200,
+      "cached": true,
+      "seconds": 0.013
+    }
+  }
+}

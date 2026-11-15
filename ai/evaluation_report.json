@@ -1,0 +1,132 @@
+{
+  "generated": "2026-11-14",
+  "schema_version": "m4-1.0.0",
+  "corpus_version": "c82ccc8092307adcbdc95912e2da4f3c48fdf64961b4dd10a75d39063d836c26",
+  "corpus_chunks": 522,
+  "cases": [
+    {
+      "case": "corpus_covers_new_products",
+      "family": "corpus",
+      "passed": true,
+      "detail": "522 chunks; GPM 141, MODIS 63"
+    },
+    {
+      "case": "deterministic_answer_valid",
+      "family": "deterministic",
+      "passed": true,
+      "detail": "errors=[]"
+    },
+    {
+      "case": "air_vs_surface_stated",
+      "family": "ambiguity",
+      "passed": true,
+      "detail": "limitation names land-surface temperature explicitly"
+    },
+    {
+      "case": "soil_moisture_units",
+      "family": "units",
+      "passed": true,
+      "detail": "answer/limitations state kg/m2, not percent"
+    },
+    {
+      "case": "ndvi_not_yield",
+      "family": "ndvi_limits",
+      "passed": true,
+      "detail": "limitation forbids yield/biomass interpretation"
+    },
+    {
+      "case": "insufficient_data_no_numbers",
+      "family": "missing_data",
+      "passed": true,
+      "detail": "state=insufficient_data, numbers=0"
+    },
+    {
+      "case": "reject_probability_claim",
+      "family": "false_causality",
+      "passed": true,
+      "detail": "errors=['BANNED_PHRASING', 'BANNED_PHRASING']"
+    },
+    {
+      "case": "reject_causality",
+      "family": "false_causality",
+      "passed": true,
+      "detail": "errors=['BANNED_PHRASING']"
+    },
+    {
+      "case": "reject_wrong_number",
+      "family": "numbers",
+      "passed": true,
+      "detail": "errors=['NUMERIC_VALUE_MISMATCH', 'UNREFERENCED_NUMBER']"
+    },
+    {
+      "case": "reject_invented_citation",
+      "family": "citations",
+      "passed": true,
+      "detail": "errors=['CITATION_NOT_RETRIEVED']"
+    },
+    {
+      "case": "reject_unavailable_suggestion",
+      "family": "availability",
+      "passed": true,
+      "detail": "errors=['SUGGESTION_UNAVAILABLE']"
+    },
+    {
+      "case": "reject_unavailable_region_suggestion",
+      "family": "availability",
+      "passed": true,
+      "detail": "errors=['SUGGESTION_UNAVAILABLE']"
+    },
+    {
+      "case": "injection_chunk_excluded_from_retrieval",
+      "family": "injection",
+      "passed": true,
+      "detail": "10 hits, injected chunk absent"
+    },
+    {
+      "case": "reject_injection_followed",
+      "family": "injection",
+      "passed": true,
+      "detail": "errors=['CITATION_NOT_RETRIEVED', 'BANNED_PHRASING', 'BANNED_PHRASING', 'BANNED_PHRASING']"
+    },
+    {
+      "case": "llm_good_answer_accepted",
+      "family": "llm_path",
+      "passed": true,
+      "detail": "path=llm"
+    },
+    {
+      "case": "llm_bad_numbers_falls_back",
+      "family": "numbers",
+      "passed": true,
+      "detail": "path=deterministic_fallback"
+    },
+    {
+      "case": "llm_bad_causality_falls_back",
+      "family": "false_causality",
+      "passed": true,
+      "detail": "path=deterministic_fallback"
+    },
+    {
+      "case": "llm_bad_citation_falls_back",
+      "family": "citations",
+      "passed": true,
+      "detail": "path=deterministic_fallback"
+    },
+    {
+      "case": "llm_injection_followed_falls_back",
+      "family": "injection",
+      "passed": true,
+      "detail": "path=deterministic_fallback"
+    }
+  ],
+  "summary": {
+    "total": 19,
+    "passed": 19,
+    "failed": 0
+  },
+  "what_is_not_tested": [
+    "No real LLM provider was called; the LLM path was exercised with deterministic stubs. A provider key would be needed to claim generated-answer quality.",
+    "Arabic retrieval quality is limited to the project-authored alias dictionary; it is not a semantic search evaluation.",
+    "No human rating of answer usefulness was performed."
+  ]
+}

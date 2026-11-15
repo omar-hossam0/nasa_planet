@@ -1,0 +1,285 @@
+{
+  "type": "FeatureCollection",
+  "name": "trend_detective_study_windows",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "nile_corridor",
+      "properties": {
+        "name": "Nile corridor",
+        "bbox_west_south_east_north": [
+          29,
+          24,
+          33,
+          32
+        ],
+        "period": {
+          "start": "2001-01",
+          "end": "2024-12",
+          "months": 288
+        },
+        "variables": [
+          {
+            "product_id": "M2TMNXSLV",
+            "variable": "T2M",
+            "units": "K",
+            "native_grid": {
+              "lat_step": 0.5,
+              "lon_step": 0.625
+            },
+            "cube": "measurements/M2TMNXSLV_Nile_2001_2024.nc"
+          },
+          {
+            "product_id": "GLDAS_NOAH025_M",
+            "variable": "SoilMoi0_10cm_inst",
+            "units": "kg m-2",
+            "native_grid": {
+              "lat_step": 0.25,
+              "lon_step": 0.25
+            },
+            "cube": "measurements/GLDAS_NOAH025_M_Nile_2001_2024.nc"
+          },
+          {
+            "product_id": "GPM_3IMERGM",
+            "variable": "precipitation",
+            "units": "mm/hr",
+            "native_grid": {
+              "lat_step": 0.1,
+              "lon_step": 0.1
+            },
+            "cube": "measurements/GPM_3IMERGM_Nile_2001_2024.nc"
+          },
+          {
+            "product_id": "MOD13C2",
+            "variable": "NDVI",
+            "units": "1",
+            "native_grid": {
+              "lat_step": 0.05,
+              "lon_step": 0.05
+            },
+            "cube": "measurements/MOD13C2_Nile_2001_2024.nc"
+          }
+        ],
+        "grid_alignment": "Each product keeps its native grid; the window is the set of native grid-cell centres inside the bbox.",
+        "boundary_type": "geographic rectangle, not an administrative boundary",
+        "limitations": [
+          "Includes neighbouring land and sea where present.",
+          "Not suitable for neighbourhood-level statements."
+        ]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              29,
+              24
+            ],
+            [
+              33,
+              24
+            ],
+            [
+              33,
+              32
+            ],
+            [
+              29,
+              32
+            ],
+            [
+              29,
+              24
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "morocco_comparison",
+      "properties": {
+        "name": "Morocco",
+        "bbox_west_south_east_north": [
+          -10,
+          30,
+          -5,
+          35
+        ],
+        "period": {
+          "start": "2001-01",
+          "end": "2024-12",
+          "months": 288
+        },
+        "variables": [
+          {
+            "product_id": "M2TMNXSLV",
+            "variable": "T2M",
+            "units": "K",
+            "native_grid": {
+              "lat_step": 0.5,
+              "lon_step": 0.625
+            },
+            "cube": "measurements/M2TMNXSLV_Morocco_2001_2024.nc"
+          },
+          {
+            "product_id": "GLDAS_NOAH025_M",
+            "variable": "SoilMoi0_10cm_inst",
+            "units": "kg m-2",
+            "native_grid": {
+              "lat_step": 0.25,
+              "lon_step": 0.25
+            },
+            "cube": "measurements/GLDAS_NOAH025_M_Morocco_2001_2024.nc"
+          },
+          {
+            "product_id": "GPM_3IMERGM",
+            "variable": "precipitation",
+            "units": "mm/hr",
+            "native_grid": {
+              "lat_step": 0.1,
+              "lon_step": 0.1
+            },
+            "cube": "measurements/GPM_3IMERGM_Morocco_2001_2024.nc"
+          },
+          {
+            "product_id": "MOD13C2",
+            "variable": "NDVI",
+            "units": "1",
+            "native_grid": {
+              "lat_step": 0.05,
+              "lon_step": 0.05
+            },
+            "cube": "measurements/MOD13C2_Morocco_2001_2024.nc"
+          }
+        ],
+        "grid_alignment": "Each product keeps its native grid; the window is the set of native grid-cell centres inside the bbox.",
+        "boundary_type": "geographic rectangle, not an administrative boundary",
+        "limitations": [
+          "Includes neighbouring land and sea where present.",
+          "Not suitable for neighbourhood-level statements."
+        ]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -10,
+              30
+            ],
+            [
+              -5,
+              30
+            ],
+            [
+              -5,
+              35
+            ],
+            [
+              -10,
+              35
+            ],
+            [
+              -10,
+              30
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sahel_comparison",
+      "properties": {
+        "name": "Sahel",
+        "bbox_west_south_east_north": [
+          -5,
+          12,
+          5,
+          17
+        ],
+        "period": {
+          "start": "2001-01",
+          "end": "2024-12",
+          "months": 288
+        },
+        "variables": [
+          {
+            "product_id": "M2TMNXSLV",
+            "variable": "T2M",
+            "units": "K",
+            "native_grid": {
+              "lat_step": 0.5,
+              "lon_step": 0.625
+            },
+            "cube": "measurements/M2TMNXSLV_Sahel_2001_2024.nc"
+          },
+          {
+            "product_id": "GLDAS_NOAH025_M",
+            "variable": "SoilMoi0_10cm_inst",
+            "units": "kg m-2",
+            "native_grid": {
+              "lat_step": 0.25,
+              "lon_step": 0.25
+            },
+            "cube": "measurements/GLDAS_NOAH025_M_Sahel_2001_2024.nc"
+          },
+          {
+            "product_id": "GPM_3IMERGM",
+            "variable": "precipitation",
+            "units": "mm/hr",
+            "native_grid": {
+              "lat_step": 0.1,
+              "lon_step": 0.1
+            },
+            "cube": "measurements/GPM_3IMERGM_Sahel_2001_2024.nc"
+          },
+          {
+            "product_id": "MOD13C2",
+            "variable": "NDVI",
+            "units": "1",
+            "native_grid": {
+              "lat_step": 0.05,
+              "lon_step": 0.05
+            },
+            "cube": "measurements/MOD13C2_Sahel_2001_2024.nc"
+          }
+        ],
+        "grid_alignment": "Each product keeps its native grid; the window is the set of native grid-cell centres inside the bbox.",
+        "boundary_type": "geographic rectangle, not an administrative boundary",
+        "limitations": [
+          "Includes neighbouring land and sea where present.",
+          "Not suitable for neighbourhood-level statements."
+        ]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -5,
+              12
+            ],
+            [
+              5,
+              12
+            ],
+            [
+              5,
+              17
+            ],
+            [
+              -5,
+              17
+            ],
+            [
+              -5,
+              12
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

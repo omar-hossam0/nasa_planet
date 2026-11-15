@@ -1,0 +1,139 @@
+{
+  "policy_version": "1.0",
+  "created": "2026-11-14",
+  "owner": "Member 1 - data acquisition and validity",
+  "scope": "12 cubes, 4 variables x 3 windows, 2001-01..2024-12",
+  "global_rules": {
+    "missing_is_not_zero": true,
+    "no_implicit_regridding": true,
+    "no_temporal_interpolation": true,
+    "same_mask_for_analysis_and_display": true,
+    "masking_never_creates_new_values": true
+  },
+  "products": {
+    "M2TMNXSLV": {
+      "variable": "T2M",
+      "units": "K",
+      "quality_fields": [],
+      "missing_handling": "netCDF fill converted to NaN at assembly",
+      "default_mask": "finite values only",
+      "notes": [
+        "Reanalysis output, not station observations.",
+        "Celsius conversion is explicit: T2M - 273.15.",
+        "Temperature differences (slopes) are identical in K and C."
+      ]
+    },
+    "GLDAS_NOAH025_M": {
+      "variable": "SoilMoi0_10cm_inst",
+      "units": "kg m-2",
+      "quality_fields": [],
+      "missing_handling": "land-only model output; source fill -9999 -> NaN",
+      "default_mask": "finite nonnegative values only",
+      "notes": [
+        "Not a percentage and not relative humidity.",
+        "Cells that are missing are missing for all 288 months (no on/off behaviour); see coverage_report.json."
+      ]
+    },
+    "GPM_3IMERGM": {
+      "variable": "precipitation",
+      "units": "mm/hr",
+      "quality_fields": [
+        "precipitationQualityIndex",
+        "randomError"
+      ],
+      "default_mask": "none (finite values only)",
+      "evidence": {
+        "observed_quality_index": {
+          "nile_corridor": {
+            "min": 1.0,
+            "median": 5.0,
+            "p95": 10.0,
+            "max": 20.0,
+            "documented_scale": "0-100, higher is better",
+            "masked_by_policy": false
+          },
+          "morocco_comparison": {
+            "min": 1.0,
+            "median": 7.0,
+            "p95": 16.0,
+            "max": 36.0,
+            "documented_scale": "0-100, higher is better",
+            "masked_by_policy": false
+          },
+          "sahel_comparison": {
+            "min": 0.0,
+            "median": 5.0,
+            "p95": 9.0,
+            "max": 23.0,
+            "documented_scale": "0-100, higher is better",
+            "masked_by_policy": false
+          }
+        },
+        "decision": "Do not exclude cells on the quality index. Observed values in all three windows are far below a 0-100 style threshold (medians 5-7), so a fixed cut such as 50 or 80 would remove 100% of the data."
+      },
+      "recommended_use": "Report the quality index and randomError next to every precipitation number; use them for weighting or caveats, not silent exclusion.",
+      "unit_conversion": "mm/month = value(mm/hr) x hours_in_month; state the conversion in the evidence card."
+    },
+    "MOD13C2": {
+      "variable": "NDVI",
+      "units": "1",
+      "quality_fields": [
+        "VI_Quality",
+        "pixel_reliability"
+      ],
+      "fill_and_scale": {
+        "raw_fill": -3000,
+        "real_value": "raw * 0.0001",
+        "valid_range": [
+          -0.2,
+          1.0
+        ]
+      },
+      "default_mask": "MODLAND QA bits 0-1 accepted, bits 2-3 masked; pixel_reliability 0-1 accepted, 2-4 flagged not excluded by the data layer",
+      "strict_mask": "MODLAND QA bits == 0 only; pixel_reliability == 0 only",
+      "evidence": {
+        "modland_qa_bit_counts": {
+          "nile_corridor": {
+            "0": 3319427,
+            "1": 19551,
+            "3": 347422
+          },
+          "morocco_comparison": {
+            "0": 2077925,
+            "1": 18905,
+            "3": 783170
+          },
+          "sahel_comparison": {
+            "0": 5587836,
+            "1": 171930,
+            "3": 234
+          }
+        },
+        "passes_qa": {
+          "nile_corridor": {
+            "default": 0.905739,
+            "strict": 0.886056
+          },
+          "morocco_comparison": {
+            "default": 0.724806,
+            "strict": 0.704674
+          },
+          "sahel_comparison": {
+            "default": 0.999045,
+            "strict": 0.946205
+          }
+        }
+      },
+      "notes": [
+        "Bits 2-3 (pixel not produced) already appear as NaN in the cube; they are not zeros.",
+        "NDVI is not a temperature or a precipitation proxy; do not reuse temperature colour scales.",
+        "Spatial comparison across windows must state that the windows have different vegetation regimes."
+      ]
+    }
+  },
+  "display_rules": {
+    "state_mask_in_legend": true,
+    "show_valid_cell_count_with_series": true,
+    "insufficient_data_threshold": "if a window/month has < 30% valid cells, show insufficient-data instead of a slope"
+  }
+}

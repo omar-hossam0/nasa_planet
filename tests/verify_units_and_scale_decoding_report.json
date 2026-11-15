@@ -1,0 +1,150 @@
+{
+  "script": "verify_units_and_scale_decoding.py",
+  "status": "pass",
+  "results": [
+    {
+      "file": "GLDAS_NOAH025_M_Morocco_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "soil_moisture_range": [
+          5.8709716796875,
+          42.66454315185547
+        ],
+        "region": "Morocco"
+      }
+    },
+    {
+      "file": "GLDAS_NOAH025_M_Nile_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "soil_moisture_range": [
+          1.9999998807907104,
+          32.41978073120117
+        ],
+        "region": "Nile"
+      }
+    },
+    {
+      "file": "GLDAS_NOAH025_M_Sahel_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "soil_moisture_range": [
+          1.9999998807907104,
+          41.38508224487305
+        ],
+        "region": "Sahel"
+      }
+    },
+    {
+      "file": "GPM_3IMERGM_Morocco_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "precip_rate_range": [
+          0.0,
+          0.5560000538825989
+        ],
+        "region": "Morocco"
+      }
+    },
+    {
+      "file": "GPM_3IMERGM_Nile_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "precip_rate_range": [
+          0.0,
+          0.42000001668930054
+        ],
+        "region": "Nile"
+      }
+    },
+    {
+      "file": "GPM_3IMERGM_Sahel_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "precip_rate_range": [
+          0.0,
+          0.6570000052452087
+        ],
+        "region": "Sahel"
+      }
+    },
+    {
+      "file": "M2TMNXSLV_Morocco_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "kelvin_range": [
+          272.630126953125,
+          310.5342102050781
+        ],
+        "region": "Morocco"
+      }
+    },
+    {
+      "file": "M2TMNXSLV_Nile_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "kelvin_range": [
+          280.88787841796875,
+          309.0633544921875
+        ],
+        "region": "Nile"
+      }
+    },
+    {
+      "file": "M2TMNXSLV_Sahel_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "kelvin_range": [
+          289.7999572753906,
+          311.13885498046875
+        ],
+        "region": "Sahel"
+      }
+    },
+    {
+      "file": "MOD13C2_Morocco_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "ndvi_range": [
+          -0.1939999908208847,
+          0.882099986076355
+        ],
+        "region": "Morocco"
+      }
+    },
+    {
+      "file": "MOD13C2_Nile_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "ndvi_range": [
+          -0.19999998807907104,
+          0.8496999740600586
+        ],
+        "region": "Nile"
+      }
+    },
+    {
+      "file": "MOD13C2_Sahel_2001_2024.nc",
+      "status": "pass",
+      "errors": [],
+      "checks": {
+        "ndvi_range": [
+          -0.09879999607801437,
+          0.8431999683380127
+        ],
+        "region": "Sahel"
+      }
+    }
+  ]
+}

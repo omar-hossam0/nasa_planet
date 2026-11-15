@@ -1,0 +1,102 @@
+{
+  "generated": "2026-11-14",
+  "method_revision": "m2-1.0.0",
+  "data_revision": "b350b06961588093558e8378bb0a15b0bd8b5f318bbbe8a4f927eb2b1bc5a78a",
+  "checks": [
+    {
+      "check": "readiness_12_pairs",
+      "item": "readiness",
+      "passed": true,
+      "detail": "12/12 measurement+method ready"
+    },
+    {
+      "check": "revisions_exposed",
+      "item": "readiness",
+      "passed": true,
+      "detail": "data b350b0696158 method m2-1.0.0"
+    },
+    {
+      "check": "analysis_succeeds",
+      "item": "end_to_end",
+      "passed": true,
+      "detail": "job job_ba93b66bd505476c -> succeeded"
+    },
+    {
+      "check": "slope_present",
+      "item": "end_to_end",
+      "passed": true,
+      "detail": "slope +0.03086 K/yr"
+    },
+    {
+      "check": "receipt_complete",
+      "item": "receipt",
+      "passed": true,
+      "detail": "13/13 fields, 288 granules"
+    },
+    {
+      "check": "receipt_has_no_secrets",
+      "item": "receipt",
+      "passed": true,
+      "detail": "no credential-like keys"
+    },
+    {
+      "check": "citations_resolve",
+      "item": "citations",
+      "passed": true,
+      "detail": "2 citations, all in retrieved set"
+    },
+    {
+      "check": "explanation_validated",
+      "item": "citations",
+      "passed": true,
+      "detail": "path deterministic"
+    },
+    {
+      "check": "llm_disabled_falls_back",
+      "item": "fallback",
+      "passed": true,
+      "detail": "no provider configured, deterministic answer served"
+    },
+    {
+      "check": "chart_matches_card",
+      "item": "consistency",
+      "passed": true,
+      "detail": "series slope +0.030859 == card +0.030859"
+    },
+    {
+      "check": "compare_matches_card",
+      "item": "consistency",
+      "passed": true,
+      "detail": "compare +0.030859 == card +0.030859"
+    },
+    {
+      "check": "units_present_for_all",
+      "item": "units",
+      "passed": true,
+      "detail": "every ready entry carries units"
+    },
+    {
+      "check": "export_reopens",
+      "item": "export",
+      "passed": true,
+      "detail": "JSON reopens, CSV has 288 rows"
+    },
+    {
+      "check": "offline_bundle_complete",
+      "item": "offline",
+      "passed": true,
+      "detail": "12 analyses, 12 spatial products"
+    },
+    {
+      "check": "offline_matches_live",
+      "item": "offline",
+      "passed": true,
+      "detail": "snapshot slope equals live slope"
+    }
+  ],
+  "summary": {
+    "total": 15,
+    "passed": 15,
+    "failed": 0
+  }
+}
