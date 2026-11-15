@@ -1,0 +1,18 @@
+.analysis-insights{margin:22px 0;color:#193c43;background:#edf3ef;border:1px solid #658f98;border-radius:15px;padding:22px;min-width:0}
+.insight-eyebrow{font-size:10px;letter-spacing:.12em;color:#4f7255;font-weight:700}
+.analysis-insights h2{font-size:24px;margin:8px 0}.analysis-insights h3{font-size:17px;margin:8px 0}
+.analysis-insights p{font-size:13px;line-height:1.65;margin:8px 0;overflow-wrap:anywhere}
+.insights-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}
+.insight-card{padding:17px;border:1px solid #ccdad2;background:#fff;border-radius:10px;min-width:0}.annual-card{grid-column:1/-1}
+.insight-card svg{width:100%;display:block;margin:10px 0}.insight-card svg text{fill:#4a6769;font:12px system-ui,sans-serif}
+.annual-path{stroke:#287965;stroke-width:2.5;fill:none}.annual-point{fill:#287965;stroke:white;stroke-width:1.5;cursor:pointer}.annual-point:focus{outline:none;stroke:#b87524;stroke-width:4}
+.annual-readout{display:flex;justify-content:space-between;border-top:1px solid #d6e2dc;padding:10px 0;font-size:14px}.annual-readout b{color:#246f5c}
+.annual-card label{display:block;font-size:12px}.annual-card input[type=range]{width:100%;accent-color:#287965;margin:12px 0}.analysis-insights small{display:block;font-size:11px;line-height:1.65;color:#526b6c}
+.annual-card details{font-size:12px;margin-top:12px}.annual-card summary{cursor:pointer}.annual-table{max-height:200px;overflow:auto}.annual-table table{width:100%;border-collapse:collapse}.annual-table th,.annual-table td{padding:7px;border-bottom:1px solid #dce5df;text-align:start}
+.cell-direction-counts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.cell-direction-counts div{background:#f0f5f2;padding:8px;border-radius:6px}.cell-direction-counts dt{font-size:11px}.cell-direction-counts dd{font-size:18px;font-weight:600;margin:5px 0 0}
+.insight-card .coverage-donut{max-height:190px}.coverage-donut circle{fill:none;stroke-width:14}.donut-track{stroke:#e0e7e2}.donut-retained{stroke:#3c8868}.coverage-donut .donut-value{font-size:25px;font-weight:600;fill:#205e4c}.coverage-count{text-align:center;font-weight:600}
+.coverage-meter{font-size:12px;padding:10px 0}.coverage-meter strong{float:inline-end}.coverage-meter>div{clear:both;background:#e3eae5;height:8px;border-radius:9px;margin:10px 0}.coverage-meter i{display:block;background:#6489a5;height:100%;border-radius:9px}
+.inference-notice{padding:14px;margin:16px 0;border:1px solid #cda269;background:#fff5e4;border-radius:9px;color:#674b2b;font-size:12px;line-height:1.6}.inference-notice summary{font-weight:600;cursor:pointer;line-height:1.65}.inference-notice p{font-size:12px;line-height:1.65}
+.inference-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:14px 0}.inference-steps>div{display:flex;flex-direction:column;gap:5px;padding:9px;background:#fffdf8;border-radius:6px;text-align:center}.inference-steps b{font-size:20px}.inference-steps small{font-size:10px}
+@media(max-width:650px){.insights-grid{grid-template-columns:1fr}.analysis-insights{padding:15px}.analysis-insights h2{font-size:21px}.inference-steps{grid-template-columns:1fr}.inference-steps>div{flex-direction:row;align-items:center;justify-content:space-between}.inference-steps small{max-width:80px}}
+@media(max-width:650px){.insight-card .annual-observations text{font-size:18px}}

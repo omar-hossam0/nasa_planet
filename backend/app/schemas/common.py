@@ -29,6 +29,7 @@ class EvidenceState(str, Enum):
     verified = "verified"
     insufficient_data = "insufficient_data"
     not_computed = "not_computed"
+    descriptive_only = 'descriptive_only'
 
 
 class TrendDirection(str, Enum):
@@ -67,6 +68,7 @@ class AvailabilityReason(str, Enum):
     UNKNOWN_REGION = "UNKNOWN_REGION"
     INVALID_PERIOD = "INVALID_PERIOD"
     INVALID_AOI = "INVALID_AOI"
+    DESCRIPTIVE_READY = 'DESCRIPTIVE_READY'
 
 
 class AoiType(str, Enum):

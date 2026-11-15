@@ -161,7 +161,10 @@ def validate_payload(payload):
 
     if payload["variable_id"] not in CANONICAL_VARIABLE_IDS:
         errors.append(f"unknown variable_id {payload['variable_id']!r}")
-    if payload["region_id"] not in REGION_LABELS:
+    if payload['region_id'] not in REGION_LABELS and not (
+        isinstance(payload['region_id'], str) and payload['region_id'].strip() and
+        isinstance(payload.get('region_label'), str) and payload['region_label'].strip()
+    ):
         errors.append(f"unknown region_id {payload['region_id']!r}")
     if not isinstance(payload["units"], str) or not payload["units"].strip():
         errors.append("units must be a non-empty string")
@@ -371,15 +374,16 @@ def _context_segment(payload, language):
     start, end = _period_pair(payload)
     pid = product["product_id"]
     source_type = SOURCE_TYPE_OF[pid]
+    region_label = REGION_LABELS.get(region, {}).get(language, payload.get('region_label', region))
     if language == LANGUAGE_AR:
         text = (
-            f"{VARIABLE_LABELS[variable]['ar']} على {REGION_LABELS[region]['ar']} "
+            f"{VARIABLE_LABELS[variable]['ar']} على {region_label} "
             f"من {start} إلى {end}، استناداً إلى {PRODUCT_LABELS[pid]} "
             f"({pid} v{product['product_version']}) — {SOURCE_PHRASES[source_type]['ar']}."
         )
     else:
         text = (
-            f"{VARIABLE_LABELS[variable]['en']} for {REGION_LABELS[region]['en']} from {start} "
+            f"{VARIABLE_LABELS[variable]['en']} for {region_label} from {start} "
             f"to {end}, based on {PRODUCT_LABELS[pid]} ({pid} v{product['product_version']}) — "
             f"{SOURCE_PHRASES[source_type]['en']}."
         )

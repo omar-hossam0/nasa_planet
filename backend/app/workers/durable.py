@@ -42,9 +42,8 @@ class DurableJobManager:
         try:
             job = container.jobs_repo.get(task_id)
             spec = container.analysis._normalise(job.request)
-            suffix = task_id.removeprefix('job_mock_')
             container.analysis._execute(job=job, spec=spec,
-                result_id=f'result_mock_{suffix}', receipt_id=f'receipt_mock_{suffix}')
+                result_id=task_id.replace('job_', 'result_', 1), receipt_id=task_id.replace('job_', 'receipt_', 1))
             state = 'completed'
         except Exception:
             logging.getLogger(__name__).exception('Task failed: %s', task_id)

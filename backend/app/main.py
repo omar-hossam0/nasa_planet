@@ -5,11 +5,13 @@ from __future__ import annotations
 import logging
 import secrets
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
+from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.api.v1 import (
@@ -35,14 +37,16 @@ logger = logging.getLogger(__name__)
 DESCRIPTION = """
 **Trend Detective - What the Average Hides** backend.
 
-Analysis endpoints currently use **deterministic synthetic data**. Real science
-is not integrated. Synthetic slopes are descriptive only: `p_value` is null and
-`inference_status` is `not_computed`.
+With `MOCK_MODE=false`, analysis endpoints load registered NASA files, apply strict
+reference QA support, and run the existing annual Theil-Sen science estimator.
+`MOCK_MODE=true` selects the explicitly synthetic demo. Both modes withhold
+statistical inference: `p_value` is null and `inference_status` is `not_computed`.
 
 `POST /v1/explanations/ask` retrieves real documentation excerpts and citations.
 Optional Gemini generation is validated against the evidence; without a configured
 provider, the endpoint returns local excerpts rather than a generated answer.
-Documentation questions do not read stored analysis results.
+Result explanations use Role04's deterministic conclusion renderer on stored
+science results. Documentation questions remain a separate path.
 
 Storage defaults to process-local memory. SQL persistence and a separate durable
 worker are available through environment configuration. See deployment documentation
@@ -90,6 +94,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     _register_middleware(app)
     _register_exception_handlers(app)
     _register_routers(app, settings)
+    _register_product_routes(app)
     return app
 
 
@@ -196,6 +201,31 @@ def _register_routers(app: FastAPI, settings: Settings) -> None:
         receipts,
     ):
         app.include_router(module.router, prefix=settings.api_prefix)
+
+
+def _register_product_routes(app: FastAPI) -> None:
+    product_dir = Path(__file__).resolve().parents[2] / "dist" / "product"
+    if product_dir.is_dir():
+        app.mount("/product", StaticFiles(directory=product_dir, html=True), name="product")
+
+        @app.get("/", include_in_schema=False)
+        def product_root() -> RedirectResponse:
+            return RedirectResponse("/product/")
+    else:
+
+        @app.get("/", include_in_schema=False)
+        def product_unavailable() -> JSONResponse:
+            return JSONResponse(
+                status_code=503,
+                content={
+                    "error": {
+                        "code": "PRODUCT_NOT_BUILT",
+                        "message": "The frontend build is unavailable. Run `npm run build` in frontend/.",
+                        "details": {"expected_directory": str(product_dir)},
+                        "request_id": get_request_id(),
+                    }
+                },
+            )
 
 
 app = create_app()

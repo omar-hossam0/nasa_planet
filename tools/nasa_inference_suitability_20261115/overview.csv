@@ -1,0 +1,13 @@
+﻿variable,region,n,Sen_slope,units_per_year,retained_area_percent,AR1_rho_hat,IID_raw_review_flags,AR1_raw_review_flags,BY_flags,inference_enabled
+air_temperature,nile_corridor,24,0.025330383313493597,K/year,100.0,-0.35046,extreme_innovation,non_gaussian_innovations,,False
+soil_moisture,nile_corridor,24,0.008890433836505951,kg m-2/year,89.97775916502785,-0.035640000000000005,variance_time_association;extreme_innovation,variance_time_association;extreme_innovation,,False
+precipitation,nile_corridor,24,0.027554997033746184,mm/year,100.0,0.013859999999999983,non_gaussian_innovations;extreme_innovation,non_gaussian_innovations;extreme_innovation,,False
+vegetation_greenness,nile_corridor,24,0.000123810554870301,1/year,57.50335524811972,0.5147999999999999,remaining_serial_dependence,,,False
+air_temperature,morocco_comparison,24,0.033175364236687224,K/year,100.0,0.34254000000000007,quadratic_departure,non_gaussian_innovations;variance_time_association;quadratic_departure,,False
+soil_moisture,morocco_comparison,24,-0.12612017353263624,kg m-2/year,72.13380545996313,0.36432,quadratic_departure,quadratic_departure,,False
+precipitation,morocco_comparison,24,-8.47735157908451,mm/year,100.0,0.07919999999999994,quadratic_departure,quadratic_departure,,False
+vegetation_greenness,morocco_comparison,24,-0.0003231025134762133,1/year,30.624419346641986,0.25146,quadratic_departure,quadratic_departure,,False
+air_temperature,sahel_comparison,24,-0.023441037765244185,K/year,100.0,-0.17423999999999995,,quadratic_departure,,False
+soil_moisture,sahel_comparison,24,-0.026383741725966903,kg m-2/year,100.0,-0.52074,,,,False
+precipitation,sahel_comparison,24,2.6037411068641902,mm/year,100.0,-0.594,remaining_serial_dependence,,,False
+vegetation_greenness,sahel_comparison,24,0.0009737242896536887,1/year,14.69480561054765,0.28313999999999995,extreme_innovation;quadratic_departure,extreme_innovation;quadratic_departure,,False

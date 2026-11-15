@@ -28,12 +28,24 @@ class SpatialService:
     drift apart.
     """
 
-    def __init__(self, results: ResultService, settings: Settings) -> None:
+    def __init__(self, results: ResultService, settings: Settings, data=None) -> None:
         self._results = results
         self._settings = settings
+        self._data = data
 
-    def get_spatial(self, result_id: str) -> SpatialResponse:
+    def get_spatial(self, result_id: str, compact: bool = False):
         result = self._results.get_result(result_id)
+        if result.science:
+            if compact:
+                from app.schemas.spatial import CompactSpatialResponse
+                variable=result.variables[0].variable_id
+                a=result.science[variable]
+                dy,dx=a['native_spacing_degrees']
+                return CompactSpatialResponse(result_id=result.result_id,variable_id=variable,lat=a['lat'],lon=a['lon'],
+                    slope=a['annual_slope'],bounds=[a['lon'][0]-dx/2,a['lat'][0]-dy/2,a['lon'][-1]+dx/2,a['lat'][-1]+dy/2],
+                    cell_count=len(a['lat'])*len(a['lon']),disclaimer=result.disclaimer)
+            from app.services.science_spatial import spatial
+            return spatial(result)
         datasets = self._cells(result)
         primary = result.variables[0]
         trend_unit = primary.trend.slope_unit or f"{primary.unit} year-1"
@@ -75,6 +87,9 @@ class SpatialService:
 
     def get_cell(self, result_id: str, cell_id: str) -> CellDetailResponse:
         result = self._results.get_result(result_id)
+        if result.science:
+            from app.services.science_spatial import cell_detail
+            return cell_detail(result,cell_id,self._data)
         datasets = {dataset.cell_id: dataset for dataset in self._cells(result)}
         dataset = datasets.get(cell_id)
         if dataset is None:

@@ -1,0 +1,67 @@
+{
+  "seed": 2026111601,
+  "validation_seed": 2026111602,
+  "method": "known-rho Student reference plus continuous-rho guarded GLS envelope",
+  "rho_bounds": [
+    -0.95,
+    0.95
+  ],
+  "grid_size": 4001,
+  "confidence": 0.95,
+  "nominal_alpha": 0.05,
+  "primary_n": 24,
+  "records_per_primary_scenario": 1000,
+  "primary_rho": [
+    -0.5,
+    0.0,
+    0.4,
+    0.7,
+    0.9,
+    0.9333
+  ],
+  "primary_slopes": [
+    0.0,
+    0.08,
+    0.5
+  ],
+  "extra_lengths": [
+    20,
+    48
+  ],
+  "extra_rho": [
+    0.7,
+    0.9333
+  ],
+  "extra_slopes": [
+    0.0,
+    -0.5
+  ],
+  "records_per_extra_scenario": 500,
+  "stress_records": 1000,
+  "stress_noise": [
+    "student3_AR1",
+    "AR2",
+    "heteroskedastic_AR1",
+    "outside_range_rho_0.99"
+  ],
+  "numeric_reference": {
+    "n": 24,
+    "target_abs_t": [
+      0.0,
+      3.0,
+      8.0
+    ],
+    "known_rho": [
+      0.0,
+      0.7,
+      0.9333
+    ]
+  },
+  "screens": {
+    "minimum_safety": "null Wilson upper <= .08; coverage Wilson lower >= .90",
+    "historical_practical": "null rate .03-.07; coverage .93-.97; strong-trend power >= .20",
+    "interpretation": "conservative control is not the same as nominal calibration; retain failures"
+  },
+  "scope": "Gaussian stationary AR1, linear conditional mean, fixed external rho range; no NASA release",
+  "retention": "All test data and earlier experiments retained until explicit user deletion request"
+}

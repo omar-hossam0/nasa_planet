@@ -1,0 +1,250 @@
+[
+  {
+    "variable": "air_temperature",
+    "language": "en",
+    "sections": [
+      [
+        "air_temperature_context",
+        "Source and period",
+        "Air temperature (2 m) for the Nile corridor from 2001-01 to 2024-12, based on MERRA-2 T2M (M2TMNXSLV v5.12.4) — a reanalysis product, not direct satellite observations."
+      ],
+      [
+        "air_temperature_regional_trend",
+        "Monthly values and inference limits",
+        "Regional mean 290.359 K over 288 monthly values (descriptive output). Inference was not computed: inferential output is not released before the method review gate passes (inference not released). No trend claim is made."
+      ],
+      [
+        "air_temperature_provenance",
+        "Evidence receipt",
+        "Full provenance, method settings and source hashes are available in receipt SYNTHETIC_receipt."
+      ],
+      [
+        "air_temperature_annual",
+        "Annual descriptive estimate",
+        "Annual descriptive Theil–Sen slope: 0.03125 K per year. 24 valid annual observations. Positive/negative cell slopes are not significance classifications."
+      ],
+      [
+        "air_temperature_support",
+        "QA and native-grid support",
+        "QA retained 4 of 4 selected cells (100.00% of selected native-cell area). Positive slopes: 4; negative slopes: 0. No significance test was released."
+      ]
+    ]
+  },
+  {
+    "variable": "air_temperature",
+    "language": "ar",
+    "sections": [
+      [
+        "air_temperature_context",
+        "المصدر والفترة",
+        "درجة حرارة الهواء (2 متر) على نطاق ممر النيل من 2001-01 إلى 2024-12، استناداً إلى MERRA-2 T2M (M2TMNXSLV v5.12.4) — منتج إعادة تحليل، وليس قياساً مباشراً من الأقمار الصناعية."
+      ],
+      [
+        "air_temperature_regional_trend",
+        "القيم الشهرية وحدود الاستدلال",
+        "المتوسط الإقليمي 290.359 K على مدار 288 قيمة شهرية (مخرج وصفي). لم يُحسب الاستدلال: المخرجات الاستدلالية لا تُنشر قبل اجتياز بوابة مراجعة المنهجية (الاستدلال غير منشور). لا يُطرح أي ادعاء بوجود اتجاه."
+      ],
+      [
+        "air_temperature_provenance",
+        "إيصال الأدلة",
+        "التوثيق الكامل وإعدادات المنهجية وبصمات المصادر متاحة في الإيصال SYNTHETIC_receipt."
+      ],
+      [
+        "air_temperature_annual",
+        "Annual descriptive estimate",
+        "ميل Theil–Sen السنوي الوصفي: 0.03125 K per year. عدد السنوات الصالحة 24. إشارة ميل الخلايا لا تعني دلالة إحصائية."
+      ],
+      [
+        "air_temperature_support",
+        "QA and native-grid support",
+        "احتفظ فحص الجودة بـ4 من 4 خلية مختارة، تمثل 100.00% من مساحة الخلايا الأصلية المختارة. الخلايا ذات الميل الموجب: 4، والسالب: 0. لم يُنشر اختبار دلالة إحصائية."
+      ]
+    ]
+  },
+  {
+    "variable": "soil_moisture",
+    "language": "en",
+    "sections": [
+      [
+        "soil_moisture_context",
+        "Source and period",
+        "Soil moisture (0-10 cm) for the Nile corridor from 2001-01 to 2024-12, based on GLDAS Noah SoilMoi0_10cm_inst (GLDAS_NOAH025_M v2.1) — a land-surface model output, not direct satellite observations."
+      ],
+      [
+        "soil_moisture_regional_trend",
+        "Monthly values and inference limits",
+        "Regional mean 18.562 kg m-2 over 288 monthly values (descriptive output). Inference was not computed: inferential output is not released before the method review gate passes (inference not released). No trend claim is made."
+      ],
+      [
+        "soil_moisture_provenance",
+        "Evidence receipt",
+        "Full provenance, method settings and source hashes are available in receipt SYNTHETIC_receipt."
+      ],
+      [
+        "soil_moisture_annual",
+        "Annual descriptive estimate",
+        "Annual descriptive Theil–Sen slope: -0.125 kg m-2 per year. 24 valid annual observations. Positive/negative cell slopes are not significance classifications."
+      ],
+      [
+        "soil_moisture_support",
+        "QA and native-grid support",
+        "QA retained 4 of 4 selected cells (100.00% of selected native-cell area). Positive slopes: 0; negative slopes: 4. No significance test was released."
+      ]
+    ]
+  },
+  {
+    "variable": "soil_moisture",
+    "language": "ar",
+    "sections": [
+      [
+        "soil_moisture_context",
+        "المصدر والفترة",
+        "رطوبة التربة (0-10 سم) على نطاق ممر النيل من 2001-01 إلى 2024-12، استناداً إلى GLDAS Noah SoilMoi0_10cm_inst (GLDAS_NOAH025_M v2.1) — مخرج نموذج سطح الأرض، وليس قياساً مباشراً من الأقمار الصناعية."
+      ],
+      [
+        "soil_moisture_regional_trend",
+        "القيم الشهرية وحدود الاستدلال",
+        "المتوسط الإقليمي 18.562 kg m-2 على مدار 288 قيمة شهرية (مخرج وصفي). لم يُحسب الاستدلال: المخرجات الاستدلالية لا تُنشر قبل اجتياز بوابة مراجعة المنهجية (الاستدلال غير منشور). لا يُطرح أي ادعاء بوجود اتجاه."
+      ],
+      [
+        "soil_moisture_provenance",
+        "إيصال الأدلة",
+        "التوثيق الكامل وإعدادات المنهجية وبصمات المصادر متاحة في الإيصال SYNTHETIC_receipt."
+      ],
+      [
+        "soil_moisture_annual",
+        "Annual descriptive estimate",
+        "ميل Theil–Sen السنوي الوصفي: -0.125 kg m-2 per year. عدد السنوات الصالحة 24. إشارة ميل الخلايا لا تعني دلالة إحصائية."
+      ],
+      [
+        "soil_moisture_support",
+        "QA and native-grid support",
+        "احتفظ فحص الجودة بـ4 من 4 خلية مختارة، تمثل 100.00% من مساحة الخلايا الأصلية المختارة. الخلايا ذات الميل الموجب: 0، والسالب: 4. لم يُنشر اختبار دلالة إحصائية."
+      ]
+    ]
+  },
+  {
+    "variable": "vegetation_greenness",
+    "language": "en",
+    "sections": [
+      [
+        "vegetation_greenness_context",
+        "Source and period",
+        "Vegetation greenness (NDVI) for the Nile corridor from 2001-01 to 2024-12, based on MODIS MOD13C2 NDVI (MOD13C2 v061) — a satellite-based retrieval product."
+      ],
+      [
+        "vegetation_greenness_regional_trend",
+        "Monthly values and inference limits",
+        "Regional mean 0.311 1 over 288 monthly values (descriptive output). Inference was not computed: inferential output is not released before the method review gate passes (inference not released). No trend claim is made."
+      ],
+      [
+        "vegetation_greenness_provenance",
+        "Evidence receipt",
+        "Full provenance, method settings and source hashes are available in receipt SYNTHETIC_receipt."
+      ],
+      [
+        "vegetation_greenness_annual",
+        "Annual descriptive estimate",
+        "Annual descriptive Theil–Sen slope: 0.001 1 per year. 24 valid annual observations. Positive/negative cell slopes are not significance classifications."
+      ],
+      [
+        "vegetation_greenness_support",
+        "QA and native-grid support",
+        "QA retained 4 of 4 selected cells (100.00% of selected native-cell area). Positive slopes: 4; negative slopes: 0. No significance test was released."
+      ]
+    ]
+  },
+  {
+    "variable": "vegetation_greenness",
+    "language": "ar",
+    "sections": [
+      [
+        "vegetation_greenness_context",
+        "المصدر والفترة",
+        "الغطاء النباتي (NDVI) على نطاق ممر النيل من 2001-01 إلى 2024-12، استناداً إلى MODIS MOD13C2 NDVI (MOD13C2 v061) — منتج استخلاص مبني على الأقمار الصناعية."
+      ],
+      [
+        "vegetation_greenness_regional_trend",
+        "القيم الشهرية وحدود الاستدلال",
+        "المتوسط الإقليمي 0.311 1 على مدار 288 قيمة شهرية (مخرج وصفي). لم يُحسب الاستدلال: المخرجات الاستدلالية لا تُنشر قبل اجتياز بوابة مراجعة المنهجية (الاستدلال غير منشور). لا يُطرح أي ادعاء بوجود اتجاه."
+      ],
+      [
+        "vegetation_greenness_provenance",
+        "إيصال الأدلة",
+        "التوثيق الكامل وإعدادات المنهجية وبصمات المصادر متاحة في الإيصال SYNTHETIC_receipt."
+      ],
+      [
+        "vegetation_greenness_annual",
+        "Annual descriptive estimate",
+        "ميل Theil–Sen السنوي الوصفي: 0.001 1 per year. عدد السنوات الصالحة 24. إشارة ميل الخلايا لا تعني دلالة إحصائية."
+      ],
+      [
+        "vegetation_greenness_support",
+        "QA and native-grid support",
+        "احتفظ فحص الجودة بـ4 من 4 خلية مختارة، تمثل 100.00% من مساحة الخلايا الأصلية المختارة. الخلايا ذات الميل الموجب: 4، والسالب: 0. لم يُنشر اختبار دلالة إحصائية."
+      ]
+    ]
+  },
+  {
+    "variable": "precipitation",
+    "language": "en",
+    "sections": [
+      [
+        "precipitation_context",
+        "Source and period",
+        "Precipitation for the Nile corridor from 2001-01 to 2024-12, based on GPM IMERG Monthly (GPM_3IMERGM v07) — a satellite-based retrieval product."
+      ],
+      [
+        "precipitation_regional_trend",
+        "Monthly values and inference limits",
+        "Regional mean 10.25 mm over 288 monthly values (descriptive output). Inference was not computed: inferential output is not released before the method review gate passes (inference not released). No trend claim is made."
+      ],
+      [
+        "precipitation_provenance",
+        "Evidence receipt",
+        "Full provenance, method settings and source hashes are available in receipt SYNTHETIC_receipt."
+      ],
+      [
+        "precipitation_annual",
+        "Annual descriptive estimate",
+        "Annual descriptive Theil–Sen slope: 2 mm per year. 24 valid annual observations. Positive/negative cell slopes are not significance classifications."
+      ],
+      [
+        "precipitation_support",
+        "QA and native-grid support",
+        "QA retained 4 of 4 selected cells (100.00% of selected native-cell area). Positive slopes: 4; negative slopes: 0. No significance test was released."
+      ]
+    ]
+  },
+  {
+    "variable": "precipitation",
+    "language": "ar",
+    "sections": [
+      [
+        "precipitation_context",
+        "المصدر والفترة",
+        "الأمطار على نطاق ممر النيل من 2001-01 إلى 2024-12، استناداً إلى GPM IMERG Monthly (GPM_3IMERGM v07) — منتج استخلاص مبني على الأقمار الصناعية."
+      ],
+      [
+        "precipitation_regional_trend",
+        "القيم الشهرية وحدود الاستدلال",
+        "المتوسط الإقليمي 10.25 mm على مدار 288 قيمة شهرية (مخرج وصفي). لم يُحسب الاستدلال: المخرجات الاستدلالية لا تُنشر قبل اجتياز بوابة مراجعة المنهجية (الاستدلال غير منشور). لا يُطرح أي ادعاء بوجود اتجاه."
+      ],
+      [
+        "precipitation_provenance",
+        "إيصال الأدلة",
+        "التوثيق الكامل وإعدادات المنهجية وبصمات المصادر متاحة في الإيصال SYNTHETIC_receipt."
+      ],
+      [
+        "precipitation_annual",
+        "Annual descriptive estimate",
+        "ميل Theil–Sen السنوي الوصفي: 2 mm per year. عدد السنوات الصالحة 24. إشارة ميل الخلايا لا تعني دلالة إحصائية."
+      ],
+      [
+        "precipitation_support",
+        "QA and native-grid support",
+        "احتفظ فحص الجودة بـ4 من 4 خلية مختارة، تمثل 100.00% من مساحة الخلايا الأصلية المختارة. الخلايا ذات الميل الموجب: 4، والسالب: 0. لم يُنشر اختبار دلالة إحصائية."
+      ]
+    ]
+  }
+]

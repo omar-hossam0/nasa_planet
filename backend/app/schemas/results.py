@@ -116,6 +116,7 @@ class ResultResponse(BaseModel):
     receipt_id: str
     links: ResultLinks
     created_at: datetime
+    science: dict | None = None
 
 
 class ResultSummary(BaseModel):

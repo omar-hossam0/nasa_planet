@@ -19,6 +19,7 @@ class Provenance(BaseModel):
     )
     registry_snapshot: str
     statistics_adapter: str = "MockStatisticsAdapter"
+    source_files: list[dict] = Field(default_factory=list)
 
 
 class ReceiptLinks(BaseModel):

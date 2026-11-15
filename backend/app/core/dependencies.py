@@ -78,6 +78,12 @@ def build_container(settings: Settings | None = None) -> Container:
     data = MockNASADataAdapter(settings.regions_file)
     statistics = MockStatisticsAdapter()
     rag = MockRAGAdapter()
+    if not settings.mock_mode:
+        from app.adapters.science import ScienceDataAdapter, ScienceStatisticsAdapter
+        from app.adapters.science_rag import ScienceRAGAdapter
+        data = ScienceDataAdapter(settings.regions_file)
+        statistics = ScienceStatisticsAdapter(data)
+        rag = ScienceRAGAdapter()
 
     jobs_repo = InMemoryJobRepository()
     results_repo = InMemoryResultRepository()
@@ -123,7 +129,7 @@ def build_container(settings: Settings | None = None) -> Container:
             settings=settings,
         ),
         result=result_service,
-        spatial=SpatialService(result_service, settings),
+        spatial=SpatialService(result_service, settings, data),
         comparison=ComparisonService(result_service, settings),
         spin=SpinService(
             results=result_service,

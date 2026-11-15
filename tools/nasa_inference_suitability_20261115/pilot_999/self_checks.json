@@ -1,0 +1,6 @@
+{
+  "independent_OLS_reference": true,
+  "residual_SSE_reference": true,
+  "dense_covariance_GLS_reference": true,
+  "diagnostic_shape": true
+}

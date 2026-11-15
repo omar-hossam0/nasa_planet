@@ -25,6 +25,7 @@ class ComputedAnalysis:
     method: MethodRef
     datasets: list[DatasetRevision]
     warnings: list[ApiWarning]
+    science: dict | None = None
 
 
 @dataclass

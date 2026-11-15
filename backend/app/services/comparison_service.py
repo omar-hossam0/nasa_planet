@@ -40,6 +40,9 @@ class ComparisonService:
             )
 
         result = self._results.get_result(request.result_id)
+        if result.science:
+            from app.services.science_comparison import compare
+            return compare(result,request,self._settings)
         primary = result.variables[0]
         datasets = {
             dataset.cell_id: dataset

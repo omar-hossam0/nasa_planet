@@ -46,6 +46,9 @@ export type WindowResult = {
   ci_high: number | null;
 };
 export type VariableResult = {
+  annual?: { years: number[]; values: (number | null)[] };
+  cell_counts?: { positive: number; negative: number; zero: number; unavailable: number };
+  support?: { selected_cells: number; eligible_cells: number; eligible_area_fraction: number };
   variable_id: VariableId;
   state: string;
   label: string;
@@ -65,6 +68,8 @@ export type VariableResult = {
   warnings: string[];
 };
 export type Result = {
+  result_id?: string;
+  data_mode?: string;
   job_id: string;
   receipt_id: string | null;
   data_revision: string;
@@ -103,6 +108,15 @@ export type Analysis = {
   explanation: Explanation | null;
   offline: boolean;
 };
+
+export async function computeSensitivity(resultId: string, years: number): Promise<WindowResult[]> {
+  const accepted = await request<{ spin_id: string }>(`/v1/results/${encodeURIComponent(resultId)}/spin`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ minimum_window_years: years }),
+  });
+  const result = await request<{ windows: { start_month: string; end_month: string; trend_value: number | null }[] }>(`/v1/spin/${encodeURIComponent(accepted.spin_id)}`);
+  return result.windows.map(w => ({ start: w.start_month, end: w.end_month, slope: w.trend_value, p_value: null, ci_low: null, ci_high: null }));
+}
+
 type Offline = {
   catalog: Catalog;
   explanations: Record<string, Explanation>;
@@ -122,7 +136,7 @@ declare global {
   }
 }
 
-let offlineMode = location.protocol === "file:";
+let offlineMode = location.protocol === "file:" || new URLSearchParams(location.search).get('offline') === '1';
 export const isOffline = () => offlineMode;
 const local = () => window.TD_OFFLINE;
 let loadingOffline: Promise<Offline> | null = null;
@@ -145,9 +159,9 @@ async function json<T>(url: string, init?: RequestInit): Promise<T> {
   const response = await fetch(url, init);
   const body = await response.json();
   if (!response.ok)
-    throw new Error(
+    throw Object.assign(new Error(
       body?.error?.message || body?.error?.detail || `${response.status} ${response.statusText}`,
-    );
+    ), { code: body?.error?.code });
   return body as T;
 }
 export async function getCatalog(): Promise<Catalog> {
@@ -164,6 +178,9 @@ export async function getCatalog(): Promise<Catalog> {
     currentApi = false;
     return raw;
   } catch (error) {
+    // A failing live backend must not silently replace real science with a
+    // precomputed snapshot. Only the dedicated offline server opts in explicitly.
+    if (!(error instanceof Error && 'code' in error && error.code === 'OFFLINE')) throw error;
     try {
       const snapshot = await loadOffline();
       offlineMode = true;

@@ -1,0 +1,16 @@
+{
+  "data/nasa/measurements/M2TMNXSLV_Nile_2001_2024.nc": "5db8a5afe85560aad3e3f847c5ddfb2c75309dad7f89fbd3002a4c0c07c1e8cb",
+  "data/nasa/measurements/GLDAS_NOAH025_M_Nile_2001_2024.nc": "55a5194144348ff668cbdcc1485493422797d2206aa0535846d8a8f2feb121cc",
+  "data/nasa/measurements/GPM_3IMERGM_Nile_2001_2024.nc": "967131aec4bdb0fa98ffc6ec9c9340cde164f5704be8f861c7ee02c130d6e219",
+  "data/nasa/measurements/MOD13C2_Nile_2001_2024.nc": "78427f6651ddc8ac129d89d6bb9903f59a020a47a10827f6f184ccafb290188c",
+  "data/nasa/measurements/M2TMNXSLV_Morocco_2001_2024.nc": "c8801417edb435606a6c9621fa127f817dbe86c160a266a5d864c085a8199e40",
+  "data/nasa/measurements/GLDAS_NOAH025_M_Morocco_2001_2024.nc": "a58c21ca540b3d008c45f8342548aab18689e4417169edd3ebcb43246c3fcb74",
+  "data/nasa/measurements/GPM_3IMERGM_Morocco_2001_2024.nc": "95f3e53659dd4593e585031c3eb8d1b1ee8dfd1c30060cfa7d28a3a26969465b",
+  "data/nasa/measurements/MOD13C2_Morocco_2001_2024.nc": "aad8265db99b64eaeafa12d5d09f9ca2ba8e813b9ccc070613987fa97cb5c7e8",
+  "data/nasa/measurements/M2TMNXSLV_Sahel_2001_2024.nc": "14cdb693d945c73f570b296b85cfae3177258e848e078170fa46e608a16cb987",
+  "data/nasa/measurements/GLDAS_NOAH025_M_Sahel_2001_2024.nc": "fd9dc0ccb3667a5987dfd7853db26cb4e8e7cdf7dddc686fb72bcf816750b273",
+  "data/nasa/measurements/GPM_3IMERGM_Sahel_2001_2024.nc": "e515e68076c1639263ba3fe81a390d946c866595d7faee622f26128a579a974f",
+  "data/nasa/measurements/MOD13C2_Sahel_2001_2024.nc": "063eeb3002c6f769b2389236626569d60f053a2a08f92500597d837222b1b02a",
+  "docs/architecture/scope.v2.json": "6561cbfccce8d932483ca582754456f461fc33fc74009265429f5ce24c51e7b3",
+  "packages/science/config/preparation_policy.json": "995492e36d235d53893491bee852d53e037affc6af5e41e35b97659880dfaa23"
+}

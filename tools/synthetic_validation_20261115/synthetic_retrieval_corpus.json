@@ -1,0 +1,16 @@
+[
+  [
+    "rain",
+    "precipitation",
+    "mm"
+  ],
+  [
+    "temperature",
+    "air",
+    "kelvin"
+  ],
+  [
+    "soil",
+    "moisture"
+  ]
+]

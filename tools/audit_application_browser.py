@@ -11,6 +11,7 @@ import subprocess
 import time
 import re
 import math
+import argparse
 import urllib.request
 from playwright.sync_api import sync_playwright
 
@@ -18,10 +19,13 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'backend/var/browser-audit'
 
 
-def main():
+def main(real=False):
+    global OUT
+    if real:
+        OUT=ROOT/'backend/var/real-browser-audit'
     OUT.mkdir(parents=True, exist_ok=True)
     environment = dict(os.environ, RAG_ENABLED='true', GEMINI_API_KEY='', APP_ENV='test',
-                       MOCK_MODE='true', JOB_BACKEND='inline', DATABASE_URL='')
+                       MOCK_MODE='false' if real else 'true', JOB_BACKEND='inline', DATABASE_URL='')
     processes = [
         subprocess.Popen(['python', '-m', 'uvicorn', 'app.main:app', '--port', '18081'],
             cwd=ROOT/'backend', env=environment, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL),
@@ -29,6 +33,8 @@ def main():
             cwd=ROOT/'frontend', stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL),
     ]
     report = {'analyses': [], 'questions': [], 'browser_errors': [], 'scope': 'Synthetic API outputs and local RAG retrieval; no live Gemini or scientific-release certification.'}
+    if real:
+        report['scope']='Real NASA descriptive science, Role04 result conclusions and local documentation retrieval. Inferential release withheld.'
     try:
         for url in ['http://127.0.0.1:18081/health', 'http://127.0.0.1:15173']:
             for _ in range(40):
@@ -47,7 +53,7 @@ def main():
                     options['executable_path'] = str(max(installed, key=lambda p: int(p.parents[1].name.split('-')[1])))
             browser = playwright.chromium.launch(**options)
             page = browser.new_page(viewport={'width': 1440, 'height': 1100}, accept_downloads=True)
-            page.set_default_timeout(15000)
+            page.set_default_timeout(30000)
             page.on('pageerror', lambda error: report['browser_errors'].append(str(error)))
             # Keep Vite's production API paths unchanged, forwarding only this
             # isolated audit's requests to its private backend port.
@@ -66,7 +72,13 @@ def main():
                     slope = variable['trend']['slope_per_year']
                     expected = f'{slope:,.4f}' if slope is not None else '—'
                     page.wait_for_function('(value) => document.querySelector(".big-number span")?.textContent === value', arg=expected)
-                    assert raw['data_mode'] == 'mock'
+                    assert raw['data_mode'] == ('real' if real else 'mock')
+                    if real:
+                        reference=json.loads((ROOT/'packages/science/phase_reports/PHASE_3_RESULTS.json').read_text())
+                        case=next(c for c in reference['cases'] if c['variable_id']==variable['variable_id'] and
+                            c['region_id']==raw['analysis']['region_id'] and c['policy']=='strict_100')
+                        assert math.isclose(slope,case['regional']['annual']['slope_per_year'],abs_tol=1e-10)
+                        assert 'Synthetic demo:' not in page.locator('.result-body').inner_text()
                     assert variable['trend']['p_value'] is None
                     assert 'Not computed' in page.locator('.result-body').inner_text()
                     assert page.locator('.monthly-line').get_attribute('d').startswith('M')
@@ -92,6 +104,17 @@ def main():
             assert receipt['job_id'] == raw['job_id']
             assert receipt['result_id'] == raw['result_id']
             report['receipt_matches_result'] = True
+            if real:
+                page.get_by_role('tab',name='Spin It',exact=True).click()
+                page.get_by_role('button',name='Compute sensitivity windows',exact=True).click()
+                page.wait_for_function("document.querySelectorAll('.window-list button').length === 15")
+                report['spin_windows']=15
+                page.get_by_role('button',name='Compare all regions',exact=True).click()
+                page.wait_for_function("document.querySelectorAll('.comparison > div').length === 3")
+                report['comparison_regions']=3
+                page.get_by_role('tab',name='Result',exact=True).click()
+                page.locator('.evidence-rail').screenshot(path=str(OUT/'real-result.png'))
+                page.locator('.region-map').screenshot(path=str(OUT/'real-native-map.png'))
 
             chunks = {chunk['chunk_id']: chunk for chunk in (
                 json.loads(line) for line in (ROOT/'data/nasa/rag/corpus_semantic.jsonl').read_text(encoding='utf-8').splitlines() if line.strip())}
@@ -144,4 +167,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--real-science',action='store_true')
+    main(real=parser.parse_args().real_science)

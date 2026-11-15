@@ -1,5 +1,7 @@
 # Statistics workspace
 
+> Latest bounded inference recheck (15 November 2026): [method and limits](phase_reports/CONTINUOUS_AR1_RECHECK_METHOD.md). Nine known-p references pass; the new continuous-rho guarded GLS path is conservative and fails 23/26 historical practical screens. Application inference remains disabled. Earlier synthetic fixtures are retained.
+
 Latest: [descriptive-only Phase 5](phase_reports/PHASE_5_REPORT.md), authorized in
 [PHASE_5_APPROVAL.md](phase_reports/PHASE_5_APPROVAL.md). Fourteen cases and four
 windows are implemented; 118 tests pass. Inference remains disabled, Strict is

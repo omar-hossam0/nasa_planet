@@ -1,0 +1,22 @@
+{
+  "seed": 20261115,
+  "years": 24,
+  "records_per_scenario": 300,
+  "rho": [
+    0.0,
+    0.7,
+    0.9
+  ],
+  "true_slopes": [
+    0.0,
+    0.08
+  ],
+  "noise": "stationary Gaussian AR(1), marginal SD=1, known generating slope",
+  "bootstrap_replicates": 199,
+  "block_length": 4,
+  "confidence": 0.95,
+  "scope": "current descriptive code, experimental inference candidates, offline retrieval and templates",
+  "not_tested": "live Gemini answer quality, browser, deployment, exhaustive inference calibration",
+  "retention": "Keep fixtures, outputs and code until user explicitly requests deletion",
+  "production_changes": false
+}

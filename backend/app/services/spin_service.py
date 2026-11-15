@@ -45,7 +45,7 @@ class SpinService:
         primary = result.variables[0]
         trend_unit = primary.trend.slope_unit or f"{primary.unit} year-1"
 
-        spin_id = "spin_mock_" + hashlib.sha256(
+        spin_id = ('spin_mock_' if not result.science else 'spin_real_') + hashlib.sha256(
             "|".join(
                 [
                     result.result_id,
@@ -59,6 +59,8 @@ class SpinService:
         spin = SpinResponse(
             spin_id=spin_id,
             result_id=result.result_id,
+            data_mode=result.data_mode,
+            disclaimer=result.disclaimer,
             status=SpinStatus.completed,
             request=request,
             variable_id=primary.variable_id,
@@ -68,6 +70,7 @@ class SpinService:
             windows=computed.windows,
             summary=computed.summary,
             warnings=[
+                'Spin It recomputes descriptive windows without modifying the base result.' if result.science else
                 "Spin It does not modify the parent result; it reports separate synthetic windows.",
                 *[warning.message for warning in computed.warnings],
             ],
@@ -78,9 +81,11 @@ class SpinService:
         return SpinCreateResponse(
             spin_id=spin_id,
             result_id=result.result_id,
+            data_mode=result.data_mode,
+            disclaimer=result.disclaimer,
             status=SpinStatus.completed,
             message=(
-                f"Spin It computed {len(computed.windows)} deterministic mock window(s). "
+                f"Spin It computed {len(computed.windows)} descriptive window(s). "
                 "The parent result was not modified."
             ),
             links=SpinLinks(
@@ -133,7 +138,7 @@ class SpinService:
                 end_year_max=upper,
             )
 
-        window_count = (upper - request.minimum_window_years) - lower + 1
+        window_count = (upper - request.minimum_window_years) - lower + (1 if self._settings.mock_mode else 2)
         if window_count <= 0:
             raise InvalidSpinWindowError(
                 "The requested window does not fit inside the selected years.",

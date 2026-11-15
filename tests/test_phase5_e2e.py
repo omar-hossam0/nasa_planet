@@ -360,7 +360,11 @@ KEY_PATTERNS = [
     re.compile(r"AIza[0-9A-Za-z_\-]{20,}"),
     re.compile(r"sk-[A-Za-z0-9]{20,}"),
     re.compile(r"gsk_[A-Za-z0-9]{20,}"),
-    re.compile(r"(?:GEMINI|MISTRAL)_API_KEY[ \t]*=[ \t]*[A-Za-z0-9_\-]{8,}"),
+    re.compile(
+        r"(?:GEMINI|MISTRAL)_API_KEY[ \t]*=[ \t]*"
+        r"(?!test-|example|<|\$\{|[A-Za-z0-9]*YourSecretKeyHere\b)"
+        r"[A-Za-z0-9_\-]{8,}"
+    ),
 ]
 TEXT_SUFFIXES = {
     ".py", ".md", ".json", ".jsonl", ".txt", ".html", ".csv", ".ini", ".cfg",

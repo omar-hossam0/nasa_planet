@@ -1,5 +1,9 @@
 # Science and RAG recheck — 15 November 2026
 
+Historical diagnostic before the requested repair. The contract blocker and real
+adapter/result-conclusion wiring are now resolved; see
+[REAL_SCIENCE_INTEGRATION.md](REAL_SCIENCE_INTEGRATION.md) for the current state.
+
 ## Verdict
 
 The displayed application is a synthetic demo, not an integrated real-science

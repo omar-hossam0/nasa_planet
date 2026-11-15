@@ -25,7 +25,7 @@ from app.schemas.catalog import (
     VariableDetail,
     VariableSummary,
 )
-from app.schemas.common import AggregationPolicy, Aoi
+from app.schemas.common import AggregationPolicy, Aoi, DataMode
 
 SUPPORTED_AGGREGATION_POLICIES: tuple[AggregationPolicy, ...] = (
     AggregationPolicy.area_weighted,
@@ -128,6 +128,16 @@ def evaluate_demo_availability(
                 details={"aoi": aoi.canonical(), "region_bbox": list(region.bbox)},
             )
 
+    if hasattr(data, 'ensure_available'):
+        from types import SimpleNamespace
+        from app.core.exceptions import DataNotAvailableError
+        try:
+            data.ensure_available(SimpleNamespace(variable_ids=[variable_id],region_id=region_id,
+                start_month=start_month,end_month=end_month,
+                aoi=aoi or Aoi(type='bbox',coordinates=list(region.bbox)),aggregation_policy=AggregationPolicy.area_weighted))
+        except DataNotAvailableError as error:
+            return AvailabilityEvaluation(usable=False,reason_code=AvailabilityReason.OUTSIDE_COVERAGE,message=error.message)
+
     return AvailabilityEvaluation(
         usable=True,
         reason_code=AvailabilityReason.MOCK_DEMO_ONLY,
@@ -150,10 +160,12 @@ class CatalogService:
         return CatalogResponse(
             variables=variables,
             count=len(variables),
+            data_mode=DataMode.mock if self._settings.mock_mode else DataMode.real,
+            disclaimer='Synthetic demonstration data. Not a NASA scientific result.' if self._settings.mock_mode else 'Real NASA inputs; descriptive analysis only. Inference is not released.',
             registry_snapshot=self._data.registry_snapshot(),
             warnings=[
                 "Catalog metadata mirrors a repository snapshot, not a live NASA registry.",
-                "app_available=false means no approved method is wired up yet.",
+                'app_available refers to the configured execution mode; descriptive availability does not release inference.',
             ],
         )
 
@@ -166,7 +178,8 @@ class CatalogService:
 
     def list_regions(self) -> RegionsResponse:
         regions = [self._to_region(record) for record in self._data.list_regions()]
-        return RegionsResponse(regions=regions, count=len(regions))
+        return RegionsResponse(regions=regions, count=len(regions), data_mode='mock' if self._settings.mock_mode else 'real',
+            disclaimer='Synthetic demonstration data.' if self._settings.mock_mode else 'Registered source coverage; descriptive analysis only.')
 
     # -- availability -----------------------------------------------------
     def check_availability(
@@ -201,7 +214,7 @@ class CatalogService:
         warnings = [
             "Availability is mock-simulated. measurement_ready/method_ready/app_available "
             "are copied from the verified registry snapshot; demo_available is the mock gate."
-        ]
+        ] if self._settings.mock_mode else ['Actual source coverage and native cell centres checked. Descriptive-only processing; inference withheld.']
         if not record.units_verified:
             warnings.append(f"Unit '{record.unit}' for {resolved_variable} is unverified.")
 
@@ -214,13 +227,15 @@ class CatalogService:
             measurement_ready=record.measurement_ready,
             method_ready=record.method_ready,
             app_available=record.app_available,
-            demo_available=evaluation.usable,
+            demo_available=evaluation.usable if self._settings.mock_mode else False,
             usable=evaluation.usable,
-            reason_code=evaluation.reason_code,
-            reason_message=evaluation.message,
-            availability_source="registry_snapshot + mock_demo_gate",
-            simulated=True,
-            supported_aggregation_policies=list(SUPPORTED_AGGREGATION_POLICIES),
+            reason_code=evaluation.reason_code if self._settings.mock_mode or not evaluation.usable else AvailabilityReason.DESCRIPTIVE_READY,
+            data_mode=DataMode.mock if self._settings.mock_mode else DataMode.real,
+            disclaimer='Synthetic demonstration data.' if self._settings.mock_mode else 'Real source inputs; descriptive estimates, inference withheld.',
+            simulated=self._settings.mock_mode,
+            reason_message=evaluation.message if self._settings.mock_mode or not evaluation.usable else 'Registered data supports descriptive processing only.',
+            availability_source='registry_snapshot + mock_demo_gate' if self._settings.mock_mode else 'source_contract_and_native_grid',
+            supported_aggregation_policies=list(SUPPORTED_AGGREGATION_POLICIES) if self._settings.mock_mode else [AggregationPolicy.area_weighted],
             warnings=warnings,
         )
 
@@ -243,6 +258,7 @@ class CatalogService:
 
     def _to_summary(self, record: VariableRecord) -> VariableSummary:
         return VariableSummary(
+            data_mode=DataMode.mock if self._settings.mock_mode else DataMode.real,
             variable_id=record.variable_id,
             display_name=record.display_name,
             description=record.description,
@@ -294,7 +310,9 @@ class CatalogService:
             bbox=list(record.bbox),
             period_start=record.period_start,
             period_end=record.period_end,
-            supported_variable_ids=list(record.supported_variable_ids),
+            supported_variable_ids=[v for v in record.supported_variable_ids if record.region_id in self._data.supported_region_ids(v)],
+            data_mode=DataMode.mock if self._settings.mock_mode else DataMode.real,
+            demo_only=self._settings.mock_mode,
             warnings=[
                 "Region bboxes are study windows, not administrative boundaries.",
             ],
