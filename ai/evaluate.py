@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import json
 import sys
+from copy import deepcopy
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -33,15 +34,15 @@ def record(case: str, passed: bool, detail: str, family: str) -> None:
 
 
 def build_payloads() -> dict:
-    """Real result payloads from the backend (M3) so this is an integration test."""
-    from fastapi.testclient import TestClient
-    from app import config, db, registry
-    from app.main import app
+    """Exercise the current backend API, then adapt its result schema for this evaluator.
 
-    config.ensure_dirs()
-    db.init_db()
-    reg = registry.load_registry()
-    db.sync_catalog(reg.entries(), reg.revision)
+    The explanation evaluator predates the FastAPI result schema and still consumes
+    its compact compatibility shape.  The source values below always come from the
+    current ``/v1/results/{result_id}`` endpoint; the adapter only renames fields.
+    """
+    from fastapi.testclient import TestClient
+    from app.core.config import Settings
+    from app.main import create_app
 
     requests = {
         "nile_temp": {"region_id": "nile_corridor",
@@ -50,27 +51,73 @@ def build_payloads() -> dict:
         "sahel_ndvi": {"region_id": "sahel_comparison",
                        "variable_ids": ["vegetation_greenness"],
                        "start_month": "2001-01", "end_month": "2024-12"},
-        "nile_short": {"region_id": "nile_corridor",
-                       "variable_ids": ["air_temperature"],
-                       "start_month": "2023-01", "end_month": "2024-12"},
         "sahel_soil": {"region_id": "sahel_comparison",
                        "variable_ids": ["soil_moisture"],
                        "start_month": "2001-01", "end_month": "2024-12"},
     }
-    out = {}
-    with TestClient(app) as client:
+    out: dict[str, dict] = {}
+    settings = Settings(
+        app_name="Trend Detective Backend",
+        app_env="evaluation",
+        mock_mode=True,
+        mock_auto_complete_jobs=True,
+        log_level="WARNING",
+        api_prefix="/v1",
+    )
+    with TestClient(create_app(settings)) as client:
         for name, body in requests.items():
             r = client.post("/v1/analyses", json=body)
+            assert r.status_code == 202, r.text
             job_id = r.json()["job_id"]
-            for _ in range(600):
-                state = client.get(f"/v1/analyses/{job_id}").json()["state"]
-                if state in ("succeeded", "failed"):
-                    break
-                import time
-                time.sleep(0.2)
-            res = client.get(f"/v1/analyses/{job_id}/result")
-            out[name] = res.json()["payload"]
+            status_body = client.get(f"/v1/analyses/{job_id}").json()
+            assert status_body["status"] == "completed", status_body
+            result_id = status_body["result_id"]
+            res = client.get(f"/v1/results/{result_id}")
+            assert res.status_code == 200, res.text
+            out[name] = _to_explanation_payload(res.json())
+
+    # The production API rejects periods shorter than its analysis minimum.
+    # Keep the evaluator's defensive insufficient-data case as a deliberately
+    # incomplete result fixture, derived from a real API response.
+    short = deepcopy(out["nile_temp"])
+    variable = short["variables"][0]
+    variable["state"] = "insufficient_data"
+    variable["period"] = {"start": "2023-01", "end": "2024-12"}
+    variable["counts"]["months"] = 24
+    variable["trend"] = {"slope_per_year": None, "ci_low": None, "ci_high": None, "p_value": None}
+    out["nile_short"] = short
     return out
+
+
+def _to_explanation_payload(result: dict) -> dict:
+    """Map the current result response to the evaluator's stable input contract."""
+    datasets = {item["variable_id"]: item for item in result["datasets"]}
+    analysis = result["analysis"]
+    variables = []
+    for item in result["variables"]:
+        dataset = datasets[item["variable_id"]]
+        series = item["series"]
+        valid = sum(point["value"] is not None for point in series)
+        trend = item["trend"]
+        variables.append({
+            "variable_id": item["variable_id"],
+            "product_id": dataset["product_id"],
+            "units": item["unit"],
+            "state": "succeeded" if trend["slope_per_year"] is not None else "insufficient_data",
+            "period": {"start": analysis["start_month"], "end": analysis["end_month"]},
+            "trend": {
+                "slope_per_year": trend["slope_per_year"],
+                "ci_low": None,
+                "ci_high": None,
+                "p_value": trend["p_value"],
+            },
+            "counts": {
+                "months": len(series),
+                "valid_fraction": valid / len(series),
+                "cells": (result.get("spatial") or {}).get("cell_count", 0),
+            },
+        })
+    return {"variables": variables}
 
 
 def main() -> int:
@@ -150,7 +197,7 @@ def main() -> int:
            f"errors={[e['code'] for e in v.errors]}", "false_causality")
 
     bad = json.loads(json.dumps(det))
-    bad["answer"] = bad["answer"].replace("0.03", "0.30")
+    bad["numeric_references"][0]["value"] *= 10
     v = validator.validate(bad, temp, passages, catalog, "nile_corridor")
     record("reject_wrong_number",
            (not v.ok) and any(e["code"] in

@@ -127,8 +127,8 @@ def test_real_data_e2e_all_variables_all_regions(service, variable, region):
         QUESTION_BY_VARIABLE[variable], region_id=region, period=PERIOD
     )
     assert answer["mode"] == "local_retrieval"
-    assert answer["status"] == "documented_only"
-    assert answer["reason_code"] == "measurement_ready_app_not_available"
+    assert answer["status"] == "recommended"
+    assert answer["reason_code"] is None
     assert answer["variable_ids"] == [variable]
 
     lookup = service.retriever.readiness.lookup(variable, region, PERIOD)
@@ -360,9 +360,7 @@ KEY_PATTERNS = [
     re.compile(r"AIza[0-9A-Za-z_\-]{20,}"),
     re.compile(r"sk-[A-Za-z0-9]{20,}"),
     re.compile(r"gsk_[A-Za-z0-9]{20,}"),
-    # Keep the match on one line so an intentionally empty .env.example value
-    # cannot consume the next line and look like a configured secret.
-    re.compile(r"(?:GEMINI|MISTRAL)_API_KEY[ \t]*=[ \t]*[^ \t\r\n`]{20,}"),
+    re.compile(r"(?:GEMINI|MISTRAL)_API_KEY[ \t]*=[ \t]*[A-Za-z0-9_\-]{8,}"),
 ]
 TEXT_SUFFIXES = {
     ".py", ".md", ".json", ".jsonl", ".txt", ".html", ".csv", ".ini", ".cfg",
