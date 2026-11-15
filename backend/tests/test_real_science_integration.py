@@ -88,6 +88,13 @@ def test_all_twelve_real_analyses_match_archived_and_independent_slope(
         format(slope, ".8g") in section["body"] for section in explanation["sections"]
     )
     assert explanation["references"]
+    assessment = explanation['assessments'][0]
+    assert assessment['result_id'] == result['result_id']
+    assert assessment['descriptive_status'] == 'available'
+    assert assessment['inference_status'] == 'not_available'
+    assert assessment['facts']['complete_years'] == 24
+    assert assessment['facts']['slope_per_year'] == slope
+    assert assessment['facts']['retained_cells'] == artifact['metadata']['eligible_fixed_support_cells']
 
 
 def test_native_cell_detail_and_real_spin(real_client):
@@ -213,3 +220,33 @@ def test_result_explanations_never_call_provider(real_client, monkeypatch):
         "result_id": result["result_id"], "style": "llm",
     })
     assert rejected.status_code == 422
+
+
+def test_short_window_explanation_has_request_specific_limits(real_client):
+    result = submit(real_client, end_month='2005-12')
+    for language in ('ar', 'en'):
+        response = real_client.post('/v1/explanations', json={'result_id': result['result_id'], 'language': language})
+        assert response.status_code == 200, response.text
+        body = response.json()
+        assessment = body['assessments'][0]
+        assert assessment['descriptive_status'] == 'available'
+        assert assessment['facts']['complete_years'] == 5
+        assert assessment['facts']['valid_months'] == 60
+        assert 'short_annual_record' in {r['code'] for r in assessment['reasons']}
+        if language == 'ar':
+            assert next(s['title'] for s in body['sections'] if s['section_id'].endswith('_context')) == 'المصدر والفترة'
+
+
+def test_real_explanation_reports_sensitive_direction_and_limited_area(real_client):
+    for variable, region, expected_reason in [
+        ('precipitation', 'nile_corridor', 'direction_sensitive_to_one_year'),
+        ('vegetation_greenness', 'sahel_comparison', 'limited_spatial_support'),
+    ]:
+        result = submit(real_client, variable, region)
+        body = real_client.post('/v1/explanations', json={'result_id': result['result_id']}).json()
+        assessment = body['assessments'][0]
+        assert expected_reason in {r['code'] for r in assessment['reasons']}
+        assert assessment['diagnostics_status'] == 'not_run_for_this_result'
+        if variable == 'precipitation':
+            assert assessment['facts']['leave_one_year_out_same_sign_count'] == 14
+            assert assessment['facts']['leave_one_year_out_windows'] == 24

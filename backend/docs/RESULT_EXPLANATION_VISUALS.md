@@ -1,5 +1,8 @@
 # Result explanations and interpretation visuals
 
+Request-specific rule assessments and the structured bilingual result card are
+documented in [RESULT_ASSESSMENT.md](RESULT_ASSESSMENT.md).
+
 Result explanations exclusively use deterministic Role04 bilingual templates over
 stored science results. POST /v1/explanations accepts result_id and language only.
 The optional result-generation service, frontend button and configuration have

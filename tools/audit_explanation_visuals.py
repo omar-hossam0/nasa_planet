@@ -108,6 +108,9 @@ def main():
 
             assert page.locator('.llm-result').count() == 0
             assert page.get_by_role('button', name='Explain with Gemini', exact=True).count() == 0
+            assert page.locator('.result-assessment').count() == 1
+            assert page.locator('[data-reason-code="request_model_diagnostics_not_run"]').count() == 1
+            page.locator('.result-explanation').screenshot(path=str(OUT / 'assessment-desktop.png'))
             # A QA-restricted case demonstrates why spatial coverage and monthly
             # completeness must be separate indicators.
             page.locator(".region-options button").nth(2).click()
@@ -116,6 +119,7 @@ def main():
             page.locator(".coverage-donut").wait_for()
             report["qa_coverage_readout"] = page.locator(".coverage-count").inner_text()
             assert "2961" in report["qa_coverage_readout"].replace(",", "")
+            assert page.locator('[data-reason-code="limited_spatial_support"]').count() == 1
             page.locator(".analysis-insights").screenshot(
                 path=str(OUT / "ndvi-qa-support.png")
             )
@@ -125,6 +129,33 @@ def main():
             page.locator(".analysis-insights").screenshot(
                 path=str(OUT / "insights-mobile.png")
             )
+            page.locator('.result-explanation').scroll_into_view_if_needed()
+            assert page.locator('.result-explanation').bounding_box()['width'] <= 390
+            page.locator('.result-explanation').screenshot(path=str(OUT/'assessment-mobile.png'))
+            page.set_viewport_size({'width': 1500, 'height': 1100})
+            page.goto('http://127.0.0.1:15174/?lang=ar#explore', wait_until='domcontentloaded')
+            page.wait_for_function("document.querySelectorAll('.region-options button').length===3")
+            page.locator('.date-row select').nth(1).select_option('2005-12')
+            page.locator('.run-button').click()
+            page.locator('[data-reason-code="short_annual_record"]').wait_for()
+            assert '5' in page.locator('[data-reason-code="short_annual_record"]').inner_text()
+            assert page.locator('.result-explanation').get_attribute('dir') == 'rtl'
+            page.locator('.result-explanation').screenshot(path=str(OUT/'assessment-arabic-short.png'))
+            report['assessment_short_window_arabic'] = True
+            report['assessment_spatial_warning'] = True
+            page.locator('#rag-question').fill('Is Morocco getting warmer between 2001 and 2010?')
+            page.locator('.rag-chat form button[type="submit"]').click()
+            page.locator('.rag-workflow button').wait_for()
+            page.locator('.rag-workflow').screenshot(path=str(OUT/'question-analysis-proposal.png'))
+            page.locator('.rag-workflow button').click()
+            assert page.locator('.date-row select').nth(1).input_value() == '2010-12'
+            with page.expect_response(lambda r: r.url.endswith('/v1/explanations') and r.request.method=='POST') as completed:
+                page.locator('.run-button').click()
+            assessment = completed.value.json()['assessments'][0]
+            assert assessment['region_id']=='morocco_comparison'
+            assert assessment['facts']['complete_years']==10
+            assert assessment['judgment']['state']=='unavailable'
+            report['question_to_analysis_to_judgment'] = True
             assert not report["errors"], report["errors"]
             report["passed"] = True
             browser.close()

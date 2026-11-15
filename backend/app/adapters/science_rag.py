@@ -1,6 +1,6 @@
 """Grounded documentation recommendations and result-only Role04 conclusions."""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from statistics import mean
 
 from app.mocks.ai import RecommendationOutcome
@@ -10,6 +10,7 @@ from app.adapters.science import DISCLAIMER
 from packages.rag.facade import Role04Service
 from packages.rag.intent import classify_query
 from packages.rag.retriever import Retriever
+from app.services.result_assessment import assess_variable
 
 
 @dataclass
@@ -19,6 +20,7 @@ class Rendered:
     limitations: list
     references: list
     mode: str = "conclusion_templates"
+    assessments: list = field(default_factory=list)
 
 
 class ScienceRAGAdapter:
@@ -47,7 +49,7 @@ class ScienceRAGAdapter:
         )
 
     def explain(self, result, language):
-        sections, references, limitations = [], [], [DISCLAIMER]
+        sections, references, limitations, assessments = [], [], [DISCLAIMER], []
         for variable in result.variables:
             artifact = result.science[variable.variable_id]
             meta = artifact["metadata"]
@@ -87,64 +89,21 @@ class ScienceRAGAdapter:
                 },
             }
             # Fresh facade/tracker per call; share only immutable retrieval index.
-            rendered = Role04Service(retriever=self.retriever).render_result(
+            role04 = Role04Service(retriever=self.retriever)
+            rendered = role04.render_result(
                 payload, language=language.value, normalize=False
             )
-            titles = (
-                {
-                    "context": "المصدر والفترة",
-                    "regional_trend": "القيم الشهرية وحدود الاستدلال",
-                    "provenance": "إيصال الأدلة",
-                }
-                if language.value == "ar"
-                else {
-                    "context": "Source and period",
-                    "regional_trend": "Monthly values and inference limits",
-                    "provenance": "Evidence receipt",
-                }
-            )
-            sections.extend(
-                (
-                    f'{variable.variable_id}_{s["id"]}',
-                    titles.get(s["id"], s["id"]),
-                    s["text"],
-                )
-                for s in rendered["segments"]
-            )
-            if not valid:
-                sections.append(
-                    (
-                        variable.variable_id + "_missing",
-                        "Insufficient data",
-                        rendered["message"],
-                    )
-                )
-            if variable.trend.slope_per_year is not None:
-                body = (
-                    f"Annual descriptive Theil–Sen slope: {variable.trend.slope_per_year:.8g} {variable.trend.slope_unit}. "
-                    f"{variable.trend.n_years} valid annual observations. Positive/negative cell slopes are not significance classifications."
-                    if language.value == "en"
-                    else f"ميل Theil–Sen السنوي الوصفي: {variable.trend.slope_per_year:.8g} {variable.trend.slope_unit}. عدد السنوات الصالحة {variable.trend.n_years}. إشارة ميل الخلايا لا تعني دلالة إحصائية."
-                )
-                sections.append(
-                    (
-                        variable.variable_id + "_annual",
-                        "Annual descriptive estimate",
-                        body,
-                    )
-                )
-            body = (
-                f"QA retained {meta['eligible_fixed_support_cells']} of {meta['selected_cell_count']} selected cells "
-                f"({meta['fixed_support_area_fraction_of_selected_native_cells']*100:.2f}% of selected native-cell area). "
-                f"Positive slopes: {artifact['positive_cells']}; negative slopes: {artifact['negative_cells']}. No significance test was released."
-            )
-            if language.value == 'ar':
-                body = (f"احتفظ فحص الجودة بـ{meta['eligible_fixed_support_cells']} من {meta['selected_cell_count']} خلية مختارة، "
-                    f"تمثل {meta['fixed_support_area_fraction_of_selected_native_cells']*100:.2f}% من مساحة الخلايا الأصلية المختارة. "
-                    f"الخلايا ذات الميل الموجب: {artifact['positive_cells']}، والسالب: {artifact['negative_cells']}. لم يُنشر اختبار دلالة إحصائية.")
-            sections.append(
-                (variable.variable_id + "_support", "QA and native-grid support", body)
-            )
+            titles = ({"context": "المصدر والفترة", "provenance": "إيصال الأدلة"}
+                      if language.value == "ar" else
+                      {"context": "Source and period", "provenance": "Evidence receipt"})
+            sections.extend((f'{variable.variable_id}_{part["id"]}',
+                             titles.get(part["id"], part["id"]), part["text"])
+                            for part in rendered.get("segments", [])
+                            if part["id"] in ("context", "provenance"))
+            assessment = assess_variable(result, variable, language)
+            assessments.append(assessment)
+            sections.extend(role04.render_assessment(assessment, language))
+            limitations.extend(reason.message for reason in assessment.reasons)
             limitations.extend(meta["warnings"])
             evidence = self.retriever.answer_query(
                 variable.variable_id.replace("_", " ")
@@ -162,4 +121,5 @@ class ScienceRAGAdapter:
             actions,
             list(dict.fromkeys(limitations)),
             list(dict.fromkeys(references)),
+            assessments=assessments,
         )

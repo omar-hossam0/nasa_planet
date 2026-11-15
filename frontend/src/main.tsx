@@ -1,4 +1,5 @@
 import { RagChat } from './RagChat';
+import { ResultExplanation } from './ResultExplanation';
 import { AnalysisInsights, InferenceNotice } from './AnalysisInsights';
 import { RegionMap } from './RegionMap';
 import React, { useEffect, useRef, useState } from "react";
@@ -961,7 +962,11 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
               </div>
             </div>
             {analysis && <AnalysisInsights analysis={analysis} lang={lang} variableId={variable}/>}
-            <RagChat lang={lang} region={region} />
+            <RagChat lang={lang} region={region} start={start} end={end} onProposal={proposal => {
+              setRegion(proposal.region_id); setVariable(proposal.variable_ids[0]);
+              setStart(proposal.start_month); setEnd(proposal.end_month); setAoi(null); setAnalysis(null);
+              document.querySelector('.run-button')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }}/>
           </div>
           <aside id="verify" className="evidence-rail">
             <div className="evidence-heading">
@@ -1068,10 +1073,7 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
                   ? (entry?.source_kind === 'synthetic_demo' ? 'Synthetic demo: these numbers are not NASA measurements. Result explanations use templates; ask documentation questions below the chart.' : 'Result explanations and documentation questions are separate. No significance is inferred from a descriptive slope.')
                   : (entry?.source_kind === 'synthetic_demo' ? 'عرض تجريبي: الأرقام ليست قياسات ناسا. شرح النتيجة من قوالب؛ اسأل عن الوثائق أسفل الرسم.' : 'شرح النتائج وأسئلة الوثائق مساران منفصلان. الميل الوصفي لا يثبت دلالة إحصائية.')}</div>
                 {analysis.explanation ? (
-                  <div className="explanation">
-                    <Sparkles size={17} />
-                    <p>{analysis.explanation.explanation.answer}</p>
-                  </div>
+                  <ResultExplanation explanation={analysis.explanation} lang={lang}/>
                 ) : null}
                 <button
                   className="receipt-button"

@@ -1,0 +1,34 @@
+[
+  {
+    "query": "What is air temperature?",
+    "mode": "llm",
+    "status": "documented_only",
+    "fallback_reason": null,
+    "answer": "MERRA-2 provides air temperature at various atmospheric levels. For example, it includes 2-meter air temperature, 10-meter air temperature, and air temperature at pressure levels such as 250 hPa, 500 hPa, and 850 hPa. The unit for air temperature is Kelvin (K).",
+    "citation_count": 3
+  },
+  {
+    "query": "يعني إيه المطر؟",
+    "mode": "local_retrieval",
+    "status": "documented_only",
+    "fallback_reason": "provider_error:timeout",
+    "answer": null,
+    "citation_count": 5
+  },
+  {
+    "query": "What is NDVI?",
+    "mode": "local_retrieval",
+    "status": "documented_only",
+    "fallback_reason": "provider_error:http_error",
+    "answer": null,
+    "citation_count": 5
+  },
+  {
+    "query": "يعني إيه رطوبة التربة؟",
+    "mode": "local_retrieval",
+    "status": "documented_only",
+    "fallback_reason": "provider_error:http_error",
+    "answer": null,
+    "citation_count": 5
+  }
+]

@@ -130,6 +130,16 @@ VARIABLE_ALIASES = {
     },
 }
 
+# Curated language variants, not NASA-authored scientific claims.
+VARIABLE_ALIASES['air_temperature']['en'] += ['warmer', 'colder', 'cooler', 'air temp', 'air temps', 'temprature', 'temperture', 'heating up', 'temperatures', 'air temperatures']
+VARIABLE_ALIASES['air_temperature']['ar'] += ['بتسخن', 'بيسخن', 'بتبرد', 'سخنت', 'الاحترار', 'الحراره', 'حرارة الجو', 'حراره الجو', 'حرارة الهوا', 'الجو بيسخن']
+VARIABLE_ALIASES['soil_moisture']['en'] += ['soil humidity', 'water in soil', 'moisture in the soil', 'soil drying', 'dry soil', 'soil getting drier', 'soil getting wetter', 'soil moiture']
+VARIABLE_ALIASES['soil_moisture']['ar'] += ['رطوبه التربه', 'مياه التربة', 'مية التربة', 'التربة ناشفة', 'التربه ناشفه', 'جفاف التربة', 'جفاف التربه', 'بلل التربة']
+VARIABLE_ALIASES['precipitation']['en'] += ['raining', 'rainier', 'rain fall', 'preciptation', 'precipitations', 'rain totals']
+VARIABLE_ALIASES['precipitation']['ar'] += ['المطر', 'المطره', 'المطرية', 'الامطار', 'امطار', 'بتمطر', 'المطر بيقل', 'الهطول', 'الأمطار']
+VARIABLE_ALIASES['vegetation_greenness']['en'] += ['greener', 'vegetation cover', 'plant cover', 'vegetation health', 'vegetation greeness', 'plant greenness']
+VARIABLE_ALIASES['vegetation_greenness']['ar'] += ['الخضرة', 'الخضره', 'اخضرار', 'اخضرار النبات', 'الغطاء النباتي', 'غطاء نباتي', 'النباتات', 'النبات بيقل']
+
 NORMALIZED_ALIASES = {
     variable: {
         lang: sorted({_norm(a) if lang == "ar" else a.lower() for a in words})

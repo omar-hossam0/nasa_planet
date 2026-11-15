@@ -5,6 +5,7 @@ from __future__ import annotations
 from datetime import datetime
 
 from pydantic import BaseModel, Field
+from packages.rag.judge import InferenceEvidence
 
 from app.schemas.common import (
     DISCLAIMER,
@@ -43,6 +44,7 @@ class TrendSummary(BaseModel):
     p_value: float | None = None
     r_squared: float | None = None
     inference_status: str = "not_computed"
+    inference: InferenceEvidence | None = None
     evidence_state: EvidenceState = EvidenceState.synthetic_demo
     notes: list[str] = Field(default_factory=list)
 

@@ -1,0 +1,21 @@
+{
+  "cases": 764,
+  "passed": 764,
+  "failed": 0,
+  "by_split": {
+    "development": {
+      "total": 512,
+      "failed": 0
+    },
+    "heldout_compositions": {
+      "total": 192,
+      "failed": 0
+    },
+    "scope_safety": {
+      "total": 60,
+      "failed": 0
+    }
+  },
+  "elapsed_seconds": 1.55,
+  "limitations": "Generated compositions, not independent real-user accuracy; heldout phrases reuse wrappers; no live LLM evaluation."
+}

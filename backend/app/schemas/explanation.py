@@ -12,6 +12,7 @@ from typing import Any
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.schemas.common import DISCLAIMER, DataMode, Language
+from app.schemas.assessment import ResultAssessment
 
 
 class ExplanationMode(str, Enum):
@@ -65,6 +66,7 @@ class ExplanationResponse(BaseModel):
         description="Verified source references. Empty because no retrieval ran.",
     )
     limitations: list[str] = Field(default_factory=list)
+    assessments: list[ResultAssessment] = Field(default_factory=list)
     data_mode: DataMode = DataMode.mock
     disclaimer: str = DISCLAIMER
     generated_at: str

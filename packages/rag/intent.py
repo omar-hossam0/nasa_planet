@@ -110,7 +110,15 @@ def classify_query(query: str) -> dict:
         )
 
     years = [int(y) for y in YEAR_RE.findall(normalize_query(raw_query))]
-    early_year = next((y for y in years if y < 2001), None)
+    early_year = next((y for y in years if y < 2001 or y > 2024), None)
+    if _in(_normalize_wordlist(['forecast', 'predict', 'prediction', 'تنبؤ', 'توقع', 'توقعات']), tokens):
+        return _unsupported(raw_query, 'forecast_not_supported', 'Forecasting is not supported. التنبؤ بالمستقبل غير مدعوم.')
+    if _in(_normalize_wordlist(['sea surface', 'ocean temperature', 'sea temperature', 'حرارة البحر', 'حرارة المحيط']), tokens):
+        return _unsupported(raw_query, 'target_variable_not_available', 'Sea-surface temperature is outside the supported variables. حرارة سطح البحر غير مدعومة.')
+    if not variables and _in(_normalize_wordlist(['drought', 'الجفاف', 'جفاف']), tokens):
+        return {'status': STATUS_AMBIGUOUS, 'reason_code': 'drought_requires_variable',
+                'variable_ids': [], 'suggested_variable_ids': [],
+                'clarification': 'Do you mean precipitation, soil moisture or vegetation? هل تقصد الأمطار أم رطوبة التربة أم الغطاء النباتي؟'}
 
     humidity_present = _in(_HUMIDITY, tokens)
     soil_qualified = _in(_SOIL_QUALIFIERS, tokens)

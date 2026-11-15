@@ -96,8 +96,18 @@ export type Spatial = {
   bbox: number[];
   limitations: string[];
 };
+export type ResultAssessment = {
+  policy_revision: string; result_id: string; variable_id: string;
+  descriptive_status: 'available' | 'insufficient_data' | 'inconsistent_result';
+  inference_status: 'not_available'; diagnostics_status: 'not_run_for_this_result';
+  direction: 'increase' | 'decrease' | 'no_estimated_change' | 'unavailable';
+  headline: string;
+  reasons: { code: string; severity: 'info' | 'warning' | 'blocking'; message: string }[];
+};
 export type Explanation = {
   explanation: { answer: string; limitations: string[] };
+  sections?: { section_id: string; title: string; body: string }[];
+  assessments?: ResultAssessment[];
   citations: { title: string; source_url: string; page?: number }[];
   path: string;
 };

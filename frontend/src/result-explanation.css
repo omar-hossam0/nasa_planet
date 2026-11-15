@@ -1,0 +1,16 @@
+.result-explanation{background:#e2eee4;border:1px solid #bfd4c5;border-radius:10px;color:#234832;padding:16px;margin-top:18px;overflow-wrap:anywhere;min-width:0}
+.result-explanation .result-explanation-label{font-size:11px;line-height:1.5;margin:0 0 12px;color:#3c6450}
+.result-explanation .result-assessment{background:#f6faf7;border:1px solid #c1d6c6;border-radius:8px;padding:13px;margin-bottom:16px}
+.result-explanation h3{font-size:16px;line-height:1.6;margin:0 0 8px}
+.result-explanation h4{font-size:13px;line-height:1.5;margin:0 0 5px}
+.result-explanation p,.result-explanation li{font-size:12px;line-height:1.8;margin:0 0 8px;white-space:pre-line}
+.result-explanation .assessment-scope{color:#466657;font-size:11px}
+.result-explanation ul{padding-inline-start:18px;margin:8px 0 0}
+.result-explanation .assessment-blocking{color:#744c24}
+.result-explanation .assessment-warning{color:#71572b}
+.result-explanation .assessment-info{color:#466657}
+.result-explanation-section{margin:15px 0 0}
+.result-explanation-sources{margin-top:15px;font-size:12px}
+.result-explanation-sources summary{cursor:pointer;padding:8px 0}
+.result-explanation a{color:#245a70;text-decoration:underline}
+.result-explanation a:focus-visible,.result-explanation summary:focus-visible{outline:2px solid #245a70;outline-offset:3px}

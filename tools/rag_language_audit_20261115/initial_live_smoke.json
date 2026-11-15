@@ -1,0 +1,34 @@
+[
+  {
+    "query": "What does MERRA-2 air temperature measure?",
+    "mode": "llm",
+    "status": "documented_only",
+    "fallback_reason": null,
+    "answer": "MERRA-2 provides air temperature measurements at various levels. These include 2-meter air temperature (T2M), 10-meter air temperature (T10M), and air temperature at specific pressure levels such as 250 hPa (T250), 500 hPa (T500), and 850 hPa (T850).",
+    "citation_count": 3
+  },
+  {
+    "query": "?? ???? ???? ??????? ????? IMERG?",
+    "mode": "llm",
+    "status": "documented_only",
+    "fallback_reason": null,
+    "answer": "The Integrated Multi-satellitE Retrievals for GPM (IMERG) is the unified U.S. algorithm for the U.S. GPM team, providing a multi-satellite precipitation product. It processes precipitation estimates from various satellite passive microwave (PMW) sensors within the GPM constellation. These estimates are computed using the Goddard Profiling Algorithm (GPROF2021), then gridded, intercalibrated to the GPM Combined Ku Radar-Radiometer Algorithm (CORRA) product, and merged into half-hourly 0.1°x0.1° fields. CORRA is adjusted to the monthly Global Precipitation Climatology Project (GPCP) Satellite-Gauge (SG) product over high-latitude oceans to correct known biases.\n\nIMERG produces three types of multi-satellite products: \"Early\" (approximately 4 hours after observation), \"Late\" (approximately 14 hours after observation), and \"Final\" (approximately 4 months after the observation month). The \"Final\" product incorporates monthly gauge analyses. For the \"Final\" run, the half-hourly multi-satellite estimates are adjusted to sum to the monthly satellite-gauge combination, and gauge information is introduced into the original multi-satellite-only half-hourly data to create calibrated precipitation estimates.\n\nThe output data files contain multiple fields, including the complete calibrated precipitation, which is generally recommended for most users. IMERG Version 07B is the current version, superseding older versions.",
+    "citation_count": 5
+  },
+  {
+    "query": "What does NDVI measure?",
+    "mode": "local_retrieval",
+    "status": "documented_only",
+    "fallback_reason": "provider_error:timeout",
+    "answer": null,
+    "citation_count": 5
+  },
+  {
+    "query": "?? ???? ????? ?????? ?? GLDAS?",
+    "mode": "local_retrieval",
+    "status": "documented_only",
+    "fallback_reason": "provider_error:timeout",
+    "answer": null,
+    "citation_count": 5
+  }
+]

@@ -8,6 +8,8 @@ from pydantic import BaseModel, ConfigDict, Field
 from app.core.dependencies import Container, get_container
 from app.core.exceptions import RegionNotFoundError
 from typing import Literal
+from app.schemas.common import MonthStr
+from app.services.question_workflow import plan_question
 
 router = APIRouter(tags=['explanations'])
 
@@ -18,6 +20,8 @@ class QuestionRequest(BaseModel):
     region_id: str | None = Field(default=None, max_length=128)
     data_revision: str | None = Field(default=None, max_length=128)
     language: Literal['en', 'ar'] = 'en'
+    start_month: MonthStr | None = None
+    end_month: MonthStr | None = None
 
 
 @lru_cache(maxsize=1)
@@ -46,8 +50,12 @@ def ask(payload: QuestionRequest, container: Container = Depends(get_container))
         region_id = container.data.resolve_region_id(payload.region_id)
         if not region_id:
             raise RegionNotFoundError(payload.region_id)
+    workflow = plan_question(payload.query, container.data, container.catalog, region_id,
+                            payload.start_month, payload.end_month, payload.language)
+    region_id = workflow['region_id']
     result = get_pipeline().explain(payload.query, region_id=region_id,
                                     data_revision=payload.data_revision)
+    result['workflow'] = workflow
     # Local retrieval returns evidence, not a generated answer. Keep this distinction
     # explicit and never manufacture a conversational response from unavailable data.
     result['answer'] = result.get('answer')

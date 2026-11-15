@@ -1,4 +1,4 @@
-import type { Analysis, BBox, Catalog, Lang, RegionId, VariableId, Explanation, Spatial } from './api';
+import type { Analysis, BBox, Catalog, Lang, RegionId, VariableId, Explanation, Spatial, ResultAssessment } from './api';
 
 export type CatalogResponse = {
   registry_snapshot: string; data_mode: string; disclaimer: string;
@@ -21,7 +21,7 @@ type StoredResult = {
     series: { month: string; value: number | null }[];
     trend: { slope_per_year: number | null; slope_unit: string | null; n_months: number; notes: string[] } }[];
 };
-type StoredExplanation = { sections: { title: string; body: string }[]; limitations: string[]; mode: string; references: string[] };
+type StoredExplanation = { sections: { section_id: string; title: string; body: string }[]; assessments?: ResultAssessment[]; limitations: string[]; mode: string; references: string[] };
 type StoredSpatial = { variable_id: VariableId; bounds: number[]; disclaimer: string;
   cells: { centroid: number[]; trend_value: number | null }[] };
 type CompactSpatial = { variable_id: VariableId; bounds: number[]; disclaimer: string; lat: number[]; lon: number[]; slope: (number|null)[][] };
@@ -52,6 +52,7 @@ export async function catalogFromCurrent(raw: CatalogResponse): Promise<Catalog>
 export async function explanationForResult(resultId: string, language: Lang): Promise<Explanation> {
   const raw = await request<StoredExplanation>('/v1/explanations', post({ result_id: resultId, language }));
   return { explanation: { answer: raw.sections.map(s => `${s.title}\n${s.body}`).join('\n\n'), limitations: raw.limitations },
+    sections: raw.sections, assessments: raw.assessments,
     citations: raw.references.map(url => ({ title: 'Source documentation', source_url: url })), path: raw.mode };
 }
 

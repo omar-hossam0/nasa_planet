@@ -3,7 +3,7 @@
     {
       "region_id": "nile_corridor",
       "display_name": "Nile corridor (Egypt rectangle)",
-      "display_name_ar": "???? ?????",
+      "display_name_ar": "مصر",
       "bbox": [
         29,
         24,
@@ -16,7 +16,11 @@
       "aliases": [
         "egypt",
         "nile",
-        "nile_corridor_egypt"
+        "nile_corridor_egypt",
+        "مصر",
+        "النيل",
+        "دلتا النيل",
+        "nile delta"
       ],
       "supported_variable_ids": [
         "air_temperature",
@@ -28,7 +32,7 @@
     {
       "region_id": "morocco_comparison",
       "display_name": "Morocco comparison window",
-      "display_name_ar": "??????",
+      "display_name_ar": "المغرب",
       "bbox": [
         -10,
         30,
@@ -40,7 +44,8 @@
       "period_end": "2024-12",
       "aliases": [
         "morocco",
-        "morocco_window"
+        "morocco_window",
+        "المغرب"
       ],
       "supported_variable_ids": [
         "air_temperature",
@@ -52,7 +57,7 @@
     {
       "region_id": "sahel_comparison",
       "display_name": "Sahel comparison window",
-      "display_name_ar": "??????",
+      "display_name_ar": "الساحل",
       "bbox": [
         -5,
         12,
@@ -64,7 +69,8 @@
       "period_end": "2024-12",
       "aliases": [
         "sahel",
-        "sahel_window"
+        "sahel_window",
+        "الساحل"
       ],
       "supported_variable_ids": [
         "air_temperature",

@@ -211,6 +211,11 @@ class Role04Service:
         tracker = self.tracker if self.tracker.current is not None else None
         return render_conclusions(payload, language=language, tracker=tracker)
 
+    def render_assessment(self, assessment, language="en"):
+        """Current typed result path: assessed facts -> shared bilingual templates."""
+        from .result_templates import render_assessment
+        return render_assessment(assessment, language)
+
     def live_probe(self, question, region_id=None, period=None):
         if not self.provider.is_configured():
             return {

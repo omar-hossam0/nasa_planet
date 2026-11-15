@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import type { Lang, RegionId } from './api';
+import type { Lang, RegionId, VariableId } from './api';
 import './rag-chat.css';
 
 type Citation = { chunk_id: string; title: string; source_url: string; text: string; section_locator?: string };
+export type AnalysisProposal = { region_id: RegionId; variable_ids: VariableId[]; start_month: string; end_month: string };
 type Reply = { mode: string; status: string; answer: string | null; citations: Citation[];
+  workflow?: { state: string; message: string; analysis_request: AnalysisProposal | null };
   excerpts?: Citation[]; context?: { definition_chunks?: Citation[] }; limitations?: string[];
   message?: string; clarification?: string; capability_note: string };
 type Turn = { question: string; reply: Reply };
@@ -13,7 +15,7 @@ function sourceLink(value: string) {
   catch { return undefined; }
 }
 
-export function RagChat({ lang, region }: { lang: Lang; region: RegionId }) {
+export function RagChat({ lang, region, start, end, onProposal }: { lang: Lang; region: RegionId; start?: string; end?: string; onProposal?: (proposal: AnalysisProposal) => void }) {
   const en = lang === 'en';
   const [question, setQuestion] = useState('');
   const [turns, setTurns] = useState<Turn[]>([]);
@@ -34,7 +36,7 @@ export function RagChat({ lang, region }: { lang: Lang; region: RegionId }) {
     try {
       const response = await fetch('/v1/explanations/ask', { method: 'POST',
         headers: { 'Content-Type': 'application/json' }, signal: controller.signal,
-        body: JSON.stringify({ query, language: lang, region_id: region || null }) });
+        body: JSON.stringify({ query, language: lang, region_id: region || null, start_month: start, end_month: end }) });
       const reply = await response.json();
       if (!response.ok) throw new Error(reply?.error?.message || `Request failed (${response.status})`);
       if (controller.signal.aborted) return;
@@ -64,6 +66,13 @@ export function RagChat({ lang, region }: { lang: Lang; region: RegionId }) {
         const evidence = [...new Map([...reply.citations, ...(reply.context?.definition_chunks || []), ...(reply.excerpts || [])].map(c => [c.chunk_id, c])).values()];
         return <article key={index} className="rag-turn">
           <h3>{turn.question}</h3>
+          {reply.workflow && <div className="rag-workflow">
+            <p>{reply.workflow.message}</p>
+            {reply.workflow.analysis_request && onProposal && <>
+              <p>{reply.workflow.analysis_request.region_id} · {reply.workflow.analysis_request.variable_ids.join(', ')} · {reply.workflow.analysis_request.start_month} — {reply.workflow.analysis_request.end_month}</p>
+              <button type="button" onClick={() => onProposal(reply.workflow!.analysis_request!)}>{en ? 'Use this analysis setup' : 'استخدم إعدادات التحليل دي'}</button>
+            </>}
+          </div>}
           <span className="rag-mode">{reply.mode === 'llm' ? (en ? 'Generated answer · validated citations' : 'إجابة مولدة بمراجع متحقق منها') : (en ? 'Retrieved excerpts · no generated answer' : 'مقاطع مسترجعة · بدون إجابة مولدة')}</span>
           <p>{reply.answer || reply.clarification || reply.message || (evidence.length ? (en ? 'Relevant documentation is shown below.' : 'الوثائق المرتبطة بسؤالك موجودة بالأسفل.') : (en ? 'No supporting documentation was found. Try a question about the project variables.' : 'لم نجد وثائق تدعم السؤال. جرّب سؤال عن متغيرات المشروع.'))}</p>
           {evidence.map(citation => <details key={citation.chunk_id} className="rag-citation">

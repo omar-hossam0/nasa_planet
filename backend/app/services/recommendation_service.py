@@ -56,17 +56,24 @@ class RecommendationService:
         outcome = self._rag.recommend(request.question, request.language)
 
         candidates: list[CandidateVariable] = []
+        retrieved_references = []
         for variable_id in outcome.variable_ids:
             record = self._data.get_variable(variable_id)
             if record is None:
                 continue  # never recommend an id the catalog does not contain
+            rationale = RATIONALE.get(variable_id, "Matched a demo keyword rule.")
+            if not self._settings.mock_mode:
+                evidence = self._rag.retriever.answer_query(variable_id.replace('_', ' '))
+                citations = evidence.get('citations', [])
+                retrieved_references.extend(c['source_url'] for c in citations)
+                rationale = (citations[0]['text'][:500] if citations else 'Curated alias match; no supporting excerpt retrieved.')
             candidates.append(
                 CandidateVariable(
                     variable_id=record.variable_id,
                     display_name=record.display_name,
                     unit=record.unit,
                     confidence=outcome.confidence.get(variable_id, 0.5),
-                    rationale=RATIONALE.get(variable_id, "Matched a demo keyword rule."),
+                    rationale=rationale,
                     demo_available=record.demo_available,
                     measurement_ready=record.measurement_ready,
                 )
@@ -104,6 +111,7 @@ class RecommendationService:
             question=request.question,
             language=request.language,
             candidates=candidates,
+            references=list(dict.fromkeys(retrieved_references)),
             clarification_question=outcome.clarification_question,
             message=message,
             context=RecommendationContext(

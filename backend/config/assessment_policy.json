@@ -1,0 +1,7 @@
+{
+  "revision": "result-assessment-1.0",
+  "minimum_descriptive_years": 3,
+  "short_record_review_years": 20,
+  "spatial_support_review_fraction": 0.5,
+  "note": "Review thresholds only, not NASA requirements or inference approval. No statistical method is released by this policy."
+}

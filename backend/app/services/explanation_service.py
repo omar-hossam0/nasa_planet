@@ -56,6 +56,7 @@ class ExplanationService:
             actions=rendered.actions,
             references=getattr(rendered,'references',[]),
             limitations=rendered.limitations,
+            assessments=getattr(rendered, 'assessments', []),
             generated_at=datetime.now(timezone.utc).isoformat(),
         )
         return response
