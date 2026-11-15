@@ -378,7 +378,7 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     environment:
       name: production
-      url: http://${{ vars.AZURE_VM_HOST }}
+      url: https://${{ vars.AZURE_VM_HOST }}
     concurrency:
       group: production-deploy
       cancel-in-progress: false
@@ -453,7 +453,7 @@ jobs:
           VM_PORT: ${{ vars.AZURE_VM_PORT }}
         run: |
           set -euo pipefail
-          tar czf - compose.prod.yaml scripts/deploy \
+          tar czf - compose.prod.yaml caddy scripts/deploy \
             | ssh -i ~/.ssh/deploy_key -p "${VM_PORT:-22}" \
                 -o UserKnownHostsFile=~/.ssh/known_hosts \
                 -o StrictHostKeyChecking=yes -o BatchMode=yes \
