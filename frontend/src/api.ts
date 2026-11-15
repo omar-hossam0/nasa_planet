@@ -1,5 +1,7 @@
-export type RegionId =
-  "nile_corridor" | "morocco_comparison" | "sahel_comparison";
+import { analyseCurrent, catalogFromCurrent, currentExplanation, request } from './current-api';
+import type { CatalogResponse } from './current-api';
+let currentApi = true;
+export type RegionId = string;
 export type VariableId =
   | "air_temperature"
   | "soil_moisture"
@@ -8,6 +10,8 @@ export type VariableId =
 export type Lang = "en" | "ar";
 export type BBox = { w: number; s: number; e: number; n: number };
 export type CatalogEntry = {
+  region_label?: string;
+  region_label_ar?: string;
   variable_id: VariableId;
   region_id: RegionId;
   product_id: string;
@@ -142,7 +146,7 @@ async function json<T>(url: string, init?: RequestInit): Promise<T> {
   const body = await response.json();
   if (!response.ok)
     throw new Error(
-      body?.error?.detail || `${response.status} ${response.statusText}`,
+      body?.error?.message || body?.error?.detail || `${response.status} ${response.statusText}`,
     );
   return body as T;
 }
@@ -151,7 +155,14 @@ export async function getCatalog(): Promise<Catalog> {
     return (await loadOffline()).catalog;
   }
   try {
-    return await json<Catalog>("/v1/catalog");
+    const raw = await json<Catalog | CatalogResponse>("/v1/catalog");
+    if ('variables' in raw) {
+      currentApi = true;
+      return await catalogFromCurrent(raw);
+    }
+    if (!Array.isArray(raw.entries)) throw new Error('Invalid catalog response: entries are missing.');
+    currentApi = false;
+    return raw;
   } catch (error) {
     try {
       const snapshot = await loadOffline();
@@ -203,6 +214,7 @@ export async function analyse(
       offline: true,
     };
   }
+  if (currentApi) return analyseCurrent(region, variable, start, end, lang, aoi, onProgress);
   const body = {
     region_id: region,
     variable_ids: [variable],
@@ -255,11 +267,13 @@ export async function getExplanation(
   lang: Lang,
 ): Promise<Explanation | null> {
   if (offlineMode) return local()?.explanations[`${jobId}:${lang}`] || null;
+  if (currentApi) return currentExplanation(jobId, lang);
   return json<Explanation>(
     `/v1/analyses/${jobId}/explanation?language=${lang}`,
   );
 }
 export async function getReceipt(id: string) {
+  if (currentApi) return { payload: await request<object>(`/v1/receipts/${encodeURIComponent(id)}`) };
   return json<{ payload: object }>(`/v1/receipts/${encodeURIComponent(id)}`);
 }
 export async function compare(
@@ -271,7 +285,7 @@ export async function compare(
     if (start !== "2001-01" || end !== "2024-12")
       throw new Error("Comparison for this time window requires the server.");
     return (
-      ["nile_corridor", "morocco_comparison", "sahel_comparison"] as RegionId[]
+      [...new Set((local()?.catalog.entries || []).filter(e => e.variable_id === variable).map(e => e.region_id))]
     ).map((region) => {
       const v =
         local()?.analyses[`${region}|${variable}|${start}|${end}|none`]?.result
@@ -284,6 +298,16 @@ export async function compare(
         valid_fraction: v?.counts.valid_fraction ?? null,
       };
     });
+  }
+  if (currentApi) {
+    const catalog = await getCatalog();
+    const regions = [...new Set(catalog.entries.filter(e => e.variable_id === variable && e.app_available).map(e => e.region_id))];
+    return Promise.all(regions.map(async region => {
+      const analysis = await analyseCurrent(region, variable, start, end, 'en', null, () => {});
+      const v = analysis.result.variables.find(item => item.variable_id === variable);
+      return { region_id: region, state: v?.state || 'unavailable', slope_per_year: v?.trend?.slope_per_year ?? null,
+        p_value: null, valid_fraction: v?.counts.valid_fraction ?? null };
+    }));
   }
   const response = await json<{
     regions: {

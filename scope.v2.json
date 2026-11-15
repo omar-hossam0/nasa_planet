@@ -1,0 +1,313 @@
+{
+  "architecture_revision": "2.0",
+  "region_status": "coverage_complete_12_of_12_cubes_verified",
+  "regions": [
+    {
+      "id": "nile_corridor",
+      "bbox": [
+        29,
+        24,
+        33,
+        32
+      ]
+    },
+    {
+      "id": "morocco_comparison",
+      "bbox": [
+        -10,
+        30,
+        -5,
+        35
+      ]
+    },
+    {
+      "id": "sahel_comparison",
+      "bbox": [
+        -5,
+        12,
+        5,
+        17
+      ]
+    }
+  ],
+  "target_cubes": 12,
+  "target_variable_month_slices": 3456,
+  "entries": [
+    {
+      "variable_id": "air_temperature",
+      "region_id": "nile_corridor",
+      "product_id": "M2TMNXSLV",
+      "version": "5.12.4",
+      "source_variable": "T2M",
+      "bbox": [
+        29,
+        24,
+        33,
+        32
+      ],
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "status": "verified_cube_ready_parent_subset",
+      "measurement_ready": true,
+      "method_ready": false,
+      "app_available": false,
+      "cube_file": "data/nasa/measurements/M2TMNXSLV_Nile_2001_2024.nc",
+      "monthly_subsets": "data/nasa/regional/M2TMNXSLV/nile/"
+    },
+    {
+      "variable_id": "soil_moisture",
+      "region_id": "nile_corridor",
+      "product_id": "GLDAS_NOAH025_M",
+      "version": "2.1",
+      "source_variable": "SoilMoi0_10cm_inst",
+      "bbox": [
+        29,
+        24,
+        33,
+        32
+      ],
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "status": "verified_cube_ready_parent_subset",
+      "measurement_ready": true,
+      "method_ready": false,
+      "app_available": false,
+      "cube_file": "data/nasa/measurements/GLDAS_NOAH025_M_Nile_2001_2024.nc",
+      "monthly_subsets": "data/nasa/regional/GLDAS_NOAH025_M/nile/"
+    },
+    {
+      "variable_id": "precipitation",
+      "region_id": "nile_corridor",
+      "product_id": "GPM_3IMERGM",
+      "version": "07",
+      "source_variable": "precipitation",
+      "bbox": [
+        29,
+        24,
+        33,
+        32
+      ],
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "status": "verified_cube_ready",
+      "measurement_ready": true,
+      "method_ready": false,
+      "app_available": false,
+      "cube_file": "data/nasa/measurements/GPM_3IMERGM_Nile_2001_2024.nc",
+      "monthly_subsets": "data/nasa/regional/GPM_3IMERGM/nile/"
+    },
+    {
+      "variable_id": "vegetation_greenness",
+      "region_id": "nile_corridor",
+      "product_id": "MOD13C2",
+      "version": "061",
+      "source_variable": "CMG_0_05_Deg_Monthly_NDVI",
+      "bbox": [
+        29,
+        24,
+        33,
+        32
+      ],
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "status": "verified_cube_ready",
+      "measurement_ready": true,
+      "method_ready": false,
+      "app_available": false,
+      "cube_file": "data/nasa/measurements/MOD13C2_Nile_2001_2024.nc",
+      "monthly_subsets": "data/nasa/regional/MOD13C2/nile/"
+    },
+    {
+      "variable_id": "air_temperature",
+      "region_id": "morocco_comparison",
+      "product_id": "M2TMNXSLV",
+      "version": "5.12.4",
+      "source_variable": "T2M",
+      "bbox": [
+        -10,
+        30,
+        -5,
+        35
+      ],
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "status": "verified_cube_ready",
+      "measurement_ready": true,
+      "method_ready": false,
+      "app_available": false,
+      "cube_file": "data/nasa/measurements/M2TMNXSLV_Morocco_2001_2024.nc",
+      "monthly_subsets": "data/nasa/regional/M2TMNXSLV/morocco/"
+    },
+    {
+      "variable_id": "soil_moisture",
+      "region_id": "morocco_comparison",
+      "product_id": "GLDAS_NOAH025_M",
+      "version": "2.1",
+      "source_variable": "SoilMoi0_10cm_inst",
+      "bbox": [
+        -10,
+        30,
+        -5,
+        35
+      ],
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "status": "verified_cube_ready",
+      "measurement_ready": true,
+      "method_ready": false,
+      "app_available": false,
+      "cube_file": "data/nasa/measurements/GLDAS_NOAH025_M_Morocco_2001_2024.nc",
+      "monthly_subsets": "data/nasa/regional/GLDAS_NOAH025_M/morocco/"
+    },
+    {
+      "variable_id": "precipitation",
+      "region_id": "morocco_comparison",
+      "product_id": "GPM_3IMERGM",
+      "version": "07",
+      "source_variable": "precipitation",
+      "bbox": [
+        -10,
+        30,
+        -5,
+        35
+      ],
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "status": "verified_cube_ready",
+      "measurement_ready": true,
+      "method_ready": false,
+      "app_available": false,
+      "cube_file": "data/nasa/measurements/GPM_3IMERGM_Morocco_2001_2024.nc",
+      "monthly_subsets": "data/nasa/regional/GPM_3IMERGM/morocco/"
+    },
+    {
+      "variable_id": "vegetation_greenness",
+      "region_id": "morocco_comparison",
+      "product_id": "MOD13C2",
+      "version": "061",
+      "source_variable": "CMG_0_05_Deg_Monthly_NDVI",
+      "bbox": [
+        -10,
+        30,
+        -5,
+        35
+      ],
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "status": "verified_cube_ready",
+      "measurement_ready": true,
+      "method_ready": false,
+      "app_available": false,
+      "cube_file": "data/nasa/measurements/MOD13C2_Morocco_2001_2024.nc",
+      "monthly_subsets": "data/nasa/regional/MOD13C2/morocco/"
+    },
+    {
+      "variable_id": "air_temperature",
+      "region_id": "sahel_comparison",
+      "product_id": "M2TMNXSLV",
+      "version": "5.12.4",
+      "source_variable": "T2M",
+      "bbox": [
+        -5,
+        12,
+        5,
+        17
+      ],
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "status": "verified_cube_ready",
+      "measurement_ready": true,
+      "method_ready": false,
+      "app_available": false,
+      "cube_file": "data/nasa/measurements/M2TMNXSLV_Sahel_2001_2024.nc",
+      "monthly_subsets": "data/nasa/regional/M2TMNXSLV/sahel/"
+    },
+    {
+      "variable_id": "soil_moisture",
+      "region_id": "sahel_comparison",
+      "product_id": "GLDAS_NOAH025_M",
+      "version": "2.1",
+      "source_variable": "SoilMoi0_10cm_inst",
+      "bbox": [
+        -5,
+        12,
+        5,
+        17
+      ],
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "status": "verified_cube_ready",
+      "measurement_ready": true,
+      "method_ready": false,
+      "app_available": false,
+      "cube_file": "data/nasa/measurements/GLDAS_NOAH025_M_Sahel_2001_2024.nc",
+      "monthly_subsets": "data/nasa/regional/GLDAS_NOAH025_M/sahel/"
+    },
+    {
+      "variable_id": "precipitation",
+      "region_id": "sahel_comparison",
+      "product_id": "GPM_3IMERGM",
+      "version": "07",
+      "source_variable": "precipitation",
+      "bbox": [
+        -5,
+        12,
+        5,
+        17
+      ],
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "status": "verified_cube_ready",
+      "measurement_ready": true,
+      "method_ready": false,
+      "app_available": false,
+      "cube_file": "data/nasa/measurements/GPM_3IMERGM_Sahel_2001_2024.nc",
+      "monthly_subsets": "data/nasa/regional/GPM_3IMERGM/sahel/"
+    },
+    {
+      "variable_id": "vegetation_greenness",
+      "region_id": "sahel_comparison",
+      "product_id": "MOD13C2",
+      "version": "061",
+      "source_variable": "CMG_0_05_Deg_Monthly_NDVI",
+      "bbox": [
+        -5,
+        12,
+        5,
+        17
+      ],
+      "period": [
+        "2001-01",
+        "2024-12"
+      ],
+      "status": "verified_cube_ready",
+      "measurement_ready": true,
+      "method_ready": false,
+      "app_available": false,
+      "cube_file": "data/nasa/measurements/MOD13C2_Sahel_2001_2024.nc",
+      "monthly_subsets": "data/nasa/regional/MOD13C2/sahel/"
+    }
+  ]
+}

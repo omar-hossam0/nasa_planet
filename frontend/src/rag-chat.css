@@ -1,0 +1,14 @@
+.rag-chat{margin-top:20px;padding:22px;border:1px solid #558494;border-radius:14px;background:#f0f5ee;color:#173b43;min-width:0}
+.rag-chat header,.rag-chat footer{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.rag-chat h2{margin:8px 0;font-size:23px}.rag-chat h3{font-size:16px;margin:0 0 10px}
+.rag-chat p,.rag-chat li{font-size:13px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere}
+.rag-chat button{border:1px solid #aac0b8;border-radius:7px;background:#fff;color:#163e42;padding:9px 12px;font:inherit;font-size:12px;cursor:pointer}
+.rag-chat button:disabled{opacity:.5;cursor:not-allowed}.rag-chat button:focus-visible,.rag-chat textarea:focus-visible{outline:3px solid #a76e1e;outline-offset:2px}
+.rag-examples{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}.rag-turn{background:#fff;padding:16px;border:1px solid #c4d6ce;border-radius:10px;margin:12px 0}
+.rag-turns{max-height:600px;overflow-y:auto}.rag-mode{display:inline-block;border-radius:5px;padding:5px 8px;background:#e5efdf;font-size:11px}
+.rag-citation{border-top:1px solid #d5e0d9;padding:10px 0;font-size:12px}.rag-citation summary{cursor:pointer;overflow-wrap:anywhere;line-height:1.5}
+.rag-citation a{color:#126663;text-decoration:underline}.rag-citation code{display:block;font-size:10px;margin-top:10px;overflow-wrap:anywhere}
+.rag-chat label{display:block;font-weight:600;font-size:13px;margin:14px 0 8px}.rag-chat textarea{box-sizing:border-box;width:100%;resize:vertical;border:1px solid #9db9ac;border-radius:8px;padding:12px;background:#fff;color:#163e42;font:inherit;font-size:14px}
+.rag-chat footer{margin-top:8px}.rag-chat footer button{background:#19574d;color:white;border-color:#19574d}.rag-chat [role=alert]{color:#9b2d20}
+.data-mode-notice{background:#fff4d5;color:#493500;padding:12px 16px;border:1px solid #d7b36b;border-radius:8px;margin:0 0 16px;font-size:13px;line-height:1.6}
+.rag-chat .eyebrow{color:#47683a}

@@ -32,9 +32,6 @@ SUPPORTED_AGGREGATION_POLICIES: tuple[AggregationPolicy, ...] = (
     AggregationPolicy.cell_mean,
 )
 
-_AOI_TOLERANCE = 0.01
-
-
 @dataclass(frozen=True)
 class AvailabilityEvaluation:
     usable: bool
@@ -93,6 +90,14 @@ def evaluate_demo_availability(
             details={"start_month": start_month, "end_month": end_month},
         )
 
+    if region_id not in data.supported_region_ids(variable_id):
+        return AvailabilityEvaluation(usable=False, reason_code=AvailabilityReason.OUTSIDE_COVERAGE,
+            message='This variable is not available in the selected region.')
+
+    if start_month < region.period_start or end_month > region.period_end:
+        return AvailabilityEvaluation(usable=False, reason_code=AvailabilityReason.OUTSIDE_COVERAGE,
+            message='The requested period is outside this region coverage.')
+
     if start_month < record.coverage_start or end_month > record.coverage_end:
         return AvailabilityEvaluation(
             usable=False,
@@ -110,10 +115,10 @@ def evaluate_demo_availability(
     if aoi is not None:
         west, south, east, north = region.bbox
         inside = (
-            aoi.west >= west - _AOI_TOLERANCE
-            and aoi.east <= east + _AOI_TOLERANCE
-            and aoi.south >= south - _AOI_TOLERANCE
-            and aoi.north <= north + _AOI_TOLERANCE
+            aoi.west >= west
+            and aoi.east <= east
+            and aoi.south >= south
+            and aoi.north <= north
         )
         if not inside:
             return AvailabilityEvaluation(
@@ -284,11 +289,12 @@ class CatalogService:
         return RegionSummary(
             region_id=record.region_id,
             display_name=record.display_name,
+            display_name_ar=record.display_name_ar,
             description=record.description,
             bbox=list(record.bbox),
             period_start=record.period_start,
             period_end=record.period_end,
-            supported_variable_ids=[item.variable_id for item in self._data.list_variables()],
+            supported_variable_ids=list(record.supported_variable_ids),
             warnings=[
                 "Region bboxes are study windows, not administrative boundaries.",
             ],

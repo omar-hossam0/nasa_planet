@@ -2,6 +2,7 @@ import json
 import re
 
 from .aliases import ALIAS_PROVENANCE
+from .arabic import has_arabic
 from .intent import STATUS_AMBIGUOUS, STATUS_UNAVAILABLE, STATUS_UNSUPPORTED
 from .provider import GeminiClient, ProviderError
 from .retriever import Retriever
@@ -102,6 +103,8 @@ def build_prompt(context):
     lines = [
         "You are the explanation assistant for the Trend Detective project (NASA Space Apps 2026).",
         "You summarize retrieved documentation evidence. You never compute or invent numbers.",
+        ("Write the answer in Arabic because the question contains Arabic. Keep product names and identifiers unchanged."
+         if has_arabic(context.query) else "Write the answer in English."),
         "STRICT RULES:",
         f"1. {EVIDENCE_WARNING}",
         "2. Cite only chunk_id values that appear in the EVIDENCE list below.",
@@ -111,6 +114,10 @@ def build_prompt(context):
         "5. Never claim causation; trend association does not establish cause.",
         f"6. {SCHEMA_INSTRUCTION}",
         "PERMITTED VARIABLES: " + json.dumps(context.permitted_variable_ids),
+        "PRODUCT VERSIONS: " + json.dumps(context.expected_product_versions),
+        "If product_versions is included, copy the PRODUCT VERSIONS mapping above exactly. "
+        "Its keys are semantic variable ids (for example precipitation), never product codes "
+        "such as GPM_3IMERGM. You may omit this optional field entirely.",
         "EVIDENCE:",
     ]
     for chunk_id in sorted(context.chunk_records):

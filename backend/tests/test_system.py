@@ -66,8 +66,8 @@ def test_ready_reports_mock_state_honestly(client: TestClient) -> None:
 
 def test_openapi_lists_all_eighteen_routes(client: TestClient) -> None:
     spec = client.get("/openapi.json").json()
-    assert set(spec["paths"]) == EXPECTED_PATHS
-    assert len(spec["paths"]) == 18
+    assert set(spec["paths"]) == EXPECTED_PATHS | {"/v1/explanations/ask"}
+    assert len(spec["paths"]) == 19
 
 
 def test_docs_page_loads(client: TestClient) -> None:

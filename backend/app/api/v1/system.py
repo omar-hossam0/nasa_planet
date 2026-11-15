@@ -77,8 +77,24 @@ def ready(container: Container = Depends(get_container)) -> ReadinessResponse:
         ),
     ]
 
+    if container.database is not None:
+        try:
+            container.database.ping()
+            integrations[0] = IntegrationStatus(name='database', state=IntegrationState.connected,
+                detail='SQL repositories configured; connectivity verified.')
+        except Exception:
+            integrations[0] = IntegrationStatus(name='database', state=IntegrationState.unavailable,
+                detail='Database connectivity check failed.')
+    if settings.job_backend == 'database':
+        integrations[4] = IntegrationStatus(name='job_queue', state=IntegrationState.connected,
+            detail='Durable SQL queue configured. Worker liveness is not verified by this probe.')
+    if settings.rag_enabled:
+        integrations[2] = IntegrationStatus(name='rag_service', state=IntegrationState.mock,
+            detail='Result explanations use MockRAGAdapter. Independent real documentation retrieval enabled at /v1/explanations/ask; corpus loaded on first request.')
+
     return ReadinessResponse(
-        status=ServiceStatus.ok if settings.mock_mode else ServiceStatus.degraded,
+        status=ServiceStatus.ok if settings.mock_mode and not any(
+            item.state == IntegrationState.unavailable for item in integrations) else ServiceStatus.degraded,
         app_name=settings.app_name,
         version=settings.app_version,
         environment=settings.app_env,

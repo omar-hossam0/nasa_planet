@@ -62,6 +62,8 @@ class RegionRecord:
     period_start: str = DEFAULT_PERIOD_START
     period_end: str = DEFAULT_PERIOD_END
     aliases: tuple[str, ...] = field(default_factory=tuple)
+    display_name_ar: str = ''
+    supported_variable_ids: tuple[str, ...] = field(default_factory=tuple)
 
 
 _COMMON_LIMITATIONS = (

@@ -7,8 +7,10 @@ All values are environment-overridable so the same image can run in mock and
 from __future__ import annotations
 
 from functools import lru_cache
+from pathlib import Path
 
-from pydantic import Field, field_validator
+from pydantic import Field, SecretStr, field_validator, model_validator
+from typing import Literal
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -21,7 +23,8 @@ class Settings(BaseSettings):
     """
 
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=(Path(__file__).resolve().parents[3] / '.env',
+                  Path(__file__).resolve().parents[2] / '.env'),
         env_file_encoding="utf-8",
         extra="ignore",
         case_sensitive=False,
@@ -38,6 +41,24 @@ class Settings(BaseSettings):
     # to false makes the readiness probe report NOT_IMPLEMENTED for the real
     # adapters instead of silently pretending they exist.
     mock_mode: bool = True
+    database_url: str | None = Field(default=None, repr=False)
+    database_auto_create: bool = False
+    job_backend: Literal['inline', 'database'] = 'inline'
+    rag_enabled: bool = True
+    regions_file: str | None = None
+    llm_provider: Literal['gemini'] = 'gemini'
+    gemini_api_key: SecretStr = Field(default=SecretStr(''), repr=False)
+    llm_model: str = Field(default='gemini-2.5-flash', pattern=r'^[a-zA-Z0-9._-]+$')
+    llm_timeout_seconds: float = Field(default=8, gt=0, le=60)
+    llm_max_retries: int = Field(default=1, ge=0, le=2)
+
+    @model_validator(mode='after')
+    def validate_storage(self):
+        if self.job_backend == 'database' and not self.database_url:
+            raise ValueError('JOB_BACKEND=database requires DATABASE_URL')
+        if self.app_env.lower() == 'production':
+            raise ValueError('Production release is not enabled: real science and authorization integration remain required')
+        return self
 
     # --- observability / web -------------------------------------------
     log_level: str = "INFO"

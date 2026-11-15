@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import secrets
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
@@ -22,6 +23,7 @@ from app.api.v1 import (
     spatial,
     spin,
     system,
+    questions,
 )
 from app.core.config import Settings, get_settings
 from app.core.dependencies import build_container
@@ -33,14 +35,18 @@ logger = logging.getLogger(__name__)
 DESCRIPTION = """
 **Trend Detective - What the Average Hides** backend.
 
-Every endpoint in this build is backed by **deterministic mock data**. There is no
-database, no AI/RAG provider, no frontend and no live NASA connection.
+Analysis endpoints currently use **deterministic synthetic data**. Real science
+is not integrated. Synthetic slopes are descriptive only: `p_value` is null and
+`inference_status` is `not_computed`.
 
-Every payload carries `data_mode: "mock"` and a disclaimer. Synthetic slopes are
-descriptive only: no significance test is computed, so `p_value` is always `null`
-and `inference_status` is `not_computed`.
+`POST /v1/explanations/ask` retrieves real documentation excerpts and citations.
+Optional Gemini generation is validated against the evidence; without a configured
+provider, the endpoint returns local excerpts rather than a generated answer.
+Documentation questions do not read stored analysis results.
 
-State is held in process memory and disappears when the server restarts.
+Storage defaults to process-local memory. SQL persistence and a separate durable
+worker are available through environment configuration. See deployment documentation
+for the implemented checkpoint and remaining production requirements.
 """
 
 
@@ -48,10 +54,20 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     settings = settings or get_settings()
     configure_logging(settings.log_level)
 
+    @asynccontextmanager
+    async def lifespan(application):
+        try:
+            yield
+        finally:
+            database = application.state.container.database
+            if database is not None:
+                database.engine.dispose()
+
     app = FastAPI(
         title=settings.app_name,
         version=settings.app_version,
         description=DESCRIPTION,
+        lifespan=lifespan,
         docs_url="/docs",
         redoc_url="/redoc",
         openapi_url="/openapi.json",
@@ -176,6 +192,7 @@ def _register_routers(app: FastAPI, settings: Settings) -> None:
         comparisons,
         spin,
         explanations,
+        questions,
         receipts,
     ):
         app.include_router(module.router, prefix=settings.api_prefix)

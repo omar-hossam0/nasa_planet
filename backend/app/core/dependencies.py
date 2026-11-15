@@ -45,6 +45,7 @@ from app.workers.mock_job_manager import MockJobManager
 @dataclass
 class Container:
     settings: Settings
+    database: object | None
 
     # adapters
     data: NASADataAdapter
@@ -74,7 +75,7 @@ class Container:
 def build_container(settings: Settings | None = None) -> Container:
     settings = settings or get_settings()
 
-    data = MockNASADataAdapter()
+    data = MockNASADataAdapter(settings.regions_file)
     statistics = MockStatisticsAdapter()
     rag = MockRAGAdapter()
 
@@ -84,11 +85,23 @@ def build_container(settings: Settings | None = None) -> Container:
     spins_repo = InMemorySpinRepository()
     cache = InMemoryAnalysisCacheRepository()
     job_manager = MockJobManager(auto_complete=settings.mock_auto_complete_jobs)
+    database = None
+    if settings.database_url:
+        from app.repositories.sql import Database, repositories
+        from app.workers.durable import DurableJobManager
+        database = Database(settings.database_url)
+        if settings.database_auto_create:
+            database.initialize()
+        database.ping()
+        jobs_repo, results_repo, receipts_repo, spins_repo, cache = repositories(database)
+        if settings.job_backend == 'database':
+            job_manager = DurableJobManager(database)
 
     result_service = ResultService(results_repo)
 
     return Container(
         settings=settings,
+        database=database,
         data=data,
         statistics=statistics,
         rag=rag,

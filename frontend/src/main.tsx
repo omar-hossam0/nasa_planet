@@ -1,6 +1,8 @@
+import { RagChat } from './RagChat';
+import { RegionMap } from './RegionMap';
 import React, { useEffect, useRef, useState } from "react";
 import {ReferenceActors} from './ReferenceActors';
-import { GeoBackdrop, mapExtent } from "./GeoBackdrop";
+import { GeoBackdrop } from "./GeoBackdrop";
 import { createRoot } from "react-dom/client";
 import {
   ArrowRight,
@@ -39,28 +41,12 @@ import {
   type Lang,
   type RegionId,
   type Series,
-  type Spatial,
   type VariableId,
 } from "./api";
 import "./style.css";
 import "./product-theme.css";
 import "./reference-layout.css";
 
-const REGIONS: { id: RegionId; en: string; ar: string; caption: string }[] = [
-  {
-    id: "nile_corridor",
-    en: "Nile Corridor",
-    ar: "وادي النيل",
-    caption: "Egypt",
-  },
-  {
-    id: "morocco_comparison",
-    en: "Morocco",
-    ar: "المغرب",
-    caption: "North Africa",
-  },
-  { id: "sahel_comparison", en: "Sahel", ar: "الساحل", caption: "West Africa" },
-];
 const VARIABLES: {
   id: VariableId;
   en: string;
@@ -104,8 +90,6 @@ const fmt = (n: number | null | undefined, digits = 3) =>
         maximumFractionDigits: digits,
         minimumFractionDigits: digits,
       });
-const regionLabel = (id: string, lang: Lang) =>
-  REGIONS.find((r) => r.id === id)?.[lang] || id;
 const variableLabel = (id: string, lang: Lang) =>
   VARIABLES.find((v) => v.id === id)?.[lang] || id;
 
@@ -488,14 +472,11 @@ function SeriesChart({ series, lang }: { series: Series | null; lang: Lang }) {
     span = max - min || 1;
   const xy = (v: number, i: number) =>
     `${48 + (i / Math.max(1, series.values.length - 1)) * 830},${245 - ((v - min) / span) * 190}`;
-  const monthly = series.values
-    .map((v, i) => (v == null ? "" : xy(v, i)))
-    .filter(Boolean)
-    .join(" ");
-  const trend = series.trend_line
-    .map((v, i) => (v == null ? "" : xy(v, i)))
-    .filter(Boolean)
-    .join(" ");
+  const pathFor = (points: (number | null)[]) => points.map((value, index) => {
+    if (value == null || !Number.isFinite(value)) return '';
+    const previous = points[index - 1];
+    return `${index === 0 || previous == null || !Number.isFinite(previous) ? 'M' : 'L'}${xy(value, index)}`;
+  }).join(' ');
   return (
     <svg
       className="series-chart"
@@ -504,8 +485,8 @@ function SeriesChart({ series, lang }: { series: Series | null; lang: Lang }) {
       aria-label="Monthly values and server-computed trend line"
     >
       <path d="M48 55H878 M48 150H878 M48 245H878" className="axis-grid" />
-      <polyline points={monthly} className="monthly-line" />
-      <polyline points={trend} className="trend-line" />
+      <path d={pathFor(series.values)} className="monthly-line" />
+      <path d={pathFor(series.trend_line)} className="trend-line" />
       <text x="48" y="277">
         {series.months[0]?.slice(0, 4)}
       </text>
@@ -522,167 +503,9 @@ function SeriesChart({ series, lang }: { series: Series | null; lang: Lang }) {
   );
 }
 
-function SpatialMap({
-  spatial,
-  lang,
-  onAoi,
-}: {
-  spatial: Spatial | null;
-  lang: Lang;
-  onAoi: (b: BBox) => void;
-}) {
-  const canvas = useRef<HTMLCanvasElement>(null);
-  const start = useRef<{ x: number; y: number } | null>(null);
-  const [selection, setSelection] = useState<{
-    x: number;
-    y: number;
-    w: number;
-    h: number;
-  } | null>(null);
-  useEffect(() => {
-    const c = canvas.current;
-    if (!c || !spatial) return;
-    const rows = spatial.slope.length,
-      cols = spatial.slope[0]?.length || 0;
-    if (!rows || !cols) return;
-    const cell = 8;
-    c.width = cols * cell;
-    c.height = rows * cell;
-    const ctx = c.getContext("2d");
-    if (!ctx) return;
-    const vals = spatial.slope
-      .flat()
-      .filter((v): v is number => v != null && Number.isFinite(v));
-    const bound = Math.max(0.000001, Math.max(...vals.map(Math.abs)));
-    for (let y = 0; y < rows; y++)
-      for (let x = 0; x < cols; x++) {
-        const v = spatial.slope[y][x];
-        if (v == null || !Number.isFinite(v)) {
-          ctx.fillStyle = "#223047";
-        } else {
-          const t = Math.min(1, Math.abs(v) / bound);
-          ctx.fillStyle =
-            v >= 0
-              ? `rgb(${Math.round(36 + 125 * t)},${Math.round(112 + 86 * t)},${Math.round(82 + 10 * t)})`
-              : `rgb(${Math.round(64 + 134 * t)},${Math.round(91 + 80 * t)},${Math.round(110 + 8 * t)})`;
-        }
-        ctx.fillRect(x * cell, y * cell, cell, cell);
-        if (spatial.significant_fdr?.[y]?.[x]) {
-          ctx.strokeStyle = "#eff8e5";
-          ctx.lineWidth = 1;
-          ctx.strokeRect(x * cell + 0.5, y * cell + 0.5, cell - 1, cell - 1);
-        }
-      }
-  }, [spatial]);
-  if (!spatial)
-    return (
-      <div className="map-placeholder">
-        <div className="radar-ring">
-          <Globe2 size={62} />
-        </div>
-        <p>
-          {lang === "en"
-            ? "Choose a variable and run an analysis to reveal its native-grid map."
-            : "اختر متغيرًا وشغّل التحليل لعرض خريطة الشبكة الأصلية."}
-        </p>
-      </div>
-    );
-  const point = (e: React.PointerEvent<HTMLCanvasElement>) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    return {
-      x: Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)),
-      y: Math.max(0, Math.min(1, (e.clientY - r.top) / r.height)),
-    };
-  };
-  const finish = (e: React.PointerEvent<HTMLCanvasElement>) => {
-    if (!start.current) return;
-    const p = point(e),
-      s = start.current;
-    start.current = null;
-    setSelection(null);
-    const [w, south, east, north] = spatial.bbox;
-    const x0 = Math.min(s.x, p.x),
-      x1 = Math.max(s.x, p.x),
-      y0 = Math.min(s.y, p.y),
-      y1 = Math.max(s.y, p.y);
-    if (x1 - x0 > 0.03 && y1 - y0 > 0.03)
-      onAoi({
-        w: w + x0 * (east - w),
-        e: w + x1 * (east - w),
-        n: north - y0 * (north - south),
-        s: north - y1 * (north - south),
-      });
-  };
-  const extent=mapExtent(spatial.bbox);
-  const [west,south,east,north]=extent;
-  return (
-    <div className="spatial-wrap geographic-map">
-      <GeoBackdrop bbox={extent}/>
-      <div className="map-coordinate map-coordinate-top">{spatial.bbox[3].toFixed(2)}° N</div>
-      <div className="map-coordinate map-coordinate-bottom">{spatial.bbox[1].toFixed(2)}° N</div>
-      <div
-        className="spatial-plot"
-        style={{
-          aspectRatio: `${spatial.grid.lon.length} / ${spatial.grid.lat.length}`,
-          left:`${(spatial.bbox[0]-west)/(east-west)*100}%`,
-          top:`${(north-spatial.bbox[3])/(north-south)*100}%`,
-          width:`${(spatial.bbox[2]-spatial.bbox[0])/(east-west)*100}%`,
-          height:`${(spatial.bbox[3]-spatial.bbox[1])/(north-south)*100}%`,
-        }}
-      >
-        <canvas
-          ref={canvas}
-          className="spatial-canvas"
-          aria-label="Native-grid slope map. Drag to select an analysis rectangle."
-          onPointerDown={(e) => {
-            start.current = point(e);
-            e.currentTarget.setPointerCapture(e.pointerId);
-          }}
-          onPointerMove={(e) => {
-            if (!start.current) return;
-            const p = point(e),
-              s = start.current;
-            setSelection({
-              x: Math.min(s.x, p.x) * 100,
-              y: Math.min(s.y, p.y) * 100,
-              w: Math.abs(s.x - p.x) * 100,
-              h: Math.abs(s.y - p.y) * 100,
-            });
-          }}
-          onPointerUp={finish}
-          onPointerCancel={() => {
-            start.current = null;
-            setSelection(null);
-          }}
-        />
-        {selection ? (
-          <div
-            className="map-selection"
-            style={{
-              left: `${selection.x}%`,
-              top: `${selection.y}%`,
-              width: `${selection.w}%`,
-              height: `${selection.h}%`,
-            }}
-          />
-        ) : null}
-      </div>
-      <div className="map-grid-note">
-        <span>{lang === "en" ? "NATIVE GRID" : "الشبكة الأصلية"}</span>
-        <strong>{spatial.grid.lon.length} × {spatial.grid.lat.length}</strong>
-        <small>{lang === "en" ? "Cells shown at source resolution" : "الخلايا بدقة المصدر"}</small>
-      </div>
-      <div className="map-corner">
-        <span className="map-attribution">NASA Blue Marble · Natural Earth boundaries</span>
-        {lang === "en" ? "DRAG TO SELECT AREA" : "اسحب لاختيار منطقة"}
-      </div>
-    </div>
-  );
-}
-
 function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
   const [catalog, setCatalog] = useState<Catalog | null>(null);
-  const [region, setRegion] = useState<RegionId>("nile_corridor");
+  const [region, setRegion] = useState<RegionId>("");
   const [variable, setVariable] = useState<VariableId>("air_temperature");
   const [start, setStart] = useState("2001-01");
   const [end, setEnd] = useState("2024-12");
@@ -696,11 +519,24 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
     ReturnType<typeof compare>
   > | null>(null);
   const [running, setRunning] = useState(false);
+  const requestVersion = useRef(0);
+  useEffect(() => {
+    requestVersion.current += 1;
+    setAnalysis(null);
+    setComparison(null);
+    setStatus('');
+    setError('');
+    setRunning(false);
+    return () => { requestVersion.current += 1; };
+  }, [region, variable, start, end, aoi]);
   useEffect(() => {
     let active = true;
     getCatalog()
       .then((c) => {
-        if (active) setCatalog(c);
+        if (active) {
+          setCatalog(c);
+          setRegion(current => c.entries.some(e => e.region_id === current) ? current : c.entries[0]?.region_id || '');
+        }
       })
       .catch((e) => {
         if (active) setError(e.message);
@@ -727,9 +563,14 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
       active = false;
     };
   }, [lang, analysis?.result.job_id]);
-  const entry: CatalogEntry | undefined = catalog?.entries.find(
+  const entry: CatalogEntry | undefined = catalog?.entries?.find(
     (e) => e.region_id === region && e.variable_id === variable,
   );
+  const regions = [...new Map((catalog?.entries || []).map(e => [e.region_id, {
+    id: e.region_id, en: e.region_label || e.region_id.replaceAll('_', ' '),
+    ar: e.region_label_ar || e.region_label || e.region_id.replaceAll('_', ' '), caption: '',
+  }])).values()];
+  const regionLabel = (id: string, language: Lang) => regions.find(r => r.id === id)?.[language] || id;
   const result = analysis?.result.variables.find(
     (v) => v.variable_id === variable,
   );
@@ -739,6 +580,7 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
       `${2001 + Math.floor(i / 12)}-${String((i % 12) + 1).padStart(2, "0")}`,
   );
   async function run() {
+    const version = ++requestVersion.current;
     setRunning(true);
     setStatus(lang === "en" ? "Submitting analysis…" : "جاري إرسال التحليل…");
     setError("");
@@ -753,16 +595,18 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
         end,
         lang,
         aoi,
-        setStatus,
+        value => { if (version === requestVersion.current) setStatus(value); },
       );
+      if (version !== requestVersion.current) return;
       setAnalysis(next);
       setTab("evidence");
       setStatus("");
     } catch (e) {
+      if (version !== requestVersion.current) return;
       setError(e instanceof Error ? e.message : String(e));
       setStatus("");
     } finally {
-      setRunning(false);
+      if (version === requestVersion.current) setRunning(false);
     }
   }
   async function downloadReceipt() {
@@ -783,16 +627,19 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
     }
   }
   async function runCompare() {
+    const version = requestVersion.current;
     setError("");
     try {
-      setComparison(await compare(variable, start, end));
+      const response = await compare(variable, start, end);
+      if (version === requestVersion.current) setComparison(response);
     } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
+      if (version === requestVersion.current) setError(e instanceof Error ? e.message : String(e));
     }
   }
   const windows = result?.period_sensitivity?.windows || [];
   return (
     <main className="workspace">
+
       <aside className="workspace-sidebar">
         <div className="sidebar-brand">
           <span className="logo-mark">✦</span>
@@ -814,7 +661,7 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
         </div>
         <div className="sidebar-bottom">
           <Satellite size={16} />
-          <span>{isOffline() ? "OFFLINE SNAPSHOT" : "NASA EARTH DATA"}</span>
+          <span>{isOffline() ? "OFFLINE SNAPSHOT" : entry?.source_kind === 'synthetic_demo' ? 'SYNTHETIC DEMO' : 'NASA EARTH DATA'}</span>
           <small>{catalog?.method_revision || "—"}</small>
         </div>
       </aside>
@@ -866,6 +713,9 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
             ))}
           </div>
         </div>
+        {entry?.source_kind === 'synthetic_demo' && <div className="data-mode-notice" role="status">
+          {lang === 'en' ? 'Synthetic demonstration data. Not a NASA scientific result.' : 'بيانات تجريبية مصطنعة. ليست نتائج علمية من ناسا.'}
+        </div>}
         <div className="workspace-grid">
           <aside id="configure" className="control-rail">
             <div className="rail-heading">
@@ -881,7 +731,7 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
             <div className="control-group">
               <label>{lang === "en" ? "Study area" : "منطقة الدراسة"}</label>
               <div className="region-options">
-                {REGIONS.map((r) => (
+                {regions.map((r) => (
                   <button
                     key={r.id}
                     className={region === r.id ? "active" : ""}
@@ -906,7 +756,7 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
               <div className="variable-options">
                 {VARIABLES.map((v) => {
                   const Icon = v.icon;
-                  const available = catalog?.entries.find(
+                  const available = catalog?.entries?.find(
                     (e) => e.region_id === region && e.variable_id === v.id,
                   )?.app_available;
                   return (
@@ -977,7 +827,7 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
                   {lang === "en" ? "Custom area selected" : "منطقة مخصصة محددة"}
                 </span>
                 <button
-                  onClick={() => setAoi(null)}
+                  onClick={() => { setAoi(null); setAnalysis(null); }}
                   aria-label="Clear custom area"
                 >
                   <X size={15} />
@@ -987,7 +837,7 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
             <button
               className="run-button"
               onClick={run}
-              disabled={running || !catalog || start >= end}
+              disabled={running || !entry?.app_available || start >= end}
             >
               {running
                 ? lang === "en"
@@ -1000,8 +850,8 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
             </button>
             <p className="control-hint">
               {lang === "en"
-                ? "Numbers are produced by the verified server method."
-                : "الأرقام ناتجة عن طريقة التحليل المعتمدة على الخادم."}
+                ? (entry?.source_kind === 'synthetic_demo' ? 'Synthetic demo values; real science is not connected.' : 'Check method status and provenance for server values.')
+                : (entry?.source_kind === 'synthetic_demo' ? 'قيم تجريبية؛ التحليل العلمي الحقيقي غير متصل.' : 'راجع حالة الطريقة ومصدر القيم من الخادم.')}
             </p>
           </aside>
           <div id="observe" className="analysis-center">
@@ -1026,17 +876,22 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
                 </span>
                 {analysis?.spatial ? (
                   <span>
-                    FDR q={analysis.spatial.fdr.q} ·{" "}
-                    {analysis.spatial.fdr.m_tested} cells
+                    {analysis.spatial.fdr.m_tested > 0
+                      ? `FDR q=${analysis.spatial.fdr.q} · ${analysis.spatial.fdr.m_tested} cells`
+                      : 'Significance not computed'}
                   </span>
                 ) : null}
               </div>
             </div>
             <div className="map-panel">
-              <SpatialMap
-                spatial={analysis?.spatial || null}
+              <RegionMap
+                entries={catalog?.entries.filter(e => e.variable_id === variable) || []}
+                region={region}
                 lang={lang}
-                onAoi={setAoi}
+                aoi={aoi}
+                spatial={analysis?.spatial || null}
+                onRegion={id => { setRegion(id); setAoi(null); setAnalysis(null); setComparison(null); }}
+                onAoi={box => { setAoi(box); setAnalysis(null); setComparison(null); }}
               />
             </div>
             <div className="map-legend">
@@ -1050,7 +905,7 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
               </span>
               <span>
                 <i className="legend-mark" />
-                {lang === "en" ? "FDR significant cell" : "خلية دالة بعد FDR"}
+                {lang === "en" ? "Study region boundary" : "حدود منطقة الدراسة"}
               </span>
               <span>
                 <i className="legend-none" />
@@ -1069,7 +924,7 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
                 </div>
                 {analysis?.series ? (
                   <span>
-                    {lang === "en" ? "Valid coverage" : "التغطية الصالحة"}{" "}
+                    {lang === "en" ? "Valid monthly values" : "القيم الشهرية الصالحة"}{" "}
                     {fmt(analysis.series.valid_fraction * 100, 1)}%
                   </span>
                 ) : null}
@@ -1086,6 +941,7 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
                 </span>
               </div>
             </div>
+            <RagChat lang={lang} region={region} />
           </div>
           <aside id="verify" className="evidence-rail">
             <div className="evidence-heading">
@@ -1162,17 +1018,18 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
                     {lang === "en" ? "95% slope interval" : "مجال ميل 95%"}
                   </span>
                   <strong>
-                    {fmt(result?.trend?.ci_low, 4)} to{" "}
-                    {fmt(result?.trend?.ci_high, 4)}
+                    {result?.trend?.ci_low == null || result?.trend?.ci_high == null
+                      ? (lang === 'en' ? 'Not computed' : 'غير محسوب')
+                      : `${fmt(result.trend.ci_low, 4)} to ${fmt(result.trend.ci_high, 4)}`}
                   </strong>
                 </div>
                 <div className="metric-row">
                   <span>p-value</span>
-                  <strong>{fmt(result?.trend?.p_value, 4)}</strong>
+                  <strong>{result?.trend?.p_value == null ? (lang === 'en' ? 'Not computed' : 'غير محسوب') : fmt(result.trend.p_value, 4)}</strong>
                 </div>
                 <div className="metric-row">
                   <span>
-                    {lang === "en" ? "Valid coverage" : "التغطية الصالحة"}
+                    {lang === "en" ? "Valid monthly values" : "القيم الشهرية الصالحة"}
                   </span>
                   <strong>
                     {fmt((result?.counts.valid_fraction || 0) * 100, 1)}%
@@ -1184,7 +1041,9 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
                     {result?.product_id} v{result?.version}
                   </strong>
                 </div>
-                <div className="spatial-note">{lang === 'en' ? 'Map context: the spatial layer shows the full 2001–2024 reference period. A different analysis window can produce a different trend.' : 'الخريطة تعرض الفترة المرجعية الكاملة 2001–2024. قد تختلف نتيجة الاتجاه عند تغيير فترة التحليل.'}</div>
+                <div className="spatial-note">{lang === 'en'
+                  ? (entry?.source_kind === 'synthetic_demo' ? 'Synthetic demo: these numbers are not NASA measurements. Result explanations use templates; ask documentation questions below the chart.' : 'Result explanations and documentation questions are separate. No significance is inferred from a descriptive slope.')
+                  : (entry?.source_kind === 'synthetic_demo' ? 'عرض تجريبي: الأرقام ليست قياسات ناسا. شرح النتيجة من قوالب؛ اسأل عن الوثائق أسفل الرسم.' : 'شرح النتائج وأسئلة الوثائق مساران منفصلان. الميل الوصفي لا يثبت دلالة إحصائية.')}</div>
                 {analysis.explanation ? (
                   <div className="explanation">
                     <Sparkles size={17} />

@@ -3,6 +3,9 @@
 from __future__ import annotations
 
 import hashlib
+import json
+import uuid
+from contextlib import nullcontext
 import logging
 from datetime import datetime, timezone
 
@@ -75,7 +78,7 @@ def build_cache_key(
         data_mode,
         ",".join(sorted(variable_ids)),
         region_id,
-        ",".join(f"{coord:.4f}" for coord in aoi),
+        json.dumps(aoi, separators=(",", ":"), allow_nan=False),
         start_month,
         end_month,
         aggregation_policy,
@@ -146,9 +149,10 @@ class AnalysisService:
                 logger.info("cache hit for key %s", spec.cache_key[:8])
                 return self._accepted(existing_job, cached=True), False
 
-        job_id = f"job_mock_{spec.cache_key[:8]}"
-        result_id = f"result_mock_{spec.cache_key[:8]}"
-        receipt_id = f"receipt_mock_{spec.cache_key[:8]}"
+        suffix = uuid.uuid4().hex if self._settings.job_backend == "database" else spec.cache_key[:8]
+        job_id = f"job_mock_{suffix}"
+        result_id = f"result_mock_{suffix}"
+        receipt_id = f"receipt_mock_{suffix}"
         now = utcnow()
 
         job = JobStatusResponse(
@@ -166,12 +170,14 @@ class AnalysisService:
             updated_at=now,
             links=JobLinks(job=f"{self._settings.api_prefix}/analyses/{job_id}"),
         )
-        self._jobs.add(job)
+        database = getattr(self._jobs, "database", None)
+        with database.transaction() if database else nullcontext():
+            self._jobs.add(job)
 
-        self._job_manager.submit(
-            job_id,
-            lambda: self._execute(job=job, spec=spec, result_id=result_id, receipt_id=receipt_id),
-        )
+            self._job_manager.submit(
+                job_id,
+                lambda: self._execute(job=job, spec=spec, result_id=result_id, receipt_id=receipt_id),
+            )
 
         stored = self._jobs.get(job_id) or job
         return self._accepted(stored, cached=False), True
@@ -389,30 +395,32 @@ class AnalysisService:
                 api_prefix=prefix,
             )
 
-            self._results.add(result)
-            self._receipts.add(receipt)
-            self._cache.put(
-                CacheEntry(
-                    cache_key=spec.cache_key,
-                    job_id=job.job_id,
-                    result_id=result_id,
-                    receipt_id=receipt_id,
+            database = getattr(self._jobs, "database", None)
+            with database.transaction() if database else nullcontext():
+                self._results.add(result)
+                self._receipts.add(receipt)
+                self._cache.put(
+                    CacheEntry(
+                        cache_key=spec.cache_key,
+                        job_id=job.job_id,
+                        result_id=result_id,
+                        receipt_id=receipt_id,
+                    )
                 )
-            )
 
-            job.status = JobState.completed
-            job.progress_percent = 100
-            job.result_id = result_id
-            job.links.result = f"{prefix}/results/{result_id}"
-            job.updated_at = utcnow()
-            job.state_history.append(
-                StateTransition(
-                    status=JobState.completed,
-                    at=job.updated_at,
-                    message="Mock result stored.",
+                job.status = JobState.completed
+                job.progress_percent = 100
+                job.result_id = result_id
+                job.links.result = f"{prefix}/results/{result_id}"
+                job.updated_at = utcnow()
+                job.state_history.append(
+                    StateTransition(
+                        status=JobState.completed,
+                        at=job.updated_at,
+                        message="Mock result stored.",
+                    )
                 )
-            )
-            self._jobs.replace(job)
+                self._jobs.replace(job)
             return result_id
 
         except Exception as error:  # noqa: BLE001 - job failure must be recorded

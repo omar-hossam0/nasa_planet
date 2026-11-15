@@ -75,6 +75,7 @@ class CatalogResponse(BaseModel):
 class RegionSummary(BaseModel):
     region_id: str
     display_name: str
+    display_name_ar: str = ''
     description: str
     bbox: list[float] = Field(description="[west, south, east, north] in WGS84 degrees.")
     period_start: str

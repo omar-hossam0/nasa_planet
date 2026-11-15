@@ -54,6 +54,8 @@ class NASADataAdapter(Protocol):
 
     def registry_snapshot(self) -> str: ...
 
+    def supported_region_ids(self, variable_id: str) -> list[str]: ...
+
 
 @runtime_checkable
 class StatisticsAdapter(Protocol):

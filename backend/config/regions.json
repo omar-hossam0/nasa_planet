@@ -1,0 +1,77 @@
+{
+  "regions": [
+    {
+      "region_id": "nile_corridor",
+      "display_name": "Nile corridor (Egypt rectangle)",
+      "display_name_ar": "???? ?????",
+      "bbox": [
+        29,
+        24,
+        33,
+        32
+      ],
+      "description": "Configured study window; analysis remains descriptive.",
+      "period_start": "2001-01",
+      "period_end": "2024-12",
+      "aliases": [
+        "egypt",
+        "nile",
+        "nile_corridor_egypt"
+      ],
+      "supported_variable_ids": [
+        "air_temperature",
+        "precipitation",
+        "soil_moisture",
+        "vegetation_greenness"
+      ]
+    },
+    {
+      "region_id": "morocco_comparison",
+      "display_name": "Morocco comparison window",
+      "display_name_ar": "??????",
+      "bbox": [
+        -10,
+        30,
+        -5,
+        35
+      ],
+      "description": "Configured study window; analysis remains descriptive.",
+      "period_start": "2001-01",
+      "period_end": "2024-12",
+      "aliases": [
+        "morocco",
+        "morocco_window"
+      ],
+      "supported_variable_ids": [
+        "air_temperature",
+        "precipitation",
+        "soil_moisture",
+        "vegetation_greenness"
+      ]
+    },
+    {
+      "region_id": "sahel_comparison",
+      "display_name": "Sahel comparison window",
+      "display_name_ar": "??????",
+      "bbox": [
+        -5,
+        12,
+        5,
+        17
+      ],
+      "description": "Configured study window; analysis remains descriptive.",
+      "period_start": "2001-01",
+      "period_end": "2024-12",
+      "aliases": [
+        "sahel",
+        "sahel_window"
+      ],
+      "supported_variable_ids": [
+        "air_temperature",
+        "precipitation",
+        "soil_moisture",
+        "vegetation_greenness"
+      ]
+    }
+  ]
+}
