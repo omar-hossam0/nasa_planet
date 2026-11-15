@@ -1,0 +1,36 @@
+{
+  "cases": 12,
+  "diagnostic_p_values": 120,
+  "bootstrap_synthetic_records": 479976,
+  "IID_raw_flag_cases": [
+    "air_temperature__nile_corridor",
+    "soil_moisture__nile_corridor",
+    "precipitation__nile_corridor",
+    "vegetation_greenness__nile_corridor",
+    "air_temperature__morocco_comparison",
+    "soil_moisture__morocco_comparison",
+    "precipitation__morocco_comparison",
+    "vegetation_greenness__morocco_comparison",
+    "precipitation__sahel_comparison",
+    "vegetation_greenness__sahel_comparison"
+  ],
+  "AR1_raw_flag_cases": [
+    "air_temperature__nile_corridor",
+    "soil_moisture__nile_corridor",
+    "precipitation__nile_corridor",
+    "air_temperature__morocco_comparison",
+    "soil_moisture__morocco_comparison",
+    "precipitation__morocco_comparison",
+    "vegetation_greenness__morocco_comparison",
+    "air_temperature__sahel_comparison",
+    "vegetation_greenness__sahel_comparison"
+  ],
+  "BY_flag_cases": [],
+  "low_spatial_support_cases": [
+    "vegetation_greenness__morocco_comparison",
+    "vegetation_greenness__sahel_comparison"
+  ],
+  "source_bytes_unchanged": true,
+  "inference_enabled": false,
+  "elapsed_seconds": 26.19
+}

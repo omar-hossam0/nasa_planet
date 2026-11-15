@@ -39,7 +39,7 @@ from app.schemas.analysis import (
     JobStatusResponse,
     StateTransition,
 )
-from app.schemas.common import ApiWarning, Severity
+from app.schemas.common import ApiWarning, Severity, DataMode, EvidenceState
 from app.schemas.results import AnalysisEcho, ResultLinks, ResultResponse, SpatialRef
 from app.services.catalog_service import (
     SUPPORTED_AGGREGATION_POLICIES,
@@ -100,6 +100,7 @@ def spec_from_result(result: ResultResponse, data: NASADataAdapter) -> AnalysisS
         aggregation_policy=result.analysis.aggregation_policy.value,
         dataset_revision=dataset_revision,
         method_version=result.method.method_version,
+        data_mode=result.data_mode.value,
     )
     return AnalysisSpec(
         variable_ids=list(result.analysis.variable_ids),
@@ -149,21 +150,24 @@ class AnalysisService:
                 logger.info("cache hit for key %s", spec.cache_key[:8])
                 return self._accepted(existing_job, cached=True), False
 
-        suffix = uuid.uuid4().hex if self._settings.job_backend == "database" else spec.cache_key[:8]
-        job_id = f"job_mock_{suffix}"
-        result_id = f"result_mock_{suffix}"
-        receipt_id = f"receipt_mock_{suffix}"
+        suffix = uuid.uuid4().hex if self._settings.job_backend == "database" or not self._settings.mock_mode else spec.cache_key[:8]
+        mode = "mock" if self._settings.mock_mode else "real"
+        job_id = f"job_{mode}_{suffix}"
+        result_id = f"result_{mode}_{suffix}"
+        receipt_id = f"receipt_{mode}_{suffix}"
         now = utcnow()
 
         job = JobStatusResponse(
             job_id=job_id,
             status=JobState.queued,
+            data_mode=DataMode.mock if self._settings.mock_mode else DataMode.real,
+            disclaimer="Synthetic demonstration data. Not a NASA scientific result." if self._settings.mock_mode else "Real NASA inputs; descriptive estimates only. Inference is not released.",
             result_id=None,
             progress_percent=0,
             request=request,
             resolved_variable_ids=spec.variable_ids,
             warnings=[
-                "Mock job. Execution is deterministic and completes without real computation.",
+                "Mock job. Execution is deterministic and completes without real computation." if self._settings.mock_mode else "Real NASA input analysis; descriptive only.",
             ],
             state_history=[StateTransition(status=JobState.queued, at=now, message="Job accepted.")],
             created_at=now,
@@ -265,7 +269,7 @@ class AnalysisService:
             self._data.dataset_revision(variable_id, resolved_region)
             for variable_id in resolved_variables
         )
-        method_version = synthetic.METHOD_VERSION
+        method_version = getattr(self._statistics, "method_version", synthetic.METHOD_VERSION)
         cache_key = build_cache_key(
             variable_ids=resolved_variables,
             region_id=resolved_region,
@@ -275,9 +279,10 @@ class AnalysisService:
             aggregation_policy=request.aggregation_policy.value,
             dataset_revision=dataset_revision,
             method_version=method_version,
+            data_mode='mock' if self._settings.mock_mode else 'real',
         )
 
-        return AnalysisSpec(
+        spec = AnalysisSpec(
             variable_ids=resolved_variables,
             region_id=resolved_region,
             aoi=aoi,
@@ -289,6 +294,9 @@ class AnalysisService:
             dataset_revision=dataset_revision,
             method_version=method_version,
         )
+        if hasattr(self._data, "ensure_available"):
+            self._data.ensure_available(spec)
+        return spec
 
     def _validate_aoi(self, aoi) -> None:
         if aoi.width < self._settings.min_aoi_span_degrees:
@@ -325,7 +333,7 @@ class AnalysisService:
         job.progress_percent = 40
         job.updated_at = utcnow()
         job.state_history.append(
-            StateTransition(status=JobState.running, at=job.updated_at, message="Mock computation started.")
+            StateTransition(status=JobState.running, at=job.updated_at, message="Computation started.")
         )
         self._jobs.replace(job)
 
@@ -335,25 +343,36 @@ class AnalysisService:
             region_name = region.display_name if region else spec.region_id
             prefix = self._settings.api_prefix
 
-            cells = build_cell_datasets(
-                spec.variable_ids[0],
-                spec.aoi.canonical(),
-                spec.start_month,
-                spec.end_month,
-                seed_key=result_id,
-            )
-
-            warnings = list(computed.warnings)
-            warnings.append(
-                ApiWarning(
-                    code="REGIONAL_AVERAGE_HIDES_VARIATION",
-                    message=(
-                        "Cells in this demo grid are generated independently; the regional "
-                        "series is not an area-weighted aggregate of the cells."
-                    ),
-                    severity=Severity.info,
+            if computed.science is None:
+                cells = build_cell_datasets(
+                    spec.variable_ids[0],
+                    spec.aoi.canonical(),
+                    spec.start_month,
+                    spec.end_month,
+                    seed_key=result_id,
                 )
-            )
+
+                warnings = list(computed.warnings)
+                warnings.append(
+                    ApiWarning(
+                        code="REGIONAL_AVERAGE_HIDES_VARIATION",
+                        message=(
+                            "Cells in this demo grid are generated independently; the regional "
+                            "series is not an area-weighted aggregate of the cells."
+                        ),
+                        severity=Severity.info,
+                    )
+                )
+
+                spatial = SpatialRef(spatial_url=f"{prefix}/results/{result_id}/spatial",
+                    cell_count=GRID_ROWS*GRID_COLS,missing_cell_count=missing_cell_count(cells),grid=GRID_LABEL)
+            else:
+                warnings = computed.warnings
+                artifact = computed.science[spec.variable_ids[0]]
+                slopes = artifact['annual_slope']
+                spatial = SpatialRef(spatial_url=f"{prefix}/results/{result_id}/spatial",
+                    cell_count=len(artifact['lat'])*len(artifact['lon']),
+                    missing_cell_count=sum(v is None for row in slopes for v in row),grid='native_source_grid')
 
             result = ResultResponse(
                 result_id=result_id,
@@ -372,12 +391,11 @@ class AnalysisService:
                 method=computed.method,
                 variables=computed.variables,
                 warnings=warnings,
-                spatial=SpatialRef(
-                    spatial_url=f"{prefix}/results/{result_id}/spatial",
-                    cell_count=GRID_ROWS * GRID_COLS,
-                    missing_cell_count=missing_cell_count(cells),
-                    grid=GRID_LABEL,
-                ),
+                spatial=spatial,
+                science=computed.science,
+                data_mode=job.data_mode,
+                disclaimer=job.disclaimer,
+                evidence_state=EvidenceState.synthetic_demo if computed.science is None else EvidenceState.descriptive_only,
                 receipt_id=receipt_id,
                 links=ResultLinks(
                     self_url=f"{prefix}/results/{result_id}",
@@ -417,7 +435,7 @@ class AnalysisService:
                     StateTransition(
                         status=JobState.completed,
                         at=job.updated_at,
-                        message="Mock result stored.",
+                        message="Result stored.",
                     )
                 )
                 self._jobs.replace(job)
@@ -430,7 +448,7 @@ class AnalysisService:
             job.error = f"{type(error).__name__}: {error}"
             job.updated_at = utcnow()
             job.state_history.append(
-                StateTransition(status=JobState.failed, at=job.updated_at, message="Mock computation failed.")
+                StateTransition(status=JobState.failed, at=job.updated_at, message="Computation failed.")
             )
             self._jobs.replace(job)
             raise
@@ -440,13 +458,15 @@ class AnalysisService:
         if cached:
             message = "An equivalent analysis already exists; the cached job was returned."
         elif job.status is JobState.completed:
-            message = "Analysis accepted and completed synchronously by the mock job manager."
+            message = 'Analysis completed by the configured inline executor.'
         else:
             message = "Analysis accepted and queued."
         return AnalysisAcceptedResponse(
             job_id=job.job_id,
             status=job.status,
             result_id=job.result_id,
+            data_mode=job.data_mode,
+            disclaimer=job.disclaimer,
             cached=cached,
             links=JobLinks(
                 job=f"{prefix}/analyses/{job.job_id}",

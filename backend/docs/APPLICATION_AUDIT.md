@@ -1,5 +1,10 @@
 # Application audit — 15 November 2026
 
+This records the initial mock-path audit. The subsequent real integration and
+browser verification are documented in
+[REAL_SCIENCE_INTEGRATION.md](REAL_SCIENCE_INTEGRATION.md). Real mode now includes
+the scientific adapters, native grids, result conclusions and Spin It UI.
+
 Direct Computer Use tools were unavailable in this session. Tests used a real
 Chromium browser through Playwright, including clicks, typing, downloads and
 desktop/mobile screenshots. An isolated FastAPI and Vite instance were started

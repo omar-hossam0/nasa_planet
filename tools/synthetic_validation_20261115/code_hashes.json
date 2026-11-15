@@ -1,0 +1,10 @@
+{
+  "tools\\synthetic_validation_20261115\\run_audit.py": "93b53fd16feb29ab59693a6c48321b0361dee9827ad1a8ff8cb01781ae270659",
+  "packages\\science\\src\\trend_estimation.py": "bfe270e99baf10034818b86aa2a89c7d11eb169c0d2a5f556cb20b6ff3aa8390",
+  "packages\\science\\src\\preparation.py": "95b7099dc3b1bd2f3ada26e1eb05087946e2fc47feda9ee8bbdde81ee370bbb2",
+  "packages\\science\\src\\inference.py": "673d10a735b0d4ff0de3cf632a3bb30e25df696d542d2a391e58060e5023519b",
+  "packages\\science\\src\\inference_candidates.py": "cadfc0a95cc1fe138838e9d2b8b85e615fadc708c0654031caaf855df35cea90",
+  "packages\\rag\\retriever.py": "9b37a354817ec97b694d921802c2fca461fb51bdac1b33e39006fc98144986cf",
+  "packages\\rag\\conclusions.py": "61226325d6421591762a5419a9f9cb2f6af731e2681507f09056f6cd0b23902d",
+  "backend\\app\\adapters\\science_rag.py": "ac3704de56433693de52199c99a7d24c581f4cb972ed8e67fa67d5511da61aa2"
+}

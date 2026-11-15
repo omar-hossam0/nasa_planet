@@ -6,23 +6,22 @@ from fastapi import APIRouter, Depends
 
 from app.core.dependencies import Container, get_container
 from app.schemas.common import ErrorEnvelope
-from app.schemas.spatial import CellDetailResponse, SpatialResponse
+from app.schemas.spatial import CellDetailResponse, SpatialResponse, CompactSpatialResponse
 
 router = APIRouter(tags=["spatial"])
 
 
 @router.get(
     "/results/{result_id}/spatial",
-    response_model=SpatialResponse,
+    response_model=SpatialResponse | CompactSpatialResponse,
     summary="Map-ready spatial grid for a result",
     description=(
-        "Returns a small deterministic 3x3 lon/lat grid. Each cell carries a GeoJSON polygon, "
-        "bbox, centroid, synthetic trend, unit, evidence state and a missing-data flag."
+        'Returns the configured native science grid or explicit demo cells. Use compact=true for grid arrays without repeated cell geometries.'
     ),
     responses={404: {"model": ErrorEnvelope, "description": "Unknown result id."}},
 )
-def get_spatial(result_id: str, container: Container = Depends(get_container)) -> SpatialResponse:
-    return container.spatial.get_spatial(result_id)
+def get_spatial(result_id: str, compact: bool = False, container: Container = Depends(get_container)):
+    return container.spatial.get_spatial(result_id,compact=compact)
 
 
 @router.get(

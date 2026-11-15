@@ -1,0 +1,788 @@
+{
+  "protocol": {
+    "seed": 20261115,
+    "years": 24,
+    "records_per_scenario": 300,
+    "rho": [
+      0.0,
+      0.7,
+      0.9
+    ],
+    "true_slopes": [
+      0.0,
+      0.08
+    ],
+    "noise": "stationary Gaussian AR(1), marginal SD=1, known generating slope",
+    "bootstrap_replicates": 199,
+    "block_length": 4,
+    "confidence": 0.95,
+    "scope": "current descriptive code, experimental inference candidates, offline retrieval and templates",
+    "not_tested": "live Gemini answer quality, browser, deployment, exhaustive inference calibration",
+    "retention": "Keep fixtures, outputs and code until user explicitly requests deletion",
+    "production_changes": false
+  },
+  "checks": [
+    {
+      "name": "science/warming",
+      "passed": true,
+      "detail": {
+        "slope_per_year": 0.03125,
+        "n_valid": 24,
+        "pair_count": 276,
+        "valid_span_years": 23.0,
+        "status": "computed_descriptive",
+        "minimum_valid_observations": 3,
+        "inference_status": "not_computed"
+      }
+    },
+    {
+      "name": "science/cooling",
+      "passed": true,
+      "detail": {
+        "slope_per_year": -0.125,
+        "n_valid": 24,
+        "pair_count": 276,
+        "valid_span_years": 23.0,
+        "status": "computed_descriptive",
+        "minimum_valid_observations": 3,
+        "inference_status": "not_computed"
+      }
+    },
+    {
+      "name": "science/flat",
+      "passed": true,
+      "detail": {
+        "slope_per_year": 0.0,
+        "n_valid": 24,
+        "pair_count": 276,
+        "valid_span_years": 23.0,
+        "status": "computed_descriptive",
+        "minimum_valid_observations": 3,
+        "inference_status": "not_computed"
+      }
+    },
+    {
+      "name": "science/missing_values_and_elapsed_year_gaps",
+      "passed": true,
+      "detail": {
+        "slope_per_year": 0.19999999999999996,
+        "n_valid": 4,
+        "pair_count": 6,
+        "valid_span_years": 23.0,
+        "status": "computed_descriptive",
+        "minimum_valid_observations": 3,
+        "inference_status": "not_computed"
+      }
+    },
+    {
+      "name": "science/single_extreme_outlier",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "science/grid_positive_negative_zero",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "science/duplicate_years_rejected",
+      "passed": true,
+      "detail": "duplicate timestamps rejected"
+    },
+    {
+      "name": "science/too_few_values",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "pipeline/air_temperature",
+      "passed": true,
+      "detail": {
+        "expected": 0.03125,
+        "actual": 0.03125,
+        "unit": "K"
+      }
+    },
+    {
+      "name": "pipeline/soil_moisture",
+      "passed": true,
+      "detail": {
+        "expected": -0.125,
+        "actual": -0.125,
+        "unit": "kg m-2"
+      }
+    },
+    {
+      "name": "pipeline/vegetation_greenness",
+      "passed": true,
+      "detail": {
+        "expected": 0.001,
+        "actual": 0.0010000000000000009,
+        "unit": "1"
+      }
+    },
+    {
+      "name": "pipeline/precipitation",
+      "passed": true,
+      "detail": {
+        "expected": 2.0,
+        "actual": 2.0,
+        "unit": "mm"
+      }
+    },
+    {
+      "name": "pipeline/one_bad_QA_month_excludes_cell_for_full_reference",
+      "passed": true,
+      "detail": {
+        "expected_retained_cells": 3,
+        "actual": 3
+      }
+    },
+    {
+      "name": "pipeline/unsupported_AOI_rejected",
+      "passed": true,
+      "detail": "outside region rejected"
+    },
+    {
+      "name": "pipeline/nonuniform_cells_independent_area_weight_oracle",
+      "passed": true,
+      "detail": {
+        "independent_area_weighted_slope": 0.14959769354391897,
+        "actual": 0.14959769354391583
+      }
+    },
+    {
+      "name": "rag/question/What does MERRA-2 air temperature measure?",
+      "passed": true,
+      "detail": {
+        "variable_ids": [
+          "air_temperature"
+        ],
+        "citation_count": 5
+      }
+    },
+    {
+      "name": "rag/question/ما قيود قياس درجة حرارة الهواء؟",
+      "passed": true,
+      "detail": {
+        "variable_ids": [
+          "air_temperature"
+        ],
+        "citation_count": 5
+      }
+    },
+    {
+      "name": "rag/question/هل دلتا النيل بتسخن؟",
+      "passed": true,
+      "detail": {
+        "variable_ids": [
+          "air_temperature"
+        ],
+        "citation_count": 5
+      }
+    },
+    {
+      "name": "rag/question/الدنيا بتسخن في الدلتا؟",
+      "passed": true,
+      "detail": {
+        "variable_ids": [
+          "air_temperature"
+        ],
+        "citation_count": 5
+      }
+    },
+    {
+      "name": "rag/question/Is the Nile Delta getting warmer?",
+      "passed": false,
+      "error": "AssertionError: {'mode': 'local_retrieval', 'query': 'Is the Nile Delta getting warmer?', 'status': 'unsupported', 'reason_code': 'no_target_variable_identified', 'variable_ids': [], 'suggested_variable_ids': [], 'citations': [], 'context': {'definition_chunks': [], 'limitation_chunks': []}, 'limitations': [], 'notes': [], 'message': 'لم يتم التعرف على متغير من المتغيرات الأربعة. No supported variable was identified; ask about air temperature, soil moisture, precipitation or vegetation greenness.', 'excerpts': [{'chunk_id': 'statsmodels_fdr.html:0:0', 'source_id': 'statsmodels_fdr.html', 'source_kind': 'method_doc', 'product_id': None, 'product_version': '0.15.0', 'source_url': 'https://www.statsmodels.org/stable/generated/statsmodels.stats.multitest.multipletests.html', 'section_locator': '0', 'retrieved_timestamp': '2026-11-14T02:21:32.718553+00:00', 'raw_source_hash': 'ddbb7e7033b40ef704ea6238e356e4652bc4ec7b5f446eef9e75d619a8550223', 'title': 'statsmodels_fdr.html', 'text': 'statsmodels.stats.multitest.multipletests — statsmodels 0.15.0\\nSkip to main content\\nBack to top\\nCtrl\\n+\\nK\\nstatsmodels\\nInstalling\\nGetting started\\nUser Guide\\nExamples\\nMore\\nAPI Reference\\nAbout statsmodels\\nDeveloper Page\\nRelease 0.15.0\\nSearch\\nCtrl\\n+\\nK\\nChoose version\\nSystem Settings\\nLight\\nDark\\nGitHub\\nPyPI\\nDOI\\nSearch\\nCtrl\\n+\\nK\\nInstalling\\nGetting started\\nUser Guide\\nExamples\\nAPI Reference\\nAbout statsmodels\\nDeveloper Page\\nRelease 0.15.0\\nChoose version\\nSystem Settings\\nLight\\nDark\\nGitHub\\nPyPI\\nDOI\\nCollapse Sidebar\\nExpand Sidebar\\nSection Navigation\\nendog\\n,\\nexog\\n, what’s that?\\nImport Paths and Structure\\nFitting models using R-style formulas\\nPitfalls\\nLinear Regression\\nGeneralized Linear Models\\nGeneralized Estimating Equations\\nGeneralized Additive Models (GAM)\\nRobust Linear Models\\nLinear Mixed Effects Models\\nRegression with Discrete Dependent Variable\\nGeneralized Linear Mixed Effects Models\\nANOVA\\nOther Models\\nothermod\\nTime Series analysis\\ntsa\\nTime Series Analysis by State Space Methods\\nstatespace\\nVector Autoregressions\\ntsa.vector_ar\\nMethods for Survival and Duration Analysis\\nNonparametric Methods\\nnonparametric\\nGeneralized Method of Moments\\ngmm\\nOther Models\\nmiscmodels\\nMultivariate Statistics\\nmultivariate\\nStatistics\\nstats\\nstatsmodels.stats.stattools.durbin_watson\\nstatsmodels.stats.diagnostic.acorr_breusch_godfrey\\nstatsmodels.stats.diagnostic.acorr_ljungbox\\nstatsmodels.stats.diagnostic.acorr_lm\\nstat', 'score': 8.0384}, {'chunk_id': 'MERRA2_Specification:p78:0', 'source_id': 'MERRA2_Specification', 'source_kind': 'product_doc', 'product_id': 'MERRA2_Specification', 'product_version': None, 'source_url': 'https://gmao.gsfc.nasa.gov/media/publications/zbly36ziNFDFbmYmvhQeVqPhUo/Bosilovich785.pdf', 'section_locator': 'p78', 'retrieved_timestamp': '2026-11-14T02:20:48.127624+00:00', 'raw_source_hash': '4656eda4a04c6c7b086b7a1b38c8a9e38e5c51931ed8fb661b86bfe801689945', 'title': 'MERRA2_Specification', 'text': '72\\nfor the land is in the variable PRECTOTCORR, the observation driven precipitation field. See\\nReichle and Liu (2014) for information on PRECTOTCORR.\\nIn the tavg1_2d_lnd_Nx collections, the evapotra nspiration is separa ted into components\\naccording to its sources as follows:\\nEL = Etr + Ebs + Eint + Esnow ,\\n\\nwhere Etr is the transpiration rate, Ebs is the evaporation from bare soil surfaces, Eint is the\\nevaporation from the land’s interception reservoir (e.g., water droplets sitting on leaves after a\\nrainstorm), and Esnow is the water that sublimates fr om the snowpack. The corresponding\\ncollection-variable equation is\\nEVLAND = (EVPTRNS + EVPSOIL + EVPINTR) + EVPSBLN\\nwhere Lv and L s are the latent heat of vaporization and the latent heat of sublimation,\\nrespectively. The MERRA-2 system u uses Lv=2.4665e6 J kg-1 (at 15°C) and Ls=2.8002e6 J kg-1.\\n\\nTotal Land Energy Budget\\nThe balance equation for total land surface energy can be written:\\n,\\nwhere is the total heat content (in the soil, canopy, and snowpack) rela tive to liquid water.\\nis the net shortwave radiation, is the net longwave radiation, Lv is the latent heat of\\nvaporization (from liquid), EL is the total evaporation from the land surface, SHL is the sensible\\nheat flux from the land surface, Lf is the latent heat of fusion, and ΔSWE is the change in the\\nsnow water equivalent (through addition', 'score': 2.6604}, {'chunk_id': 'IMERG_V07_ATBD:p50:0', 'source_id': 'IMERG_V07_ATBD', 'source_kind': 'product_doc', 'product_id': 'IMERG_V07_ATBD', 'product_version': None, 'source_url': 'https://arthurhou.pps.eosdis.nasa.gov/Documents/IMERG_V07_ATBD_final.pdf', 'section_locator': 'p50', 'retrieved_timestamp': '2026-11-14T16:03:15.184964+00:00', 'raw_source_hash': 'c2746d55c4637895e94b54a8a086958ab5fd96b5d5a7a087eb144f4cf645b168', 'title': 'IMERG_V07_ATBD', 'text': 'IMERG ATBD\\nVersion 07\\n45\\nAt the monthly scale, a relatively well-founded metric exists for random error, based on Huffman’s\\n(1997) analysis of sampling error for a particular data source for a month. The general form of the\\nrelationship is\\n𝜎*%=𝑟 %𝑁,F𝐻𝑝−1H , (7)\\nwhere σr is random error, 𝑟 is the time-average of the precipitation rate samples, NI is the number\\nof independent samples in 𝑟, H is the non-dimensional second moment of the probability\\ndistribution of the precipitation rates, and p is the frequency of all nonzero precipitation. Huffman\\n(1997) proceeds to simplify (6) to the approximate expression\\n𝜎*%≅ 𝐻𝐼(𝑟+𝑆)𝑁 L24+493𝑟P , (8)\\nwhere 𝑟 and N are available for each grid box in the monthly estimate, I is a multiplicative constant\\nexpressing the fraction of N that is “independent”, and H/I and S are global constants that are\\napproximated with validation data for each sensor type. This relationship is simple enough that it\\ncan be inverted for N. When all the constants are set for the gauge analysis, but the 𝑟 and 𝜎*% used\\nare the final satellite-gauge precipitation estimate and random error variance,\\n𝑁≅ F𝐻\\n𝐼\\nH\\n-\\n)𝑟+𝑆-0\\n𝜎*% L24+493𝑟P , (9)\\nand this special N is defined as the equivalent number of gauges. Following Huffman (1997), the\\ninterpretation is that this is the approximate number of gauges required to produce the estimated\\nFigure 9: QI f\\n\\nor the monthly IMERG Final Run for July 2014. The QIm value can be\\ninterpreted as the number of equivalent gauges per 2.5° × 2.5° box.', 'score': 2.5668}]}"
+    },
+    {
+      "name": "rag/question/What does GLDAS soil moisture measure?",
+      "passed": true,
+      "detail": {
+        "variable_ids": [
+          "soil_moisture"
+        ],
+        "citation_count": 5
+      }
+    },
+    {
+      "name": "rag/question/ما حدود بيانات رطوبة التربة؟",
+      "passed": true,
+      "detail": {
+        "variable_ids": [
+          "soil_moisture"
+        ],
+        "citation_count": 5
+      }
+    },
+    {
+      "name": "rag/question/What are IMERG precipitation limitations?",
+      "passed": true,
+      "detail": {
+        "variable_ids": [
+          "precipitation"
+        ],
+        "citation_count": 5
+      }
+    },
+    {
+      "name": "rag/question/ما قيود قياس الهطول؟",
+      "passed": true,
+      "detail": {
+        "variable_ids": [
+          "precipitation"
+        ],
+        "citation_count": 5
+      }
+    },
+    {
+      "name": "rag/question/What does NDVI measure?",
+      "passed": true,
+      "detail": {
+        "variable_ids": [
+          "vegetation_greenness"
+        ],
+        "citation_count": 5
+      }
+    },
+    {
+      "name": "rag/question/ما معنى مؤشر NDVI؟",
+      "passed": true,
+      "detail": {
+        "variable_ids": [
+          "vegetation_greenness"
+        ],
+        "citation_count": 5
+      }
+    },
+    {
+      "name": "rag/safety/atmospheric humidity",
+      "passed": true,
+      "detail": {
+        "status": "unsupported",
+        "reason": "target_variable_not_available"
+      }
+    },
+    {
+      "name": "rag/safety/earthquake prediction",
+      "passed": true,
+      "detail": {
+        "status": "unsupported",
+        "reason": "out_of_scope_topic"
+      }
+    },
+    {
+      "name": "rag/safety/temperature in 1990",
+      "passed": true,
+      "detail": {
+        "status": "unavailable",
+        "reason": "period_outside_scope"
+      }
+    },
+    {
+      "name": "rag/safety/رطوبة",
+      "passed": true,
+      "detail": {
+        "status": "ambiguous",
+        "reason": "air_vs_soil_humidity"
+      }
+    },
+    {
+      "name": "rag/isolated_synthetic_corpus_ranking",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "rag/Sinai_does_not_become_executable_region",
+      "passed": true,
+      "detail": {
+        "status": "unavailable",
+        "reason": "region_unavailable"
+      }
+    },
+    {
+      "name": "rag/backend_templates/air_temperature/en",
+      "passed": true,
+      "detail": {
+        "mode": "conclusion_templates",
+        "slope_preserved": true,
+        "provider_calls": 0
+      }
+    },
+    {
+      "name": "rag/backend_templates/air_temperature/ar",
+      "passed": true,
+      "detail": {
+        "mode": "conclusion_templates",
+        "slope_preserved": true,
+        "provider_calls": 0
+      }
+    },
+    {
+      "name": "rag/backend_templates/soil_moisture/en",
+      "passed": true,
+      "detail": {
+        "mode": "conclusion_templates",
+        "slope_preserved": true,
+        "provider_calls": 0
+      }
+    },
+    {
+      "name": "rag/backend_templates/soil_moisture/ar",
+      "passed": true,
+      "detail": {
+        "mode": "conclusion_templates",
+        "slope_preserved": true,
+        "provider_calls": 0
+      }
+    },
+    {
+      "name": "rag/backend_templates/vegetation_greenness/en",
+      "passed": true,
+      "detail": {
+        "mode": "conclusion_templates",
+        "slope_preserved": true,
+        "provider_calls": 0
+      }
+    },
+    {
+      "name": "rag/backend_templates/vegetation_greenness/ar",
+      "passed": true,
+      "detail": {
+        "mode": "conclusion_templates",
+        "slope_preserved": true,
+        "provider_calls": 0
+      }
+    },
+    {
+      "name": "rag/backend_templates/precipitation/en",
+      "passed": true,
+      "detail": {
+        "mode": "conclusion_templates",
+        "slope_preserved": true,
+        "provider_calls": 0
+      }
+    },
+    {
+      "name": "rag/backend_templates/precipitation/ar",
+      "passed": true,
+      "detail": {
+        "mode": "conclusion_templates",
+        "slope_preserved": true,
+        "provider_calls": 0
+      }
+    },
+    {
+      "name": "inference/confidence_change_does_not_change_p",
+      "passed": true,
+      "detail": {
+        "p_95": 0.005,
+        "p_90": 0.005,
+        "width_95": 0.0724741882998424,
+        "width_90": 0.06057329756299071
+      }
+    }
+  ],
+  "passed": 40,
+  "failed": 1,
+  "inference_diagnostics": [
+    {
+      "method": "block_bootstrap_candidate",
+      "rho": 0.0,
+      "true_slope": 0.0,
+      "records": 300,
+      "valid_outputs": 300,
+      "nonconverged": 0,
+      "failures": [],
+      "rejection_rate": 0.18333333333333332,
+      "rejection_rate_MC95": [
+        0.14364526409824455,
+        0.23102861767730118
+      ],
+      "coverage": 0.7933333333333333,
+      "coverage_MC95": [
+        0.743944983244025,
+        0.8353044736375745
+      ],
+      "slope_bias": 0.002580282780701738,
+      "slope_RMSE": 0.031349680031265426,
+      "production_enabled": false
+    },
+    {
+      "method": "adjusted_MK_candidate",
+      "rho": 0.0,
+      "true_slope": 0.0,
+      "records": 300,
+      "valid_outputs": 300,
+      "nonconverged": 0,
+      "failures": [],
+      "rejection_rate": 0.03333333333333333,
+      "rejection_rate_MC95": [
+        0.01820494733885481,
+        0.06026182580405482
+      ],
+      "coverage": 0.9566666666666667,
+      "coverage_MC95": [
+        0.9272825343659885,
+        0.9745035519155927
+      ],
+      "slope_bias": 0.002580282780701738,
+      "slope_RMSE": 0.031349680031265426,
+      "production_enabled": false
+    },
+    {
+      "method": "AR1_regression_candidate",
+      "rho": 0.0,
+      "true_slope": 0.0,
+      "records": 300,
+      "valid_outputs": 300,
+      "nonconverged": 0,
+      "failures": [],
+      "rejection_rate": 0.07666666666666666,
+      "rejection_rate_MC95": [
+        0.051627611786607464,
+        0.1124101038501748
+      ],
+      "coverage": 0.9233333333333333,
+      "coverage_MC95": [
+        0.8875898961498251,
+        0.9483723882133924
+      ],
+      "slope_bias": 0.0022487700587332155,
+      "slope_RMSE": 0.02954964732204925,
+      "production_enabled": false
+    },
+    {
+      "method": "block_bootstrap_candidate",
+      "rho": 0.0,
+      "true_slope": 0.08,
+      "records": 300,
+      "valid_outputs": 300,
+      "nonconverged": 0,
+      "failures": [],
+      "rejection_rate": 0.8266666666666667,
+      "rejection_rate_MC95": [
+        0.7797738592974309,
+        0.8652993995025323
+      ],
+      "coverage": 0.82,
+      "coverage_MC95": [
+        0.7725668011129554,
+        0.859341697303335
+      ],
+      "slope_bias": -0.0034887500466433824,
+      "slope_RMSE": 0.03000501206405029,
+      "production_enabled": false
+    },
+    {
+      "method": "adjusted_MK_candidate",
+      "rho": 0.0,
+      "true_slope": 0.08,
+      "records": 300,
+      "valid_outputs": 300,
+      "nonconverged": 0,
+      "failures": [],
+      "rejection_rate": 0.6833333333333333,
+      "rejection_rate_MC95": [
+        0.628659261236736,
+        0.7333716493142638
+      ],
+      "coverage": 0.9333333333333333,
+      "coverage_MC95": [
+        0.899276940483885,
+        0.9564324844548417
+      ],
+      "slope_bias": -0.0034887500466433824,
+      "slope_RMSE": 0.03000501206405029,
+      "production_enabled": false
+    },
+    {
+      "method": "AR1_regression_candidate",
+      "rho": 0.0,
+      "true_slope": 0.08,
+      "records": 300,
+      "valid_outputs": 300,
+      "nonconverged": 0,
+      "failures": [],
+      "rejection_rate": 0.7633333333333333,
+      "rejection_rate_MC95": [
+        0.7120967390716028,
+        0.8079112960834695
+      ],
+      "coverage": 0.9066666666666666,
+      "coverage_MC95": [
+        0.8684146029829267,
+        0.934635780421109
+      ],
+      "slope_bias": -0.004243747028225345,
+      "slope_RMSE": 0.029364529027836945,
+      "production_enabled": false
+    },
+    {
+      "method": "block_bootstrap_candidate",
+      "rho": 0.7,
+      "true_slope": 0.0,
+      "records": 300,
+      "valid_outputs": 300,
+      "nonconverged": 0,
+      "failures": [],
+      "rejection_rate": 0.35,
+      "rejection_rate_MC95": [
+        0.29823200252235404,
+        0.4055608888450096
+      ],
+      "coverage": 0.6166666666666667,
+      "coverage_MC95": [
+        0.5605031391673366,
+        0.669880167546936
+      ],
+      "slope_bias": 0.001557497512308225,
+      "slope_RMSE": 0.056746552497286544,
+      "production_enabled": false
+    },
+    {
+      "method": "adjusted_MK_candidate",
+      "rho": 0.7,
+      "true_slope": 0.0,
+      "records": 300,
+      "valid_outputs": 300,
+      "nonconverged": 0,
+      "failures": [],
+      "rejection_rate": 0.30333333333333334,
+      "rejection_rate_MC95": [
+        0.2540711301237818,
+        0.3575684385578729
+      ],
+      "coverage": 0.6933333333333334,
+      "coverage_MC95": [
+        0.6389838112035251,
+        0.7427942399229839
+      ],
+      "slope_bias": 0.001557497512308225,
+      "slope_RMSE": 0.056746552497286544,
+      "production_enabled": false
+    },
+    {
+      "method": "AR1_regression_candidate",
+      "rho": 0.7,
+      "true_slope": 0.0,
+      "records": 300,
+      "valid_outputs": 300,
+      "nonconverged": 0,
+      "failures": [],
+      "rejection_rate": 0.21666666666666667,
+      "rejection_rate_MC95": [
+        0.1737878350698321,
+        0.2667098486240773
+      ],
+      "coverage": 0.7833333333333333,
+      "coverage_MC95": [
+        0.7332901513759227,
+        0.8262121649301679
+      ],
+      "slope_bias": 0.0013567442359832126,
+      "slope_RMSE": 0.05289425369600435,
+      "production_enabled": false
+    },
+    {
+      "method": "block_bootstrap_candidate",
+      "rho": 0.7,
+      "true_slope": 0.08,
+      "records": 300,
+      "valid_outputs": 300,
+      "nonconverged": 0,
+      "failures": [],
+      "rejection_rate": 0.5933333333333334,
+      "rejection_rate_MC95": [
+        0.5369084052348393,
+        0.6473982401365789
+      ],
+      "coverage": 0.6433333333333333,
+      "coverage_MC95": [
+        0.5876297656515226,
+        0.6954125825974409
+      ],
+      "slope_bias": -0.003432964970581251,
+      "slope_RMSE": 0.0577588190252195,
+      "production_enabled": false
+    },
+    {
+      "method": "adjusted_MK_candidate",
+      "rho": 0.7,
+      "true_slope": 0.08,
+      "records": 300,
+      "valid_outputs": 300,
+      "nonconverged": 0,
+      "failures": [],
+      "rejection_rate": 0.5366666666666666,
+      "rejection_rate_MC95": [
+        0.4801320652390865,
+        0.5922741168711132
+      ],
+      "coverage": 0.7566666666666667,
+      "coverage_MC95": [
+        0.7050648160221181,
+        0.8017784587492817
+      ],
+      "slope_bias": -0.003432964970581251,
+      "slope_RMSE": 0.0577588190252195,
+      "production_enabled": false
+    },
+    {
+      "method": "AR1_regression_candidate",
+      "rho": 0.7,
+      "true_slope": 0.08,
+      "records": 300,
+      "valid_outputs": 300,
+      "nonconverged": 0,
+      "failures": [],
+      "rejection_rate": 0.4633333333333333,
+      "rejection_rate_MC95": [
+        0.4077258831288866,
+        0.5198679347609133
+      ],
+      "coverage": 0.8266666666666667,
+      "coverage_MC95": [
+        0.7797738592974309,
+        0.8652993995025323
+      ],
+      "slope_bias": -0.0026900979775659056,
+      "slope_RMSE": 0.053857557991561354,
+      "production_enabled": false
+    },
+    {
+      "method": "block_bootstrap_candidate",
+      "rho": 0.9,
+      "true_slope": 0.0,
+      "records": 300,
+      "valid_outputs": 300,
+      "nonconverged": 0,
+      "failures": [],
+      "rejection_rate": 0.5233333333333333,
+      "rejection_rate_MC95": [
+        0.466878323217167,
+        0.5791983381256874
+      ],
+      "coverage": 0.44,
+      "coverage_MC95": [
+        0.38493919498482354,
+        0.49657796156212186
+      ],
+      "slope_bias": -0.000403554038926263,
+      "slope_RMSE": 0.07233404811076731,
+      "production_enabled": false
+    },
+    {
+      "method": "adjusted_MK_candidate",
+      "rho": 0.9,
+      "true_slope": 0.0,
+      "records": 300,
+      "valid_outputs": 300,
+      "nonconverged": 0,
+      "failures": [],
+      "rejection_rate": 0.46,
+      "rejection_rate_MC95": [
+        0.4044631474970939,
+        0.5165482902008698
+      ],
+      "coverage": 0.5433333333333333,
+      "coverage_MC95": [
+        0.48677384505565635,
+        0.5987970974382163
+      ],
+      "slope_bias": -0.000403554038926263,
+      "slope_RMSE": 0.07233404811076731,
+      "production_enabled": false
+    },
+    {
+      "method": "AR1_regression_candidate",
+      "rho": 0.9,
+      "true_slope": 0.0,
+      "records": 300,
+      "valid_outputs": 300,
+      "nonconverged": 0,
+      "failures": [],
+      "rejection_rate": 0.38,
+      "rejection_rate_MC95": [
+        0.3269187519503734,
+        0.4361155611435176
+      ],
+      "coverage": 0.62,
+      "coverage_MC95": [
+        0.5638844388564824,
+        0.6730812480496265
+      ],
+      "slope_bias": -0.00034799298390423357,
+      "slope_RMSE": 0.06501301075068072,
+      "production_enabled": false
+    },
+    {
+      "method": "block_bootstrap_candidate",
+      "rho": 0.9,
+      "true_slope": 0.08,
+      "records": 300,
+      "valid_outputs": 300,
+      "nonconverged": 0,
+      "failures": [],
+      "rejection_rate": 0.7333333333333333,
+      "rejection_rate_MC95": [
+        0.680572605868549,
+        0.7801940075599961
+      ],
+      "coverage": 0.5033333333333333,
+      "coverage_MC95": [
+        0.44707193979203275,
+        0.5595104403998036
+      ],
+      "slope_bias": 0.002295712976839462,
+      "slope_RMSE": 0.06633207673533165,
+      "production_enabled": false
+    },
+    {
+      "method": "adjusted_MK_candidate",
+      "rho": 0.9,
+      "true_slope": 0.08,
+      "records": 300,
+      "valid_outputs": 300,
+      "nonconverged": 0,
+      "failures": [],
+      "rejection_rate": 0.65,
+      "rejection_rate_MC95": [
+        0.5944391111549903,
+        0.7017679974776458
+      ],
+      "coverage": 0.63,
+      "coverage_MC95": [
+        0.5740445552913591,
+        0.6826682721902588
+      ],
+      "slope_bias": 0.002295712976839462,
+      "slope_RMSE": 0.06633207673533165,
+      "production_enabled": false
+    },
+    {
+      "method": "AR1_regression_candidate",
+      "rho": 0.9,
+      "true_slope": 0.08,
+      "records": 300,
+      "valid_outputs": 300,
+      "nonconverged": 0,
+      "failures": [],
+      "rejection_rate": 0.6033333333333334,
+      "rejection_rate_MC95": [
+        0.5470046178899679,
+        0.6570491680569592
+      ],
+      "coverage": 0.6766666666666666,
+      "coverage_MC95": [
+        0.6217915462510746,
+        0.7270746039162523
+      ],
+      "slope_bias": 0.003043069438294091,
+      "slope_RMSE": 0.060032934453516686,
+      "production_enabled": false
+    }
+  ],
+  "elapsed_seconds": 9.01
+}

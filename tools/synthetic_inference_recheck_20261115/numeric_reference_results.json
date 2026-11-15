@@ -1,0 +1,92 @@
+[
+  {
+    "rho": 0.0,
+    "target_t": 0.0,
+    "expected_p": 1.0,
+    "actual_known_rho_p": 0.9999999999999907,
+    "absolute_error": 9.325873406851315e-15,
+    "guarded_unknown_rho_p": 1.0,
+    "passed": true,
+    "note": "manufactured algebraic reference, not a random calibration record"
+  },
+  {
+    "rho": 0.0,
+    "target_t": 3.0,
+    "expected_p": 0.0065946197107992904,
+    "actual_known_rho_p": 0.006594619710799766,
+    "absolute_error": 4.753142324176451e-16,
+    "guarded_unknown_rho_p": 0.5349624734097223,
+    "passed": true,
+    "note": "manufactured algebraic reference, not a random calibration record"
+  },
+  {
+    "rho": 0.0,
+    "target_t": 8.0,
+    "expected_p": 5.9032568211539105e-08,
+    "actual_known_rho_p": 5.90325682115628e-08,
+    "absolute_error": 2.3697070188419137e-20,
+    "guarded_unknown_rho_p": 0.186359080844093,
+    "passed": true,
+    "note": "manufactured algebraic reference, not a random calibration record"
+  },
+  {
+    "rho": 0.7,
+    "target_t": 0.0,
+    "expected_p": 1.0,
+    "actual_known_rho_p": 0.9999999999999832,
+    "absolute_error": 1.6764367671839864e-14,
+    "guarded_unknown_rho_p": 1.0,
+    "passed": true,
+    "note": "manufactured algebraic reference, not a random calibration record"
+  },
+  {
+    "rho": 0.7,
+    "target_t": 3.0,
+    "expected_p": 0.0065946197107992904,
+    "actual_known_rho_p": 0.006594619710798781,
+    "absolute_error": 5.091413401991929e-16,
+    "guarded_unknown_rho_p": 0.24911287492685952,
+    "passed": true,
+    "note": "manufactured algebraic reference, not a random calibration record"
+  },
+  {
+    "rho": 0.7,
+    "target_t": 8.0,
+    "expected_p": 5.9032568211539105e-08,
+    "actual_known_rho_p": 5.903256821151371e-08,
+    "absolute_error": 2.5397753527828162e-20,
+    "guarded_unknown_rho_p": 0.01013083810404502,
+    "passed": true,
+    "note": "manufactured algebraic reference, not a random calibration record"
+  },
+  {
+    "rho": 0.9333,
+    "target_t": 0.0,
+    "expected_p": 1.0,
+    "actual_known_rho_p": 0.9999999999993429,
+    "absolute_error": 6.571410082756302e-13,
+    "guarded_unknown_rho_p": 1.0,
+    "passed": true,
+    "note": "manufactured algebraic reference, not a random calibration record"
+  },
+  {
+    "rho": 0.9333,
+    "target_t": 3.0,
+    "expected_p": 0.0065946197107992904,
+    "actual_known_rho_p": 0.006594619710792945,
+    "absolute_error": 6.34561847512316e-15,
+    "guarded_unknown_rho_p": 0.018931756734084423,
+    "passed": true,
+    "note": "manufactured algebraic reference, not a random calibration record"
+  },
+  {
+    "rho": 0.9333,
+    "target_t": 8.0,
+    "expected_p": 5.9032568211539105e-08,
+    "actual_known_rho_p": 5.903256821136422e-08,
+    "absolute_error": 1.7488583382841132e-19,
+    "guarded_unknown_rho_p": 0.008044157951582018,
+    "passed": true,
+    "note": "manufactured algebraic reference, not a random calibration record"
+  }
+]

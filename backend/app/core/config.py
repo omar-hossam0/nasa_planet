@@ -37,9 +37,7 @@ class Settings(BaseSettings):
     api_prefix: str = "/v1"
 
     # --- capability switches -------------------------------------------
-    # MOCK_MODE=true is the only supported mode in this milestone. Flipping it
-    # to false makes the readiness probe report NOT_IMPLEMENTED for the real
-    # adapters instead of silently pretending they exist.
+    # Select explicit synthetic fixtures or actual descriptive science adapters.
     mock_mode: bool = True
     database_url: str | None = Field(default=None, repr=False)
     database_auto_create: bool = False
@@ -57,7 +55,7 @@ class Settings(BaseSettings):
         if self.job_backend == 'database' and not self.database_url:
             raise ValueError('JOB_BACKEND=database requires DATABASE_URL')
         if self.app_env.lower() == 'production':
-            raise ValueError('Production release is not enabled: real science and authorization integration remain required')
+            raise ValueError('Production release is not enabled: deployment and authorization review remain required')
         return self
 
     # --- observability / web -------------------------------------------
@@ -66,7 +64,7 @@ class Settings(BaseSettings):
 
     # --- request guardrails --------------------------------------------
     max_variables_per_analysis: int = Field(default=4, ge=1, le=8)
-    min_period_months: int = Field(default=12, ge=1)
+    min_period_months: int = Field(default=60, ge=1)
     max_period_months: int = Field(default=600, ge=1)
     min_aoi_span_degrees: float = Field(default=0.25, gt=0)
     max_aoi_span_degrees: float = Field(default=40.0, gt=0)

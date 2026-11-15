@@ -91,9 +91,19 @@ def ready(container: Container = Depends(get_container)) -> ReadinessResponse:
     if settings.rag_enabled:
         integrations[2] = IntegrationStatus(name='rag_service', state=IntegrationState.mock,
             detail='Result explanations use MockRAGAdapter. Independent real documentation retrieval enabled at /v1/explanations/ask; corpus loaded on first request.')
+    if not settings.mock_mode:
+        integrations[1] = IntegrationStatus(name='statistics_engine',state=IntegrationState.connected,
+            detail='Existing science preparation, native annual Theil-Sen and strict reference QA support. Inference withheld.')
+        integrations[2] = IntegrationStatus(name='rag_service',state=IntegrationState.connected,
+            detail='Role04 conclusions consume stored numeric results. Documentation Q&A is a separate grounded retrieval path.')
+        integrations[3] = IntegrationStatus(name='nasa_data',state=IntegrationState.connected,
+            detail='Registered local NetCDF files with source hashes; no live-download claim.')
+        if settings.job_backend == 'inline':
+            integrations[4] = IntegrationStatus(name='job_queue',state=IntegrationState.not_integrated,
+                detail='Inline execution for local development. Configure SQL queue and separate workers for deployment.')
 
     return ReadinessResponse(
-        status=ServiceStatus.ok if settings.mock_mode and not any(
+        status=ServiceStatus.ok if not any(
             item.state == IntegrationState.unavailable for item in integrations) else ServiceStatus.degraded,
         app_name=settings.app_name,
         version=settings.app_version,
@@ -104,7 +114,8 @@ def ready(container: Container = Depends(get_container)) -> ReadinessResponse:
         integrations=integrations,
         notes=[
             "Ready to serve mock-backed requests." if settings.mock_mode else
-            "MOCK_MODE is disabled but no real integration exists; endpoints will report 503.",
-            "All numeric payloads are synthetic demonstration data.",
+            'Real descriptive analysis connected; inferential release remains disabled.',
+            'All numeric payloads are synthetic demonstration data.' if settings.mock_mode else
+            'Source/preparation provenance is recorded. Deployment readiness is separate from scientific inference approval.',
         ],
     )

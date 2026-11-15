@@ -93,7 +93,13 @@ class RecommendationService:
                 ),
             }[status]
 
+        if not self._settings.mock_mode:
+            message = 'Curated variable alias matching; check region, source and period availability before running descriptive analysis.'
+
         return RecommendationResponse(
+            data_mode='mock' if self._settings.mock_mode else 'real',
+            disclaimer='Synthetic demonstration data.' if self._settings.mock_mode else 'Variable discovery only. Check source coverage before analysis.',
+            provider=getattr(self._rag,'provider_name','mock_rules'),
             status=status,
             question=request.question,
             language=request.language,
@@ -109,5 +115,5 @@ class RecommendationService:
             warnings=[
                 "Mock recommendation engine: keyword rules, not an LLM or a retrieval system.",
                 "No citation is returned because nothing was retrieved.",
-            ],
+            ] if self._settings.mock_mode else ['Curated variable aliases are not probability estimates. Check availability before analysis; documentation Q&A is separate.'],
         )

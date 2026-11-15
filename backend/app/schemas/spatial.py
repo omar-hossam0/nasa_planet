@@ -55,6 +55,18 @@ class SpatialResponse(BaseModel):
     warnings: list[ApiWarning] = Field(default_factory=list)
 
 
+class CompactSpatialResponse(BaseModel):
+    result_id: str
+    variable_id: str
+    lat: list[float]
+    lon: list[float]
+    slope: list[list[float | None]]
+    bounds: list[float]
+    cell_count: int
+    data_mode: DataMode = DataMode.real
+    disclaimer: str
+
+
 class CellDetailResponse(BaseModel):
     cell_id: str
     result_id: str

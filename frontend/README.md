@@ -1,5 +1,14 @@
 # AstraVerd React product
 
+Current integration: the active FastAPI backend now supports real descriptive
+science with `MOCK_MODE=false`. Run the API on port 8000 and this Vite app on 5173;
+the API does not currently host the React build at `/product/`. Older static-hosting
+notes below describe the legacy server. See
+[`backend/docs/REAL_SCIENCE_INTEGRATION.md`](../backend/docs/REAL_SCIENCE_INTEGRATION.md)
+for current execution and validation. Live-backend failures are surfaced as errors,
+not silently replaced by the precomputed snapshot; offline mode must be explicit
+(`?offline=1`) or selected by the dedicated offline server.
+
 This is the new landing page and analysis workspace. The previous static UI
 remains at `/app/`; the backend root serves the React build at `/product/`.
 

@@ -1,0 +1,9 @@
+{
+  "code_sha256": "ad49b55062ec22a17e1a2738153f4792b12ca6f53b31130f5cddc8d325fc924d",
+  "versions": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.0",
+    "xarray": "2026.9.0",
+    "matplotlib": "3.10.8"
+  }
+}

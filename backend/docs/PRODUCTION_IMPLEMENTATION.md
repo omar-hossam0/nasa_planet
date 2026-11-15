@@ -1,5 +1,8 @@
 # Backend implementation checkpoint
 
+Current science integration: [REAL_SCIENCE_INTEGRATION.md](REAL_SCIENCE_INTEGRATION.md).
+`MOCK_MODE=false` now uses actual NASA inputs and Role04 result conclusions.
+
 The active entrypoint is `app.main:app`. Legacy `app/db.py`, `app/worker.py`
 and `app/analysis_runner.py` belong to a different contract and must not be mixed
 with the active API. No production science release is claimed by this checkpoint.
@@ -14,7 +17,8 @@ with the active API. No production science release is claimed by this checkpoint
 - Full UUID task identities in queue mode; cache keys preserve AOI precision.
 - Real corpus retrieval at `POST /v1/explanations/ask` when `RAG_ENABLED=true`.
 - Retrieval pipeline is reused per process, without sharing mutable RAG session trackers.
-- Production startup is blocked while the scientific adapter remains synthetic.
+- Real source/statistics/spatial adapters and Role04 stored-result conclusions.
+- Production startup remains blocked pending deployment and authorization review.
 
 ## Run the persistent integration environment
 
@@ -26,6 +30,7 @@ $env:DATABASE_URL = 'postgresql+psycopg://USER:PASSWORD@HOST:5432/trend_detectiv
 $env:JOB_BACKEND = 'database'
 $env:RAG_ENABLED = 'true'
 $env:APP_ENV = 'staging'
+$env:MOCK_MODE = 'false'
 python init_storage.py
 ```
 
@@ -44,18 +49,17 @@ Worker, in a separate shell with the same settings:
 python -m app.workers.durable
 ```
 
-The analysis endpoints still return explicitly synthetic data. The question endpoint
+Real analysis endpoints return descriptive science data. Explicit mock mode remains
+available for fixture tests. The question endpoint
 uses the real corpus and optionally Gemini via server-side `GEMINI_API_KEY`.
 Questions currently have a separate input contract, without analysis-result context.
 
 ## Remaining before production
 
-1. Implement a scientific adapter and data availability adapter using the approved
-   descriptive science contract. Current result/spatial assemblers generate mock
-   grids and must also be replaced, not just the numeric adapter.
-2. Map stored per-variable results into `Role04Service.render_result`; preserve
-   `inference_status=not_computed`. Positive/negative slopes must never be mapped
-   to significance categories. Do not share `ActiveRequestTracker` across users.
+1. Preserve the descriptive-only boundary during deployment; passing integration
+   tests does not approve scientific inference.
+2. Retain request-local Role04 trackers and result provenance while adding new
+   data/regions; positive/negative cell slopes are never significance categories.
 3. Add identity/ownership checks for results, rate limits, admission limits,
    gateway TLS, secret management and deployment origin restrictions.
 4. Introduce versioned schema migrations and normalized indexed tables before

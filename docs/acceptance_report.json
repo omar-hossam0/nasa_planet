@@ -1,37 +1,35 @@
 {
-  "generated": "2026-11-14",
-  "method_revision": "m2-1.0.0",
-  "data_revision": "b350b06961588093558e8378bb0a15b0bd8b5f318bbbe8a4f927eb2b1bc5a78a",
+  "generated": "2026-11-15",
   "checks": [
     {
       "check": "readiness_12_pairs",
       "item": "readiness",
       "passed": true,
-      "detail": "12/12 measurement+method ready"
+      "detail": "12/12 available pairs"
     },
     {
       "check": "revisions_exposed",
       "item": "readiness",
       "passed": true,
-      "detail": "data b350b0696158 method m2-1.0.0"
+      "detail": "catalog revision exposed"
+    },
+    {
+      "check": "product_routes",
+      "item": "runtime",
+      "passed": true,
+      "detail": "root redirects and product HTML is served"
     },
     {
       "check": "analysis_succeeds",
       "item": "end_to_end",
       "passed": true,
-      "detail": "job job_ba93b66bd505476c -> succeeded"
+      "detail": "job_real_c7cfe7d98ac8405f9c67d759ad7561ad -> completed"
     },
     {
       "check": "slope_present",
       "item": "end_to_end",
       "passed": true,
-      "detail": "slope +0.03086 K/yr"
-    },
-    {
-      "check": "receipt_complete",
-      "item": "receipt",
-      "passed": true,
-      "detail": "13/13 fields, 288 granules"
+      "detail": "slope +0.02533"
     },
     {
       "check": "receipt_has_no_secrets",
@@ -40,40 +38,28 @@
       "detail": "no credential-like keys"
     },
     {
-      "check": "citations_resolve",
-      "item": "citations",
-      "passed": true,
-      "detail": "2 citations, all in retrieved set"
-    },
-    {
       "check": "explanation_validated",
       "item": "citations",
       "passed": true,
-      "detail": "path deterministic"
+      "detail": "references attached"
     },
     {
-      "check": "llm_disabled_falls_back",
-      "item": "fallback",
+      "check": "inference_honest",
+      "item": "science",
       "passed": true,
-      "detail": "no provider configured, deterministic answer served"
+      "detail": "p-value withheld until inference review"
     },
     {
-      "check": "chart_matches_card",
+      "check": "chart_series_complete",
       "item": "consistency",
       "passed": true,
-      "detail": "series slope +0.030859 == card +0.030859"
+      "detail": "288 monthly points"
     },
     {
-      "check": "compare_matches_card",
-      "item": "consistency",
+      "check": "spatial_shape",
+      "item": "spatial",
       "passed": true,
-      "detail": "compare +0.030859 == card +0.030859"
-    },
-    {
-      "check": "units_present_for_all",
-      "item": "units",
-      "passed": true,
-      "detail": "every ready entry carries units"
+      "detail": "17x6 native grid"
     },
     {
       "check": "export_reopens",
@@ -85,18 +71,12 @@
       "check": "offline_bundle_complete",
       "item": "offline",
       "passed": true,
-      "detail": "12 analyses, 12 spatial products"
-    },
-    {
-      "check": "offline_matches_live",
-      "item": "offline",
-      "passed": true,
-      "detail": "snapshot slope equals live slope"
+      "detail": "offline bundle present"
     }
   ],
   "summary": {
-    "total": 15,
-    "passed": 15,
+    "total": 12,
+    "passed": 12,
     "failed": 0
   }
 }

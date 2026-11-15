@@ -1,4 +1,5 @@
 import { RagChat } from './RagChat';
+import { AnalysisInsights, InferenceNotice } from './AnalysisInsights';
 import { RegionMap } from './RegionMap';
 import React, { useEffect, useRef, useState } from "react";
 import {ReferenceActors} from './ReferenceActors';
@@ -30,6 +31,7 @@ import {
 import {
   analyse,
   compare,
+  computeSensitivity,
   getCatalog,
   getExplanation,
   getReceipt,
@@ -519,6 +521,8 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
     ReturnType<typeof compare>
   > | null>(null);
   const [running, setRunning] = useState(false);
+  const [spinLoading, setSpinLoading] = useState(false);
+  const [spinYears, setSpinYears] = useState(10);
   const requestVersion = useRef(0);
   useEffect(() => {
     requestVersion.current += 1;
@@ -527,6 +531,7 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
     setStatus('');
     setError('');
     setRunning(false);
+    setSpinLoading(false);
     return () => { requestVersion.current += 1; };
   }, [region, variable, start, end, aoi]);
   useEffect(() => {
@@ -637,6 +642,20 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
     }
   }
   const windows = result?.period_sensitivity?.windows || [];
+  async function loadSensitivity() {
+    if (!analysis?.result.result_id) return;
+    const version = requestVersion.current;
+    setSpinLoading(true); setError('');
+    try {
+      const values = await computeSensitivity(analysis.result.result_id, spinYears);
+      if (version !== requestVersion.current) return;
+      setSelectedWindow(null);
+      setAnalysis(current => current ? { ...current, result: { ...current.result, variables: current.result.variables.map(v =>
+        v.variable_id === variable ? { ...v, period_sensitivity: { windows: values } } : v) } } : current);
+    } catch (failure) {
+      if (version === requestVersion.current) setError(failure instanceof Error ? failure.message : String(failure));
+    } finally { if (version === requestVersion.current) setSpinLoading(false); }
+  }
   return (
     <main className="workspace">
 
@@ -935,12 +954,13 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
                   <i className="key-month" />
                   {lang === "en" ? "Monthly observations" : "القيم الشهرية"}
                 </span>
-                <span>
+                {analysis?.series?.trend_line.some(value => value != null) && <span>
                   <i className="key-trend" />
                   {lang === "en" ? "Server trend line" : "خط اتجاه الخادم"}
-                </span>
+                </span>}
               </div>
             </div>
+            {analysis && <AnalysisInsights analysis={analysis} lang={lang} variableId={variable}/>}
             <RagChat lang={lang} region={region} />
           </div>
           <aside id="verify" className="evidence-rail">
@@ -1027,6 +1047,7 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
                   <span>p-value</span>
                   <strong>{result?.trend?.p_value == null ? (lang === 'en' ? 'Not computed' : 'غير محسوب') : fmt(result.trend.p_value, 4)}</strong>
                 </div>
+                {result?.trend?.p_value==null && <InferenceNotice lang={lang}/>}
                 <div className="metric-row">
                   <span>
                     {lang === "en" ? "Valid monthly values" : "القيم الشهرية الصالحة"}
@@ -1035,6 +1056,8 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
                     {fmt((result?.counts.valid_fraction || 0) * 100, 1)}%
                   </strong>
                 </div>
+                {result?.support && <div className="metric-row"><span>{lang === 'en' ? 'QA retained cells / area' : 'الخلايا والمساحة المقبولة بالجودة'}</span>
+                  <strong>{result.support.eligible_cells}/{result.support.selected_cells} · {fmt(result.support.eligible_area_fraction*100,1)}%</strong></div>}
                 <div className="metric-row">
                   <span>{lang === "en" ? "Product" : "المنتج"}</span>
                   <strong>
@@ -1067,6 +1090,12 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
               </div>
             ) : tab === "spin" ? (
               <div className="spin-body">
+                {analysis.result.result_id && !analysis.offline && <div>
+                  <label htmlFor="spin-years">{lang === 'en' ? 'Window length (years)' : 'طول الفترة بالسنوات'}</label>
+                  <input id="spin-years" type="number" min={3} max={30} value={spinYears} disabled={spinLoading} onChange={e => setSpinYears(Number(e.target.value))} />
+                  <button className="compare-button" disabled={spinLoading || !Number.isInteger(spinYears) || spinYears<3 || spinYears>30} onClick={loadSensitivity}>
+                    {spinLoading ? (lang === 'en' ? 'Computing…' : 'جاري الحساب…') : (lang === 'en' ? 'Compute sensitivity windows' : 'احسب حساسية الفترات')}
+                  </button></div>}
                 <h3>
                   {lang === "en"
                     ? "How much does the window matter?"

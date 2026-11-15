@@ -17,10 +17,9 @@ router = APIRouter(tags=["analyses"])
     status_code=202,
     summary="Create a trend analysis",
     description=(
-        "Validates the request, then creates a mock job. Returns **202** for new work and **200** "
+        "Validates the request, then creates an analysis job. Returns **202** for new work and **200** "
         "when an equivalent analysis already exists (identical variables, AOI, period, policy, "
-        "dataset revision and method version). Execution is deterministic and completes inline, "
-        "so the job is immediately pollable."
+        "dataset revision and method version). Execution uses the configured inline or durable SQL worker backend."
     ),
     responses={
         200: {"model": AnalysisAcceptedResponse, "description": "Equivalent analysis reused."},

@@ -1,0 +1,33 @@
+{
+  "seed": 2026111701,
+  "bootstrap_replicates": 999,
+  "basis": "actual complete regional annual series, 2001-2024, strict full-reference QA support",
+  "models": [
+    "linear Gaussian IID",
+    "linear stationary Gaussian AR1 with fitted rho"
+  ],
+  "AR1_profile_grid": [
+    -0.99,
+    0.99,
+    1001
+  ],
+  "diagnostics": [
+    "remaining_serial_dependence",
+    "non_gaussian_innovations",
+    "variance_time_association",
+    "extreme_innovation",
+    "quadratic_departure"
+  ],
+  "diagnostic_tail": "large statistic; plus-one parametric bootstrap, full refit",
+  "exploratory_threshold": 0.05,
+  "multiplicity": "BY across all 12*2*5=120 diagnostic p-values",
+  "retained_area_review_threshold": 0.5,
+  "limitations": [
+    "fitted-parameter bootstrap is approximate, especially with 24 years",
+    "diagnostic p-values are not p-values for trend",
+    "no detected contradiction does not validate assumptions",
+    "BY cannot repair invalid marginal diagnostic p-values",
+    "do not select a model by p-values and then treat it as fixed for trend inference"
+  ],
+  "production_enabled": false
+}

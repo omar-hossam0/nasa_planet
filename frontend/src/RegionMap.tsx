@@ -135,7 +135,7 @@ export function RegionMap(props: Props) {
       const north = row+1<lat.length ? (lat[row+1]+y)/2 : spatial.bbox[3];
       const west = col ? (lon[col-1]+x)/2 : spatial.bbox[0];
       const east = col+1<lon.length ? (lon[col+1]+x)/2 : spatial.bbox[2];
-      L.rectangle(bounds([west,south,east,north]), { stroke: false, fillColor: value>=0 ? '#23985a' : '#ca7839',
+      L.rectangle(bounds([west,south,east,north]), { stroke: false, fillColor: value === 0 ? '#899ca2' : value>0 ? '#23985a' : '#ca7839',
         fillOpacity: .2+.5*Math.min(1,Math.abs(value)/max), interactive: false }).addTo(group);
     }));
     return () => { group.remove(); };

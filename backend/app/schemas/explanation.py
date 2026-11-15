@@ -17,7 +17,7 @@ from app.schemas.common import DISCLAIMER, DataMode, Language
 class ExplanationMode(str, Enum):
     mock_template = "mock_template"
     local_retrieval = "local_retrieval"
-    llm = "llm"
+    conclusion_templates = 'conclusion_templates'
 
 
 class UiActionId(str, Enum):

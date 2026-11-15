@@ -16,9 +16,7 @@ router = APIRouter(tags=["explanations"])
     response_model=ExplanationResponse,
     summary="Explain a completed result",
     description=(
-        "Template-rendered explanation built only from fields already stored in the result. "
-        "No model is called, no number is invented and `references` is empty because nothing "
-        "was retrieved. English and Arabic are supported at the contract level."
+        'Deterministic bilingual result report rendered from stored statistics and scientific templates. No LLM is called.'
     ),
     responses={
         404: {"model": ErrorEnvelope, "description": "Unknown result id."},

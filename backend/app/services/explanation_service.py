@@ -38,20 +38,24 @@ class ExplanationService:
 
         rendered = self._rag.explain(result, request.language)
 
-        explanation_id = "expl_mock_" + hashlib.sha256(
+        explanation_id = ('expl_mock_' if result.data_mode.value=='mock' else 'expl_real_') + hashlib.sha256(
             f"{result.result_id}:{request.language.value}".encode("utf-8")
         ).hexdigest()[:8]
 
-        return ExplanationResponse(
+        response = ExplanationResponse(
             explanation_id=explanation_id,
             result_id=result.result_id,
             language=request.language,
+            data_mode=result.data_mode,
+            disclaimer=result.disclaimer,
+            mode=getattr(rendered,'mode','mock_template'),
             sections=[
                 ExplanationSection(section_id=section_id, title=title, body=body)
                 for section_id, title, body in rendered.sections
             ],
             actions=rendered.actions,
-            references=[],
+            references=getattr(rendered,'references',[]),
             limitations=rendered.limitations,
             generated_at=datetime.now(timezone.utc).isoformat(),
         )
+        return response
