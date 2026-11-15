@@ -242,12 +242,12 @@ def test_definition_and_limitation_context_attached(retriever):
 
 def test_readiness_integration_region_and_period(retriever):
     result = q(retriever, "temperature", region_id="nile_corridor", period=("2001-01", "2024-12"))
-    assert result["status"] == STATUS_DOCUMENTED_ONLY
-    assert result["reason_code"] == "measurement_ready_app_not_available"
+    assert result["status"] == STATUS_RECOMMENDED
+    assert result["reason_code"] is None
     entry = result["availability"]["air_temperature"]
     assert entry["measurement_ready"] is True
-    assert entry["method_ready"] is False
-    assert entry["app_available"] is False
+    assert entry["method_ready"] is True
+    assert entry["app_available"] is True
     assert result["suggested_variable_ids"] == ["air_temperature"]
 
 

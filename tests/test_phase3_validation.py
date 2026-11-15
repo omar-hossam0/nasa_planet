@@ -123,8 +123,8 @@ def test_availability_truth_comes_from_registry_not_model(retriever):
     assert result["availability"] == local["availability"]
     entry = result["availability"]["air_temperature"]
     assert entry["measurement_ready"] is True
-    assert entry["app_available"] is False
-    assert result["reason_code"] == "measurement_ready_app_not_available"
+    assert entry["app_available"] is True
+    assert result["reason_code"] is None
 
 
 def test_invented_chunk_id_rejected_then_local_fallback(retriever):

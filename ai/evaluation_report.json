@@ -56,7 +56,7 @@
       "case": "reject_wrong_number",
       "family": "numbers",
       "passed": true,
-      "detail": "errors=['UNREFERENCED_NUMBER']"
+      "detail": "errors=['NUMERIC_VALUE_MISMATCH', 'UNREFERENCED_NUMBER']"
     },
     {
       "case": "reject_invented_citation",

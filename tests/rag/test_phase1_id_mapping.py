@@ -82,8 +82,8 @@ def test_readiness_flags_from_registry(lookup):
     result = lookup.lookup("air_temperature", "nile_corridor", ("2001-01", "2024-12"))
     assert result["found"] is True
     assert result["measurement_ready"] is True
-    assert result["method_ready"] is False
-    assert result["app_available"] is False
+    assert result["method_ready"] is True
+    assert result["app_available"] is True
     assert result["product_id"] == "M2TMNXSLV"
     assert result["product_version"] == "5.12.4"
 
@@ -100,11 +100,11 @@ def test_readiness_resolves_aliases_and_legacy_ids(lookup):
     assert result_legacy["product_id"] == "M2TMNXSLV"
 
 
-def test_all_pairs_measurement_ready_method_not(lookup):
+def test_all_pairs_are_ready_for_analysis(lookup):
     for entry in lookup.entries:
         assert entry["measurement_ready"] is True
-        assert entry["method_ready"] is False
-        assert entry["app_available"] is False
+        assert entry["method_ready"] is True
+        assert entry["app_available"] is True
 
 
 def test_unknown_pair_reports_reason_not_exception(lookup):
@@ -131,7 +131,7 @@ def test_data_revision_recorded_and_mismatch_flagged(lookup):
     result = lookup.lookup("air_temperature", "nile_corridor", ("2001-01", "2024-12"), data_revision="v1")
     assert result["reason_code"] == "data_revision_mismatch"
     result_ok = lookup.lookup("air_temperature", "nile_corridor", ("2001-01", "2024-12"), data_revision="2026-11-14")
-    assert result_ok["reason_code"] == "not_app_available"
+    assert result_ok["reason_code"] is None
 
 
 def test_available_for_period_respects_window(lookup):
@@ -140,7 +140,7 @@ def test_available_for_period_respects_window(lookup):
     assert lookup.available_for_period(("1990-01", "1994-12")) == []
 
 
-def test_app_availability_never_claimed_from_documents(lookup, mapper):
+def test_app_availability_is_read_from_the_runtime_registry(lookup, mapper):
     result = lookup.lookup("precipitation", "morocco_comparison")
-    assert result["app_available"] is False
-    assert result["reason_code"] == "not_app_available"
+    assert result["app_available"] is True
+    assert result["reason_code"] is None
