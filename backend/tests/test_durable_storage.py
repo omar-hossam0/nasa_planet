@@ -59,7 +59,8 @@ def test_real_rag_endpoint_can_retrieve_without_provider_key(monkeypatch):
     with TestClient(create_app(make_settings(rag_enabled=True))) as client:
         result = client.post('/v1/explanations/ask', json={'query': 'What is precipitation?'})
         assert result.status_code == 200
-        assert result.json()['mode'] == 'local_retrieval'
+        assert result.json()['mode'] == 'grounded_template'
+        assert result.json()['answer']
         assert result.json()['citations']
     get_pipeline.cache_clear()
 

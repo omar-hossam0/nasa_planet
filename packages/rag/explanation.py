@@ -50,7 +50,12 @@ class ExplanationPipeline:
             try:
                 raw = self.provider.generate(prompt)
             except ProviderError as exc:
-                return _with_fallback(local, f"provider_error:{exc.reason}")
+                fallback = _with_fallback(local, f"provider_error:{exc.reason}")
+                if exc.reason == 'http_error':
+                    status = re.search(r'HTTP (\d{3})', exc.detail or '')
+                    if status:
+                        fallback['provider_http_status'] = int(status[1])
+                return fallback
             payload, parse_error = _parse_json(raw)
             if parse_error is not None:
                 last_error = f"invalid_json:{parse_error}"

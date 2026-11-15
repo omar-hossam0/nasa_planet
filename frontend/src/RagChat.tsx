@@ -5,6 +5,7 @@ import './rag-chat.css';
 type Citation = { chunk_id: string; title: string; source_url: string; text: string; section_locator?: string };
 export type AnalysisProposal = { region_id: RegionId; variable_ids: VariableId[]; start_month: string; end_month: string };
 type Reply = { mode: string; status: string; answer: string | null; citations: Citation[];
+  provider_http_status?: number; fallback_reason?: string;
   workflow?: { state: string; message: string; analysis_request: AnalysisProposal | null };
   excerpts?: Citation[]; context?: { definition_chunks?: Citation[] }; limitations?: string[];
   message?: string; clarification?: string; capability_note: string };
@@ -66,14 +67,15 @@ export function RagChat({ lang, region, start, end, onProposal }: { lang: Lang; 
         const evidence = [...new Map([...reply.citations, ...(reply.context?.definition_chunks || []), ...(reply.excerpts || [])].map(c => [c.chunk_id, c])).values()];
         return <article key={index} className="rag-turn">
           <h3>{turn.question}</h3>
+          {reply.provider_http_status === 429 && <p role="status">{en ? 'Gemini is currently rate-limited or out of quota. A source-based explanation is shown when available.' : 'Gemini رفض الطلب بسبب حد الطلبات أو الحصة. يُعرض شرح موثّق من القوالب عند توفره.'}</p>}
           {reply.workflow && <div className="rag-workflow">
             <p>{reply.workflow.message}</p>
             {reply.workflow.analysis_request && onProposal && <>
               <p>{reply.workflow.analysis_request.region_id} · {reply.workflow.analysis_request.variable_ids.join(', ')} · {reply.workflow.analysis_request.start_month} — {reply.workflow.analysis_request.end_month}</p>
-              <button type="button" onClick={() => onProposal(reply.workflow!.analysis_request!)}>{en ? 'Use this analysis setup' : 'استخدم إعدادات التحليل دي'}</button>
+              <button type="button" onClick={() => onProposal(reply.workflow!.analysis_request!)}>{en ? 'Run this analysis' : 'شغّل التحليل ده'}</button>
             </>}
           </div>}
-          <span className="rag-mode">{reply.mode === 'llm' ? (en ? 'Generated answer · validated citations' : 'إجابة مولدة بمراجع متحقق منها') : (en ? 'Retrieved excerpts · no generated answer' : 'مقاطع مسترجعة · بدون إجابة مولدة')}</span>
+          <span className="rag-mode">{reply.mode === 'grounded_template' ? (en ? 'Source-based explanation (template; no LLM)' : '\u0634\u0631\u062d \u0645\u0648\u062b\u0642 \u0628\u0627\u0644\u0642\u0648\u0627\u0644\u0628') : reply.mode === 'llm' ? (en ? 'Generated answer · validated citations' : 'إجابة مولدة بمراجع متحقق منها') : (en ? 'Retrieved excerpts · no generated answer' : 'مقاطع مسترجعة · بدون إجابة مولدة')}</span>
           <p>{reply.answer || reply.clarification || reply.message || (evidence.length ? (en ? 'Relevant documentation is shown below.' : 'الوثائق المرتبطة بسؤالك موجودة بالأسفل.') : (en ? 'No supporting documentation was found. Try a question about the project variables.' : 'لم نجد وثائق تدعم السؤال. جرّب سؤال عن متغيرات المشروع.'))}</p>
           {evidence.map(citation => <details key={citation.chunk_id} className="rag-citation">
             <summary>{citation.title} · {citation.section_locator || citation.chunk_id}</summary>

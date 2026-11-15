@@ -525,6 +525,7 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
   const [spinLoading, setSpinLoading] = useState(false);
   const [spinYears, setSpinYears] = useState(10);
   const requestVersion = useRef(0);
+  const runProposedAnalysis = useRef(false);
   useEffect(() => {
     requestVersion.current += 1;
     setAnalysis(null);
@@ -533,6 +534,10 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
     setError('');
     setRunning(false);
     setSpinLoading(false);
+    if (runProposedAnalysis.current) {
+      runProposedAnalysis.current = false;
+      void run();
+    }
     return () => { requestVersion.current += 1; };
   }, [region, variable, start, end, aoi]);
   useEffect(() => {
@@ -963,9 +968,13 @@ function Explorer({ lang, onHome }: { lang: Lang; onHome: () => void }) {
             </div>
             {analysis && <AnalysisInsights analysis={analysis} lang={lang} variableId={variable}/>}
             <RagChat lang={lang} region={region} start={start} end={end} onProposal={proposal => {
+              if (region === proposal.region_id && variable === proposal.variable_ids[0] && start === proposal.start_month && end === proposal.end_month && aoi === null) {
+                void run(); return;
+              }
+              runProposedAnalysis.current = true;
               setRegion(proposal.region_id); setVariable(proposal.variable_ids[0]);
               setStart(proposal.start_month); setEnd(proposal.end_month); setAoi(null); setAnalysis(null);
-              document.querySelector('.run-button')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              document.querySelector('#observe')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }}/>
           </div>
           <aside id="verify" className="evidence-rail">

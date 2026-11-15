@@ -27,8 +27,9 @@ def test_retrieval_has_exact_corpus_evidence(rag_client, query, variable):
     response = client.post('/v1/explanations/ask', json={'query': query, 'language': 'ar'})
     assert response.status_code == 200
     result = response.json()
-    assert result['mode'] == 'local_retrieval'
-    assert result['answer'] is None
+    assert result['mode'] == 'grounded_template'
+    assert result['answer']
+    assert result['workflow']['analysis_request'] is None
     assert variable in result['variable_ids']
     assert result['citations']
     corpus = {chunk['chunk_id']: chunk for chunk in pipeline.retriever.chunks}
@@ -58,6 +59,20 @@ def test_invalid_region_and_empty_question_are_rejected(rag_client):
 def test_disabled_rag_returns_service_error():
     with TestClient(create_app(make_settings(rag_enabled=False))) as client:
         assert client.post('/v1/explanations/ask', json={'query': 'What is NDVI?'}).status_code == 503
+
+
+def test_provider_429_is_visible_and_definition_still_explained(rag_client, monkeypatch):
+    client, pipeline = rag_client
+    from packages.rag.provider import ProviderError
+    monkeypatch.setattr(pipeline.provider, 'is_configured', lambda: True)
+    def blocked(prompt):
+        raise ProviderError('http_error', 'gemini HTTP 429')
+    monkeypatch.setattr(pipeline.provider, 'generate', blocked)
+    result = client.post('/v1/explanations/ask', json={'query':'What is soil moisture?'}).json()
+    assert result['provider_http_status'] == 429
+    assert result['mode'] == 'grounded_template'
+    assert '0–10 cm' in result['answer']
+    assert result['workflow']['analysis_request'] is None
 
 
 @pytest.mark.parametrize('query,language', [('ما هو NDVI؟', 'Arabic'), ('What is NDVI?', 'English')])

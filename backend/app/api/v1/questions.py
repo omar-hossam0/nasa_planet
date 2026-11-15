@@ -10,6 +10,8 @@ from app.core.exceptions import RegionNotFoundError
 from typing import Literal
 from app.schemas.common import MonthStr
 from app.services.question_workflow import plan_question
+import re
+from packages.rag.grounded_definitions import definition_answer
 
 router = APIRouter(tags=['explanations'])
 
@@ -56,6 +58,15 @@ def ask(payload: QuestionRequest, container: Container = Depends(get_container))
     result = get_pipeline().explain(payload.query, region_id=region_id,
                                     data_revision=payload.data_revision)
     result['workflow'] = workflow
+    definition = bool(re.search(r'what\s+(?:is|are|does)|define|meaning|ما هو|ما هي|يعني|معنى|معني|تعريف', payload.query, re.I))
+    if definition:
+        workflow['analysis_request'] = None
+        workflow['state'] = 'documentation_only'
+        workflow['message'] = 'Definition and source limitations.' if payload.language=='en' else 'تعريف المتغير وحدود مصدره.'
+        ids = result.get('variable_ids', [])
+        if not result.get('answer') and len(ids)==1 and result.get('citations') and result.get('status') not in ('unsupported','unavailable','ambiguous'):
+            result['answer'] = definition_answer(ids[0], payload.language)
+            result['mode'] = 'grounded_template'
     # Local retrieval returns evidence, not a generated answer. Keep this distinction
     # explicit and never manufacture a conversational response from unavailable data.
     result['answer'] = result.get('answer')

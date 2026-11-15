@@ -84,8 +84,8 @@ class GeminiClient:
         try:
             with urllib.request.urlopen(request, timeout=self.timeout) as response:
                 raw = response.read()
-        except urllib.error.HTTPError:
-            raise ProviderError(REASON_HTTP, "gemini request returned an HTTP error status") from None
+        except urllib.error.HTTPError as exc:
+            raise ProviderError(REASON_HTTP, f"gemini HTTP {exc.code}") from None
         except (socket.timeout, TimeoutError):
             raise ProviderError(REASON_TIMEOUT, f"gemini request timed out after {self.timeout}s") from None
         except (urllib.error.URLError, OSError):

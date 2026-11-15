@@ -147,10 +147,9 @@ def main():
             page.locator('.rag-chat form button[type="submit"]').click()
             page.locator('.rag-workflow button').wait_for()
             page.locator('.rag-workflow').screenshot(path=str(OUT/'question-analysis-proposal.png'))
-            page.locator('.rag-workflow button').click()
-            assert page.locator('.date-row select').nth(1).input_value() == '2010-12'
             with page.expect_response(lambda r: r.url.endswith('/v1/explanations') and r.request.method=='POST') as completed:
-                page.locator('.run-button').click()
+                page.locator('.rag-workflow button').click()
+            assert page.locator('.date-row select').nth(1).input_value() == '2010-12'
             assessment = completed.value.json()['assessments'][0]
             assert assessment['region_id']=='morocco_comparison'
             assert assessment['facts']['complete_years']==10
