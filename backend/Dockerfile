@@ -16,8 +16,13 @@ RUN adduser --disabled-password --gecos "" --uid 10001 appuser
 # because the backend imports packages/rag, ai/ and reads the RAG corpus.
 
 # Dependencies first so the layer is cached across source-only changes.
+# backend/requirements.txt ends with `-r ../packages/science/requirements-audit.txt`,
+# which pip resolves relative to the requirements file -> /packages inside the image.
+# So `packages/` must be present (and reachable at /packages) before this step.
 COPY backend/requirements.txt ./
-RUN sed -E '/^[[:space:]]*pytest/d' requirements.txt > /tmp/runtime-requirements.txt \
+COPY packages ./packages
+RUN ln -s /app/packages /packages \
+    && sed -E '/^[[:space:]]*pytest/d' requirements.txt > /tmp/runtime-requirements.txt \
     && pip install --no-cache-dir -r /tmp/runtime-requirements.txt \
     && rm -f /tmp/runtime-requirements.txt
 
@@ -27,9 +32,8 @@ COPY backend/app ./app
 COPY backend/config ./config
 COPY backend/run.py ./
 
-# In-process libraries: RAG (retrieval + explanation) and the science package.
-# They are NOT separate services, so they ship inside this image.
-COPY packages ./packages
+# In-process libraries: RAG (retrieval + explanation) and the science package
+# are already copied above (packages/); the corpus and AI helpers come next.
 COPY ai ./ai
 # Registry + corpus. Heavy trees (measurements/, regional/) are pruned by the
 # root .dockerignore; what remains is a few MB of JSON/JSONL.
