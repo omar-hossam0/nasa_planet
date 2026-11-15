@@ -1,0 +1,104 @@
+{
+  "purpose": "prepared artifact verification, not statistical method validation",
+  "policy_sha256": "b6e141504f4296bea24ae70da74a822f46e50debbaf0c5d0fa88ec1316eba37e",
+  "passed": 12,
+  "total": 12,
+  "checks": [
+    {
+      "variable_id": "air_temperature",
+      "region_id": "nile_corridor",
+      "result": "PASS",
+      "source_hash_unchanged": true,
+      "round_trip_months": 288,
+      "round_trip_years": 24
+    },
+    {
+      "variable_id": "soil_moisture",
+      "region_id": "nile_corridor",
+      "result": "PASS",
+      "source_hash_unchanged": true,
+      "round_trip_months": 288,
+      "round_trip_years": 24
+    },
+    {
+      "variable_id": "precipitation",
+      "region_id": "nile_corridor",
+      "result": "PASS",
+      "source_hash_unchanged": true,
+      "round_trip_months": 288,
+      "round_trip_years": 24
+    },
+    {
+      "variable_id": "vegetation_greenness",
+      "region_id": "nile_corridor",
+      "result": "PASS",
+      "source_hash_unchanged": true,
+      "round_trip_months": 288,
+      "round_trip_years": 24
+    },
+    {
+      "variable_id": "air_temperature",
+      "region_id": "morocco_comparison",
+      "result": "PASS",
+      "source_hash_unchanged": true,
+      "round_trip_months": 288,
+      "round_trip_years": 24
+    },
+    {
+      "variable_id": "soil_moisture",
+      "region_id": "morocco_comparison",
+      "result": "PASS",
+      "source_hash_unchanged": true,
+      "round_trip_months": 288,
+      "round_trip_years": 24
+    },
+    {
+      "variable_id": "precipitation",
+      "region_id": "morocco_comparison",
+      "result": "PASS",
+      "source_hash_unchanged": true,
+      "round_trip_months": 288,
+      "round_trip_years": 24
+    },
+    {
+      "variable_id": "vegetation_greenness",
+      "region_id": "morocco_comparison",
+      "result": "PASS",
+      "source_hash_unchanged": true,
+      "round_trip_months": 288,
+      "round_trip_years": 24
+    },
+    {
+      "variable_id": "air_temperature",
+      "region_id": "sahel_comparison",
+      "result": "PASS",
+      "source_hash_unchanged": true,
+      "round_trip_months": 288,
+      "round_trip_years": 24
+    },
+    {
+      "variable_id": "soil_moisture",
+      "region_id": "sahel_comparison",
+      "result": "PASS",
+      "source_hash_unchanged": true,
+      "round_trip_months": 288,
+      "round_trip_years": 24
+    },
+    {
+      "variable_id": "precipitation",
+      "region_id": "sahel_comparison",
+      "result": "PASS",
+      "source_hash_unchanged": true,
+      "round_trip_months": 288,
+      "round_trip_years": 24
+    },
+    {
+      "variable_id": "vegetation_greenness",
+      "region_id": "sahel_comparison",
+      "result": "PASS",
+      "source_hash_unchanged": true,
+      "round_trip_months": 288,
+      "round_trip_years": 24
+    }
+  ]
+}

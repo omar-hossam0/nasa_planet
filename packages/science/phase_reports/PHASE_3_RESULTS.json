@@ -1,0 +1,1738 @@
+{
+  "method_revision": "descriptive-ts-1.0",
+  "approval_record": "packages/science/phase_reports/PHASE_2_APPROVAL.md",
+  "inference_status": "not_computed",
+  "default_changed": false,
+  "preparation_policy_changed": false,
+  "software_versions": {
+    "numpy": "2.5.4",
+    "xarray": "2026.9.0",
+    "scipy": "1.18.0",
+    "netCDF4": "1.7.5.1.post1"
+  },
+  "code_sha256": {
+    "packages/science/src/trend_estimation.py": "41b26456db2506d7b494339d2c2579baf76020902d3352e123ebf558e1a7dcb8",
+    "tools/run_science_trends.py": "165b4653450378ae28ffadf4cd8261cb38e711f3d292fa61906f2e19a10aef7e",
+    "packages/science/config/trend_policy.json": "926ab66d7074ee84fbceeab111fcc7b43d71e2a5675eb7e31eb30104ebd761ba"
+  },
+  "input_git_revision": "d43161e4fe2263127d47795fe591ac96b79a450b",
+  "policy": {
+    "revision": "descriptive-ts-1.0",
+    "status": "phase_3_candidate_pending_checkpoint_review",
+    "estimator": "exact_median_of_all_finite_observation_pair_slopes",
+    "monthly_time": "elapsed_calendar_month_ordinals_divided_by_12",
+    "annual_time": "actual_calendar_year_labels_minus_first_year",
+    "missing": "omit_pairs_touching_missing_values_without_compressing_time",
+    "minimum_valid_observations": 3,
+    "minimum_interpretation": "shared computational guard inherited from the reviewed core; not an inference or representative-record threshold",
+    "monthly_estimand": "prepared_raw_monthly_values",
+    "regional_anomaly_sensitivity": "existing_stage_2_full_reference_calendar_month_anomalies",
+    "annual_estimand": "existing_complete_12_month_cell_or_regional_summary",
+    "regional_slope": "estimate_from_prepared_regional_series_never_average_cell_slopes",
+    "imputation": "none",
+    "inference_status": "not_computed",
+    "inherited_review": {
+      "revision": "486fe73551b3239bab172d26fe94979402c81e4e",
+      "file": "data/nasa/analysis/trend.py",
+      "reused_method": "finite-pair upper-triangle median slope",
+      "repairs": [
+        "mandatory explicit year axis",
+        "same scalar and grid kernel and minimum guard"
+      ],
+      "excluded": "legacy inference, bootstrap, significance and implicit-time wrappers"
+    }
+  },
+  "cases": [
+    {
+      "case": "air_temperature__nile_corridor__strict_100",
+      "variable_id": "air_temperature",
+      "region_id": "nile_corridor",
+      "policy": "strict_100",
+      "experimental": false,
+      "source_artifact": "data/derived/science/phase_2/air_temperature__nile_corridor.nc",
+      "source_artifact_sha256": "77ed7a528ec10cdc95ae79034f58009ee492e03a8da6810a75df2db23a998d37",
+      "regional": {
+        "monthly": {
+          "slope_per_year": 0.04759863776438539,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "K per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        },
+        "annual": {
+          "slope_per_year": 0.025330383313493597,
+          "n_valid": 24,
+          "pair_count": 276,
+          "valid_span_years": 23.0,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "K per year",
+          "time_convention": "actual calendar-year label differences"
+        },
+        "monthly_calendar_anomaly": {
+          "slope_per_year": 0.03085881726550043,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "K per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        }
+      },
+      "grid": {
+        "monthly": {
+          "eligible_preparation_cells": 102,
+          "selected_cells": 102,
+          "computable_cell_slopes": 102,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 0,
+          "eligible_valid_observation_count": {
+            "count": 102,
+            "min": 288.0,
+            "mean": 288.0,
+            "max": 288.0,
+            "p05": 288.0,
+            "p50": 288.0,
+            "p95": 288.0
+          },
+          "eligible_valid_span_years": {
+            "count": 102,
+            "min": 23.916666666666668,
+            "mean": 23.916666666666657,
+            "max": 23.916666666666668,
+            "p05": 23.916666666666668,
+            "p50": 23.916666666666668,
+            "p95": 23.916666666666668
+          },
+          "cell_slope_distribution": {
+            "count": 102,
+            "min": 0.036795601728791705,
+            "mean": 0.04631409803904489,
+            "max": 0.05870882670084636,
+            "p05": 0.038459107637201104,
+            "p50": 0.045478332935587604,
+            "p95": 0.057218222832118484
+          }
+        },
+        "annual": {
+          "eligible_preparation_cells": 102,
+          "selected_cells": 102,
+          "computable_cell_slopes": 102,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 0,
+          "eligible_valid_observation_count": {
+            "count": 102,
+            "min": 24.0,
+            "mean": 24.0,
+            "max": 24.0,
+            "p05": 24.0,
+            "p50": 24.0,
+            "p95": 24.0
+          },
+          "eligible_valid_span_years": {
+            "count": 102,
+            "min": 23.0,
+            "mean": 23.0,
+            "max": 23.0,
+            "p05": 23.0,
+            "p50": 23.0,
+            "p95": 23.0
+          },
+          "cell_slope_distribution": {
+            "count": 102,
+            "min": 0.01817608227727495,
+            "mean": 0.02856116465432154,
+            "max": 0.047236658682329846,
+            "p05": 0.020372363522236005,
+            "p50": 0.026925556743399307,
+            "p95": 0.044394463154677835
+          }
+        }
+      },
+      "eligible_area_fraction_selected": 1.0,
+      "grid_artifact": "data/derived/science/phase_3/air_temperature__nile_corridor__strict_100.nc",
+      "grid_sha256": "7f71ba41d47c8254a83212275a636adf1b7ffa972fa216a28f96262d82be4e8d",
+      "cell_annual_missing_eligible_records": 0,
+      "annual_interpretation": "fixed support; regional annual and cell annual summaries each require twelve original months",
+      "elapsed_seconds": 0.857022500000312
+    },
+    {
+      "case": "soil_moisture__nile_corridor__strict_100",
+      "variable_id": "soil_moisture",
+      "region_id": "nile_corridor",
+      "policy": "strict_100",
+      "experimental": false,
+      "source_artifact": "data/derived/science/phase_2/soil_moisture__nile_corridor.nc",
+      "source_artifact_sha256": "655374d5e782d9938d37e1b93d06229fea9ad40042955e30b0d934ee63e15b5e",
+      "regional": {
+        "monthly": {
+          "slope_per_year": 8.500237870321988e-06,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "kg m-2 per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        },
+        "annual": {
+          "slope_per_year": 0.008890433836505951,
+          "n_valid": 24,
+          "pair_count": 276,
+          "valid_span_years": 23.0,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "kg m-2 per year",
+          "time_convention": "actual calendar-year label differences"
+        },
+        "monthly_calendar_anomaly": {
+          "slope_per_year": 0.0024857104470383997,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "kg m-2 per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        }
+      },
+      "grid": {
+        "monthly": {
+          "eligible_preparation_cells": 459,
+          "selected_cells": 512,
+          "computable_cell_slopes": 459,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 53,
+          "eligible_valid_observation_count": {
+            "count": 459,
+            "min": 288.0,
+            "mean": 288.0,
+            "max": 288.0,
+            "p05": 288.0,
+            "p50": 288.0,
+            "p95": 288.0
+          },
+          "eligible_valid_span_years": {
+            "count": 459,
+            "min": 23.916666666666668,
+            "mean": 23.916666666666668,
+            "max": 23.916666666666668,
+            "p05": 23.916666666666668,
+            "p50": 23.916666666666668,
+            "p95": 23.916666666666668
+          },
+          "cell_slope_distribution": {
+            "count": 459,
+            "min": -0.06905362769775522,
+            "mean": -0.002089391146288435,
+            "max": 0.05138069003102612,
+            "p05": -0.020604844793043996,
+            "p50": -0.00202463370001167,
+            "p95": 0.0186260508751374
+          }
+        },
+        "annual": {
+          "eligible_preparation_cells": 459,
+          "selected_cells": 512,
+          "computable_cell_slopes": 459,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 53,
+          "eligible_valid_observation_count": {
+            "count": 459,
+            "min": 24.0,
+            "mean": 24.0,
+            "max": 24.0,
+            "p05": 24.0,
+            "p50": 24.0,
+            "p95": 24.0
+          },
+          "eligible_valid_span_years": {
+            "count": 459,
+            "min": 23.0,
+            "mean": 23.0,
+            "max": 23.0,
+            "p05": 23.0,
+            "p50": 23.0,
+            "p95": 23.0
+          },
+          "cell_slope_distribution": {
+            "count": 459,
+            "min": -0.09006079735318784,
+            "mean": 0.007864116185924214,
+            "max": 0.0870875218431781,
+            "p05": -0.02211820050710556,
+            "p50": 0.006306314257361964,
+            "p95": 0.0491136843871651
+          }
+        }
+      },
+      "eligible_area_fraction_selected": 0.8997775916502785,
+      "grid_artifact": "data/derived/science/phase_3/soil_moisture__nile_corridor__strict_100.nc",
+      "grid_sha256": "1751f00b2c0cb0a2f2f977fad15f3e78ad8f8dd9b53378f65208be56f1d3db79",
+      "cell_annual_missing_eligible_records": 0,
+      "annual_interpretation": "fixed support; regional annual and cell annual summaries each require twelve original months",
+      "elapsed_seconds": 1.1369295999902533
+    },
+    {
+      "case": "precipitation__nile_corridor__strict_100",
+      "variable_id": "precipitation",
+      "region_id": "nile_corridor",
+      "policy": "strict_100",
+      "experimental": false,
+      "source_artifact": "data/derived/science/phase_2/precipitation__nile_corridor.nc",
+      "source_artifact_sha256": "ab3ef38d54bd0302534b0726fc6c6bc1ffa366f9d35e597db008d7a840c67066",
+      "regional": {
+        "monthly": {
+          "slope_per_year": 0.0006843421725175266,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "mm per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        },
+        "annual": {
+          "slope_per_year": 0.027554997033746184,
+          "n_valid": 24,
+          "pair_count": 276,
+          "valid_span_years": 23.0,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "mm per year",
+          "time_convention": "actual calendar-year label differences"
+        },
+        "monthly_calendar_anomaly": {
+          "slope_per_year": 0.00048702755799793433,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "mm per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        }
+      },
+      "grid": {
+        "monthly": {
+          "eligible_preparation_cells": 3200,
+          "selected_cells": 3200,
+          "computable_cell_slopes": 3200,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 0,
+          "eligible_valid_observation_count": {
+            "count": 3200,
+            "min": 288.0,
+            "mean": 288.0,
+            "max": 288.0,
+            "p05": 288.0,
+            "p50": 288.0,
+            "p95": 288.0
+          },
+          "eligible_valid_span_years": {
+            "count": 3200,
+            "min": 23.916666666666668,
+            "mean": 23.91666666666667,
+            "max": 23.916666666666668,
+            "p05": 23.916666666666668,
+            "p50": 23.916666666666668,
+            "p95": 23.916666666666668
+          },
+          "cell_slope_distribution": {
+            "count": 3200,
+            "min": -0.0862608786834323,
+            "mean": -0.0001406043570943956,
+            "max": 0.05468354690112645,
+            "p05": 0.0,
+            "p50": 0.0,
+            "p95": 0.0
+          }
+        },
+        "annual": {
+          "eligible_preparation_cells": 3200,
+          "selected_cells": 3200,
+          "computable_cell_slopes": 3200,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 0,
+          "eligible_valid_observation_count": {
+            "count": 3200,
+            "min": 24.0,
+            "mean": 24.0,
+            "max": 24.0,
+            "p05": 24.0,
+            "p50": 24.0,
+            "p95": 24.0
+          },
+          "eligible_valid_span_years": {
+            "count": 3200,
+            "min": 23.0,
+            "mean": 23.0,
+            "max": 23.0,
+            "p05": 23.0,
+            "p50": 23.0,
+            "p95": 23.0
+          },
+          "cell_slope_distribution": {
+            "count": 3200,
+            "min": -6.675095115660836,
+            "mean": 0.06284914985435436,
+            "max": 3.9447272672444917,
+            "p05": -1.9308218270750042,
+            "p50": 0.09942857305785374,
+            "p95": 1.4038472906094037
+          }
+        }
+      },
+      "eligible_area_fraction_selected": 1.0,
+      "grid_artifact": "data/derived/science/phase_3/precipitation__nile_corridor__strict_100.nc",
+      "grid_sha256": "1ad0ffe3091d91e5626207c2396695ea775c1a7d692e28016c98e4d1099c3b1b",
+      "cell_annual_missing_eligible_records": 0,
+      "annual_interpretation": "fixed support; regional annual and cell annual summaries each require twelve original months",
+      "elapsed_seconds": 3.3744227000133833
+    },
+    {
+      "case": "vegetation_greenness__nile_corridor__strict_100",
+      "variable_id": "vegetation_greenness",
+      "region_id": "nile_corridor",
+      "policy": "strict_100",
+      "experimental": false,
+      "source_artifact": "data/derived/science/phase_2/vegetation_greenness__nile_corridor.nc",
+      "source_artifact_sha256": "8929660caddee1dae5a60e968af9dfe08dcabe20c8e382e040016c343fa075fe",
+      "regional": {
+        "monthly": {
+          "slope_per_year": 9.951866482024361e-05,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "1 per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        },
+        "annual": {
+          "slope_per_year": 0.000123810554870301,
+          "n_valid": 24,
+          "pair_count": 276,
+          "valid_span_years": 23.0,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "1 per year",
+          "time_convention": "actual calendar-year label differences"
+        },
+        "monthly_calendar_anomaly": {
+          "slope_per_year": 0.00011796258833345652,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "1 per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        }
+      },
+      "grid": {
+        "monthly": {
+          "eligible_preparation_cells": 7302,
+          "selected_cells": 12800,
+          "computable_cell_slopes": 7302,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 5498,
+          "eligible_valid_observation_count": {
+            "count": 7302,
+            "min": 288.0,
+            "mean": 288.0,
+            "max": 288.0,
+            "p05": 288.0,
+            "p50": 288.0,
+            "p95": 288.0
+          },
+          "eligible_valid_span_years": {
+            "count": 7302,
+            "min": 23.916666666666668,
+            "mean": 23.916666666666668,
+            "max": 23.916666666666668,
+            "p05": 23.916666666666668,
+            "p50": 23.916666666666668,
+            "p95": 23.916666666666668
+          },
+          "cell_slope_distribution": {
+            "count": 7302,
+            "min": -0.008518253049804171,
+            "mean": 8.68909881259804e-05,
+            "max": 0.019349416661241188,
+            "p05": -0.0005180297902177944,
+            "p50": -6.556878765657075e-05,
+            "p95": 0.00113270830541261
+          }
+        },
+        "annual": {
+          "eligible_preparation_cells": 7302,
+          "selected_cells": 12800,
+          "computable_cell_slopes": 7302,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 5498,
+          "eligible_valid_observation_count": {
+            "count": 7302,
+            "min": 24.0,
+            "mean": 24.0,
+            "max": 24.0,
+            "p05": 24.0,
+            "p50": 24.0,
+            "p95": 24.0
+          },
+          "eligible_valid_span_years": {
+            "count": 7302,
+            "min": 23.0,
+            "mean": 23.0,
+            "max": 23.0,
+            "p05": 23.0,
+            "p50": 23.0,
+            "p95": 23.0
+          },
+          "cell_slope_distribution": {
+            "count": 7302,
+            "min": -0.00766999476128274,
+            "mean": 0.00010593318185058588,
+            "max": 0.018202868790299156,
+            "p05": -0.0004904979157063729,
+            "p50": -6.416734513757077e-05,
+            "p95": 0.001167041066549038
+          }
+        }
+      },
+      "eligible_area_fraction_selected": 0.5750335524811971,
+      "grid_artifact": "data/derived/science/phase_3/vegetation_greenness__nile_corridor__strict_100.nc",
+      "grid_sha256": "30cca33a35bf463ecf2372b93de035ac74149614cadce6a9815b34f446ff04e5",
+      "cell_annual_missing_eligible_records": 0,
+      "annual_interpretation": "fixed support; regional annual and cell annual summaries each require twelve original months",
+      "elapsed_seconds": 7.34406640000816
+    },
+    {
+      "case": "air_temperature__morocco_comparison__strict_100",
+      "variable_id": "air_temperature",
+      "region_id": "morocco_comparison",
+      "policy": "strict_100",
+      "experimental": false,
+      "source_artifact": "data/derived/science/phase_2/air_temperature__morocco_comparison.nc",
+      "source_artifact_sha256": "5a81dc2ef4538c51db309ce58baaf3f0775ffe964ad3c96c4749afe69f2ac4eb",
+      "regional": {
+        "monthly": {
+          "slope_per_year": 0.04495350244460905,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "K per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        },
+        "annual": {
+          "slope_per_year": 0.033175364236687224,
+          "n_valid": 24,
+          "pair_count": 276,
+          "valid_span_years": 23.0,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "K per year",
+          "time_convention": "actual calendar-year label differences"
+        },
+        "monthly_calendar_anomaly": {
+          "slope_per_year": 0.03111173637435196,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "K per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        }
+      },
+      "grid": {
+        "monthly": {
+          "eligible_preparation_cells": 80,
+          "selected_cells": 80,
+          "computable_cell_slopes": 80,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 0,
+          "eligible_valid_observation_count": {
+            "count": 80,
+            "min": 288.0,
+            "mean": 288.0,
+            "max": 288.0,
+            "p05": 288.0,
+            "p50": 288.0,
+            "p95": 288.0
+          },
+          "eligible_valid_span_years": {
+            "count": 80,
+            "min": 23.916666666666668,
+            "mean": 23.916666666666664,
+            "max": 23.916666666666668,
+            "p05": 23.916666666666668,
+            "p50": 23.916666666666668,
+            "p95": 23.916666666666668
+          },
+          "cell_slope_distribution": {
+            "count": 80,
+            "min": 0.010985030514729714,
+            "mean": 0.04640686283637651,
+            "max": 0.07353177067252559,
+            "p05": 0.01905445603122563,
+            "p50": 0.048249452376678575,
+            "p95": 0.07111389229357108
+          }
+        },
+        "annual": {
+          "eligible_preparation_cells": 80,
+          "selected_cells": 80,
+          "computable_cell_slopes": 80,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 0,
+          "eligible_valid_observation_count": {
+            "count": 80,
+            "min": 24.0,
+            "mean": 24.0,
+            "max": 24.0,
+            "p05": 24.0,
+            "p50": 24.0,
+            "p95": 24.0
+          },
+          "eligible_valid_span_years": {
+            "count": 80,
+            "min": 23.0,
+            "mean": 23.0,
+            "max": 23.0,
+            "p05": 23.0,
+            "p50": 23.0,
+            "p95": 23.0
+          },
+          "cell_slope_distribution": {
+            "count": 80,
+            "min": -0.0004158924250390328,
+            "mean": 0.03351641148564596,
+            "max": 0.06778049121095553,
+            "p05": 0.004070524770669778,
+            "p50": 0.0312539152122938,
+            "p95": 0.060520090418637096
+          }
+        }
+      },
+      "eligible_area_fraction_selected": 1.0,
+      "grid_artifact": "data/derived/science/phase_3/air_temperature__morocco_comparison__strict_100.nc",
+      "grid_sha256": "a72993734ead9e9d87daf9bf59032adc5de82cc3c76a352b174e835769ef96ae",
+      "cell_annual_missing_eligible_records": 0,
+      "annual_interpretation": "fixed support; regional annual and cell annual summaries each require twelve original months",
+      "elapsed_seconds": 0.8610679999983404
+    },
+    {
+      "case": "soil_moisture__morocco_comparison__strict_100",
+      "variable_id": "soil_moisture",
+      "region_id": "morocco_comparison",
+      "policy": "strict_100",
+      "experimental": false,
+      "source_artifact": "data/derived/science/phase_2/soil_moisture__morocco_comparison.nc",
+      "source_artifact_sha256": "30e9f7958b4d65442f6459836618269046fd35aed28ab301612e2d9286b62999",
+      "regional": {
+        "monthly": {
+          "slope_per_year": -0.1046365023243147,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "kg m-2 per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        },
+        "annual": {
+          "slope_per_year": -0.12612017353263624,
+          "n_valid": 24,
+          "pair_count": 276,
+          "valid_span_years": 23.0,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "kg m-2 per year",
+          "time_convention": "actual calendar-year label differences"
+        },
+        "monthly_calendar_anomaly": {
+          "slope_per_year": -0.09412001575866494,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "kg m-2 per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        }
+      },
+      "grid": {
+        "monthly": {
+          "eligible_preparation_cells": 287,
+          "selected_cells": 400,
+          "computable_cell_slopes": 287,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 113,
+          "eligible_valid_observation_count": {
+            "count": 287,
+            "min": 288.0,
+            "mean": 288.0,
+            "max": 288.0,
+            "p05": 288.0,
+            "p50": 288.0,
+            "p95": 288.0
+          },
+          "eligible_valid_span_years": {
+            "count": 287,
+            "min": 23.916666666666668,
+            "mean": 23.916666666666664,
+            "max": 23.916666666666668,
+            "p05": 23.916666666666668,
+            "p50": 23.916666666666668,
+            "p95": 23.916666666666668
+          },
+          "cell_slope_distribution": {
+            "count": 287,
+            "min": -0.22025270199556962,
+            "mean": -0.10175646212220153,
+            "max": 0.0684165416677186,
+            "p05": -0.16400658422073558,
+            "p50": -0.1026997332290373,
+            "p95": -0.03479018578479219
+          }
+        },
+        "annual": {
+          "eligible_preparation_cells": 287,
+          "selected_cells": 400,
+          "computable_cell_slopes": 287,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 113,
+          "eligible_valid_observation_count": {
+            "count": 287,
+            "min": 24.0,
+            "mean": 24.0,
+            "max": 24.0,
+            "p05": 24.0,
+            "p50": 24.0,
+            "p95": 24.0
+          },
+          "eligible_valid_span_years": {
+            "count": 287,
+            "min": 23.0,
+            "mean": 23.0,
+            "max": 23.0,
+            "p05": 23.0,
+            "p50": 23.0,
+            "p95": 23.0
+          },
+          "cell_slope_distribution": {
+            "count": 287,
+            "min": -0.2639338750995731,
+            "mean": -0.1211996299083675,
+            "max": 0.04169489843145701,
+            "p05": -0.20382850165843025,
+            "p50": -0.12075902010404174,
+            "p95": -0.05138123216208303
+          }
+        }
+      },
+      "eligible_area_fraction_selected": 0.7213380545996313,
+      "grid_artifact": "data/derived/science/phase_3/soil_moisture__morocco_comparison__strict_100.nc",
+      "grid_sha256": "e0f114e48a3b49cb78de7eb0bcb3bb82796a3ab0f82f37e8941e51cea3de8b35",
+      "cell_annual_missing_eligible_records": 0,
+      "annual_interpretation": "fixed support; regional annual and cell annual summaries each require twelve original months",
+      "elapsed_seconds": 1.0328513999993447
+    },
+    {
+      "case": "precipitation__morocco_comparison__strict_100",
+      "variable_id": "precipitation",
+      "region_id": "morocco_comparison",
+      "policy": "strict_100",
+      "experimental": false,
+      "source_artifact": "data/derived/science/phase_2/precipitation__morocco_comparison.nc",
+      "source_artifact_sha256": "a44700160db0f2dbc15c9150b984d7735fce482cd97ecce7a9516a2bc8fab91d",
+      "regional": {
+        "monthly": {
+          "slope_per_year": -0.2829641452341731,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "mm per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        },
+        "annual": {
+          "slope_per_year": -8.47735157908451,
+          "n_valid": 24,
+          "pair_count": 276,
+          "valid_span_years": 23.0,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "mm per year",
+          "time_convention": "actual calendar-year label differences"
+        },
+        "monthly_calendar_anomaly": {
+          "slope_per_year": -0.3757500532096897,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "mm per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        }
+      },
+      "grid": {
+        "monthly": {
+          "eligible_preparation_cells": 2500,
+          "selected_cells": 2500,
+          "computable_cell_slopes": 2500,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 0,
+          "eligible_valid_observation_count": {
+            "count": 2500,
+            "min": 288.0,
+            "mean": 288.0,
+            "max": 288.0,
+            "p05": 288.0,
+            "p50": 288.0,
+            "p95": 288.0
+          },
+          "eligible_valid_span_years": {
+            "count": 2500,
+            "min": 23.916666666666668,
+            "mean": 23.916666666666664,
+            "max": 23.916666666666668,
+            "p05": 23.916666666666668,
+            "p50": 23.916666666666668,
+            "p95": 23.916666666666668
+          },
+          "cell_slope_distribution": {
+            "count": 2500,
+            "min": -0.6453750202826933,
+            "mean": -0.21871887221057396,
+            "max": 0.0,
+            "p05": -0.42866333732855544,
+            "p50": -0.19963561170048427,
+            "p95": -0.03664968339025574
+          }
+        },
+        "annual": {
+          "eligible_preparation_cells": 2500,
+          "selected_cells": 2500,
+          "computable_cell_slopes": 2500,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 0,
+          "eligible_valid_observation_count": {
+            "count": 2500,
+            "min": 24.0,
+            "mean": 24.0,
+            "max": 24.0,
+            "p05": 24.0,
+            "p50": 24.0,
+            "p95": 24.0
+          },
+          "eligible_valid_span_years": {
+            "count": 2500,
+            "min": 23.0,
+            "mean": 23.0,
+            "max": 23.0,
+            "p05": 23.0,
+            "p50": 23.0,
+            "p95": 23.0
+          },
+          "cell_slope_distribution": {
+            "count": 2500,
+            "min": -16.677201521163806,
+            "mean": -8.346936383486117,
+            "max": -0.4355598370606998,
+            "p05": -13.500230156466742,
+            "p50": -8.489025223685895,
+            "p95": -1.8477139094401969
+          }
+        }
+      },
+      "eligible_area_fraction_selected": 1.0,
+      "grid_artifact": "data/derived/science/phase_3/precipitation__morocco_comparison__strict_100.nc",
+      "grid_sha256": "e0e6d7c33b04395621bdba78f2d12fe0aad75256a93c1c3c52a190608148ca68",
+      "cell_annual_missing_eligible_records": 0,
+      "annual_interpretation": "fixed support; regional annual and cell annual summaries each require twelve original months",
+      "elapsed_seconds": 3.025243900003261
+    },
+    {
+      "case": "vegetation_greenness__morocco_comparison__strict_100",
+      "variable_id": "vegetation_greenness",
+      "region_id": "morocco_comparison",
+      "policy": "strict_100",
+      "experimental": false,
+      "source_artifact": "data/derived/science/phase_2/vegetation_greenness__morocco_comparison.nc",
+      "source_artifact_sha256": "26fd56f343ea3a2d6deabfc49be555915eb9746f917b9c9b67428ebab242a349",
+      "regional": {
+        "monthly": {
+          "slope_per_year": -0.00021073541044995086,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "1 per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        },
+        "annual": {
+          "slope_per_year": -0.0003231025134762133,
+          "n_valid": 24,
+          "pair_count": 276,
+          "valid_span_years": 23.0,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "1 per year",
+          "time_convention": "actual calendar-year label differences"
+        },
+        "monthly_calendar_anomaly": {
+          "slope_per_year": -0.0002014537838478319,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "1 per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        }
+      },
+      "grid": {
+        "monthly": {
+          "eligible_preparation_cells": 3019,
+          "selected_cells": 10000,
+          "computable_cell_slopes": 3019,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 6981,
+          "eligible_valid_observation_count": {
+            "count": 3019,
+            "min": 288.0,
+            "mean": 288.0,
+            "max": 288.0,
+            "p05": 288.0,
+            "p50": 288.0,
+            "p95": 288.0
+          },
+          "eligible_valid_span_years": {
+            "count": 3019,
+            "min": 23.916666666666668,
+            "mean": 23.916666666666664,
+            "max": 23.916666666666668,
+            "p05": 23.916666666666668,
+            "p50": 23.916666666666668,
+            "p95": 23.916666666666668
+          },
+          "cell_slope_distribution": {
+            "count": 3019,
+            "min": -0.004393650425804986,
+            "mean": -0.00016294828558074064,
+            "max": 0.007290248375829867,
+            "p05": -0.0015453387716245928,
+            "p50": 6.528521472505484e-05,
+            "p95": 0.0007934743974828415
+          }
+        },
+        "annual": {
+          "eligible_preparation_cells": 3019,
+          "selected_cells": 10000,
+          "computable_cell_slopes": 3019,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 6981,
+          "eligible_valid_observation_count": {
+            "count": 3019,
+            "min": 24.0,
+            "mean": 24.0,
+            "max": 24.0,
+            "p05": 24.0,
+            "p50": 24.0,
+            "p95": 24.0
+          },
+          "eligible_valid_span_years": {
+            "count": 3019,
+            "min": 23.0,
+            "mean": 23.0,
+            "max": 23.0,
+            "p05": 23.0,
+            "p50": 23.0,
+            "p95": 23.0
+          },
+          "cell_slope_distribution": {
+            "count": 3019,
+            "min": -0.005093089089017445,
+            "mean": -0.0002257784630333755,
+            "max": 0.007500208311259202,
+            "p05": -0.002045214845169251,
+            "p50": 0.0001126716188543118,
+            "p95": 0.0008546274235504129
+          }
+        }
+      },
+      "eligible_area_fraction_selected": 0.30624419346641985,
+      "grid_artifact": "data/derived/science/phase_3/vegetation_greenness__morocco_comparison__strict_100.nc",
+      "grid_sha256": "773b60efc829c608e540fd997e423280cf9fb7a646e58523e22a7d551b0ceca4",
+      "cell_annual_missing_eligible_records": 0,
+      "annual_interpretation": "fixed support; regional annual and cell annual summaries each require twelve original months",
+      "elapsed_seconds": 3.391966900002444
+    },
+    {
+      "case": "air_temperature__sahel_comparison__strict_100",
+      "variable_id": "air_temperature",
+      "region_id": "sahel_comparison",
+      "policy": "strict_100",
+      "experimental": false,
+      "source_artifact": "data/derived/science/phase_2/air_temperature__sahel_comparison.nc",
+      "source_artifact_sha256": "536ff9d48651e7798fa56cd48b1cd5e1abd0fbd3de8adfb8dc468a5b4450e529",
+      "regional": {
+        "monthly": {
+          "slope_per_year": -0.02321220268539269,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "K per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        },
+        "annual": {
+          "slope_per_year": -0.023441037765244185,
+          "n_valid": 24,
+          "pair_count": 276,
+          "valid_span_years": 23.0,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "K per year",
+          "time_convention": "actual calendar-year label differences"
+        },
+        "monthly_calendar_anomaly": {
+          "slope_per_year": -0.013312161628381102,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "K per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        }
+      },
+      "grid": {
+        "monthly": {
+          "eligible_preparation_cells": 160,
+          "selected_cells": 160,
+          "computable_cell_slopes": 160,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 0,
+          "eligible_valid_observation_count": {
+            "count": 160,
+            "min": 288.0,
+            "mean": 288.0,
+            "max": 288.0,
+            "p05": 288.0,
+            "p50": 288.0,
+            "p95": 288.0
+          },
+          "eligible_valid_span_years": {
+            "count": 160,
+            "min": 23.916666666666668,
+            "mean": 23.916666666666664,
+            "max": 23.916666666666668,
+            "p05": 23.916666666666668,
+            "p50": 23.916666666666668,
+            "p95": 23.916666666666668
+          },
+          "cell_slope_distribution": {
+            "count": 160,
+            "min": -0.04940530839660358,
+            "mean": -0.02339770655806883,
+            "max": 0.009819147419127486,
+            "p05": -0.04007952215173036,
+            "p50": -0.024569757055246506,
+            "p95": -0.0016682670905795933
+          }
+        },
+        "annual": {
+          "eligible_preparation_cells": 160,
+          "selected_cells": 160,
+          "computable_cell_slopes": 160,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 0,
+          "eligible_valid_observation_count": {
+            "count": 160,
+            "min": 24.0,
+            "mean": 24.0,
+            "max": 24.0,
+            "p05": 24.0,
+            "p50": 24.0,
+            "p95": 24.0
+          },
+          "eligible_valid_span_years": {
+            "count": 160,
+            "min": 23.0,
+            "mean": 23.0,
+            "max": 23.0,
+            "p05": 23.0,
+            "p50": 23.0,
+            "p95": 23.0
+          },
+          "cell_slope_distribution": {
+            "count": 160,
+            "min": -0.05025432907671986,
+            "mean": -0.019367890020513187,
+            "max": 0.0070820607929028435,
+            "p05": -0.0354957835965974,
+            "p50": -0.019647438842580085,
+            "p95": -0.0020906949701800593
+          }
+        }
+      },
+      "eligible_area_fraction_selected": 1.0,
+      "grid_artifact": "data/derived/science/phase_3/air_temperature__sahel_comparison__strict_100.nc",
+      "grid_sha256": "1a8bde25201c874fca9bbd74c4675d4ce7ac1f81eda87a95615b224a98762ed9",
+      "cell_annual_missing_eligible_records": 0,
+      "annual_interpretation": "fixed support; regional annual and cell annual summaries each require twelve original months",
+      "elapsed_seconds": 0.83988749999844
+    },
+    {
+      "case": "soil_moisture__sahel_comparison__strict_100",
+      "variable_id": "soil_moisture",
+      "region_id": "sahel_comparison",
+      "policy": "strict_100",
+      "experimental": false,
+      "source_artifact": "data/derived/science/phase_2/soil_moisture__sahel_comparison.nc",
+      "source_artifact_sha256": "14e8d4e44c8807dda5f2ae4fe3885fd229ef6734b24b5b354e750963c54a7ae5",
+      "regional": {
+        "monthly": {
+          "slope_per_year": -0.01885444330415009,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "kg m-2 per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        },
+        "annual": {
+          "slope_per_year": -0.026383741725966903,
+          "n_valid": 24,
+          "pair_count": 276,
+          "valid_span_years": 23.0,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "kg m-2 per year",
+          "time_convention": "actual calendar-year label differences"
+        },
+        "monthly_calendar_anomaly": {
+          "slope_per_year": -0.03135882443567119,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "kg m-2 per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        }
+      },
+      "grid": {
+        "monthly": {
+          "eligible_preparation_cells": 800,
+          "selected_cells": 800,
+          "computable_cell_slopes": 800,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 0,
+          "eligible_valid_observation_count": {
+            "count": 800,
+            "min": 288.0,
+            "mean": 288.0,
+            "max": 288.0,
+            "p05": 288.0,
+            "p50": 288.0,
+            "p95": 288.0
+          },
+          "eligible_valid_span_years": {
+            "count": 800,
+            "min": 23.916666666666668,
+            "mean": 23.91666666666667,
+            "max": 23.916666666666668,
+            "p05": 23.916666666666668,
+            "p50": 23.916666666666668,
+            "p95": 23.916666666666668
+          },
+          "cell_slope_distribution": {
+            "count": 800,
+            "min": -0.09273015776055349,
+            "mean": -0.017008697540050143,
+            "max": 0.03259075904996167,
+            "p05": -0.05042186683331162,
+            "p50": -0.013236156224230576,
+            "p95": 0.004107063378606518
+          }
+        },
+        "annual": {
+          "eligible_preparation_cells": 800,
+          "selected_cells": 800,
+          "computable_cell_slopes": 800,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 0,
+          "eligible_valid_observation_count": {
+            "count": 800,
+            "min": 24.0,
+            "mean": 24.0,
+            "max": 24.0,
+            "p05": 24.0,
+            "p50": 24.0,
+            "p95": 24.0
+          },
+          "eligible_valid_span_years": {
+            "count": 800,
+            "min": 23.0,
+            "mean": 23.0,
+            "max": 23.0,
+            "p05": 23.0,
+            "p50": 23.0,
+            "p95": 23.0
+          },
+          "cell_slope_distribution": {
+            "count": 800,
+            "min": -0.13544630386304296,
+            "mean": -0.030733615208258153,
+            "max": 0.04652721118072156,
+            "p05": -0.09126930876422472,
+            "p50": -0.026379725939748883,
+            "p95": 0.01606896514138727
+          }
+        }
+      },
+      "eligible_area_fraction_selected": 1.0,
+      "grid_artifact": "data/derived/science/phase_3/soil_moisture__sahel_comparison__strict_100.nc",
+      "grid_sha256": "e9582b5b8c4bca3a504337830a92455227c0c5a94814bc4a8dc52cabf2ff7791",
+      "cell_annual_missing_eligible_records": 0,
+      "annual_interpretation": "fixed support; regional annual and cell annual summaries each require twelve original months",
+      "elapsed_seconds": 1.4216273999918485
+    },
+    {
+      "case": "precipitation__sahel_comparison__strict_100",
+      "variable_id": "precipitation",
+      "region_id": "sahel_comparison",
+      "policy": "strict_100",
+      "experimental": false,
+      "source_artifact": "data/derived/science/phase_2/precipitation__sahel_comparison.nc",
+      "source_artifact_sha256": "0972ca3149a7eec8eb2a827634d90795a6b59f03c8bb407e181eb45aa046f3fe",
+      "regional": {
+        "monthly": {
+          "slope_per_year": 0.0010746500298424127,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "mm per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        },
+        "annual": {
+          "slope_per_year": 2.6037411068641902,
+          "n_valid": 24,
+          "pair_count": 276,
+          "valid_span_years": 23.0,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "mm per year",
+          "time_convention": "actual calendar-year label differences"
+        },
+        "monthly_calendar_anomaly": {
+          "slope_per_year": 0.0247991623022117,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "mm per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        }
+      },
+      "grid": {
+        "monthly": {
+          "eligible_preparation_cells": 5000,
+          "selected_cells": 5000,
+          "computable_cell_slopes": 5000,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 0,
+          "eligible_valid_observation_count": {
+            "count": 5000,
+            "min": 288.0,
+            "mean": 288.0,
+            "max": 288.0,
+            "p05": 288.0,
+            "p50": 288.0,
+            "p95": 288.0
+          },
+          "eligible_valid_span_years": {
+            "count": 5000,
+            "min": 23.916666666666668,
+            "mean": 23.916666666666664,
+            "max": 23.916666666666668,
+            "p05": 23.916666666666668,
+            "p50": 23.916666666666668,
+            "p95": 23.916666666666668
+          },
+          "cell_slope_distribution": {
+            "count": 5000,
+            "min": 0.0,
+            "mean": 0.00048424818549428725,
+            "max": 0.9382008977201828,
+            "p05": 0.0,
+            "p50": 0.0,
+            "p95": 0.0
+          }
+        },
+        "annual": {
+          "eligible_preparation_cells": 5000,
+          "selected_cells": 5000,
+          "computable_cell_slopes": 5000,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 0,
+          "eligible_valid_observation_count": {
+            "count": 5000,
+            "min": 24.0,
+            "mean": 24.0,
+            "max": 24.0,
+            "p05": 24.0,
+            "p50": 24.0,
+            "p95": 24.0
+          },
+          "eligible_valid_span_years": {
+            "count": 5000,
+            "min": 23.0,
+            "mean": 23.0,
+            "max": 23.0,
+            "p05": 23.0,
+            "p50": 23.0,
+            "p95": 23.0
+          },
+          "cell_slope_distribution": {
+            "count": 5000,
+            "min": -3.3454953726117864,
+            "mean": 2.3670903900219007,
+            "max": 18.012000099755824,
+            "p05": -0.8730406383626078,
+            "p50": 1.8239852270899484,
+            "p95": 6.831252989208637
+          }
+        }
+      },
+      "eligible_area_fraction_selected": 1.0,
+      "grid_artifact": "data/derived/science/phase_3/precipitation__sahel_comparison__strict_100.nc",
+      "grid_sha256": "638b5d228a7b3b3b7694b07e8024561b23e1c93e0d37205b8d975d9dab699195",
+      "cell_annual_missing_eligible_records": 0,
+      "annual_interpretation": "fixed support; regional annual and cell annual summaries each require twelve original months",
+      "elapsed_seconds": 4.735329200004344
+    },
+    {
+      "case": "vegetation_greenness__sahel_comparison__strict_100",
+      "variable_id": "vegetation_greenness",
+      "region_id": "sahel_comparison",
+      "policy": "strict_100",
+      "experimental": false,
+      "source_artifact": "data/derived/science/phase_2/vegetation_greenness__sahel_comparison.nc",
+      "source_artifact_sha256": "7ee3f6dc68875eb980944b9e7e8ad89d10e7d66d339d8661efd12a9210abf9b2",
+      "regional": {
+        "monthly": {
+          "slope_per_year": 0.0005382615976778852,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "1 per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        },
+        "annual": {
+          "slope_per_year": 0.0009737242896536887,
+          "n_valid": 24,
+          "pair_count": 276,
+          "valid_span_years": 23.0,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "1 per year",
+          "time_convention": "actual calendar-year label differences"
+        },
+        "monthly_calendar_anomaly": {
+          "slope_per_year": 0.000673970074359416,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "1 per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        }
+      },
+      "grid": {
+        "monthly": {
+          "eligible_preparation_cells": 2961,
+          "selected_cells": 20000,
+          "computable_cell_slopes": 2961,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 17039,
+          "eligible_valid_observation_count": {
+            "count": 2961,
+            "min": 288.0,
+            "mean": 288.0,
+            "max": 288.0,
+            "p05": 288.0,
+            "p50": 288.0,
+            "p95": 288.0
+          },
+          "eligible_valid_span_years": {
+            "count": 2961,
+            "min": 23.916666666666668,
+            "mean": 23.916666666666668,
+            "max": 23.916666666666668,
+            "p05": 23.916666666666668,
+            "p50": 23.916666666666668,
+            "p95": 23.916666666666668
+          },
+          "cell_slope_distribution": {
+            "count": 2961,
+            "min": -0.0010265861649111094,
+            "mean": 0.000522330809898454,
+            "max": 0.006511788619192023,
+            "p05": -1.2665915637926203e-05,
+            "p50": 0.0004444447932419953,
+            "p95": 0.0013777759340074327
+          }
+        },
+        "annual": {
+          "eligible_preparation_cells": 2961,
+          "selected_cells": 20000,
+          "computable_cell_slopes": 2961,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 17039,
+          "eligible_valid_observation_count": {
+            "count": 2961,
+            "min": 24.0,
+            "mean": 24.0,
+            "max": 24.0,
+            "p05": 24.0,
+            "p50": 24.0,
+            "p95": 24.0
+          },
+          "eligible_valid_span_years": {
+            "count": 2961,
+            "min": 23.0,
+            "mean": 23.0,
+            "max": 23.0,
+            "p05": 23.0,
+            "p50": 23.0,
+            "p95": 23.0
+          },
+          "cell_slope_distribution": {
+            "count": 2961,
+            "min": -0.0012526991724785995,
+            "mean": 0.000988944600608266,
+            "max": 0.008269026739765711,
+            "p05": 0.0001618016598234054,
+            "p50": 0.0009163012268812696,
+            "p95": 0.0020917031026049834
+          }
+        }
+      },
+      "eligible_area_fraction_selected": 0.1469480561054765,
+      "grid_artifact": "data/derived/science/phase_3/vegetation_greenness__sahel_comparison__strict_100.nc",
+      "grid_sha256": "313aaeeae0b7030a68a28de3cfde11a92d1eefdd689f90a36cb88bc57f524dc0",
+      "cell_annual_missing_eligible_records": 0,
+      "annual_interpretation": "fixed support; regional annual and cell annual summaries each require twelve original months",
+      "elapsed_seconds": 3.506826299999375
+    },
+    {
+      "case": "vegetation_greenness__sahel_comparison__standard_100",
+      "variable_id": "vegetation_greenness",
+      "region_id": "sahel_comparison",
+      "policy": "standard_100",
+      "experimental": false,
+      "source_artifact": "data/derived/science/phase_2_standard/vegetation_greenness__sahel_comparison.nc",
+      "source_artifact_sha256": "ff40e267a9b1f0b1f2a08e3181d4ff3e05c3a02f5580ebd75508784d30adbb32",
+      "regional": {
+        "monthly": {
+          "slope_per_year": 0.0006032521741241182,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "1 per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        },
+        "annual": {
+          "slope_per_year": 0.0009536488487937967,
+          "n_valid": 24,
+          "pair_count": 276,
+          "valid_span_years": 23.0,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "1 per year",
+          "time_convention": "actual calendar-year label differences"
+        },
+        "monthly_calendar_anomaly": {
+          "slope_per_year": 0.0007200386924460292,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "1 per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        }
+      },
+      "grid": {
+        "monthly": {
+          "eligible_preparation_cells": 16531,
+          "selected_cells": 20000,
+          "computable_cell_slopes": 16531,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 3469,
+          "eligible_valid_observation_count": {
+            "count": 16531,
+            "min": 288.0,
+            "mean": 288.0,
+            "max": 288.0,
+            "p05": 288.0,
+            "p50": 288.0,
+            "p95": 288.0
+          },
+          "eligible_valid_span_years": {
+            "count": 16531,
+            "min": 23.916666666666668,
+            "mean": 23.91666666666667,
+            "max": 23.916666666666668,
+            "p05": 23.916666666666668,
+            "p50": 23.916666666666668,
+            "p95": 23.916666666666668
+          },
+          "cell_slope_distribution": {
+            "count": 16531,
+            "min": -0.005862009867526698,
+            "mean": 0.0006089236372249674,
+            "max": 0.008676844283568958,
+            "p05": -0.0005390422010485218,
+            "p50": 0.000509884479487659,
+            "p95": 0.0020312561670762916
+          }
+        },
+        "annual": {
+          "eligible_preparation_cells": 16531,
+          "selected_cells": 20000,
+          "computable_cell_slopes": 16531,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 3469,
+          "eligible_valid_observation_count": {
+            "count": 16531,
+            "min": 24.0,
+            "mean": 24.0,
+            "max": 24.0,
+            "p05": 24.0,
+            "p50": 24.0,
+            "p95": 24.0
+          },
+          "eligible_valid_span_years": {
+            "count": 16531,
+            "min": 23.0,
+            "mean": 23.0,
+            "max": 23.0,
+            "p05": 23.0,
+            "p50": 23.0,
+            "p95": 23.0
+          },
+          "cell_slope_distribution": {
+            "count": 16531,
+            "min": -0.006512558581125141,
+            "mean": 0.0009625258889495442,
+            "max": 0.00928210687247074,
+            "p05": -0.0008310888727746067,
+            "p50": 0.0009466657327145023,
+            "p95": 0.0026874546748144384
+          }
+        }
+      },
+      "eligible_area_fraction_selected": 0.8258686050073931,
+      "grid_artifact": "data/derived/science/phase_3/vegetation_greenness__sahel_comparison__standard_100.nc",
+      "grid_sha256": "35c1f27e5a0783397599452378cc6c95f76102a5bd3a4b6b92665ed2485d48ff",
+      "cell_annual_missing_eligible_records": 0,
+      "annual_interpretation": "fixed support; regional annual and cell annual summaries each require twelve original months",
+      "elapsed_seconds": 15.178111100001843
+    },
+    {
+      "case": "vegetation_greenness__sahel_comparison__standard_95",
+      "variable_id": "vegetation_greenness",
+      "region_id": "sahel_comparison",
+      "policy": "standard_95",
+      "experimental": true,
+      "source_artifact": "data/derived/science/sahel_ndvi_policy_review/standard_95.nc",
+      "source_artifact_sha256": "80ec75ff4fe2359f753a109586c10cc938d266ff18183cb570d91d4b5cd40738",
+      "regional": {
+        "monthly": {
+          "slope_per_year": 0.0005679886330545649,
+          "n_valid": 288,
+          "pair_count": 41328,
+          "valid_span_years": 23.916666666666668,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "1 per year",
+          "time_convention": "elapsed calendar-month ordinals / 12"
+        },
+        "annual": {
+          "slope_per_year": 0.0009015377518069447,
+          "n_valid": 24,
+          "pair_count": 276,
+          "valid_span_years": 23.0,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "1 per year",
+          "time_convention": "actual calendar-year label differences"
+        },
+        "annual_complete_cell_year_diagnostic": {
+          "slope_per_year": 0.0008785395401875466,
+          "n_valid": 24,
+          "pair_count": 276,
+          "valid_span_years": 23.0,
+          "status": "computed_descriptive",
+          "minimum_valid_observations": 3,
+          "inference_status": "not_computed",
+          "slope_units": "1 per year",
+          "time_convention": "actual calendar-year label differences"
+        }
+      },
+      "grid": {
+        "monthly": {
+          "eligible_preparation_cells": 19995,
+          "selected_cells": 20000,
+          "computable_cell_slopes": 19995,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 5,
+          "eligible_valid_observation_count": {
+            "count": 19995,
+            "min": 277.0,
+            "mean": 287.735983995999,
+            "max": 288.0,
+            "p05": 286.0,
+            "p50": 288.0,
+            "p95": 288.0
+          },
+          "eligible_valid_span_years": {
+            "count": 19995,
+            "min": 23.833333333333332,
+            "mean": 23.916658331249476,
+            "max": 23.916666666666668,
+            "p05": 23.916666666666668,
+            "p50": 23.916666666666668,
+            "p95": 23.916666666666668
+          },
+          "cell_slope_distribution": {
+            "count": 19995,
+            "min": -0.005862009867526698,
+            "mean": 0.0005773724549976427,
+            "max": 0.008676844283568958,
+            "p05": -0.0006652543423049564,
+            "p50": 0.0005036157827940184,
+            "p95": 0.0020086462901980854
+          }
+        },
+        "annual": {
+          "eligible_preparation_cells": 19995,
+          "selected_cells": 20000,
+          "computable_cell_slopes": 19995,
+          "insufficient_eligible_cells": 0,
+          "excluded_preparation_cells": 5,
+          "eligible_valid_observation_count": {
+            "count": 19995,
+            "min": 14.0,
+            "mean": 23.742085521380346,
+            "max": 24.0,
+            "p05": 22.0,
+            "p50": 24.0,
+            "p95": 24.0
+          },
+          "eligible_valid_span_years": {
+            "count": 19995,
+            "min": 21.0,
+            "mean": 22.979794948737183,
+            "max": 23.0,
+            "p05": 23.0,
+            "p50": 23.0,
+            "p95": 23.0
+          },
+          "cell_slope_distribution": {
+            "count": 19995,
+            "min": -0.006536712079015497,
+            "mean": 0.0008959128475696232,
+            "max": 0.00928210687247074,
+            "p05": -0.0010416717677492217,
+            "p50": 0.0009160443770456809,
+            "p95": 0.002689724831213743
+          }
+        }
+      },
+      "eligible_area_fraction_selected": 0.999751475142648,
+      "grid_artifact": "data/derived/science/phase_3/vegetation_greenness__sahel_comparison__standard_95.nc",
+      "grid_sha256": "2a129d348319369d1b5c20f37baba24165ea25710922b2ec6016e5f5622ad439",
+      "cell_annual_missing_eligible_records": 5157,
+      "annual_interpretation": "experimental annual mean of changing-support monthly regional means; incomplete cell-years excluded from cell slopes",
+      "elapsed_seconds": 18.17074169999978
+    }
+  ],
+  "sahel_policy_sensitivity": {
+    "standard_100_minus_strict_100": {
+      "regional_monthly_slope_difference_per_year": 6.499057644623299e-05,
+      "regional_annual_slope_difference_per_year": -2.0075440859891928e-05
+    },
+    "standard_95_minus_standard_100": {
+      "regional_monthly_slope_difference_per_year": -3.5263541069553315e-05,
+      "regional_annual_slope_difference_per_year": -5.211109698685201e-05
+    }
+  },
+  "elapsed_seconds": 67.16504480000003
+}

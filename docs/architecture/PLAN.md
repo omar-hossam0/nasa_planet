@@ -1,6 +1,6 @@
-# Trend Detective - Competition Architecture v2
+# Trend Detective - Competition Architecture v2.1
 
-Updated 14 November 2026. Supersedes the affected scope and ownership in earlier playbooks.
+Data-aligned update: 15 November 2026. Supersedes outdated acquisition assumptions below the original 14 November architecture. Current statistical sequencing and acceptance gates are in `packages/science/PLAN.md`. Source availability and scientific/application readiness remain distinct.
 
 ## Competition architecture v2
 
@@ -12,7 +12,7 @@ Trend Detective - What the Average Hides. Four connected variables, three bounde
 
 ### Supersedes the earlier scope
 
-This revision replaces the two-variable, one-domain scope and affected responsibilities in the previous team playbooks. Existing temperature and soil-moisture data remain useful inputs. This document specifies the expanded target; it does not claim the application or additional data already exist.
+This revision replaces the two-variable, one-domain scope and affected responsibilities in the previous team playbooks. All twelve source cubes now exist, with 288 months each. The original temperature and soil-moisture Egypt cubes remain parent/reference inputs. Application and method readiness require their separate checks.
 
 ### Why four variables
 
@@ -38,25 +38,25 @@ Four variables | Twelve regional cubes
 
 MERRA-2 M2TMNXSLV v5.12.4: T2M, approximately 0.5-degree latitude by 0.625-degree longitude, K. GLDAS_NOAH025_M v2.1: SoilMoi0_10cm_inst, 0.25-degree grid, kg m-2 for the top 0-10 cm. These are reanalysis/model outputs, not direct independent station observations. Existing Egypt files passed ingestion checks.
 
-### Precipitation - new acquisition
+### Precipitation - delivered input
 
-GPM_3IMERGM v07 Final Monthly, 0.1-degree grid. Confirm the actual precipitation variable, units, quality/error fields and fill rules from the files and version-specific guide. Convert a precipitation rate to a monthly amount only using the correct time integration; preserve original units and conversion provenance.
+GPM_3IMERGM v07 Final Monthly, 0.1-degree grid, is delivered in all three windows. The cube field is `precipitation`, in mm/hr, with `precipitationQualityIndex` and `randomError`. Integrate the monthly mean rate over the actual calendar-month hours before reporting mm/month or annual totals; preserve source units, ancillary fields and conversion provenance. QA policy validation remains analysis work.
 
-### Vegetation - new acquisition
+### Vegetation - delivered input
 
-MOD13C2 v061 monthly 0.05-degree CMG. Acquire NDVI with applicable QA/reliability fields, scale factors and fill values. Screen poor-quality observations before aggregation and report valid-area coverage. NDVI is a greenness indicator, not crop yield or a direct measure of plant health.
+MOD13C2 v061 monthly 0.05-degree CMG is delivered in all three windows. Its processed cube field is already scaled `NDVI`, with `VI_Quality` and `pixel_reliability`. The input contract retains the original provider field separately. Verify and version quality screening before aggregation, report valid-area coverage, and do not apply the raw scale factor again. NDVI is a greenness indicator, not crop yield or a direct measure of plant health.
 
-### Proposed windows: west, south, east, north
+### Registered data windows: west, south, east, north
 
-Nile corridor [29,24,33,32]; Morocco comparison [-10,30,-5,35]; Sahel comparison [-5,12,5,17]. These rectangles are not national boundaries or agricultural/irrigation masks. Freeze them after coverage/quality checks and before inspecting significance; later changes require a scope revision.
+Nile corridor [29,24,33,32]; Morocco comparison [-10,30,-5,35]; Sahel comparison [-5,12,5,17]. These delivered rectangles are the working scope, not national boundaries or agricultural/irrigation masks. Retain them through validation; later changes require a recorded scope revision before inspecting significance.
 
 ### Actual readiness gap
 
-The verified Egypt rectangle [24,22,36,32] contains the proposed Nile window. Two target cubes can be derived from it. Ten cubes require new acquisition: GPM and MODIS in all three windows, plus MERRA-2 and GLDAS in the two additional windows. Target: 12 x 288 = 3,456 regional variable-month slices, not necessarily that many unique source files.
+All 12 x 288 = 3,456 regional variable-month slices are present in combined cubes. The Nile temperature and soil-moisture cubes were derived from the parent Egypt rectangle [24,22,36,32]; the other ten sets have 2,880 downloaded monthly subsets. The remaining gap is validated QA/aggregation, slopes, uncertainty, spatial summaries and service integration, not initial acquisition.
 
 ### No false availability
 
-Each variable-region pair has its own readiness state. Keep new entries unavailable until actual files, QA and coverage pass validation. Reuse the existing data bundle without relabeling it as the expanded dataset.
+Each variable-region pair has its own readiness state. Source-ingestion flags must not promote method or application readiness. The expanded data are real; further release flags require the relevant QA, method and integration checks. Preserve the supplied measurements and lineage.
 
 ## System components
 
@@ -292,7 +292,7 @@ The current Egypt pack has 576 monthly subsets and two combined cubes. Temperatu
 
 ### What remains planned
 
-GPM, MODIS and Morocco/Sahel extensions are not downloaded in this revision. Their v2 registry entries remain unavailable. Statistical methods, UI, inference validation and new RAG evaluations are implementation work. The existing data ZIP is still a two-variable Egypt pack.
+Expanded GPM, MODIS and Morocco/Sahel source acquisition is delivered. On this main-derived statistics branch, the numerical core is being validated under `packages/science/PLAN.md`; the existing React-branch method and mock backend are separate candidates requiring review/reconciliation. Inference release, integrated UI behavior and new RAG evaluations are not certified by the data inventory. Historical Egypt ZIPs and legacy catalogs still describe the original pack.
 
 ### Official challenge
 

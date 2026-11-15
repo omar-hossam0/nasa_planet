@@ -13,9 +13,9 @@ Team reference for **What the Average Hides**: investigate Earth-system trends, 
 
 ## Delivered versus planned
 
-**Delivered:** temperature (MERRA-2) and soil moisture (GLDAS) for the Egypt bounding rectangle, monthly January 2001 through December 2024. Includes 576 monthly regional subsets, two combined NetCDF cubes, browser JSON, source lineage, official documentation and a 315-chunk RAG starter.
+**Delivered data:** all twelve regional cubes: temperature (MERRA-2), precipitation (GPM IMERG), soil moisture (GLDAS) and vegetation greenness (MODIS) across the Nile, Morocco and Sahel study rectangles, monthly January 2001 through December 2024. The two original Egypt cubes are retained as parent/reference assets. The expanded pack includes 2,880 downloaded regional monthly subsets; the original pack includes 576 monthly subsets.
 
-**Target:** four variables (temperature, precipitation, soil moisture, vegetation greenness) across Nile, Morocco and Sahel study windows. Precipitation, vegetation/QA and additional geographic coverage are not included yet. The full application and validated statistics pipeline remain implementation work.
+**Current statistics work:** [data-aligned implementation plan](packages/science/PLAN.md) and [progress](packages/science/PROGRESS.md). Source/processed field identities are explicit in `docs/architecture/scope.v2.json`. Core input preparation precedes inference validation and service integration. The main-derived checkout has no full application; implementations on other branches require reconciliation and review before reuse.
 
 Data-ingestion readiness is not scientific-method or application readiness. Follow the separate readiness gates in the architecture.
 

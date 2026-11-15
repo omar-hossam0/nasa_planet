@@ -1,0 +1,1844 @@
+{
+  "config": {
+    "revision": "double-parametric-bootstrap-1",
+    "alpha": 0.05,
+    "confidence": 0.95,
+    "lengths": [
+      20,
+      24
+    ],
+    "phis": [
+      0.0,
+      0.4,
+      0.7
+    ],
+    "slopes": [
+      -0.08,
+      0.0,
+      0.08
+    ],
+    "seasonal_profiles": [
+      "none",
+      "monthly_cycle_annualized"
+    ],
+    "rho_grid": {
+      "lower": -0.5,
+      "upper": 0.95,
+      "step": 0.025
+    },
+    "candidates": [
+      "double_refitted_parametric"
+    ],
+    "pilot_records": 100,
+    "validation_records": 1000,
+    "bootstrap_replicates": 499,
+    "pilot_seed": 910341,
+    "validation_seed": 117609,
+    "acceptance": {
+      "null_rate_target_band": [
+        0.03,
+        0.07
+      ],
+      "coverage_target_band": [
+        0.93,
+        0.97
+      ],
+      "null_upper_wilson_max": 0.08,
+      "coverage_lower_wilson_min": 0.9,
+      "power_lower_wilson_min": 0.2,
+      "all_scenarios_required": true,
+      "note": "Approximate nominal targets plus prior minimum screens; not automatic release. No post-result tuning."
+    },
+    "release": false,
+    "nasa_pvalue_selection": false,
+    "inner_replicates": 1999,
+    "outer_replicates": 999,
+    "method": "prepivot absolute studentized statistic using independent outer simulations and inner refitted REML distributions; alpha remains .05"
+  },
+  "identity": {
+    "config": "f0a29a6628f4f1985742d99476cb319694ccfd98eca08d1e22314cfbb0627e18",
+    "script": "1cdbb3a65445c916ef15520e4c9305d47c6a8cc5e841481dad0c1f81549d4702"
+  },
+  "pilot": [
+    {
+      "stage": "pilot",
+      "n": 20,
+      "phi": 0.0,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 100,
+      "rejected": 41,
+      "covered": 97,
+      "rejection_rate": 0.41,
+      "coverage": 0.97,
+      "rejection_mc95": [
+        0.3186731302113651,
+        0.5079856994658921
+      ],
+      "coverage_mc95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "mean_width": 0.1929327621793964,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "pilot",
+      "n": 20,
+      "phi": 0.0,
+      "season": "none",
+      "truth": 0.0,
+      "trials": 100,
+      "rejected": 3,
+      "covered": 97,
+      "rejection_rate": 0.03,
+      "coverage": 0.97,
+      "rejection_mc95": [
+        0.010254524024038925,
+        0.0845193642905276
+      ],
+      "coverage_mc95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "mean_width": 0.1929327621793964,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 20,
+      "phi": 0.0,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 100,
+      "rejected": 40,
+      "covered": 97,
+      "rejection_rate": 0.4,
+      "coverage": 0.97,
+      "rejection_mc95": [
+        0.3094012864324589,
+        0.4979974132089382
+      ],
+      "coverage_mc95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "mean_width": 0.1929327621793964,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "pilot",
+      "n": 20,
+      "phi": 0.0,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 100,
+      "rejected": 42,
+      "covered": 98,
+      "rejection_rate": 0.42,
+      "coverage": 0.98,
+      "rejection_mc95": [
+        0.3279838267435473,
+        0.5179351329695703
+      ],
+      "coverage_mc95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "mean_width": 0.19801641769851755,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 20,
+      "phi": 0.0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.0,
+      "trials": 100,
+      "rejected": 2,
+      "covered": 98,
+      "rejection_rate": 0.02,
+      "coverage": 0.98,
+      "rejection_mc95": [
+        0.00550196755016235,
+        0.07001179072854388
+      ],
+      "coverage_mc95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "mean_width": 0.19801641769851755,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 20,
+      "phi": 0.0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 100,
+      "rejected": 38,
+      "covered": 98,
+      "rejection_rate": 0.38,
+      "coverage": 0.98,
+      "rejection_mc95": [
+        0.29097599252478734,
+        0.47790244704488916
+      ],
+      "coverage_mc95": [
+        0.929988209271456,
+        0.9944980324498376
+      ],
+      "mean_width": 0.19801641769851755,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 20,
+      "phi": 0.4,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 100,
+      "rejected": 25,
+      "covered": 91,
+      "rejection_rate": 0.25,
+      "coverage": 0.91,
+      "rejection_mc95": [
+        0.17545211362287672,
+        0.34304463548061603
+      ],
+      "coverage_mc95": [
+        0.837737871472837,
+        0.9519274599974348
+      ],
+      "mean_width": 0.4030767846290824,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 20,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0.0,
+      "trials": 100,
+      "rejected": 9,
+      "covered": 91,
+      "rejection_rate": 0.09,
+      "coverage": 0.91,
+      "rejection_mc95": [
+        0.04807254000256516,
+        0.1622621285271631
+      ],
+      "coverage_mc95": [
+        0.837737871472837,
+        0.9519274599974348
+      ],
+      "mean_width": 0.4030767846290824,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 20,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 100,
+      "rejected": 16,
+      "covered": 91,
+      "rejection_rate": 0.16,
+      "coverage": 0.91,
+      "rejection_mc95": [
+        0.10095288488804782,
+        0.24420269389270244
+      ],
+      "coverage_mc95": [
+        0.837737871472837,
+        0.9519274599974348
+      ],
+      "mean_width": 0.4030767846290824,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 20,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 100,
+      "rejected": 20,
+      "covered": 96,
+      "rejection_rate": 0.2,
+      "coverage": 0.96,
+      "rejection_mc95": [
+        0.1333669333310325,
+        0.2888291655931589
+      ],
+      "coverage_mc95": [
+        0.9016292856411208,
+        0.9843366960084523
+      ],
+      "mean_width": 0.4886337367829822,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 20,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.0,
+      "trials": 100,
+      "rejected": 4,
+      "covered": 96,
+      "rejection_rate": 0.04,
+      "coverage": 0.96,
+      "rejection_mc95": [
+        0.01566330399154762,
+        0.0983707143588792
+      ],
+      "coverage_mc95": [
+        0.9016292856411208,
+        0.9843366960084523
+      ],
+      "mean_width": 0.4886337367829822,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 20,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 100,
+      "rejected": 25,
+      "covered": 96,
+      "rejection_rate": 0.25,
+      "coverage": 0.96,
+      "rejection_mc95": [
+        0.17545211362287672,
+        0.34304463548061603
+      ],
+      "coverage_mc95": [
+        0.9016292856411208,
+        0.9843366960084523
+      ],
+      "mean_width": 0.4886337367829822,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 20,
+      "phi": 0.7,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 100,
+      "rejected": 17,
+      "covered": 92,
+      "rejection_rate": 0.17,
+      "coverage": 0.92,
+      "rejection_mc95": [
+        0.10893566114059931,
+        0.25548004767601123
+      ],
+      "coverage_mc95": [
+        0.8500189229905127,
+        0.9589065385156194
+      ],
+      "mean_width": 0.841137072604778,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 20,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0.0,
+      "trials": 100,
+      "rejected": 8,
+      "covered": 92,
+      "rejection_rate": 0.08,
+      "coverage": 0.92,
+      "rejection_mc95": [
+        0.041093461484380624,
+        0.14998107700948735
+      ],
+      "coverage_mc95": [
+        0.8500189229905127,
+        0.9589065385156194
+      ],
+      "mean_width": 0.841137072604778,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 20,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 100,
+      "rejected": 15,
+      "covered": 92,
+      "rejection_rate": 0.15,
+      "coverage": 0.92,
+      "rejection_mc95": [
+        0.0930598528365663,
+        0.23283559590832364
+      ],
+      "coverage_mc95": [
+        0.8500189229905127,
+        0.9589065385156194
+      ],
+      "mean_width": 0.841137072604778,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 20,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 100,
+      "rejected": 16,
+      "covered": 88,
+      "rejection_rate": 0.16,
+      "coverage": 0.88,
+      "rejection_mc95": [
+        0.10095288488804782,
+        0.24420269389270244
+      ],
+      "coverage_mc95": [
+        0.8018790057328857,
+        0.9300059356298052
+      ],
+      "mean_width": 0.9440141372778555,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 20,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.0,
+      "trials": 100,
+      "rejected": 12,
+      "covered": 88,
+      "rejection_rate": 0.12,
+      "coverage": 0.88,
+      "rejection_mc95": [
+        0.06999406437019488,
+        0.19812099426711421
+      ],
+      "coverage_mc95": [
+        0.8018790057328857,
+        0.9300059356298052
+      ],
+      "mean_width": 0.9440141372778555,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 20,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 100,
+      "rejected": 21,
+      "covered": 88,
+      "rejection_rate": 0.21,
+      "coverage": 0.88,
+      "rejection_mc95": [
+        0.141656540619153,
+        0.29979968834089865
+      ],
+      "coverage_mc95": [
+        0.8018790057328857,
+        0.9300059356298052
+      ],
+      "mean_width": 0.9440141372778555,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 24,
+      "phi": 0.0,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 100,
+      "rejected": 64,
+      "covered": 97,
+      "rejection_rate": 0.64,
+      "coverage": 0.97,
+      "rejection_mc95": [
+        0.5423540245160874,
+        0.7272877959859567
+      ],
+      "coverage_mc95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "mean_width": 0.14536383793027496,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "pilot",
+      "n": 24,
+      "phi": 0.0,
+      "season": "none",
+      "truth": 0.0,
+      "trials": 100,
+      "rejected": 3,
+      "covered": 97,
+      "rejection_rate": 0.03,
+      "coverage": 0.97,
+      "rejection_mc95": [
+        0.010254524024038925,
+        0.0845193642905276
+      ],
+      "coverage_mc95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "mean_width": 0.14536383793027496,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 24,
+      "phi": 0.0,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 100,
+      "rejected": 61,
+      "covered": 97,
+      "rejection_rate": 0.61,
+      "coverage": 0.97,
+      "rejection_mc95": [
+        0.5120301704584073,
+        0.6998312599360558
+      ],
+      "coverage_mc95": [
+        0.9154806357094724,
+        0.9897454759759611
+      ],
+      "mean_width": 0.14536383793027496,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "pilot",
+      "n": 24,
+      "phi": 0.0,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 100,
+      "rejected": 58,
+      "covered": 94,
+      "rejection_rate": 0.58,
+      "coverage": 0.94,
+      "rejection_mc95": [
+        0.4820648670304296,
+        0.6720161732564526
+      ],
+      "coverage_mc95": [
+        0.8752318455410406,
+        0.9722138760368118
+      ],
+      "mean_width": 0.14535475071113335,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 24,
+      "phi": 0.0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.0,
+      "trials": 100,
+      "rejected": 6,
+      "covered": 94,
+      "rejection_rate": 0.06,
+      "coverage": 0.94,
+      "rejection_mc95": [
+        0.027786123963188192,
+        0.1247681544589592
+      ],
+      "coverage_mc95": [
+        0.8752318455410406,
+        0.9722138760368118
+      ],
+      "mean_width": 0.14535475071113335,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 24,
+      "phi": 0.0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 100,
+      "rejected": 61,
+      "covered": 94,
+      "rejection_rate": 0.61,
+      "coverage": 0.94,
+      "rejection_mc95": [
+        0.5120301704584073,
+        0.6998312599360558
+      ],
+      "coverage_mc95": [
+        0.8752318455410406,
+        0.9722138760368118
+      ],
+      "mean_width": 0.14535475071113335,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 24,
+      "phi": 0.4,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 100,
+      "rejected": 32,
+      "covered": 91,
+      "rejection_rate": 0.32,
+      "coverage": 0.91,
+      "rejection_mc95": [
+        0.23669147324999093,
+        0.41662618610452384
+      ],
+      "coverage_mc95": [
+        0.837737871472837,
+        0.9519274599974348
+      ],
+      "mean_width": 0.2613060990046468,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 24,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0.0,
+      "trials": 100,
+      "rejected": 9,
+      "covered": 91,
+      "rejection_rate": 0.09,
+      "coverage": 0.91,
+      "rejection_mc95": [
+        0.04807254000256516,
+        0.1622621285271631
+      ],
+      "coverage_mc95": [
+        0.837737871472837,
+        0.9519274599974348
+      ],
+      "mean_width": 0.2613060990046468,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 24,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 100,
+      "rejected": 29,
+      "covered": 91,
+      "rejection_rate": 0.29,
+      "coverage": 0.91,
+      "rejection_mc95": [
+        0.2101483574912227,
+        0.3853889117557111
+      ],
+      "coverage_mc95": [
+        0.837737871472837,
+        0.9519274599974348
+      ],
+      "mean_width": 0.2613060990046468,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 24,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 100,
+      "rejected": 36,
+      "covered": 95,
+      "rejection_rate": 0.36,
+      "coverage": 0.95,
+      "rejection_mc95": [
+        0.2727122040140433,
+        0.4576459754839126
+      ],
+      "coverage_mc95": [
+        0.8882495307680808,
+        0.9784563208456319
+      ],
+      "mean_width": 0.2221859913976017,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 24,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.0,
+      "trials": 100,
+      "rejected": 5,
+      "covered": 95,
+      "rejection_rate": 0.05,
+      "coverage": 0.95,
+      "rejection_mc95": [
+        0.02154367915436796,
+        0.11175046923191913
+      ],
+      "coverage_mc95": [
+        0.8882495307680808,
+        0.9784563208456319
+      ],
+      "mean_width": 0.22218599139760165,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 24,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 100,
+      "rejected": 33,
+      "covered": 95,
+      "rejection_rate": 0.33,
+      "coverage": 0.95,
+      "rejection_mc95": [
+        0.24563122734128034,
+        0.4269465620490947
+      ],
+      "coverage_mc95": [
+        0.8882495307680808,
+        0.9784563208456319
+      ],
+      "mean_width": 0.22218599139760165,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 24,
+      "phi": 0.7,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 100,
+      "rejected": 16,
+      "covered": 92,
+      "rejection_rate": 0.16,
+      "coverage": 0.92,
+      "rejection_mc95": [
+        0.10095288488804782,
+        0.24420269389270244
+      ],
+      "coverage_mc95": [
+        0.8500189229905127,
+        0.9589065385156194
+      ],
+      "mean_width": 0.6180510243798921,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 24,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0.0,
+      "trials": 100,
+      "rejected": 8,
+      "covered": 92,
+      "rejection_rate": 0.08,
+      "coverage": 0.92,
+      "rejection_mc95": [
+        0.041093461484380624,
+        0.14998107700948735
+      ],
+      "coverage_mc95": [
+        0.8500189229905127,
+        0.9589065385156194
+      ],
+      "mean_width": 0.6180510243798921,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 24,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 100,
+      "rejected": 23,
+      "covered": 92,
+      "rejection_rate": 0.23,
+      "coverage": 0.92,
+      "rejection_mc95": [
+        0.15843265880303448,
+        0.3215438302287378
+      ],
+      "coverage_mc95": [
+        0.8500189229905127,
+        0.9589065385156194
+      ],
+      "mean_width": 0.6180510243798921,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 24,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 100,
+      "rejected": 22,
+      "covered": 93,
+      "rejection_rate": 0.22,
+      "coverage": 0.93,
+      "rejection_mc95": [
+        0.150012823846054,
+        0.31070353514985793
+      ],
+      "coverage_mc95": [
+        0.8625048526092651,
+        0.9656807389327273
+      ],
+      "mean_width": 0.5552149957176841,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 24,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.0,
+      "trials": 100,
+      "rejected": 7,
+      "covered": 93,
+      "rejection_rate": 0.07,
+      "coverage": 0.93,
+      "rejection_mc95": [
+        0.03431926106727268,
+        0.137495147390735
+      ],
+      "coverage_mc95": [
+        0.8625048526092651,
+        0.9656807389327273
+      ],
+      "mean_width": 0.5552149957176841,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "pilot",
+      "n": 24,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 100,
+      "rejected": 21,
+      "covered": 93,
+      "rejection_rate": 0.21,
+      "coverage": 0.93,
+      "rejection_mc95": [
+        0.141656540619153,
+        0.29979968834089865
+      ],
+      "coverage_mc95": [
+        0.8625048526092651,
+        0.9656807389327273
+      ],
+      "mean_width": 0.5552149957176841,
+      "failures": 0,
+      "passes_screen": false
+    }
+  ],
+  "validation": [
+    {
+      "stage": "validation",
+      "n": 20,
+      "phi": 0.0,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 1000,
+      "rejected": 409,
+      "covered": 942,
+      "rejection_rate": 0.409,
+      "coverage": 0.942,
+      "rejection_mc95": [
+        0.37893242495569907,
+        0.4397640450886719
+      ],
+      "coverage_mc95": [
+        0.9257504237337675,
+        0.9548667217650018
+      ],
+      "mean_width": 0.20491912797387993,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 20,
+      "phi": 0.0,
+      "season": "none",
+      "truth": 0.0,
+      "trials": 1000,
+      "rejected": 58,
+      "covered": 942,
+      "rejection_rate": 0.058,
+      "coverage": 0.942,
+      "rejection_mc95": [
+        0.04513327823499824,
+        0.0742495762662325
+      ],
+      "coverage_mc95": [
+        0.9257504237337675,
+        0.9548667217650018
+      ],
+      "mean_width": 0.20491912797387993,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 20,
+      "phi": 0.0,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 1000,
+      "rejected": 393,
+      "covered": 942,
+      "rejection_rate": 0.393,
+      "coverage": 0.942,
+      "rejection_mc95": [
+        0.3631928332405499,
+        0.42362609307535887
+      ],
+      "coverage_mc95": [
+        0.9257504237337675,
+        0.9548667217650018
+      ],
+      "mean_width": 0.20491912797387993,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 20,
+      "phi": 0.0,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 1000,
+      "rejected": 405,
+      "covered": 945,
+      "rejection_rate": 0.405,
+      "coverage": 0.945,
+      "rejection_mc95": [
+        0.37499439177359234,
+        0.43573269233866313
+      ],
+      "coverage_mc95": [
+        0.9290916123226243,
+        0.9575025726252315
+      ],
+      "mean_width": 0.19996347209644516,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 20,
+      "phi": 0.0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.0,
+      "trials": 1000,
+      "rejected": 55,
+      "covered": 945,
+      "rejection_rate": 0.055,
+      "coverage": 0.945,
+      "rejection_mc95": [
+        0.04249742737476844,
+        0.07090838767737563
+      ],
+      "coverage_mc95": [
+        0.9290916123226243,
+        0.9575025726252315
+      ],
+      "mean_width": 0.19996347209644516,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 20,
+      "phi": 0.0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 1000,
+      "rejected": 402,
+      "covered": 945,
+      "rejection_rate": 0.402,
+      "coverage": 0.945,
+      "rejection_mc95": [
+        0.3720422335603109,
+        0.4327078111028579
+      ],
+      "coverage_mc95": [
+        0.9290916123226243,
+        0.9575025726252315
+      ],
+      "mean_width": 0.19996347209644516,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 20,
+      "phi": 0.4,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 1000,
+      "rejected": 196,
+      "covered": 946,
+      "rejection_rate": 0.196,
+      "coverage": 0.946,
+      "rejection_mc95": [
+        0.17257900508840987,
+        0.22174766407080768
+      ],
+      "coverage_mc95": [
+        0.9302078451539475,
+        0.9583786862769372
+      ],
+      "mean_width": 0.4631338537786494,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "validation",
+      "n": 20,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0.0,
+      "trials": 1000,
+      "rejected": 54,
+      "covered": 946,
+      "rejection_rate": 0.054,
+      "coverage": 0.946,
+      "rejection_mc95": [
+        0.04162131372306273,
+        0.06979215484605245
+      ],
+      "coverage_mc95": [
+        0.9302078451539475,
+        0.9583786862769372
+      ],
+      "mean_width": 0.4631338537786494,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 20,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 1000,
+      "rejected": 218,
+      "covered": 946,
+      "rejection_rate": 0.218,
+      "coverage": 0.946,
+      "rejection_mc95": [
+        0.19351481458069164,
+        0.2446434772051615
+      ],
+      "coverage_mc95": [
+        0.9302078451539475,
+        0.9583786862769372
+      ],
+      "mean_width": 0.4631338537786494,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "validation",
+      "n": 20,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 1000,
+      "rejected": 191,
+      "covered": 967,
+      "rejection_rate": 0.191,
+      "coverage": 0.967,
+      "rejection_mc95": [
+        0.16783693231549512,
+        0.216528004428578
+      ],
+      "coverage_mc95": [
+        0.9540187355329184,
+        0.9764070720415732
+      ],
+      "mean_width": 0.4733862478566002,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "validation",
+      "n": 20,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.0,
+      "trials": 1000,
+      "rejected": 33,
+      "covered": 967,
+      "rejection_rate": 0.033,
+      "coverage": 0.967,
+      "rejection_mc95": [
+        0.023592927958426907,
+        0.04598126446708159
+      ],
+      "coverage_mc95": [
+        0.9540187355329184,
+        0.9764070720415732
+      ],
+      "mean_width": 0.4733862478566002,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 20,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 1000,
+      "rejected": 192,
+      "covered": 967,
+      "rejection_rate": 0.192,
+      "coverage": 0.967,
+      "rejection_mc95": [
+        0.16878484731114135,
+        0.21757243591596065
+      ],
+      "coverage_mc95": [
+        0.9540187355329184,
+        0.9764070720415732
+      ],
+      "mean_width": 0.4733862478566002,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "validation",
+      "n": 20,
+      "phi": 0.7,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 1000,
+      "rejected": 133,
+      "covered": 931,
+      "rejection_rate": 0.133,
+      "coverage": 0.931,
+      "rejection_mc95": [
+        0.11335116065727396,
+        0.15545768007112354
+      ],
+      "coverage_mc95": [
+        0.9135852797713628,
+        0.9451160544140889
+      ],
+      "mean_width": 1.0264593511718494,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "validation",
+      "n": 20,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0.0,
+      "trials": 1000,
+      "rejected": 69,
+      "covered": 931,
+      "rejection_rate": 0.069,
+      "coverage": 0.931,
+      "rejection_mc95": [
+        0.054883945585911253,
+        0.08641472022863728
+      ],
+      "coverage_mc95": [
+        0.9135852797713628,
+        0.9451160544140889
+      ],
+      "mean_width": 1.0264593511718494,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "validation",
+      "n": 20,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 1000,
+      "rejected": 152,
+      "covered": 931,
+      "rejection_rate": 0.152,
+      "coverage": 0.931,
+      "rejection_mc95": [
+        0.13108250256297901,
+        0.17558092134296735
+      ],
+      "coverage_mc95": [
+        0.9135852797713628,
+        0.9451160544140889
+      ],
+      "mean_width": 1.0264593511718494,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "validation",
+      "n": 20,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 1000,
+      "rejected": 130,
+      "covered": 933,
+      "rejection_rate": 0.13,
+      "coverage": 0.933,
+      "rejection_mc95": [
+        0.11056377462484193,
+        0.1522680266544689
+      ],
+      "coverage_mc95": [
+        0.9157879467581331,
+        0.9468980803933762
+      ],
+      "mean_width": 0.9773197378647831,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "validation",
+      "n": 20,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.0,
+      "trials": 1000,
+      "rejected": 67,
+      "covered": 933,
+      "rejection_rate": 0.067,
+      "coverage": 0.933,
+      "rejection_mc95": [
+        0.05310191960662385,
+        0.08421205324186688
+      ],
+      "coverage_mc95": [
+        0.9157879467581331,
+        0.9468980803933762
+      ],
+      "mean_width": 0.9773197378647831,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "validation",
+      "n": 20,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 1000,
+      "rejected": 168,
+      "covered": 933,
+      "rejection_rate": 0.168,
+      "coverage": 0.933,
+      "rejection_mc95": [
+        0.14610794675394784,
+        0.19243302088046083
+      ],
+      "coverage_mc95": [
+        0.9157879467581331,
+        0.9468980803933762
+      ],
+      "mean_width": 0.9773197378647831,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "validation",
+      "n": 24,
+      "phi": 0.0,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 1000,
+      "rejected": 616,
+      "covered": 952,
+      "rejection_rate": 0.616,
+      "coverage": 0.952,
+      "rejection_mc95": [
+        0.5854663334716732,
+        0.645645858559678
+      ],
+      "coverage_mc95": [
+        0.936933911349866,
+        0.963606698979192
+      ],
+      "mean_width": 0.14348668682911705,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 24,
+      "phi": 0.0,
+      "season": "none",
+      "truth": 0.0,
+      "trials": 1000,
+      "rejected": 48,
+      "covered": 952,
+      "rejection_rate": 0.048,
+      "coverage": 0.952,
+      "rejection_mc95": [
+        0.036393301020807914,
+        0.06306608865013393
+      ],
+      "coverage_mc95": [
+        0.936933911349866,
+        0.963606698979192
+      ],
+      "mean_width": 0.14348668682911705,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 24,
+      "phi": 0.0,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 1000,
+      "rejected": 592,
+      "covered": 952,
+      "rejection_rate": 0.592,
+      "coverage": 0.952,
+      "rejection_mc95": [
+        0.5612435983142355,
+        0.6220522781244223
+      ],
+      "coverage_mc95": [
+        0.936933911349866,
+        0.963606698979192
+      ],
+      "mean_width": 0.14348668682911705,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 24,
+      "phi": 0.0,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 1000,
+      "rejected": 633,
+      "covered": 951,
+      "rejection_rate": 0.633,
+      "coverage": 0.951,
+      "rejection_mc95": [
+        0.6026706264751108,
+        0.6623114557677315
+      ],
+      "coverage_mc95": [
+        0.9358092984933898,
+        0.9627389653526394
+      ],
+      "mean_width": 0.1398790106216504,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 24,
+      "phi": 0.0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.0,
+      "trials": 1000,
+      "rejected": 48,
+      "covered": 951,
+      "rejection_rate": 0.048,
+      "coverage": 0.951,
+      "rejection_mc95": [
+        0.036393301020807914,
+        0.06306608865013393
+      ],
+      "coverage_mc95": [
+        0.9358092984933898,
+        0.9627389653526394
+      ],
+      "mean_width": 0.1398790106216504,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 24,
+      "phi": 0.0,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 1000,
+      "rejected": 604,
+      "covered": 951,
+      "rejection_rate": 0.604,
+      "coverage": 0.951,
+      "rejection_mc95": [
+        0.5733454840711704,
+        0.6338585501638342
+      ],
+      "coverage_mc95": [
+        0.9358092984933898,
+        0.9627389653526394
+      ],
+      "mean_width": 0.1398790106216504,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 24,
+      "phi": 0.4,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 1000,
+      "rejected": 277,
+      "covered": 946,
+      "rejection_rate": 0.277,
+      "coverage": 0.946,
+      "rejection_mc95": [
+        0.25015649034831283,
+        0.3055502439362448
+      ],
+      "coverage_mc95": [
+        0.9302078451539475,
+        0.9583786862769372
+      ],
+      "mean_width": 0.2973850089237707,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 24,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0.0,
+      "trials": 1000,
+      "rejected": 54,
+      "covered": 946,
+      "rejection_rate": 0.054,
+      "coverage": 0.946,
+      "rejection_mc95": [
+        0.04162131372306273,
+        0.06979215484605245
+      ],
+      "coverage_mc95": [
+        0.9302078451539475,
+        0.9583786862769372
+      ],
+      "mean_width": 0.2973850089237707,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 24,
+      "phi": 0.4,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 1000,
+      "rejected": 311,
+      "covered": 946,
+      "rejection_rate": 0.311,
+      "coverage": 0.946,
+      "rejection_mc95": [
+        0.2830785879940784,
+        0.34036792671346144
+      ],
+      "coverage_mc95": [
+        0.9302078451539475,
+        0.9583786862769372
+      ],
+      "mean_width": 0.2973850089237707,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 24,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 1000,
+      "rejected": 296,
+      "covered": 940,
+      "rejection_rate": 0.296,
+      "coverage": 0.94,
+      "rejection_mc95": [
+        0.26853097433797923,
+        0.32503034312412726
+      ],
+      "coverage_mc95": [
+        0.9235289252086434,
+        0.953103527324068
+      ],
+      "mean_width": 0.26553980711061276,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 24,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.0,
+      "trials": 1000,
+      "rejected": 59,
+      "covered": 940,
+      "rejection_rate": 0.059,
+      "coverage": 0.94,
+      "rejection_mc95": [
+        0.04601429821280047,
+        0.07536090277145915
+      ],
+      "coverage_mc95": [
+        0.9235289252086434,
+        0.953103527324068
+      ],
+      "mean_width": 0.26553980711061276,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 24,
+      "phi": 0.4,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 1000,
+      "rejected": 332,
+      "covered": 940,
+      "rejection_rate": 0.332,
+      "coverage": 0.94,
+      "rejection_mc95": [
+        0.30350363489239063,
+        0.36178215595875596
+      ],
+      "coverage_mc95": [
+        0.9235289252086434,
+        0.953103527324068
+      ],
+      "mean_width": 0.26553980711061276,
+      "failures": 0,
+      "passes_screen": true
+    },
+    {
+      "stage": "validation",
+      "n": 24,
+      "phi": 0.7,
+      "season": "none",
+      "truth": -0.08,
+      "trials": 1000,
+      "rejected": 209,
+      "covered": 924,
+      "rejection_rate": 0.209,
+      "coverage": 0.924,
+      "rejection_mc95": [
+        0.1849366933157235,
+        0.23529048012286963
+      ],
+      "coverage_mc95": [
+        0.9059043568759517,
+        0.9388505519282977
+      ],
+      "mean_width": 0.6717902083931145,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "validation",
+      "n": 24,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0.0,
+      "trials": 1000,
+      "rejected": 73,
+      "covered": 924,
+      "rejection_rate": 0.073,
+      "coverage": 0.924,
+      "rejection_mc95": [
+        0.05845902621241335,
+        0.0908090255342507
+      ],
+      "coverage_mc95": [
+        0.9059043568759517,
+        0.9388505519282977
+      ],
+      "mean_width": 0.6717902083931145,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "validation",
+      "n": 24,
+      "phi": 0.7,
+      "season": "none",
+      "truth": 0.08,
+      "trials": 1000,
+      "rejected": 200,
+      "covered": 924,
+      "rejection_rate": 0.2,
+      "coverage": 0.924,
+      "rejection_mc95": [
+        0.17637709044319852,
+        0.22591896464813463
+      ],
+      "coverage_mc95": [
+        0.9059043568759517,
+        0.9388505519282977
+      ],
+      "mean_width": 0.6717902083931147,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "validation",
+      "n": 24,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": -0.08,
+      "trials": 1000,
+      "rejected": 181,
+      "covered": 935,
+      "rejection_rate": 0.181,
+      "coverage": 0.935,
+      "rejection_mc95": [
+        0.15837194044398084,
+        0.20606953146980334
+      ],
+      "coverage_mc95": [
+        0.9179944906866292,
+        0.948676229430938
+      ],
+      "mean_width": 0.7192474322259687,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "validation",
+      "n": 24,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.0,
+      "trials": 1000,
+      "rejected": 65,
+      "covered": 935,
+      "rejection_rate": 0.065,
+      "coverage": 0.935,
+      "rejection_mc95": [
+        0.051323770569062045,
+        0.0820055093133709
+      ],
+      "coverage_mc95": [
+        0.9179944906866292,
+        0.948676229430938
+      ],
+      "mean_width": 0.7192474322259687,
+      "failures": 0,
+      "passes_screen": false
+    },
+    {
+      "stage": "validation",
+      "n": 24,
+      "phi": 0.7,
+      "season": "monthly_cycle_annualized",
+      "truth": 0.08,
+      "trials": 1000,
+      "rejected": 204,
+      "covered": 935,
+      "rejection_rate": 0.204,
+      "coverage": 0.935,
+      "rejection_mc95": [
+        0.1801790152622816,
+        0.23008642576116703
+      ],
+      "coverage_mc95": [
+        0.9179944906866292,
+        0.948676229430938
+      ],
+      "mean_width": 0.7192474322259687,
+      "failures": 0,
+      "passes_screen": false
+    }
+  ],
+  "failed_scenarios": 16,
+  "prior_hashes": {
+    "data/derived/science/phase_2/air_temperature__morocco_comparison.nc": "5a81dc2ef4538c51db309ce58baaf3f0775ffe964ad3c96c4749afe69f2ac4eb",
+    "data/derived/science/phase_2/air_temperature__nile_corridor.nc": "77ed7a528ec10cdc95ae79034f58009ee492e03a8da6810a75df2db23a998d37",
+    "data/derived/science/phase_2/air_temperature__sahel_comparison.nc": "536ff9d48651e7798fa56cd48b1cd5e1abd0fbd3de8adfb8dc468a5b4450e529",
+    "data/derived/science/phase_2/coverage_summary.png": "1c2eaa947cd80c46bcc1de188cf8c70a2edb4212cc803eb8d12770e77504ad03",
+    "data/derived/science/phase_2/manifest.json": "b2eaee3033ac8bf10e7e52950019e552555583b767032de310d7efb35c38c3c1",
+    "data/derived/science/phase_2/nile_ndvi_support.png": "eb90a9918e9668bd4910e2263460a88cee4356d0ba0ac24f282e7b7c78447316",
+    "data/derived/science/phase_2/nile_prepared_series.png": "cd4127d6af2ba38af6aeaf0aca3bc78bbd434584a52f6454a9f3827bf2325ca5",
+    "data/derived/science/phase_2/precipitation__morocco_comparison.nc": "a44700160db0f2dbc15c9150b984d7735fce482cd97ecce7a9516a2bc8fab91d",
+    "data/derived/science/phase_2/precipitation__nile_corridor.nc": "ab3ef38d54bd0302534b0726fc6c6bc1ffa366f9d35e597db008d7a840c67066",
+    "data/derived/science/phase_2/precipitation__sahel_comparison.nc": "0972ca3149a7eec8eb2a827634d90795a6b59f03c8bb407e181eb45aa046f3fe",
+    "data/derived/science/phase_2/qa_sensitivity.png": "21725934a4d791b3978d992cc74a2bb2847fc13456798d5485c4287d976f6396",
+    "data/derived/science/phase_2/soil_moisture__morocco_comparison.nc": "30e9f7958b4d65442f6459836618269046fd35aed28ab301612e2d9286b62999",
+    "data/derived/science/phase_2/soil_moisture__nile_corridor.nc": "655374d5e782d9938d37e1b93d06229fea9ad40042955e30b0d934ee63e15b5e",
+    "data/derived/science/phase_2/soil_moisture__sahel_comparison.nc": "14e8d4e44c8807dda5f2ae4fe3885fd229ef6734b24b5b354e750963c54a7ae5",
+    "data/derived/science/phase_2/source_review/IMERG_V07_ATBD_page_32.png": "9e077099018e5127a7cf676e15e601ec1605469b02db0a56360255e4233aa80a",
+    "data/derived/science/phase_2/source_review/MOD13_User_Guide_V61_page_18.png": "4f727f1cca487073605ab5e258f4329bf9bd32f6349c2cde9936dc9857e90d44",
+    "data/derived/science/phase_2/source_review/MOD13_User_Guide_V61_page_28.png": "6969d72f07fbaa49df9ee081b32c15d04b8f0ece648436fe9101ad1f370aa7da",
+    "data/derived/science/phase_2/vegetation_greenness__morocco_comparison.nc": "26fd56f343ea3a2d6deabfc49be555915eb9746f917b9c9b67428ebab242a349",
+    "data/derived/science/phase_2/vegetation_greenness__nile_corridor.nc": "8929660caddee1dae5a60e968af9dfe08dcabe20c8e382e040016c343fa075fe",
+    "data/derived/science/phase_2/vegetation_greenness__sahel_comparison.nc": "7ee3f6dc68875eb980944b9e7e8ad89d10e7d66d339d8661efd12a9210abf9b2",
+    "data/derived/science/phase_2_standard/manifest.json": "87866ac8f04e6d14d1b5c49fda52e1aa0526f87e931962eb915fbe7e0304bc98",
+    "data/derived/science/phase_2_standard/vegetation_greenness__morocco_comparison.nc": "114d43ef8111a13be600218109d884731a3e57bf6e8313dbbc56d5be96871c24",
+    "data/derived/science/phase_2_standard/vegetation_greenness__nile_corridor.nc": "446841f33debe6395de2166950d5a33aa7633a2834d64893143fbfa05ab80fea",
+    "data/derived/science/phase_2_standard/vegetation_greenness__sahel_comparison.nc": "ff40e267a9b1f0b1f2a08e3181d4ff3e05c3a02f5580ebd75508784d30adbb32",
+    "data/nasa/measurements/GLDAS_NOAH025_M_Egypt_2001_2024.nc": "47563a751a328e3d7cc2ff73dfc13e14dc5f2830f8e38e77ba3af4c38774773a",
+    "data/nasa/measurements/GLDAS_NOAH025_M_Morocco_2001_2024.nc": "a58c21ca540b3d008c45f8342548aab18689e4417169edd3ebcb43246c3fcb74",
+    "data/nasa/measurements/GLDAS_NOAH025_M_Nile_2001_2024.nc": "55a5194144348ff668cbdcc1485493422797d2206aa0535846d8a8f2feb121cc",
+    "data/nasa/measurements/GLDAS_NOAH025_M_Sahel_2001_2024.nc": "fd9dc0ccb3667a5987dfd7853db26cb4e8e7cdf7dddc686fb72bcf816750b273",
+    "data/nasa/measurements/GPM_3IMERGM_Morocco_2001_2024.nc": "95f3e53659dd4593e585031c3eb8d1b1ee8dfd1c30060cfa7d28a3a26969465b",
+    "data/nasa/measurements/GPM_3IMERGM_Nile_2001_2024.nc": "967131aec4bdb0fa98ffc6ec9c9340cde164f5704be8f861c7ee02c130d6e219",
+    "data/nasa/measurements/GPM_3IMERGM_Sahel_2001_2024.nc": "e515e68076c1639263ba3fe81a390d946c866595d7faee622f26128a579a974f",
+    "data/nasa/measurements/M2TMNXSLV_Egypt_2001_2024.nc": "f0bdb8612aae3e2394f19b48b84a07c90c6e654dd5698b0b521946652850e293",
+    "data/nasa/measurements/M2TMNXSLV_Morocco_2001_2024.nc": "c8801417edb435606a6c9621fa127f817dbe86c160a266a5d864c085a8199e40",
+    "data/nasa/measurements/M2TMNXSLV_Nile_2001_2024.nc": "5db8a5afe85560aad3e3f847c5ddfb2c75309dad7f89fbd3002a4c0c07c1e8cb",
+    "data/nasa/measurements/M2TMNXSLV_Sahel_2001_2024.nc": "14cdb693d945c73f570b296b85cfae3177258e848e078170fa46e608a16cb987",
+    "data/nasa/measurements/MOD13C2_Morocco_2001_2024.nc": "aad8265db99b64eaeafa12d5d09f9ca2ba8e813b9ccc070613987fa97cb5c7e8",
+    "data/nasa/measurements/MOD13C2_Nile_2001_2024.nc": "78427f6651ddc8ac129d89d6bb9903f59a020a47a10827f6f184ccafb290188c",
+    "data/nasa/measurements/MOD13C2_Sahel_2001_2024.nc": "063eeb3002c6f769b2389236626569d60f053a2a08f92500597d837222b1b02a",
+    "packages/science/config/preparation_policy.json": "35492fe4c43250d20a1a6996248cd9829e76d327042c270e13fb76996899efb2",
+    "packages/science/notebooks/02_preprocessing.ipynb": "c56404dcff06257ce4ea93a049431f224db77ca605da02c8056721e718ee07de",
+    "packages/science/phase_reports/PHASE_2_APPROVAL.md": "5f725e849d85da66948a7af1a166584d46f8ab5a23a277a58f405ebf61b2e4b3",
+    "packages/science/phase_reports/PHASE_2_COVERAGE.json": "b2eaee3033ac8bf10e7e52950019e552555583b767032de310d7efb35c38c3c1",
+    "packages/science/phase_reports/PHASE_2_QA_SENSITIVITY.json": "87866ac8f04e6d14d1b5c49fda52e1aa0526f87e931962eb915fbe7e0304bc98",
+    "packages/science/phase_reports/PHASE_2_REPORT.md": "3134537482eff4753dbd6b4752c3e44398537534892eb8220899d1d6cfa63cd6",
+    "packages/science/phase_reports/PHASE_2_VALIDATION.json": "d10963fc2f14a58d4107a76d22f656bacd5094465bd6cd94fd51c87083a0bbcc",
+    "data/derived/science/phase_1/precipitation_exploration.png": "6eb4978662904e1d51624aa64b987bacfe4285db9137c2a82317669f7ca14366",
+    "data/derived/science/sahel_ndvi_annual_review/annual_series_and_completeness.png": "b0509086fb4736522017cd186fb0e90fe30c95eed91901590ac5d91958ae27e2",
+    "data/derived/science/sahel_ndvi_annual_review/monthly_missingness_and_difference.png": "35b6a47dac1ce86dad481c97e479091f4b4da94468b4e7e041487e000276d802",
+    "data/derived/science/sahel_ndvi_annual_review/standard_100_annual_review.nc": "36a62b9ffb9e37c34378f45daeb7f2c1d450704d1d43a0cea9aaaa5de2a5a8d2",
+    "data/derived/science/sahel_ndvi_annual_review/standard_95_annual_review.nc": "cf7b499de93ec9bbce44c70de654e6c9fc25c3c86e792cbc3bb68f628005b7a6",
+    "data/derived/science/sahel_ndvi_annual_review/strict_100_annual_review.nc": "8b87314f17467c355facacec9b349d5ebe91e449e0dab4a8487a77617efe5a76",
+    "data/derived/science/sahel_ndvi_policy_review/calendar_month_quality.png": "3e91351862b124c4b0ceaf4aea014e55d8672214402db457a6786a02c185981a",
+    "data/derived/science/sahel_ndvi_policy_review/eligible_footprints.png": "0d590348a2992fa3eeb3c52940b76ff061066d57b61e03c2d065e454433c34ec",
+    "data/derived/science/sahel_ndvi_policy_review/monthly_series_and_support.png": "f0746aacb0afc6576a53f41c16c3f8c3a5efd607a00f9d6412c4448c18ee3705",
+    "data/derived/science/sahel_ndvi_policy_review/preserved_originals.json": "2c07f045c735aee406afa1c58b30887dbb553bd23e8bd94cff39b6588271b3af",
+    "data/derived/science/sahel_ndvi_policy_review/standard_100.nc": "9a729a6d6fd154e44ff97ae276da2d8ff87e5a14d15cd8f8592567250c146841",
+    "data/derived/science/sahel_ndvi_policy_review/standard_90.nc": "2f1a948f7fca74f9f790ef45030567f5e4acde17d7b81c7d1b963409513de413",
+    "data/derived/science/sahel_ndvi_policy_review/standard_95.nc": "80ec75ff4fe2359f753a109586c10cc938d266ff18183cb570d91d4b5cd40738",
+    "data/derived/science/sahel_ndvi_policy_review/strict_100.nc": "61613ffd1f69ba03bda9368a95a814bf9ad7a29d9435c878d51cc309b981d386",
+    "data/derived/science/sahel_ndvi_policy_review/strict_90.nc": "6db442c28df6fcfe3aa1a7b89ab7971b56708d2415293f5bbd3023a5ddf61981",
+    "data/derived/science/sahel_ndvi_policy_review/strict_95.nc": "6e2e15b6f4ca87eaf52d0bc45d35012402b67df5c009584a348833bd7f5535e5",
+    "data/derived/science/sahel_ndvi_policy_review/source_review/MOD13_C61_page27.png": "c1ce1254e74c380bde7207989f8e12e0ad9757bac624a74f8e16b16234873d2a",
+    "data/derived/science/sahel_ndvi_policy_review/source_review/MOD13_C61_page28.png": "6969d72f07fbaa49df9ee081b32c15d04b8f0ece648436fe9101ad1f370aa7da",
+    "data/derived/science/sahel_ndvi_preprocessing_comparison/source_and_prepared_month.png": "b80dd4ed32386981381bf5249fa046604c646612ecdcf077847d33eaeda544a3",
+    "data/derived/science/sahel_ndvi_preprocessing_comparison/three_output_comparison.png": "33bc569ddcd683473391ecfddf2330ff1ccf1eab3049c0468fae8b9a6609e369",
+    "data/derived/science/sahel_ndvi_preprocessing_comparison/three_output_footprints.png": "75bbfa13266a1ebfcaa4323c777311e42cc158f4d811081f55209e3bbec64659",
+    "packages/science/phase_reports/SAHEL_NDVI_POLICY_CHECKPOINT.md": "bfc6fa1ec12c57c7afa95fccfe3db33c0549439a62926dcdc75c46f4ca0c01cf",
+    "packages/science/phase_reports/SAHEL_NDVI_POLICY_METRICS.json": "ffcfbac5a2115a687afe50913f93610011892d7e4b8d1d10dcedb97158a588d7",
+    "packages/science/phase_reports/SAHEL_NDVI_QA_DISTRIBUTIONS.json": "971e4f8066fe5c55e7315d151dac8a099e8ebb39ba2719c7bf1006975dcdf76a",
+    "packages/science/phase_reports/SAHEL_NDVI_STANDARD95_MONTHLY_COVERAGE.md": "c5d9cc059da7cffb10d6519f5996337c819c3258ff10a74ba231cbda3574245c",
+    "packages/science/phase_reports/SAHEL_NDVI_STANDARD95_REVIEW.json": "8019de97fab81a268882243545895ff9a269b886333fd3ba74eaa79b2a56c393",
+    "packages/science/phase_reports/SAHEL_NDVI_STANDARD95_REVIEW.md": "510cfb116932afb7f809303a984a3b5c01586c394798b4fedb3ff78e130301a4",
+    "packages/science/phase_reports/PHASE_3_APPROVAL.md": "6941377ec076f0f8324987ac9110335c9ce0f20adeebdff95bdbffb537ce9e58",
+    "packages/science/phase_reports/PHASE_3_REPORT.md": "aee176cb07baaed562486c12b7e88c20073cd1e37c1a62931fb3565ca95be9f7",
+    "packages/science/phase_reports/PHASE_3_RESULTS.json": "3ea7e5b5e9f8fe5a793faf44b2948dc3ddf52f2dac3ab15707bc39ca27734497",
+    "packages/science/phase_reports/PHASE_3_TESTS.json": "c97f29b25058bc24407775dfedad47696223f7cf6940df68b4289a90180a5ea7",
+    "packages/science/phase_reports/PHASE_3_VALIDATION.json": "39193aedaf6dad1be5f9b1729040ac40c9c2a4d60ba3fec10abe38aa421f7f6d",
+    "packages/science/notebooks/03_trend_validation.ipynb": "9d0437262e2f43ab374da405284db245290edf62416bb246840685664618cc4c",
+    "packages/science/config/trend_policy.json": "926ab66d7074ee84fbceeab111fcc7b43d71e2a5675eb7e31eb30104ebd761ba",
+    "packages/science/src/trend_estimation.py": "41b26456db2506d7b494339d2c2579baf76020902d3352e123ebf558e1a7dcb8",
+    "data/derived/science/phase_3/air_temperature__morocco_comparison__strict_100.nc": "a72993734ead9e9d87daf9bf59032adc5de82cc3c76a352b174e835769ef96ae",
+    "data/derived/science/phase_3/air_temperature__nile_corridor__strict_100.nc": "7f71ba41d47c8254a83212275a636adf1b7ffa972fa216a28f96262d82be4e8d",
+    "data/derived/science/phase_3/air_temperature__sahel_comparison__strict_100.nc": "1a8bde25201c874fca9bbd74c4675d4ce7ac1f81eda87a95615b224a98762ed9",
+    "data/derived/science/phase_3/manifest.json": "93872d1f494446c2eff052b5b999f17a35283143e8aa62b6ca44ec1eb04868cb",
+    "data/derived/science/phase_3/precipitation__morocco_comparison__strict_100.nc": "e0e6d7c33b04395621bdba78f2d12fe0aad75256a93c1c3c52a190608148ca68",
+    "data/derived/science/phase_3/precipitation__nile_corridor__strict_100.nc": "1ad0ffe3091d91e5626207c2396695ea775c1a7d692e28016c98e4d1099c3b1b",
+    "data/derived/science/phase_3/precipitation__sahel_comparison__strict_100.nc": "638b5d228a7b3b3b7694b07e8024561b23e1c93e0d37205b8d975d9dab699195",
+    "data/derived/science/phase_3/sahel_cell_slopes.png": "82e8fc16dc57fc3e88cf894cacb70595dc7bd6a26bd122d7350b8857e9adc49c",
+    "data/derived/science/phase_3/sahel_policy_slopes.png": "336ec2803ffd9642759ee4fe497d4b4553006d80c55789f7678e1536ac07400a",
+    "data/derived/science/phase_3/soil_moisture__morocco_comparison__strict_100.nc": "e0f114e48a3b49cb78de7eb0bcb3bb82796a3ab0f82f37e8941e51cea3de8b35",
+    "data/derived/science/phase_3/soil_moisture__nile_corridor__strict_100.nc": "1751f00b2c0cb0a2f2f977fad15f3e78ad8f8dd9b53378f65208be56f1d3db79",
+    "data/derived/science/phase_3/soil_moisture__sahel_comparison__strict_100.nc": "e9582b5b8c4bca3a504337830a92455227c0c5a94814bc4a8dc52cabf2ff7791",
+    "data/derived/science/phase_3/stage2_preserved.json": "4ce31a6211bfa3fe53663161de70a0691fb3b27a0a9569909f442d26fd27956e",
+    "data/derived/science/phase_3/vegetation_greenness__morocco_comparison__strict_100.nc": "773b60efc829c608e540fd997e423280cf9fb7a646e58523e22a7d551b0ceca4",
+    "data/derived/science/phase_3/vegetation_greenness__nile_corridor__strict_100.nc": "30cca33a35bf463ecf2372b93de035ac74149614cadce6a9815b34f446ff04e5",
+    "data/derived/science/phase_3/vegetation_greenness__sahel_comparison__standard_100.nc": "35c1f27e5a0783397599452378cc6c95f76102a5bd3a4b6b92665ed2485d48ff",
+    "data/derived/science/phase_3/vegetation_greenness__sahel_comparison__standard_95.nc": "2a129d348319369d1b5c20f37baba24165ea25710922b2ec6016e5f5622ad439",
+    "data/derived/science/phase_3/vegetation_greenness__sahel_comparison__strict_100.nc": "313aaeeae0b7030a68a28de3cfde11a92d1eefdd689f90a36cb88bc57f524dc0",
+    "packages/science/phase_reports/PHASE_4_REPORT.md": "9fe398281e24eb827316864f8d426d4651128cbd8f2d3985a1243b6bf4394d62",
+    "packages/science/phase_reports/PHASE_4_STUDY.json": "47818f4e687164c24f876a75870ccf7e9f23fc2be9549368480565e13a2b3219",
+    "packages/science/phase_reports/PHASE_4_VALIDATION.json": "a0af3dc18d104a9ac7441654efdbba077925275e1275bfe097dc9fb605b39add",
+    "packages/science/phase_reports/PHASE_4_DECISION.json": "ed3ff10a0000c2d6b4ec64698b0a455ac195e9ae995f59d0584d0bd4cf71c134",
+    "packages/science/src/inference.py": "dfc727bd58761e1f2289a4de96a16a4fb46a8bd5124db4731d3cf25f8a57d0fc",
+    "packages/science/config/inference_policy.json": "f6152d1b24a134403fc6cb041dbdf0fdb9eb2a8a2c8600f6be7dd707108b0c6c",
+    "packages/science/notebooks/04_inference_validation.ipynb": "314b5cf1f33ac568bfa96a7f61e55b1a593d525426ca83cc2e01b113ad67098e",
+    "packages/science/config/inference_followup.json": "5fc58e7b806d29dc5893e413600c2b49caa9ab150c9e972ef80bf8e2dddef4d3",
+    "packages/science/src/inference_candidates.py": "0093c8f64757fdffce0fa21fa7680025bf8406b2a7711642dc619eda369f524d",
+    "packages/science/phase_reports/PHASE_4_FOLLOWUP.json": "2ab64b1b999b418e2f32460f8d75e5960d2adb36e2c9414d3167ccf35d38a05a",
+    "packages/science/phase_reports/PHASE_4_FOLLOWUP_REPORT.md": "421e93eeac45c609601dbbaa7af8c539234296c07ae72a1f93a5c5e9b0388c0e",
+    "packages/science/phase_reports/PHASE_4_REML_RESEARCH.json": "90a90c99a1bcc54eb6094040ae3bcb9b0411cdbe7c45db411faeec120e0dc045"
+  },
+  "application_release": false,
+  "phase5_started": false,
+  "elapsed_seconds": 2.724711999995634,
+  "limitations": [
+    "finite rho grid",
+    "inner/outer calibration caches shared across trials; Wilson intervals conditional on caches",
+    "Gaussian AR1 model required",
+    "grid and simulation error need sensitivity before release"
+  ]
+}

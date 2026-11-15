@@ -5,3 +5,22 @@ data/nasa/** -text -whitespace
 *.pdf binary
 docs/** text eol=lf
 README.md text eol=lf
+
+# Keep this experiment's recorded SHA-256 identities stable across checkouts.
+# These are new files only; earlier scientific artifacts keep their byte policy.
+packages/science/config/berger_boos_research.json -text
+packages/science/src/berger_boos.py -text
+packages/science/tests/test_berger_boos.py -text
+packages/science/phase_reports/PHASE_4_BERGER_BOOS_PROTOCOL.md -text
+packages/science/phase_reports/PHASE_4_BERGER_BOOS_RESEARCH.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+packages/science/phase_reports/PHASE_4_BERGER_BOOS_TESTS.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+tools/research_berger_boos.py -text
+
+# Preserve the new descriptive checkpoint's recorded byte identities.
+packages/science/src/spatial_descriptive.py -text
+packages/science/tests/test_spatial_descriptive.py -text
+packages/science/phase_reports/PHASE_5_APPROVAL.md -text
+tools/run_science_spatial.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+packages/science/notebooks/05_descriptive_spatial.ipynb -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+packages/science/phase_reports/PHASE_5_RESULTS.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+packages/science/phase_reports/PHASE_5_VALIDATION.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

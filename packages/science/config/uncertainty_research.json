@@ -1,0 +1,27 @@
+{
+  "revision": "reml-uncertainty-study-1",
+  "alpha": 0.05,
+  "confidence": 0.95,
+  "lengths": [20, 24],
+  "phis": [0.0, 0.4, 0.7],
+  "slopes": [-0.08, 0.0, 0.08],
+  "seasonal_profiles": ["none", "monthly_cycle_annualized"],
+  "rho_grid": {"lower": -0.5, "upper": 0.95, "step": 0.025},
+  "candidates": ["reml_small_sample_t", "reml_refitted_parametric_bootstrap_t"],
+  "pilot_records": 100,
+  "validation_records": 1000,
+  "bootstrap_replicates": 499,
+  "pilot_seed": 605731,
+  "validation_seed": 806311,
+  "acceptance": {
+    "null_rate_target_band": [0.03, 0.07],
+    "coverage_target_band": [0.93, 0.97],
+    "null_upper_wilson_max": 0.08,
+    "coverage_lower_wilson_min": 0.90,
+    "power_lower_wilson_min": 0.20,
+    "all_scenarios_required": true,
+    "note": "Approximate nominal targets plus prior minimum screens; not automatic release. No post-result tuning."
+  },
+  "release": false,
+  "nasa_pvalue_selection": false
+}

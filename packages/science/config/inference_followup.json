@@ -1,0 +1,53 @@
+{
+  "revision": "phase4-followup-1",
+  "status": "prespecified_candidates_not_released",
+  "alpha": 0.05,
+  "confidence": 0.95,
+  "pilot_replications": 200,
+  "final_replications": 1000,
+  "pilot_seed": 731155,
+  "final_seed": 9906115,
+  "lengths": [
+    20,
+    24
+  ],
+  "phis": [
+    0,
+    0.4,
+    0.7
+  ],
+  "slopes": [
+    -0.08,
+    0,
+    0.08
+  ],
+  "seasonal_profiles": [
+    "none",
+    "monthly_cycle_annualized"
+  ],
+  "acceptance": {
+    "null_upper_wilson_max": 0.08,
+    "coverage_lower_wilson_min": 0.9,
+    "power_lower_wilson_min": 0.2,
+    "required_all_scenarios": true,
+    "numerical_failures_max": 0,
+    "note": "Minimum research screen only; no automatic release even if passed"
+  },
+  "mk": {
+    "variant": "Sen-detrended rank Hamed-Rao-style variance correction",
+    "lags": "1..floor(n/4), retain |acf|>1.96/sqrt(n)",
+    "variance_factor_floor": 1,
+    "interval": "experimental variance-adjusted Sen order-statistic inversion"
+  },
+  "ar1": {
+    "variant": "iterative feasible stationary Prais-Winsten GLS",
+    "rho_clip": [
+      -0.95,
+      0.95
+    ],
+    "max_iterations": 50,
+    "t_degrees_of_freedom": "n-3",
+    "interval_caveat": "plug-in covariance does not fully account for estimated rho"
+  },
+  "release": false
+}

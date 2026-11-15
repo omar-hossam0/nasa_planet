@@ -1,0 +1,47 @@
+{
+  "phase": "input_exploration_only",
+  "variable_id": "precipitation",
+  "region_id": "nile_corridor",
+  "product_id": "GPM_3IMERGM",
+  "version": "07",
+  "source_variable": "precipitation",
+  "cube_variable": "precipitation",
+  "source_url": "https://doi.org/10.5067/GPM/IMERG/3B-MONTH/07",
+  "cube_file": "data/nasa/measurements/GPM_3IMERGM_Nile_2001_2024.nc",
+  "cube_sha256": "967131aec4bdb0fa98ffc6ec9c9340cde164f5704be8f861c7ee02c130d6e219",
+  "source_metadata": "data/nasa/expanded_v2/docs/GPM_3IMERGM_collection.json",
+  "source_guide_manifest": "data/nasa/expanded_v2/docs/guide_sources.json",
+  "dimensions": {
+    "time": 288,
+    "lat": 80,
+    "lon": 40
+  },
+  "period": [
+    "2001-01",
+    "2024-12"
+  ],
+  "calendar": "proleptic_gregorian",
+  "source_units": "mm/hr",
+  "converted_units": "mm",
+  "conversion": "monthly mean rate multiplied by Gregorian calendar-month days and 24 hours/day",
+  "source_fill_value": "9.96921e+36",
+  "missing_source_values": 0,
+  "qa_status": "ancillary fields retained; no additional product QA selection applied",
+  "ancillary_fields": {
+    "precipitationQualityIndex": {
+      "units": "1",
+      "missing_values": 0
+    },
+    "randomError": {
+      "units": "mm/hr",
+      "missing_values": 0
+    }
+  },
+  "inference_status": "not_computed",
+  "sample_cell": {
+    "latitude": 28.0,
+    "longitude": 31.0,
+    "selection": "middle indices fixed before inspecting trends"
+  },
+  "plot": "data/derived/science/phase_1/precipitation_exploration.png"
+}
