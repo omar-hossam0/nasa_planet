@@ -1,0 +1,48 @@
+# CI variant of compose.yaml: same services, no host port publishing and no
+# restart policy, so parallel jobs cannot collide on ports and nothing restarts
+# after the smoke test tears the stack down.
+#
+#   docker compose -f compose.ci.yaml up -d --wait
+#   docker compose -f compose.ci.yaml down --remove-orphans
+
+name: trend-detective-ci
+
+services:
+  backend:
+    build:
+      # Repository root: the image needs packages/, ai/ and the RAG corpus.
+      context: .
+      dockerfile: backend/Dockerfile
+    image: trend-detective/backend:ci
+    environment:
+      APP_ENV: test
+      MOCK_MODE: "true"
+      LOG_LEVEL: INFO
+      JOB_BACKEND: inline
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import sys,urllib.request; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3).status == 200 else 1)"
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 15s
+    networks:
+      - app-net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: trend-detective/frontend:ci
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: bridge

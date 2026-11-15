@@ -1,0 +1,171 @@
+name: Server bootstrap (one-time)
+
+# Prepares the Azure VM for Docker deployments.
+#
+# This is NOT part of the normal pipeline. It runs only when a maintainer
+# triggers it manually from `main`, and it refuses to run anywhere else.
+#
+# Required one-time inputs:
+#   vars: AZURE_VM_HOST, AZURE_VM_USER, AZURE_VM_PORT, AZURE_VM_HOST_FINGERPRINT
+#   secrets: AZURE_VM_SSH_KEY
+#
+# The SSH user must be able to run sudo non-interactively. If it cannot, the
+# job stops and prints the exact command the owner must run instead.
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type BOOTSTRAP to prepare the server (exact match required)'
+        required: true
+        type: string
+      run_verify_only:
+        description: 'Only run verify.sh (no installation)'
+        required: false
+        type: boolean
+        default: false
+
+concurrency:
+  # Shares the deployment lock so bootstrap and deploy never overlap.
+  group: production-deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap:
+    name: Prepare Azure VM
+    runs-on: ubuntu-latest
+    # Trusted code only: main branch + explicit typed confirmation.
+    if: github.ref == 'refs/heads/main' && github.event.inputs.confirm == 'BOOTSTRAP'
+    environment:
+      name: production
+      url: http://${{ vars.AZURE_VM_HOST }}
+
+    env:
+      APP_DIR: /opt/trend-detective
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Prepare SSH identity
+        env:
+          SSH_KEY: ${{ secrets.AZURE_VM_SSH_KEY }}
+          VM_HOST: ${{ vars.AZURE_VM_HOST }}
+          VM_PORT: ${{ vars.AZURE_VM_PORT }}
+          EXPECTED_FINGERPRINT: ${{ vars.AZURE_VM_HOST_FINGERPRINT }}
+        run: |
+          set -euo pipefail
+          [ -n "${SSH_KEY}" ] || { echo "AZURE_VM_SSH_KEY secret is not set"; exit 1; }
+          [ -n "${VM_HOST}" ] || { echo "AZURE_VM_HOST variable is not set"; exit 1; }
+          [ -n "${EXPECTED_FINGERPRINT}" ] || { echo "AZURE_VM_HOST_FINGERPRINT is required"; exit 1; }
+          PORT="${VM_PORT:-22}"
+
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "${SSH_KEY}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+
+          ssh-keyscan -p "${PORT}" -T 10 "${VM_HOST}" > ~/.ssh/scanned_hosts 2>/dev/null
+          [ -s ~/.ssh/scanned_hosts ] || { echo "host key scan returned nothing"; exit 1; }
+
+          if ! ssh-keygen -lf ~/.ssh/scanned_hosts -E sha256 | awk '{print $2}' | grep -qx "${EXPECTED_FINGERPRINT}"; then
+            echo "SSH host key fingerprint mismatch"
+            ssh-keygen -lf ~/.ssh/scanned_hosts -E sha256
+            exit 1
+          fi
+          echo "host key fingerprint verified"
+          cp ~/.ssh/scanned_hosts ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Inspect host and privileges
+        env:
+          VM_HOST: ${{ vars.AZURE_VM_HOST }}
+          VM_USER: ${{ vars.AZURE_VM_USER }}
+          VM_PORT: ${{ vars.AZURE_VM_PORT }}
+        run: |
+          set -euo pipefail
+          ssh -i ~/.ssh/deploy_key -p "${VM_PORT:-22}" \
+              -o UserKnownHostsFile=~/.ssh/known_hosts -o StrictHostKeyChecking=yes \
+              -o ConnectTimeout=15 -o BatchMode=yes \
+              "${VM_USER:-azureuser}@${VM_HOST}" \
+              'set -e
+               echo "user: $(whoami)"
+               echo "host: $(hostname)"
+               . /etc/os-release && echo "os: ${PRETTY_NAME}"
+               echo "arch: $(uname -m)  cpus: $(nproc)"
+               echo "mem: $(free -h | awk "/^Mem:/{print \$2}")"
+               echo "disk: $(df -h / | awk "NR==2{print \$4\" free\"}")"
+               if sudo -n true 2>/dev/null; then echo "sudo: passwordless OK"; else echo "sudo: NOT passwordless"; fi
+               if command -v docker >/dev/null 2>&1; then docker --version; else echo "docker: not installed"; fi'
+
+      - name: Ship bootstrap scripts
+        env:
+          VM_HOST: ${{ vars.AZURE_VM_HOST }}
+          VM_USER: ${{ vars.AZURE_VM_USER }}
+          VM_PORT: ${{ vars.AZURE_VM_PORT }}
+        run: |
+          set -euo pipefail
+          tar czf - scripts/server \
+            | ssh -i ~/.ssh/deploy_key -p "${VM_PORT:-22}" \
+                -o UserKnownHostsFile=~/.ssh/known_hosts -o StrictHostKeyChecking=yes \
+                -o BatchMode=yes "${VM_USER:-azureuser}@${VM_HOST}" \
+                "mkdir -p ${APP_DIR} && tar xzf - -C ${APP_DIR} && chmod +x ${APP_DIR}/scripts/server/*.sh"
+
+      - name: Run bootstrap (or verify only)
+        env:
+          VM_HOST: ${{ vars.AZURE_VM_HOST }}
+          VM_USER: ${{ vars.AZURE_VM_USER }}
+          VM_PORT: ${{ vars.AZURE_VM_PORT }}
+          VERIFY_ONLY: ${{ github.event.inputs.run_verify_only }}
+        run: |
+          set -euo pipefail
+          REMOTE="${VM_USER:-azureuser}@${VM_HOST}"
+
+          if [ "${VERIFY_ONLY}" = "true" ]; then
+            ssh -i ~/.ssh/deploy_key -p "${VM_PORT:-22}" \
+                -o UserKnownHostsFile=~/.ssh/known_hosts -o StrictHostKeyChecking=yes \
+                -o BatchMode=yes "${REMOTE}" \
+                "sudo -n bash ${APP_DIR}/scripts/server/verify.sh"
+            exit 0
+          fi
+
+          # Fail fast with an actionable message when sudo is not available.
+          if ! ssh -i ~/.ssh/deploy_key -p "${VM_PORT:-22}" \
+                 -o UserKnownHostsFile=~/.ssh/known_hosts -o StrictHostKeyChecking=yes \
+                 -o BatchMode=yes "${REMOTE}" 'sudo -n true' 2>/dev/null; then
+            echo "::error::The SSH user cannot run sudo non-interactively."
+            echo "Owner action required (run once, from a machine with SSH access):"
+            echo "  scp scripts/server/bootstrap.sh ${REMOTE}:/tmp/"
+            echo "  ssh -t ${REMOTE} 'sudo bash /tmp/bootstrap.sh'"
+            exit 1
+          fi
+
+          ssh -i ~/.ssh/deploy_key -p "${VM_PORT:-22}" \
+              -o UserKnownHostsFile=~/.ssh/known_hosts -o StrictHostKeyChecking=yes \
+              -o BatchMode=yes "${REMOTE}" \
+              "sudo -n bash ${APP_DIR}/scripts/server/bootstrap.sh"
+
+      - name: Verify readiness
+        env:
+          VM_HOST: ${{ vars.AZURE_VM_HOST }}
+          VM_USER: ${{ vars.AZURE_VM_USER }}
+          VM_PORT: ${{ vars.AZURE_VM_PORT }}
+        run: |
+          set -euo pipefail
+          ssh -i ~/.ssh/deploy_key -p "${VM_PORT:-22}" \
+              -o UserKnownHostsFile=~/.ssh/known_hosts -o StrictHostKeyChecking=yes \
+              -o BatchMode=yes "${VM_USER:-azureuser}@${VM_HOST}" \
+              "bash ${APP_DIR}/scripts/server/verify.sh"
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Server bootstrap"
+            echo ""
+            echo "- host: \`${{ vars.AZURE_VM_HOST }}\`"
+            echo "- verify only: \`${{ github.event.inputs.run_verify_only }}\`"
+            echo "- result: ${{ job.status }}"
+          } >> "$GITHUB_STEP_SUMMARY"

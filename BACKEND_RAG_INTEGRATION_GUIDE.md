@@ -439,7 +439,7 @@ render_result(
 1. Create a `.env` file in the repo root (never commit `.env` to version control):
    ```bash
    LLM_PROVIDER=gemini
-   GEMINI_API_KEY=AIzaSyYourSecretKeyHere
+   GEMINI_API_KEY=<set-in-server-env-only>
    LLM_MODEL=gemini-2.5-flash
    LLM_TIMEOUT_SECONDS=8
    LLM_MAX_RETRIES=1

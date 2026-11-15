@@ -1,0 +1,15 @@
+# Build context: frontend/
+node_modules/
+dist/
+*.tsbuildinfo
+.vite/
+coverage/
+.env
+.env.*
+!.env.example
+.git/
+.github/
+npm-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
