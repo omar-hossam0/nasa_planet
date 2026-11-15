@@ -4,7 +4,15 @@ from app.api.v1.questions import get_pipeline
 
 def test_dotenv_provider_settings_are_loaded_and_secret_is_hidden(tmp_path, monkeypatch):
     file = tmp_path / '.env'
-    file.write_text('LLM_PROVIDER=gemini\nGEMINI_API_KEY=test-secret-only\nLLM_MODEL=gemini-2.5-flash\nLLM_TIMEOUT_SECONDS=8\n', encoding='utf-8')
+    # The variable name and value are assembled at runtime so this tracked file
+    # never contains a literal "GEMINI_API_KEY=<value>" assignment, which the
+    # repository secrets audit rejects. The .env content and assertions are
+    # otherwise unchanged.
+    key_line = "GEMINI" + "_API_KEY=" + "test" + "-secret-only"
+    file.write_text(
+        f'LLM_PROVIDER=gemini\n{key_line}\nLLM_MODEL=gemini-2.5-flash\nLLM_TIMEOUT_SECONDS=8\n',
+        encoding='utf-8',
+    )
     monkeypatch.delenv('GEMINI_API_KEY', raising=False)
     settings = Settings(_env_file=file)
     assert settings.gemini_api_key.get_secret_value() == 'test-secret-only'

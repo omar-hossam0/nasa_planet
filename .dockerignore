@@ -1,0 +1,44 @@
+# Build context is the repository root (the backend image needs `packages/`,
+# `ai/` and the RAG corpus, which live outside backend/).
+# This is a deny-list: keep the context small by excluding everything heavy.
+
+.git
+.github
+.workbuddy-ai
+.venv
+venv
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+**/.mypy_cache
+**/.ruff_cache
+
+# Frontend (built by its own Dockerfile)
+frontend
+
+# Large scientific data — never baked into an image
+data/nasa/measurements
+data/nasa/regional
+data/nasa/manifests
+data/nasa/docs
+data/nasa/methods
+data/nasa/expanded_v2/docs/*.pdf
+data/nasa/expanded_v2/docs/*.png
+
+# Unrelated trees
+dist
+web
+docs/screenshots
+phase_reports
+tools
+tests
+backend/tests
+backend/var
+backend/bench_results.json
+packages/science/notebooks
+packages/science/phase_reports
+
+# Local env / secrets
+.env
+.env.*
+!.env.example

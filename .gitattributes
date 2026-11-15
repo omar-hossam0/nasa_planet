@@ -24,3 +24,6 @@ tools/run_science_spatial.py -text whitespace=blank-at-eol,blank-at-eof,space-be
 packages/science/notebooks/05_descriptive_spatial.ipynb -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 packages/science/phase_reports/PHASE_5_RESULTS.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 packages/science/phase_reports/PHASE_5_VALIDATION.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Shell scripts must stay LF: CRLF breaks the shebang inside Linux containers/VM.
+*.sh text eol=lf
+scripts/** text eol=lf

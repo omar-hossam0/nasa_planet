@@ -1,0 +1,68 @@
+# Trend Detective — baseline development stack.
+#
+# Only components that exist and run today are declared here:
+#   frontend (React/Vite -> Nginx)  and  backend (FastAPI).
+#
+# RAG and ML are currently Python libraries imported in-process
+# (packages/rag, ai/, packages/science), not standalone HTTP services, so they
+# are intentionally NOT separate containers. See docs/DOCKER.md and
+# compose.optional.example.yaml for the future integration template.
+#
+# Usage:
+#   docker compose config --quiet
+#   docker compose build
+#   docker compose up -d
+#   docker compose ps
+#   docker compose logs -f
+#   docker compose down --remove-orphans
+
+name: trend-detective
+
+services:
+  backend:
+    build:
+      # Repository root: the image needs packages/, ai/ and the RAG corpus.
+      context: .
+      dockerfile: backend/Dockerfile
+    image: trend-detective/backend:local
+    environment:
+      APP_ENV: ${APP_ENV:-development}
+      MOCK_MODE: ${MOCK_MODE:-true}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      API_PREFIX: ${API_PREFIX:-/v1}
+      # "memory" keeps the stack database-free. Set to "database" and provide
+      # DATABASE_URL only when durable storage is actually required.
+      JOB_BACKEND: ${JOB_BACKEND:-inline}
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import sys,urllib.request; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3).status == 200 else 1)"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    restart: unless-stopped
+    networks:
+      - app-net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: trend-detective/frontend:local
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "${FRONTEND_PORT:-8080}:8080"
+    restart: unless-stopped
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: bridge

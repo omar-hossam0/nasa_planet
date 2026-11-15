@@ -1,0 +1,61 @@
+# OPTIONAL INTEGRATION TEMPLATE — NOT PART OF THE BASELINE STACK.
+#
+# This file is documentation, not a runnable configuration today:
+# the build contexts below (`services/rag`, `services/ml`) do not exist yet.
+# RAG and ML currently ship as in-process Python libraries (packages/rag, ai/,
+# packages/science), which is why they are not containers.
+#
+# When a team delivers a real HTTP service, move its Dockerfile into
+# services/rag or services/ml, then run:
+#
+#   docker compose -f compose.yaml -f compose.optional.example.yaml --profile rag --profile ml up -d
+#
+# Do not enable a profile before its build context exists.
+
+services:
+  rag:
+    profiles: ["rag"]
+    build:
+      context: ./services/rag
+      dockerfile: Dockerfile
+    image: trend-detective/rag:local
+    environment:
+      LLM_PROVIDER: ${LLM_PROVIDER:-none}
+      LLM_MODEL: ${LLM_MODEL:-}
+      # Provider keys are injected at runtime; never baked into the image.
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      LLM_TIMEOUT_SECONDS: ${LLM_TIMEOUT_SECONDS:-8}
+    expose:
+      - "8001"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import sys,urllib.request; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8001/health', timeout=3).status == 200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    networks:
+      - app-net
+
+  ml:
+    profiles: ["ml"]
+    build:
+      context: ./services/ml
+      dockerfile: Dockerfile
+    image: trend-detective/ml:local
+    environment:
+      # CPU-only baseline: no GPU runtime is required or assumed.
+      MODEL_PATH: ${MODEL_PATH:-/models}
+      DEVICE: ${DEVICE:-cpu}
+    expose:
+      - "8002"
+    volumes:
+      # Weights stay outside the image and are mounted read-only.
+      - ${MODEL_DIR:-./models}:/models:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import sys,urllib.request; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8002/health', timeout=3).status == 200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    networks:
+      - app-net
