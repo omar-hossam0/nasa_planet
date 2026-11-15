@@ -30,9 +30,9 @@ services:
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost}
       # Optional: only read when JOB_BACKEND=database
       DATABASE_URL: ${DATABASE_URL:-}
-    # Published on loopback only; Nginx reaches it over the internal network.
-    ports:
-      - "127.0.0.1:${BACKEND_PORT:-8000}:8000"
+    # The backend is reachable only by the internal Docker network.
+    expose:
+      - "8000"
     healthcheck:
       test:
         - CMD
@@ -58,8 +58,8 @@ services:
     depends_on:
       backend:
         condition: service_healthy
-    ports:
-      - "${FRONTEND_PORT:-80}:8080"
+    expose:
+      - "8080"
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8080/"]
       interval: 15s
@@ -76,6 +76,28 @@ services:
     networks:
       - prod-net
 
+  caddy:
+    image: caddy:2-alpine
+    depends_on:
+      frontend:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+    logging: *default-logging
+    networks:
+      - prod-net
+
 networks:
   prod-net:
     driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:

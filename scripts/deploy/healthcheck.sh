@@ -7,8 +7,9 @@ set -Eeuo pipefail
 APP_DIR="${APP_DIR:-/opt/trend-detective}"
 COMPOSE_FILE="${COMPOSE_FILE:-compose.prod.yaml}"
 HEALTH_TIMEOUT="${HEALTH_TIMEOUT:-120}"
-FRONTEND_PORT="${FRONTEND_PORT:-80}"
-BACKEND_PORT="${BACKEND_PORT:-8000}"
+PUBLIC_HTTP_PORT="${PUBLIC_HTTP_PORT:-80}"
+PUBLIC_HTTPS_PORT="${PUBLIC_HTTPS_PORT:-443}"
+PUBLIC_HOSTNAME="${PUBLIC_HOSTNAME:-astraverd.duckdns.org}"
 CURRENT_TAG_FILE="${APP_DIR}/state/current_tag"
 
 log()  { printf '  \033[1;32mok\033[0m   %s\n' "$*"; }
@@ -78,9 +79,9 @@ while :; do
 
   check_containers || failures=$((failures + $?))
 
-  http_ok "http://127.0.0.1:${BACKEND_PORT}/health" "backend /health"
-  http_ok "http://127.0.0.1:${BACKEND_PORT}/ready"  "backend /ready"
-  http_ok "http://127.0.0.1:${FRONTEND_PORT}/"      "frontend /"
+  http_ok "https://${PUBLIC_HOSTNAME}:${PUBLIC_HTTPS_PORT}/health" "public /health"
+  http_ok "https://${PUBLIC_HOSTNAME}:${PUBLIC_HTTPS_PORT}/ready"  "public /ready"
+  http_ok "https://${PUBLIC_HOSTNAME}:${PUBLIC_HTTPS_PORT}/"       "public frontend /"
 
   if [[ ${failures} -eq 0 ]]; then
     break
@@ -97,11 +98,20 @@ while :; do
 done
 
 # --- 4. API contract smoke ---------------------------------------------------
-if curl -fsS --max-time 10 "http://127.0.0.1:${BACKEND_PORT}/openapi.json" \
+if curl -fsS --max-time 10 "https://${PUBLIC_HOSTNAME}:${PUBLIC_HTTPS_PORT}/openapi.json" \
      | grep -q '"/v1/analyses"'; then
   log "openapi exposes /v1/analyses"
 else
   bad "openapi missing /v1/analyses"
+  failures=$((failures + 1))
+fi
+
+redirect_code="$(curl -sS --max-time 10 -o /dev/null -w '%{http_code}' \
+  "http://${PUBLIC_HOSTNAME}:${PUBLIC_HTTP_PORT}/")"
+if [[ "${redirect_code}" =~ ^30[1278]$ ]]; then
+  log "HTTP redirects to HTTPS (status ${redirect_code})"
+else
+  bad "HTTP did not redirect to HTTPS (status ${redirect_code})"
   failures=$((failures + 1))
 fi
 
